@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/back_but.xml" value="0.2205" />
+        <entry key="app/src/main/res/drawable/back_butf.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/back_search.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/back_textf.xml" value="0.2205" />
+        <entry key="app/src/main/res/drawable/click_but.xml" value="0.249" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2776268115942029" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.2911773681640625" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2069015502929688" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1887031408308004" />
+        <entry key="app/src/main/res/layout/activity_student.xml" value="0.2402644724085711" />
+        <entry key="app/src/main/res/layout/activity_studentt.xml" value="0.15704154002026344" />
+        <entry key="app/src/main/res/layout/fragment_details_course.xml" value="0.35464019775390637" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2745101928710938" />
+        <entry key="app/src/main/res/layout/item_courses.xml" value="0.3229166666666667" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.3880208333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
