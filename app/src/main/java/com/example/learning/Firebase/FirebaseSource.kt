@@ -21,6 +21,10 @@ class FirebaseSource( val activity: Activity){
      lateinit var  progressDialog:ProgressDialog
       var coursea: course?=null
     lateinit var CourseListMutableLiveData: MutableLiveData<List<course>>
+
+
+
+
      //Log in to the account
     fun Sign_in(Email:String,Password:String){
         progressDialog =ProgressDialog(activity)
@@ -50,17 +54,17 @@ class FirebaseSource( val activity: Activity){
 
 
     //Sign up for the account
-    fun Sign_up(users: users){
+    fun Sign_up(password:String,users: users){
         auth =  Firebase.auth
         progressDialog =ProgressDialog(activity)
         progressDialog.setCancelable(false)
         progressDialog.setMessage("Loading...")
         progressDialog.show()
-        auth.createUserWithEmailAndPassword(users.email,users.password).addOnCompleteListener { task->
+        auth.createUserWithEmailAndPassword(users.email,password).addOnCompleteListener { task->
             if (task.isSuccessful) {
                 auth.currentUser!!.sendEmailVerification().addOnCompleteListener {
                     if (it.isSuccessful){
-                        createUser(users)
+                        createUser(users(auth.currentUser!!.uid,users.name,users.lastName,users.email))
                         progressDialog.dismiss()
                         Toast.makeText(activity, "Registered successully. please check your email",
                             Toast.LENGTH_SHORT).show()
