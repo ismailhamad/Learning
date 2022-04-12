@@ -12,10 +12,41 @@
         <action
             android:id="@+id/action_homeFragment_to_detailsCourseFragment"
             app:destination="@id/detailsCourseFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_WCourseFragment"
+            app:destination="@id/WCourseFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsCourseFragment"
-        android:name="com.example.learning.DetailsCourseFragment"
+        android:name="com.example.learning.View.DetailsCourseFragment"
         android:label="fragment_details_course"
-        tools:layout="@layout/fragment_details_course" />
+        tools:layout="@layout/fragment_details_course" >
+        <argument
+            android:name="course"
+            app:argType="com.example.learning.Model.course" />
+        <action
+            android:id="@+id/action_detailsCourseFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.learning.View.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/myCourseFragment"
+        android:name="com.example.learning.View.MyCourseFragment"
+        android:label="fragment_my_course"
+        tools:layout="@layout/fragment_my_course" >
+        <action
+            android:id="@+id/action_myCourseFragment_to_WCourseFragment"
+            app:destination="@id/WCourseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/WCourseFragment"
+        android:name="com.example.learning.WCourseFragment"
+        android:label="fragment_w_course"
+        tools:layout="@layout/fragment_w_course" />
 </navigation>

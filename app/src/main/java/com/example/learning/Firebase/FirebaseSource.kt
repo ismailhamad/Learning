@@ -21,8 +21,8 @@ class FirebaseSource( val activity: Activity){
      lateinit var  progressDialog:ProgressDialog
       var coursea: course?=null
     lateinit var CourseListMutableLiveData: MutableLiveData<List<course>>
-
-
+    lateinit var MyCourseListMutableLiveData: MutableLiveData<List<course>>
+     var BuyOrNot:Boolean = false
 
 
      //Log in to the account
@@ -94,7 +94,7 @@ class FirebaseSource( val activity: Activity){
         }
 
     }
-
+//addcousrs by lecture
     fun addCourse(course: course){
         db=Firebase.firestore
         db.collection("courses").add(course).addOnSuccessListener {
@@ -103,7 +103,7 @@ class FirebaseSource( val activity: Activity){
     }
 
 
-
+//getAllCourse
      fun getCourse(): MutableLiveData<List<course>> {
          db=Firebase.firestore
         val Courselist = ArrayList<course>()
@@ -121,5 +121,59 @@ class FirebaseSource( val activity: Activity){
          return CourseListMutableLiveData
 
    }
+
+    //addMyCourse by student
+    fun addMyCourse(course: course){
+        db=Firebase.firestore
+        progressDialog =ProgressDialog(activity)
+        progressDialog.setCancelable(false)
+        progressDialog.setMessage("Loading...")
+        progressDialog.show()
+        db.collection("myCourse").add(course).addOnSuccessListener {
+            Toast.makeText(activity, "add successfully", Toast.LENGTH_SHORT).show()
+            progressDialog.dismiss()
+        }
+    }
+
+    fun getMyCourse(): MutableLiveData<List<course>> {
+        db=Firebase.firestore
+        val Courselist = ArrayList<course>()
+        MyCourseListMutableLiveData =MutableLiveData()
+        db.collection("myCourse").get().addOnSuccessListener { result ->
+            for (document in result){
+                val course = document.toObject<course>()
+                Courselist.add(course)
+                MyCourseListMutableLiveData.postValue(Courselist)
+            }
+
+
+        }
+
+        return MyCourseListMutableLiveData
+
+    }
+
+    fun BuyCourseOrNot(id:String):Boolean{
+        db=Firebase.firestore
+        MyCourseListMutableLiveData =MutableLiveData()
+        db.collection("myCourse").get().addOnSuccessListener { result ->
+            for (document in result){
+                val course = document.toObject<course>()
+                for (user in course.users!!){
+                    user as users
+                    if (id==user.id){
+                        BuyOrNot = true
+                    }
+                }
+
+
+            }
+        }
+        return BuyOrNot
+    }
+
+    fun updateUsers(){
+
+    }
 
 }

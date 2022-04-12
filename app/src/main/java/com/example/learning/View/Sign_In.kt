@@ -26,6 +26,7 @@ class Sign_In : AppCompatActivity() {
 
         sign_In.setOnClickListener {
             learningViewModel.Sign_in(TextEmail.text.toString(),TextPassword.text.toString())
+            //finish()
         }
         sign_Up.setOnClickListener {
             val i =Intent(this,Sign_Up::class.java)

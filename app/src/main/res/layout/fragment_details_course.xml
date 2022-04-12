@@ -4,15 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsCourseFragment">
+    tools:context=".View.DetailsCourseFragment">
 
 
     <View
         android:id="@+id/view2"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="586dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="5dp"
         android:background="#4FB2E4FB"
-        tools:layout_editor_absoluteY="75dp" />
+        app:layout_constraintBottom_toTopOf="@+id/but_Buy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/But_Back" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -40,13 +45,13 @@
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="3dp"
                 android:src="@drawable/web2"
-                app:layout_constraintBottom_toTopOf="@+id/textView11"
+                app:layout_constraintBottom_toTopOf="@+id/nameCourseD"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/nameCourseD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="9dp"
@@ -63,7 +68,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/titlle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
@@ -71,12 +76,12 @@
         android:text="web Developer"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+        app:layout_constraintBottom_toBottomOf="@+id/But_Back"
+        app:layout_constraintStart_toEndOf="@+id/But_Back"
+        app:layout_constraintTop_toTopOf="@+id/But_Back" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/But_Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -90,16 +95,18 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/baloo_bhai_2_semibold"
         android:text="Descriptions"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="368dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/Desc"
         android:layout_width="376dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo_bhai_2"
@@ -115,9 +122,9 @@
         android:layout_height="1dp"
         android:layout_marginTop="14dp"
         android:background="#E4E4E4"
-        app:layout_constraintEnd_toEndOf="@+id/textView17"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintEnd_toEndOf="@+id/Desc"
+        app:layout_constraintStart_toStartOf="@+id/Desc"
+        app:layout_constraintTop_toBottomOf="@+id/Desc" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView5"
@@ -125,7 +132,7 @@
         android:layout_height="59dp"
         android:layout_marginTop="20dp"
         app:cardCornerRadius="20dp"
-        app:layout_constraintStart_toStartOf="@+id/textView17"
+        app:layout_constraintStart_toStartOf="@+id/Desc"
         app:layout_constraintTop_toBottomOf="@+id/view3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -260,7 +267,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/countUsers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
@@ -276,19 +283,15 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="372dp"
+        android:id="@+id/but_Buy"
+        android:layout_width="0dp"
         android:layout_height="49dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="23dp"
         android:text="Buy"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
