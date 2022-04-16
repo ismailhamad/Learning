@@ -4,10 +4,13 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 
 import com.example.learning.Model.course
+import com.example.learning.Model.lecture
 import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import com.example.learning.View.Student
@@ -18,6 +21,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 
 
 class FirebaseSource( val activity: Activity){
@@ -25,10 +31,14 @@ class FirebaseSource( val activity: Activity){
      lateinit var auth: FirebaseAuth
      lateinit var  progressDialog:ProgressDialog
       var coursea: course?=null
-
+    var storge: FirebaseStorage? = null
+    private var storageRef: StorageReference? = null
     lateinit var CourseListMutableLiveData: MutableLiveData<List<course>>
     lateinit var MyCourseListMutableLiveData: MutableLiveData<List<myCourse>>
-     var  BuyONot : Boolean = false
+    lateinit var LectureListMutableLiveData: MutableLiveData<List<lecture>>
+    lateinit var course: course
+
+    var  BuyONot : Boolean = false
 
 
      //Log in to the account
@@ -245,6 +255,99 @@ class FirebaseSource( val activity: Activity){
 
             }
         }
+
+
+    fun addLecture(lecture: lecture, uriVideo: Uri?, uriFile: Uri?, document:String, code: String) {
+        storge = Firebase.storage
+        storageRef = storge!!.reference
+        progressDialog = ProgressDialog(activity)
+        progressDialog.setCancelable(false)
+        progressDialog.setMessage("Loading...")
+        progressDialog.show()
+        db = Firebase.firestore
+        course = course()
+        if (code == "5000") {
+            storageRef!!.child("video/" + "${lecture.id}").putFile(uriVideo!!)
+                .addOnSuccessListener { taskSnapshot ->
+                    progressDialog.dismiss()
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+                        lecture.video = uri.toString()
+                        db.collection("courses").document(document)
+                            .update("lecture", FieldValue.arrayUnion(lecture))
+                    }
+                }.addOnFailureListener { exception ->
+                    progressDialog.dismiss()
+                    Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
+
+                }.addOnProgressListener {
+                    val progress: Double =
+                        100.0 * it.bytesTransferred / it.totalByteCount
+                    progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+                }
+        } else if (code == "4000") {
+            storageRef!!.child("files/" + "${lecture.id}").putFile(uriFile!!)
+                .addOnSuccessListener { taskSnapshot ->
+                    progressDialog.dismiss()
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+                        lecture.file = uri.toString()
+                        db.collection("courses").document(document)
+                            .update("lecture", FieldValue.arrayUnion(lecture))
+                    }
+                }.addOnFailureListener { exception ->
+                    progressDialog.dismiss()
+                    Toast.makeText(activity, "filedUploadfiles", Toast.LENGTH_LONG).show()
+
+                }.addOnProgressListener {
+                    val progress: Double =
+                        100.0 * it.bytesTransferred / it.totalByteCount
+                    progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+                }
+        } else {
+            storageRef!!.child("files/" + "${lecture.id}").putFile(uriFile!!)
+                .addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+                        lecture.file = uri.toString()
+                        storageRef!!.child("video/" + "${lecture.id}").putFile(uriVideo!!)
+                            .addOnSuccessListener { videotaskSnapshot ->
+                                progressDialog.dismiss()
+                                videotaskSnapshot.storage.downloadUrl.addOnSuccessListener { uriv ->
+                                    lecture.video = uriv.toString()
+                                    db.collection("courses")
+                                        .document(document)
+                                        .update("lecture", FieldValue.arrayUnion(lecture))
+                                }
+                            }
+
+                    }
+                }.addOnFailureListener { exception ->
+                    progressDialog.dismiss()
+                    Toast.makeText(activity, "filedUploadfiles", Toast.LENGTH_LONG).show()
+
+                }.addOnProgressListener {
+                    val progress: Double =
+                        100.0 * it.bytesTransferred / it.totalByteCount
+                    progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+                }
+
+        }
+
+
+    }
+
+
+    fun getLecture(document:String): MutableLiveData<List<lecture>> {
+        db = Firebase.firestore
+        LectureListMutableLiveData = MutableLiveData()
+        db.collection("courses").document(document)
+            .get().addOnSuccessListener { result ->
+                val course = result.toObject<course>()
+                LectureListMutableLiveData.postValue(course!!.lecture!!)
+            }.addOnFailureListener { e ->
+                Log.e("aa",e.message.toString())
+            }
+        return LectureListMutableLiveData
+
+    }
 
     }
 

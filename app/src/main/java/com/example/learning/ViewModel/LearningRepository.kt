@@ -18,5 +18,5 @@ class LearningRepository(
   fun getMyCourse()= firebaseSource.getMyCourse()
    //suspend fun buyCourseOrNot(id:String) = firebaseSource.BuyCourseOrNot(id)
    suspend fun updateUsers(idCourse:String,users: users) = firebaseSource.updateUsers(idCourse,users)
-
+    fun getLecture(document:String)= firebaseSource.getLecture(document)
 }

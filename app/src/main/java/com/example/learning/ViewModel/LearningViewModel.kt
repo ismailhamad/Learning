@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.learning.Model.course
+import com.example.learning.Model.lecture
 import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import kotlinx.coroutines.launch
@@ -15,7 +16,9 @@ private val learningRepository: LearningRepository
 
     var Course: MutableLiveData<List<course>>? = null
     var MyCourse: MutableLiveData<List<myCourse>>? = null
-      var BuyNot:Boolean?=null
+    var lecture: MutableLiveData<List<lecture>>? = null
+
+    var BuyNot:Boolean?=null
    init {
 //   //
      //  getCourse()
@@ -52,6 +55,10 @@ private val learningRepository: LearningRepository
 
     fun updateUsers(idCourse:String,users: users) = viewModelScope.launch {
         learningRepository.updateUsers(idCourse,users)
+    }
+
+    fun getLecture(document:String) {
+        lecture = learningRepository.getLecture(document)
     }
 
 

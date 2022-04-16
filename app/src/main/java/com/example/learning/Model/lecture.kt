@@ -4,13 +4,21 @@ class lecture {
     var id:String? =""
     var name:String?=""
     var description:String?=""
-    var image:String?=""
+    var video:String?=""
+    var file:String?=""
     constructor()
-    constructor(id:String,name:String,description:String,image:String){
+    constructor(id:String,name:String,description:String,video:String,file:String){
         this.id=id
         this.name=name
         this.description=description
-        this.image=image
+        this.video=video
+        this.file=file
+    }
+    constructor(id:String,name:String,description:String,video:String){
+        this.id=id
+        this.name=name
+        this.description=description
+        this.video=video
     }
 
 }

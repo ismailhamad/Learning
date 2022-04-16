@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.learning"
-   >
+    package="com.example.learning">
 
     <application
         android:allowBackup="true"
@@ -10,13 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Learning">
-
+        <activity
+            android:name=".View.AddLecture"
+            android:exported="false" />
         <activity
             android:name=".View.Student"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".View.SplashScreen"
             android:exported="false" />
@@ -26,7 +24,6 @@
         <activity
             android:name=".View.Sign_In"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,15 +34,14 @@
             android:name=".View.MainActivity"
             android:exported="true" />
 
-        <service android:name=".Firebase.FirebaseService"
-            android:permission="com.google.android.c2dm.permission.SEND"
-            android:exported="true">
-
+        <service
+            android:name=".Firebase.FirebaseService"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
-
         </service>
 
         <meta-data

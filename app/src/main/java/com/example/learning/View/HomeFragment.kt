@@ -1,5 +1,6 @@
 package com.example.learning.View
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -38,7 +39,9 @@ lateinit var auth: FirebaseAuth
         ArrayListusers= arrayListOf()
         auth =Firebase.auth
         setupReceycleView()
-
+        imageButton.setOnClickListener {
+            startActivity(Intent(context, AddLecture::class.java))
+        }
         cardViewAll.setOnClickListener {
             var courses = users(null,"","","",0)
             ArrayListusers.add(courses)
