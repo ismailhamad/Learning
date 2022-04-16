@@ -1,4 +1,4 @@
-package com.example.learning
+package com.example.learning.Notification
 
 import com.example.learning.Constants.Constants.Companion.CONTENT_TYPE
 import com.example.learning.Constants.Constants.Companion.SERVER_KEY

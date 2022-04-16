@@ -1,13 +1,10 @@
-package com.example.learning
+package com.example.learning.View
 
 import android.content.Intent.getIntent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +13,8 @@ import com.example.learning.Model.Chat
 import com.example.learning.Model.NotificationData
 import com.example.learning.Model.PushNotification
 import com.example.learning.Model.users
-import com.example.learning.View.Student
+import com.example.learning.R
+import com.example.learning.Notification.RetrofitInstance
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

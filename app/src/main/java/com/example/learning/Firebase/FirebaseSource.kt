@@ -3,11 +3,10 @@ package com.example.learning.Firebase
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
-import android.os.Handler
-import android.util.Log
+import android.graphics.Color
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+
 import com.example.learning.Model.course
 import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
@@ -16,10 +15,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+
 
 class FirebaseSource( val activity: Activity){
      lateinit var db:FirebaseFirestore
@@ -38,6 +37,8 @@ class FirebaseSource( val activity: Activity){
         progressDialog.setCancelable(false)
         progressDialog.setMessage("Loading...")
         progressDialog.show()
+
+
      auth =  Firebase.auth
    auth.signInWithEmailAndPassword(Email,Password).addOnCompleteListener {
     if (it.isSuccessful){
@@ -210,6 +211,10 @@ class FirebaseSource( val activity: Activity){
      return BuyONot
 
     }
+
+
+
+
     // Atomically add a new region to the "users" array field.
    suspend fun updateUsers(idCourse:String,users: users){
         val users = hashMapOf(
@@ -231,17 +236,11 @@ class FirebaseSource( val activity: Activity){
 
     //Atomically add a new region to the "numCourse" array field.
     fun updatenumCourse(numberr:Int){
-        auth =  Firebase.auth
 
-   var number = numberr
-        if (number>5){
-
-        }else{
-            number += 1
             val washingtonRef = db.collection("users").document(auth.currentUser!!.uid)
 
 // Atomically add a new region to the "users" array field.
-            washingtonRef.update("numCourse",number).addOnSuccessListener {
+            washingtonRef.update("numCourse",numberr).addOnSuccessListener {
 
 
             }
@@ -250,4 +249,3 @@ class FirebaseSource( val activity: Activity){
     }
 
 
-}
