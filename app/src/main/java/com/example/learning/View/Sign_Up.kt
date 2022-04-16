@@ -25,8 +25,9 @@ class Sign_Up : AppCompatActivity() {
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
         but_SignUp.setOnClickListener {
-           learningViewModel.Sign_Up(Password_SignUp.text.toString(),users(null,TextName_SignUp.text.toString(),TextLName_SignUp.text.toString(),Email_SignUp.text.toString()))
+           learningViewModel.Sign_Up(Password_SignUp.text.toString(),users(null,TextName_SignUp.text.toString(),TextLName_SignUp.text.toString(),Email_SignUp.text.toString(),0))
         }
 
     }
+
 }

@@ -7,19 +7,25 @@
         <entry key="app/src/main/res/drawable/back_butf.xml" value="0.249" />
         <entry key="app/src/main/res/drawable/back_search.xml" value="0.249" />
         <entry key="app/src/main/res/drawable/back_textf.xml" value="0.2205" />
+        <entry key="app/src/main/res/drawable/button_background.xml" value="0.1775" />
         <entry key="app/src/main/res/drawable/click_but.xml" value="0.249" />
+        <entry key="app/src/main/res/drawable/item_left_side_background.xml" value="0.236" />
+        <entry key="app/src/main/res/drawable/item_right_side_background.xml" value="0.236" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2776268115942029" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.2911773681640625" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2069015502929688" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1887031408308004" />
         <entry key="app/src/main/res/layout/activity_student.xml" value="0.27482410375622734" />
         <entry key="app/src/main/res/layout/activity_studentt.xml" value="0.15704154002026344" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.10446860826486515" />
         <entry key="app/src/main/res/layout/fragment_details_course.xml" value="0.3144912719726564" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.18161094224924013" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2745101928710938" />
         <entry key="app/src/main/res/layout/fragment_my_course.xml" value="0.24388206041330263" />
         <entry key="app/src/main/res/layout/item_courses.xml" value="0.3229166666666667" />
+        <entry key="app/src/main/res/layout/item_left.xml" value="0.3115942028985507" />
         <entry key="app/src/main/res/layout/item_mycourse.xml" value="0.3446557971014493" />
+        <entry key="app/src/main/res/layout/item_right.xml" value="0.3115942028985507" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.3880208333333333" />
       </map>
     </option>

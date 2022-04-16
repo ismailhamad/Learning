@@ -2,6 +2,7 @@ package com.example.learning.ViewModel
 
 import com.example.learning.Firebase.FirebaseSource
 import com.example.learning.Model.course
+import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import com.example.learning.View.Sign_Up
 import com.google.firebase.FirebaseApp
@@ -13,7 +14,9 @@ class LearningRepository(
     fun Sign_Up(password:String,users: users) = firebaseSource.Sign_up(password,users)
     fun addcourse(course: course) = firebaseSource.addCourse(course)
      fun getCourse()= firebaseSource.getCourse()
-    fun addMyCourse(course: course) = firebaseSource.addMyCourse(course)
-    fun getMyCourse()= firebaseSource.getMyCourse()
-    fun buyCourseOrNot(id:String) = firebaseSource.BuyCourseOrNot(id)
+   suspend fun addMyCourse(myCourse: myCourse) = firebaseSource.addMyCourse(myCourse)
+  fun getMyCourse()= firebaseSource.getMyCourse()
+   //suspend fun buyCourseOrNot(id:String) = firebaseSource.BuyCourseOrNot(id)
+   suspend fun updateUsers(idCourse:String,users: users) = firebaseSource.updateUsers(idCourse,users)
+
 }

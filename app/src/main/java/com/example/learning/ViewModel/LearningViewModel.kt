@@ -2,20 +2,26 @@ package com.example.learning.ViewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.learning.Model.course
+import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
+import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 class LearningViewModel(
 private val learningRepository: LearningRepository
 ):ViewModel() {
 
     var Course: MutableLiveData<List<course>>? = null
-    var MyCourse: MutableLiveData<List<course>>? = null
-    var BuyNot: Boolean= false
-//    init {
-//        getCourse()
-//        getMyCourse()
-//    }
+    var MyCourse: MutableLiveData<List<myCourse>>? = null
+      var BuyNot:Boolean?=null
+   init {
+//   //
+     //  getCourse()
+      // getMyCourse()
+     //  BuyCourseOrNot()
+  }
 
      fun getCourse() {
    Course = learningRepository.getCourse()
@@ -36,13 +42,17 @@ private val learningRepository: LearningRepository
         learningRepository.addcourse(course)
     }
 
-    fun AddMyCourse(course: course){
-        learningRepository.addMyCourse(course)
+    fun AddMyCourse(myCourse: myCourse) = viewModelScope.launch {
+        learningRepository.addMyCourse(myCourse)
     }
-    fun BuyCourseOrNot(id:String) {
-        BuyNot = learningRepository.buyCourseOrNot(id)
-    }
+//    fun BuyCourseOrNot(id:String)=viewModelScope.launch {
+//        BuyNot= learningRepository.buyCourseOrNot(id)
+//    }
 
+
+    fun updateUsers(idCourse:String,users: users) = viewModelScope.launch {
+        learningRepository.updateUsers(idCourse,users)
+    }
 
 
 

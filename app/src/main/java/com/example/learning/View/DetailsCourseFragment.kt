@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
@@ -36,11 +37,18 @@ class DetailsCourseFragment : Fragment(R.layout.fragment_details_course) {
             findNavController().navigate(R.id.action_detailsCourseFragment_to_homeFragment)
         }
 
+        imageButton2.setOnClickListener {
+            val Bundle=Bundle().apply {
+                putSerializable("chat",course)
+            }
+            findNavController().navigate(R.id.action_detailsCourseFragment_to_chatFragment,Bundle)
+        }
+
 
         but_Buy.setOnClickListener {
-            val users= course.users as HashMap<String, String>
-            users.put("id",auth.currentUser!!.uid)
-            learningViewModel.AddMyCourse(course)
+            learningViewModel.updateUsers(course.id.toString(),users(auth.currentUser!!.uid,"","","",0))
+            learningViewModel.AddMyCourse(myCourse(course.id.toString(),course.name.toString(),course.description,course.image,auth.currentUser!!.uid,""))
+
         }
 
 

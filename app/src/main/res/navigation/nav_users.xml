@@ -29,6 +29,9 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_detailsCourseFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -48,5 +51,17 @@
         android:id="@+id/WCourseFragment"
         android:name="com.example.learning.WCourseFragment"
         android:label="fragment_w_course"
-        tools:layout="@layout/fragment_w_course" />
+        tools:layout="@layout/fragment_w_course" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.example.learning.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+
+        <argument
+            android:name="chat"
+            app:argType="com.example.learning.Model.course" />
+    </fragment>
 </navigation>

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Model.course
+import com.example.learning.Model.myCourse
 import com.example.learning.R
 import kotlinx.android.synthetic.main.item_mycourse.view.*
 
@@ -15,13 +16,13 @@ import kotlinx.android.synthetic.main.item_mycourse.view.*
 class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
-    private val differCallback = object : DiffUtil.ItemCallback<course>() {
-        override fun areItemsTheSame(oldItem: course, newItem: course): Boolean {
-            return oldItem.id == newItem.id
+    private val differCallback = object : DiffUtil.ItemCallback<myCourse>() {
+        override fun areItemsTheSame(oldItem: myCourse, newItem: myCourse): Boolean {
+            return oldItem.idcourse == newItem.idcourse
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: course, newItem: course): Boolean {
+        override fun areContentsTheSame(oldItem: myCourse, newItem: myCourse): Boolean {
             return oldItem == newItem
         }
 
@@ -53,8 +54,8 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((course) -> Unit)? = null
-    fun setOnItemClickListener(listener: (course) -> Unit) {
+    private var onItemClickListener: ((myCourse) -> Unit)? = null
+    fun setOnItemClickListener(listener: (myCourse) -> Unit) {
         onItemClickListener = listener
     }
 }

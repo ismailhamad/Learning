@@ -21,7 +21,7 @@ lateinit var myCourseAD: MyCourseAD
         super.onViewCreated(view, savedInstanceState)
         learningViewModel= (activity as Student).learningViewModel
 
-        learningViewModel.getMyCourse()
+       learningViewModel.getMyCourse()
         setupRecycleView()
         learningViewModel.MyCourse!!.observe(viewLifecycleOwner, Observer {
             myCourseAD.differ.submitList(it)

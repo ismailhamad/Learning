@@ -3,14 +3,20 @@ package com.example.learning.Firebase
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.os.Handler
+import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.learning.Model.course
+import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import com.example.learning.View.Student
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -20,9 +26,10 @@ class FirebaseSource( val activity: Activity){
      lateinit var auth: FirebaseAuth
      lateinit var  progressDialog:ProgressDialog
       var coursea: course?=null
+
     lateinit var CourseListMutableLiveData: MutableLiveData<List<course>>
-    lateinit var MyCourseListMutableLiveData: MutableLiveData<List<course>>
-     var BuyOrNot:Boolean = false
+    lateinit var MyCourseListMutableLiveData: MutableLiveData<List<myCourse>>
+     var  BuyONot : Boolean = false
 
 
      //Log in to the account
@@ -64,7 +71,7 @@ class FirebaseSource( val activity: Activity){
             if (task.isSuccessful) {
                 auth.currentUser!!.sendEmailVerification().addOnCompleteListener {
                     if (it.isSuccessful){
-                        createUser(users(auth.currentUser!!.uid,users.name,users.lastName,users.email))
+                        createUser(users(auth.currentUser!!.uid,users.name,users.lastName,users.email,0))
                         progressDialog.dismiss()
                         Toast.makeText(activity, "Registered successully. please check your email",
                             Toast.LENGTH_SHORT).show()
@@ -89,7 +96,9 @@ class FirebaseSource( val activity: Activity){
 //Create a user and put it in the firestore
     fun createUser(users: users){
         db=Firebase.firestore
-        db.collection("users").add(users).addOnSuccessListener {
+        auth =  Firebase.auth
+        db.collection("users").document(auth.currentUser!!.uid)
+            .set(users).addOnSuccessListener {
 
         }
 
@@ -97,7 +106,7 @@ class FirebaseSource( val activity: Activity){
 //addcousrs by lecture
     fun addCourse(course: course){
         db=Firebase.firestore
-        db.collection("courses").add(course).addOnSuccessListener {
+        db.collection("courses").document(course.id.toString()).set(course).addOnSuccessListener {
 
         }
     }
@@ -109,7 +118,7 @@ class FirebaseSource( val activity: Activity){
         val Courselist = ArrayList<course>()
          CourseListMutableLiveData =MutableLiveData()
          db.collection("courses").get().addOnSuccessListener { result ->
-             for (document in result){
+             for (document in result!!){
                 val course = document.toObject<course>()
                  Courselist.add(course)
                  CourseListMutableLiveData.postValue(Courselist)
@@ -123,57 +132,122 @@ class FirebaseSource( val activity: Activity){
    }
 
     //addMyCourse by student
-    fun addMyCourse(course: course){
+   suspend fun addMyCourse(myCourse: myCourse){
         db=Firebase.firestore
+        auth =  Firebase.auth
         progressDialog =ProgressDialog(activity)
         progressDialog.setCancelable(false)
         progressDialog.setMessage("Loading...")
         progressDialog.show()
-        db.collection("myCourse").add(course).addOnSuccessListener {
-            Toast.makeText(activity, "add successfully", Toast.LENGTH_SHORT).show()
-            progressDialog.dismiss()
+        db.collection("users").document(auth.currentUser!!.uid).get().addOnSuccessListener { it->
+            val users=it.toObject<users>()
+                if (users!!.numCourse<5){
+                    db.collection("myCourse").add(myCourse).addOnSuccessListener {
+                        Toast.makeText(activity, "add successfully", Toast.LENGTH_SHORT).show()
+                        progressDialog.dismiss()
+                    }
+                }else{
+                    //Alert
+                    progressDialog.dismiss()
+                    Toast.makeText(activity, "no more course", Toast.LENGTH_SHORT).show()
+                }
+
         }
+
+
+
     }
 
-    fun getMyCourse(): MutableLiveData<List<course>> {
+    fun getMyCourse(): MutableLiveData<List<myCourse>> {
         db=Firebase.firestore
-        val Courselist = ArrayList<course>()
+        val Courselist = ArrayList<myCourse>()
         MyCourseListMutableLiveData =MutableLiveData()
-        db.collection("myCourse").get().addOnSuccessListener { result ->
-            for (document in result){
-                val course = document.toObject<course>()
-                Courselist.add(course)
-                MyCourseListMutableLiveData.postValue(Courselist)
+        auth =  Firebase.auth
+        db.collection("myCourse").addSnapshotListener { result, error ->
+            for (document in result!!){
+                val course = document.toObject<myCourse>()
+                if (auth.currentUser!!.uid==course.idusers){
+                    Courselist.add(course)
+                    updatenumCourse(Courselist.count())
+                    MyCourseListMutableLiveData.postValue(Courselist)
+                }
+
             }
-
-
         }
 
         return MyCourseListMutableLiveData
 
     }
 
+
+
     fun BuyCourseOrNot(id:String):Boolean{
         db=Firebase.firestore
-        MyCourseListMutableLiveData =MutableLiveData()
-        db.collection("myCourse").get().addOnSuccessListener { result ->
-            for (document in result){
-                val course = document.toObject<course>()
-                for (user in course.users!!){
-                    user as users
-                    if (id==user.id){
-                        BuyOrNot = true
-                    }
-                }
+        auth =  Firebase.auth
+        db.collection("myCourse").whereEqualTo("idcourse",id).addSnapshotListener { result, error ->
+            for (document in result!!){
+                val course = document.toObject<myCourse>()
+                 //val usesrs = course.users
+                     if (auth.currentUser!!.uid==course.idusers){
+                        BuyONot = true
+                         Toast.makeText(activity, "yes", Toast.LENGTH_SHORT).show()
+                    }else{
+                         BuyONot = false
+                         Toast.makeText(activity, "no", Toast.LENGTH_SHORT).show()
+                     }
+
+//                for (user in usesrs!!){
+//                    val user =user as HashMap<String,users>
+//                    if (auth.currentUser!!.uid==user.get("id").toString()){
+//                        BuyONot = true
+//                    }
+//                }
 
 
             }
         }
-        return BuyOrNot
-    }
 
-    fun updateUsers(){
+     return BuyONot
 
     }
+    // Atomically add a new region to the "users" array field.
+   suspend fun updateUsers(idCourse:String,users: users){
+        val users = hashMapOf(
+            "id" to users.id,
+            "name" to users.name,
+            "lastName" to users.lastName,
+            "email" to users.email
+        ) as Map<String, Any>
+
+        val washingtonRef = db.collection("courses").document(idCourse)
+
+// Atomically add a new region to the "users" array field.
+        washingtonRef.update("users", FieldValue.arrayUnion(users)).addOnSuccessListener {
+
+
+        }
+    }
+
+
+    //Atomically add a new region to the "numCourse" array field.
+    fun updatenumCourse(numberr:Int){
+        auth =  Firebase.auth
+
+   var number = numberr
+        if (number>5){
+
+        }else{
+            number += 1
+            val washingtonRef = db.collection("users").document(auth.currentUser!!.uid)
+
+// Atomically add a new region to the "users" array field.
+            washingtonRef.update("numCourse",number).addOnSuccessListener {
+
+
+            }
+        }
+
+    }
+
 
 }
