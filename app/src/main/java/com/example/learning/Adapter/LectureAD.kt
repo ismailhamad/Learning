@@ -9,8 +9,10 @@ import android.widget.MediaController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.learning.Model.course
 import com.example.learning.Model.lecture
 import com.example.learning.R
+import kotlinx.android.synthetic.main.item_lecture.view.*
 import kotlinx.android.synthetic.main.lecture_item.view.*
 
 class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
@@ -33,7 +35,7 @@ class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.lecture_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_lecture, parent, false)
         )
     }
 
@@ -41,17 +43,20 @@ class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
         val lecture = differ.currentList[position]
 
         holder.itemView.apply {
-            tv_nameLecture.text = lecture.name
-            tv_desLecture.text = lecture.description
-            if (lecture.video != null){
-                val mediaController = MediaController(context)
-                mediaController.setAnchorView(video_getLecture)
-                val uri = Uri.parse("${lecture.video}")
-                video_getLecture.setMediaController(mediaController)
-                video_getLecture.setVideoURI(uri)
-                video_getLecture.requestFocus()
-            }else{
-                video_getLecture.visibility = View.INVISIBLE
+            name_lect.text = lecture.name
+//            tv_desLecture.text = lecture.description
+//            if (lecture.video != null){
+//                val mediaController = MediaController(context)
+//                mediaController.setAnchorView(video_getLecture)
+//                val uri = Uri.parse("${lecture.video}")
+//                video_getLecture.setMediaController(mediaController)
+//                video_getLecture.setVideoURI(uri)
+//                video_getLecture.requestFocus()
+//            }else{
+//                video_getLecture.visibility = View.INVISIBLE
+//            }
+            setOnClickListener {
+                onItemClickListener?.let { it(lecture) }
             }
 
         }
@@ -60,5 +65,10 @@ class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
 
     override fun getItemCount(): Int {
         return differ.currentList.size
+    }
+
+    private var onItemClickListener: ((lecture) -> Unit)? = null
+    fun setOnItemClickListener(listener: (lecture) -> Unit) {
+        onItemClickListener = listener
     }
 }

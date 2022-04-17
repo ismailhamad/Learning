@@ -54,6 +54,7 @@ rev= arrayListOf()
 
         btnSendMessage.setOnClickListener {
             val course=args.chat
+
             var message: String = etMessage.text.toString()
 
             if (message.isEmpty()) {
@@ -62,9 +63,9 @@ rev= arrayListOf()
             } else {
                 rev.clear()
                 for (userid in course.users!!){
-                    val user =userid as HashMap<String,users>
-                    rev.add(user.get("id").toString())
-                    topic = "/topics/${user.get("id")}"
+//                    val user =userid as HashMap<String,users>
+                    rev.add(userid.id.toString())
+                    topic = "/topics/${userid.id.toString()}"
                     PushNotification(
                         NotificationData( "userName",message),
                         topic).also {

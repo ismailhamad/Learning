@@ -42,12 +42,12 @@ lateinit var auth: FirebaseAuth
         imageButton.setOnClickListener {
             startActivity(Intent(context, AddLecture::class.java))
         }
-        cardViewAll.setOnClickListener {
-            var courses = users(null,"","","",0)
-            ArrayListusers.add(courses)
-            learningViewModel.AddCourse(course(uuid.toString(),"hhh","kmsksmsmsksms",null,ArrayListusers as ArrayList<Any>,null))
-            //learningViewModel.AddCourse(course())
-        }
+//        cardViewAll.setOnClickListener {
+//            var courses = users(null,"","","",0)
+//            ArrayListusers.add(courses)
+//            learningViewModel.AddCourse(course(uuid.toString(),"hhh","kmsksmsmsksms",null,ArrayListusers as ArrayList<Any>,null))
+//            //learningViewModel.AddCourse(course())
+//        }
 
         courseAD.setOnItemClickListener {
 //         learningViewModel.BuyCourseOrNot(it.id!!)

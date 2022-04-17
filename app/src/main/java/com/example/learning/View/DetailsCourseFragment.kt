@@ -37,17 +37,11 @@ class DetailsCourseFragment : Fragment(R.layout.fragment_details_course) {
             findNavController().navigate(R.id.action_detailsCourseFragment_to_homeFragment)
         }
 
-        imageButton2.setOnClickListener {
-            val Bundle=Bundle().apply {
-                putSerializable("chat",course)
-            }
-            findNavController().navigate(R.id.action_detailsCourseFragment_to_chatFragment,Bundle)
-        }
 
 
         but_Buy.setOnClickListener {
             learningViewModel.updateUsers(course.id.toString(),users(auth.currentUser!!.uid,"","","",0))
-            learningViewModel.AddMyCourse(myCourse(course.id.toString(),course.name.toString(),course.description,course.image,auth.currentUser!!.uid,""))
+           // learningViewModel.AddMyCourse(myCourse(course.id.toString(),course.name.toString(),course.description,course.image,auth.currentUser!!.uid,course.lecture))
 
         }
 

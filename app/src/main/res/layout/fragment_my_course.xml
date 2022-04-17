@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F5F9"
     tools:context=".View.MyCourseFragment">
 
 
@@ -12,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="142dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="34dp"
         android:fontFamily="@font/baloo_bhaijaan"
         android:text="My Courses"
         android:textColor="#000000"
@@ -20,24 +21,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="7dp"
-        android:background="#4FB2E4FB"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_MyCourse"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/view4"
+        android:layout_width="396dp"
+        android:layout_height="173dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
         tools:listitem="@layout/item_mycourse" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_Lect"
+        android:layout_width="0dp"
+        android:layout_height="462dp"
+        android:layout_marginTop="15dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_MyCourse"
+        tools:listitem="@layout/item_lecture" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Go_Chat"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="33dp"
+        android:backgroundTint="#1D91ED"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="34dp"
+            android:layout_height="38dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_baseline_message_24" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="274dp"
+        android:layout_height="92dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="118dp"
+        android:layout_marginEnd="82dp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="Select the course to display the list of lectures"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_MyCourse" />
 </androidx.constraintlayout.widget.ConstraintLayout>

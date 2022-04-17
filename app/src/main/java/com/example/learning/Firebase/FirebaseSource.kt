@@ -143,7 +143,7 @@ class FirebaseSource( val activity: Activity){
    }
 
     //addMyCourse by student
-   suspend fun addMyCourse(myCourse: myCourse){
+    fun addMyCourse(myCourse: course){
         db=Firebase.firestore
         auth =  Firebase.auth
         progressDialog =ProgressDialog(activity)
@@ -177,11 +177,17 @@ class FirebaseSource( val activity: Activity){
         db.collection("myCourse").addSnapshotListener { result, error ->
             for (document in result!!){
                 val course = document.toObject<myCourse>()
-                if (auth.currentUser!!.uid==course.idusers){
-                    Courselist.add(course)
-                    updatenumCourse(Courselist.count())
-                    MyCourseListMutableLiveData.postValue(Courselist)
+                val cousree =course.users
+                if (cousree != null) {
+                    for (users in cousree){
+                        if (auth.currentUser!!.uid==users.id){
+                            Courselist.add(course)
+                            updatenumCourse(Courselist.count())
+                            MyCourseListMutableLiveData.postValue(Courselist)
+                        }
+                    }
                 }
+
 
             }
         }
@@ -192,35 +198,35 @@ class FirebaseSource( val activity: Activity){
 
 
 
-    fun BuyCourseOrNot(id:String):Boolean{
-        db=Firebase.firestore
-        auth =  Firebase.auth
-        db.collection("myCourse").whereEqualTo("idcourse",id).addSnapshotListener { result, error ->
-            for (document in result!!){
-                val course = document.toObject<myCourse>()
-                 //val usesrs = course.users
-                     if (auth.currentUser!!.uid==course.idusers){
-                        BuyONot = true
-                         Toast.makeText(activity, "yes", Toast.LENGTH_SHORT).show()
-                    }else{
-                         BuyONot = false
-                         Toast.makeText(activity, "no", Toast.LENGTH_SHORT).show()
-                     }
-
-//                for (user in usesrs!!){
-//                    val user =user as HashMap<String,users>
-//                    if (auth.currentUser!!.uid==user.get("id").toString()){
+//    fun BuyCourseOrNot(id:String):Boolean{
+//        db=Firebase.firestore
+//        auth =  Firebase.auth
+//        db.collection("myCourse").whereEqualTo("idcourse",id).addSnapshotListener { result, error ->
+//            for (document in result!!){
+//                val course = document.toObject<myCourse>()
+//                 //val usesrs = course.users
+//                     if (auth.currentUser!!.uid==course.idusers){
 //                        BuyONot = true
-//                    }
-//                }
-
-
-            }
-        }
-
-     return BuyONot
-
-    }
+//                         Toast.makeText(activity, "yes", Toast.LENGTH_SHORT).show()
+//                    }else{
+//                         BuyONot = false
+//                         Toast.makeText(activity, "no", Toast.LENGTH_SHORT).show()
+//                     }
+//
+////                for (user in usesrs!!){
+////                    val user =user as HashMap<String,users>
+////                    if (auth.currentUser!!.uid==user.get("id").toString()){
+////                        BuyONot = true
+////                    }
+////                }
+//
+//
+//            }
+//        }
+//
+//     return BuyONot
+//
+//    }
 
 
 
@@ -238,9 +244,13 @@ class FirebaseSource( val activity: Activity){
 
 // Atomically add a new region to the "users" array field.
         washingtonRef.update("users", FieldValue.arrayUnion(users)).addOnSuccessListener {
-
-
+            db.collection("courses").document(idCourse).addSnapshotListener { value, error ->
+                val course = value!!.toObject<course>()
+                addMyCourse(course!!)
+            }
         }
+
+
     }
 
 
@@ -330,6 +340,10 @@ class FirebaseSource( val activity: Activity){
                 }
 
         }
+
+
+
+
 
 
     }

@@ -45,9 +45,9 @@ private val learningRepository: LearningRepository
         learningRepository.addcourse(course)
     }
 
-    fun AddMyCourse(myCourse: myCourse) = viewModelScope.launch {
-        learningRepository.addMyCourse(myCourse)
-    }
+//    fun AddMyCourse(myCourse: myCourse) = viewModelScope.launch {
+//        learningRepository.addMyCourse(myCourse)
+//    }
 //    fun BuyCourseOrNot(id:String)=viewModelScope.launch {
 //        BuyNot= learningRepository.buyCourseOrNot(id)
 //    }

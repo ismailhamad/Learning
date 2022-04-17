@@ -14,7 +14,7 @@ class LearningRepository(
     fun Sign_Up(password:String,users: users) = firebaseSource.Sign_up(password,users)
     fun addcourse(course: course) = firebaseSource.addCourse(course)
      fun getCourse()= firebaseSource.getCourse()
-   suspend fun addMyCourse(myCourse: myCourse) = firebaseSource.addMyCourse(myCourse)
+   //suspend fun addMyCourse(myCourse: myCourse) = firebaseSource.addMyCourse(myCourse)
   fun getMyCourse()= firebaseSource.getMyCourse()
    //suspend fun buyCourseOrNot(id:String) = firebaseSource.BuyCourseOrNot(id)
    suspend fun updateUsers(idCourse:String,users: users) = firebaseSource.updateUsers(idCourse,users)

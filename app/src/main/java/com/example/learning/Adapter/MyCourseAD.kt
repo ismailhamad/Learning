@@ -1,6 +1,7 @@
 package com.example.learning.Adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Model.course
 import com.example.learning.Model.myCourse
 import com.example.learning.R
+import com.example.learning.View.MyCourseFragment.Companion.xx
 import kotlinx.android.synthetic.main.item_mycourse.view.*
 
 
 class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
+     var rowindex = 0
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
     private val differCallback = object : DiffUtil.ItemCallback<myCourse>() {
@@ -37,11 +40,24 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val course = differ.currentList[position]
+
         holder.itemView.apply {
+
             name_myCourse.text=course.name
-            Desc_MyCourse.text=course.description
             setOnClickListener {
                 onItemClickListener?.let { it(course) }
+                rowindex = position
+                notifyDataSetChanged();
+            }
+            if (rowindex==position){
+                item_card.radius=20f
+                item_card.setBackgroundColor(Color.parseColor("#9B67F6"))
+                item_card.cardElevation=20f
+            }else{
+                item_card.cardElevation=0f
+                item_card.radius=20f
+                item_card.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                item_card.elevation=0f
             }
 
 

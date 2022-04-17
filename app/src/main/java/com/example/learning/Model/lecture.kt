@@ -1,6 +1,8 @@
 package com.example.learning.Model
 
-class lecture {
+import java.io.Serializable
+
+class lecture:Serializable {
     var id:String? =""
     var name:String?=""
     var description:String?=""
