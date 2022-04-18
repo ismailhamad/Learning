@@ -1,12 +1,10 @@
 package com.example.learning.ViewModel
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.learning.Model.course
-import com.example.learning.Model.lecture
-import com.example.learning.Model.myCourse
-import com.example.learning.Model.users
+import com.example.learning.Model.*
 import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
@@ -41,8 +39,8 @@ private val learningRepository: LearningRepository
         learningRepository.Sign_Up(password,users)
     }
 
-    fun AddCourse(course: course){
-        learningRepository.addcourse(course)
+    fun AddCourse(course: course,img:Uri){
+        learningRepository.addcourse(course,img)
     }
 
 //    fun AddMyCourse(myCourse: myCourse) = viewModelScope.launch {
@@ -60,6 +58,18 @@ private val learningRepository: LearningRepository
     fun getLecture(document:String) {
         lecture = learningRepository.getLecture(document)
     }
+    fun updateCourse(course: course,img:Uri,document: String) {
+        learningRepository.updateCourse(course,img,document)
+    }
+
+    fun deleteCourse(document: String) {
+        learningRepository.deleteCourse(document)
+    }
+
+    fun addAssignment(assignment: Assignment, documentCourses:String, documentLecture:String, file:Uri){
+        learningRepository.addAssignment(assignment,documentCourses,documentLecture,file)
+    }
+
 
 
 

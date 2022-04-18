@@ -16,32 +16,42 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_w_course.*
 
 
 class WCourseFragment : Fragment(R.layout.fragment_w_course) {
-lateinit var learningViewModel: LearningViewModel
-   val args:WCourseFragmentArgs by navArgs()
-var mydownload:Long = 0
+    lateinit var learningViewModel: LearningViewModel
+    val args: WCourseFragmentArgs by navArgs()
+    var mydownload: Long = 0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        learningViewModel =(activity as Student).learningViewModel
+        learningViewModel = (activity as Student).learningViewModel
         val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
-        navBar.visibility=View.GONE
+        navBar.visibility = View.GONE
         val lecture = args.watch
-        nameLect.text=lecture.name
-        dec_lect.text=lecture.description
-        videoView.setVideoURI(Uri.parse(lecture.video))
+        nameLect.text = lecture.name
+        dec_lect.text = lecture.description
+//        videoView.setVideoURI(Uri.parse(lecture.video))
 
-if (lecture.file==""){
-    pdf.visibility=View.GONE
-}else{
-    pdf.visibility=View.VISIBLE
-}
+        val player = ExoPlayer.Builder(requireActivity()).build()
+        videoView.player = player
+        val mediaItem: MediaItem =
+            MediaItem.fromUri(Uri.parse("${lecture.video}"))
+        player.setMediaItem(mediaItem)
+        player.prepare()
+
+
+        if (lecture.file == "") {
+            pdf.visibility = View.GONE
+        } else {
+            pdf.visibility = View.VISIBLE
+        }
         pdf.setOnClickListener {
 
-            var request=DownloadManager.Request(Uri.parse(lecture.file))
+            var request = DownloadManager.Request(Uri.parse(lecture.file))
                 .setTitle("Download")
                 .setDescription("Download a ${lecture.name}")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
@@ -52,8 +62,6 @@ if (lecture.file==""){
             dm!!.enqueue(request)
 
         }
-
-
 
 
 

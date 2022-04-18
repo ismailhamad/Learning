@@ -50,6 +50,8 @@ lateinit var auth: FirebaseAuth
 //        }
 
         courseAD.setOnItemClickListener {
+        val i = Intent()
+            i.putExtra("idCourse",it.id)
 //         learningViewModel.BuyCourseOrNot(it.id!!)
 //
 //        if (learningViewModel.BuyNot!!){

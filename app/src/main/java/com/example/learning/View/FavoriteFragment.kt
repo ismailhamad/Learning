@@ -20,7 +20,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Student).learningViewModel
         setupReceycleView()
-        learningViewModel.getLecture("56f78e25-031e-41d2-9ce9-68115fa60b2c")
+        learningViewModel.getLecture("93da687e-4aea-4420-96c6-3f0ed3f222d2")
         learningViewModel.lecture!!.observe(viewLifecycleOwner, Observer {
             lectureAD.differ.submitList(it)
         })

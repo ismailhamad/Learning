@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Model.course
 import com.example.learning.Model.myCourse
 import com.example.learning.R
-import com.example.learning.View.MyCourseFragment.Companion.xx
 import kotlinx.android.synthetic.main.item_mycourse.view.*
 
 
@@ -21,7 +20,7 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<myCourse>() {
         override fun areItemsTheSame(oldItem: myCourse, newItem: myCourse): Boolean {
-            return oldItem.idcourse == newItem.idcourse
+            return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")

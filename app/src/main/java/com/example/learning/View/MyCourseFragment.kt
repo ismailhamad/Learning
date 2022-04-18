@@ -15,57 +15,63 @@ import com.example.learning.Adapter.MyCourseAD
 import com.example.learning.Model.myCourse
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_my_course.*
 
-
 class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
-lateinit var learningViewModel: LearningViewModel
-lateinit var myCourseAD: MyCourseAD
-lateinit var lectureAD: LectureAD
- var course:myCourse?=null
+    lateinit var learningViewModel: LearningViewModel
+    lateinit var myCourseAD: MyCourseAD
+    lateinit var lectureAD: LectureAD
+    var course:myCourse?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel= (activity as Student).learningViewModel
-
-       learningViewModel.getMyCourse()
+        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        navBar.visibility=View.VISIBLE
+        learningViewModel.getMyCourse()
         setupRecycleView()
         setupRecycleView2()
         learningViewModel.MyCourse!!.observe(viewLifecycleOwner, Observer {
             myCourseAD.differ.submitList(it)
         })
         myCourseAD.setOnItemClickListener {
-            xx  = it
+
             textView7.visibility = View.GONE
-            lectureAD.differ.submitList(it.lecture)
+            learningViewModel.getLecture(it.id.toString())
+
             course = it
+            learningViewModel.lecture?.observe(viewLifecycleOwner, Observer {
+                lectureAD.differ.submitList(it)
+            })
         }
+
 
         lectureAD.setOnItemClickListener {
             val Bundle=Bundle().apply {
                 putSerializable("watch",it)
             }
-    findNavController().navigate(R.id.action_myCourseFragment_to_WCourseFragment,Bundle)
+            findNavController().navigate(R.id.action_myCourseFragment_to_WCourseFragment,Bundle)
         }
-  if (course !=null){
-    Go_Chat.setOnClickListener {
-        val Bundle=Bundle().apply {
-            putSerializable("chat",course)
+
+        Go_Chat.setOnClickListener {
+            val Bundle=Bundle().apply {
+                putSerializable("chaat",course)
+            }
+            findNavController().navigate(R.id.action_myCourseFragment_to_chatFragment,Bundle)
+
         }
-        findNavController().navigate(R.id.action_myCourseFragment_to_chatFragment,Bundle)
 
-    }
-}
 
 
     }
 
-fun setupRecycleView(){
-   myCourseAD = MyCourseAD()
-    rv_MyCourse.apply {
-        adapter = myCourseAD
-        layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
+    fun setupRecycleView(){
+        myCourseAD = MyCourseAD()
+        rv_MyCourse.apply {
+            adapter = myCourseAD
+            layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
+        }
     }
-}
 
     fun setupRecycleView2(){
         lectureAD = LectureAD()
@@ -74,7 +80,5 @@ fun setupRecycleView(){
             layoutManager = LinearLayoutManager(activity)
         }
     }
-    companion object{
-         var xx:myCourse?=null
-    }
+
 }
