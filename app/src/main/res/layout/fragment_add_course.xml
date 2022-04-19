@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F5F9"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddCourseFragment">
+
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="159dp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="Add New Course"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="257dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="Enter the course details to add the course"
+        android:textAlignment="center"
+        android:textColor="#757272"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView21"
+        app:layout_constraintStart_toStartOf="@+id/textView21"
+        app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView14"
+        android:layout_width="0dp"
+
+        android:layout_height="304dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="19dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView22">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/Text_NameCourse"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Name Course"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="#97CCCACA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Text_NameCourse" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="3dp"
+                android:background="#97CCCACA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Text_description" />
+
+            <EditText
+                android:id="@+id/Text_description"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="description"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Text_NameCourse" />
+
+            <ImageView
+                android:id="@+id/image_course"
+                android:layout_width="296dp"
+                android:layout_height="177dp"
+                android:layout_marginStart="39dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="38dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/back_view"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="84dp"
+                android:text="Add image"
+                android:textColor="#BAB4B4"
+                app:layout_constraintStart_toStartOf="@+id/image_course"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/Add_Course"
+        android:layout_width="184dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="24dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="@+id/cardView14"
+        app:layout_constraintStart_toStartOf="@+id/cardView14"
+        app:layout_constraintTop_toBottomOf="@+id/cardView14" />
+</androidx.constraintlayout.widget.ConstraintLayout>

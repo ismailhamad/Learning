@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_tech"
+    app:startDestination="@id/homeTFragment">
+
+    <fragment
+        android:id="@+id/homeTFragment"
+        android:name="com.example.learning.HomeTFragment"
+        android:label="fragment_home_t"
+        tools:layout="@layout/fragment_home_t" >
+        <action
+            android:id="@+id/action_homeTFragment_to_addCourseFragment"
+            app:destination="@id/addCourseFragment" />
+        <action
+            android:id="@+id/action_homeTFragment_to_detailsCourseTechFragment"
+            app:destination="@id/detailsCourseTechFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCourseFragment"
+        android:name="com.example.learning.AddCourseFragment"
+        android:label="fragment_add_course"
+        tools:layout="@layout/fragment_add_course" />
+    <fragment
+        android:id="@+id/detailsCourseTechFragment"
+        android:name="com.example.learning.DetailsCourseTechFragment"
+        android:label="fragment_details_course_tech"
+        tools:layout="@layout/fragment_details_course_tech" >
+        <argument
+            android:name="courseTech"
+            app:argType="com.example.learning.Model.course" />
+        <action
+            android:id="@+id/action_detailsCourseTechFragment_to_addLectureFragment"
+            app:destination="@id/addLectureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addLectureFragment"
+        android:name="com.example.learning.AddLectureFragment"
+        android:label="fragment_add_lecture"
+        tools:layout="@layout/fragment_add_lecture" >
+        <argument
+            android:name="idCourseL"
+            app:argType="string" />
+    </fragment>
+</navigation>

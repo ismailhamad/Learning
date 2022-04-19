@@ -6,8 +6,9 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="344dp"
-        android:layout_height="68dp"
+        android:id="@+id/cc_lect"
+        android:layout_width="350dp"
+        android:layout_height="57dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
@@ -26,14 +27,15 @@
                 android:id="@+id/name_lect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="9dp"
+                android:layout_marginStart="12dp"
                 android:fontFamily="@font/baloo_bhai_2"
                 android:text="Android ApIs"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/check_seee"
                 app:layout_constraintStart_toEndOf="@+id/check_seee"
-                app:layout_constraintTop_toTopOf="@+id/check_seee" />
+                app:layout_constraintTop_toTopOf="@+id/check_seee"
+                app:layout_constraintVertical_bias="0.666" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/check_seee"

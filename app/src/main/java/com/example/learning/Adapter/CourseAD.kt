@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.learning.Model.course
 import com.example.learning.R
 import kotlinx.android.synthetic.main.item_courses.view.*
@@ -56,6 +57,7 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
 //            draw.setColor(Color.rgb(red, green, blue))
             item_c.setCardBackgroundColor(color)
             nameCourse.text=course.name
+            Glide.with(this).load(course.image).into(imageCourse)
             setOnClickListener {
                 onItemClickListener?.let { it(course) }
             }

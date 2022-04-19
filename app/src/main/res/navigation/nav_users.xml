@@ -64,7 +64,7 @@
         tools:layout="@layout/fragment_chat" >
 
         <argument
-            android:name="chat"
+            android:name="chaat"
             app:argType="com.example.learning.Model.myCourse" />
     </fragment>
 </navigation>

@@ -3,7 +3,6 @@ package com.example.learning.Firebase
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
@@ -11,11 +10,11 @@ import androidx.lifecycle.MutableLiveData
 import com.example.learning.Model.*
 
 import com.example.learning.View.Student
+import com.example.learning.View.Teacher
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
@@ -23,7 +22,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -35,6 +33,7 @@ class FirebaseSource(val activity: Activity) {
     var storge: FirebaseStorage? = null
     private var storageRef: StorageReference? = null
     lateinit var CourseListMutableLiveData: MutableLiveData<List<course>>
+    lateinit var CourseTeacherListMutableLiveData: MutableLiveData<List<course>>
     lateinit var MyCourseListMutableLiveData: MutableLiveData<List<myCourse>>
     lateinit var LectureListMutableLiveData: MutableLiveData<List<lecture>>
     lateinit var course: course
@@ -54,8 +53,14 @@ class FirebaseSource(val activity: Activity) {
         auth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener {
             if (it.isSuccessful) {
                 if (auth.currentUser!!.isEmailVerified) {
-                    val i = Intent(activity, Student::class.java)
-                    activity.startActivity(i)
+                    if (Email=="joehamad2060@gmail.com"){
+                        val i = Intent(activity, Teacher::class.java)
+                        activity.startActivity(i)
+                    }else{
+                        val i = Intent(activity, Student::class.java)
+                        activity.startActivity(i)
+                    }
+
                 } else {
                     progressDialog.dismiss()
                     Toast.makeText(activity, "Please verify your email address", Toast.LENGTH_SHORT)
@@ -134,7 +139,7 @@ class FirebaseSource(val activity: Activity) {
     }
 
     //addcousrs by lecture
-    fun addCourse(course: course, img: Uri?) {
+    fun addCourse(course: course,imgeUri:Uri?) {
 
         storge = Firebase.storage
         storageRef = storge!!.reference
@@ -143,26 +148,28 @@ class FirebaseSource(val activity: Activity) {
         progressDialog.setMessage("Loading...")
         progressDialog.show()
         db = Firebase.firestore
-        storageRef!!.child("image/" + "${course.id}").putFile(img!!)
-            .addOnSuccessListener { taskSnapshot ->
-                progressDialog.dismiss()
-                taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
-                    course.image = uri.toString()
-                    db.collection("courses").document(course.id.toString()).set(course)
-                        .addOnSuccessListener {
-                            Toast.makeText(activity, "تم اضافة الكورس", Toast.LENGTH_LONG).show()
+        imgeUri?.let {
+            storageRef!!.child("image/" + "${course.id}").putFile(it)
+                .addOnSuccessListener { taskSnapshot ->
+                    progressDialog.dismiss()
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+                        course.image = uri.toString()
+                        db.collection("courses").document(course.id.toString()).set(course)
+                            .addOnSuccessListener {
+                                Toast.makeText(activity, "تم اضافة الكورس", Toast.LENGTH_LONG).show()
 
-                        }
+                            }
+                    }
+                }.addOnFailureListener { exception ->
+                    progressDialog.dismiss()
+                    Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
+
+                }.addOnProgressListener {
+                    val progress: Double =
+                        100.0 * it.bytesTransferred / it.totalByteCount
+                    progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                 }
-            }.addOnFailureListener { exception ->
-                progressDialog.dismiss()
-                Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
-
-            }.addOnProgressListener {
-                val progress: Double =
-                    100.0 * it.bytesTransferred / it.totalByteCount
-                progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
-            }
+        }
 
 
     }
@@ -187,6 +194,33 @@ class FirebaseSource(val activity: Activity) {
 
     }
 
+    fun getTeacherCourse(uid: String): MutableLiveData<List<course>> {
+        db = Firebase.firestore
+        auth = Firebase.auth
+        val Courselist = ArrayList<course>()
+        CourseTeacherListMutableLiveData = MutableLiveData()
+        db.collection("courses").addSnapshotListener() { result,error ->
+            for (courses in result!!){
+                val course = courses!!.toObject<course>()
+                if (uid == course.idTeacher){
+                    course?.let { Courselist.add(it) }
+                    CourseTeacherListMutableLiveData.postValue(Courselist)
+                }
+
+            }
+
+            }
+
+
+
+
+        return CourseTeacherListMutableLiveData
+
+    }
+
+
+
+
     //addMyCourse by student
     fun addMyCourse(myCourse: course) {
         db = Firebase.firestore
@@ -197,7 +231,7 @@ class FirebaseSource(val activity: Activity) {
         progressDialog.show()
         db.collection("users").document(auth.currentUser!!.uid).get().addOnSuccessListener { it ->
             val users = it.toObject<users>()
-            if (users!!.numCourse < 5) {
+            if (users!!.numCourse!! < 5) {
                 db.collection("myCourse").add(myCourse).addOnSuccessListener {
                     Toast.makeText(activity, "add successfully", Toast.LENGTH_SHORT).show()
                     progressDialog.dismiss()
@@ -527,34 +561,34 @@ class FirebaseSource(val activity: Activity) {
     }
 
 
-    fun updateCourse(course:course,img: Uri?,document:String){
-        storge = Firebase.storage
-        storageRef = storge!!.reference
-        progressDialog = ProgressDialog(activity)
-        progressDialog.setCancelable(false)
-        progressDialog.setMessage("Loading...")
-        progressDialog.show()
-        db = Firebase.firestore
-        storageRef!!.child("image/" + "${course.id}").putFile(img!!)
-            .addOnSuccessListener { taskSnapshot ->
-                progressDialog.dismiss()
-                taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
-                    course.image = uri.toString()
-                    db.collection("courses").document(document).update(course.getCourseHashMap())
-                        .addOnSuccessListener {
-                            Toast.makeText(activity, "تم تعديل الكورس", Toast.LENGTH_LONG).show()
-                        }
-                }
-            }.addOnFailureListener { exception ->
-                progressDialog.dismiss()
-                Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
-
-            }.addOnProgressListener {
-                val progress: Double =
-                    100.0 * it.bytesTransferred / it.totalByteCount
-                progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
-            }
-    }
+//    fun updateCourse(course:course,img: Uri?,document:String){
+//        storge = Firebase.storage
+//        storageRef = storge!!.reference
+//        progressDialog = ProgressDialog(activity)
+//        progressDialog.setCancelable(false)
+//        progressDialog.setMessage("Loading...")
+//        progressDialog.show()
+//        db = Firebase.firestore
+//        storageRef!!.child("image/" + "${course.id}").putFile(img!!)
+//            .addOnSuccessListener { taskSnapshot ->
+//                progressDialog.dismiss()
+//                taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+//                    course.image = uri.toString()
+//                    db.collection("courses").document(document).update(course.getCourseHashMap())
+//                        .addOnSuccessListener {
+//                            Toast.makeText(activity, "تم تعديل الكورس", Toast.LENGTH_LONG).show()
+//                        }
+//                }
+//            }.addOnFailureListener { exception ->
+//                progressDialog.dismiss()
+//                Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
+//
+//            }.addOnProgressListener {
+//                val progress: Double =
+//                    100.0 * it.bytesTransferred / it.totalByteCount
+//                progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+//            }
+//    }
 
     fun deleteCourse(document: String) {
         storge = Firebase.storage
@@ -577,24 +611,24 @@ class FirebaseSource(val activity: Activity) {
         progressDialog.setMessage("Loading...")
         progressDialog.show()
         db = Firebase.firestore
-            storageRef!!.child("assignment/" + "${assignment.id}").putFile(file!!)
-                .addOnSuccessListener { taskSnapshot ->
-                    progressDialog.dismiss()
-                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
-                        assignment.file = uri.toString()
-                        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment").document(assignment.id!!)
-                            .set(assignment.getAssignmentHashMap())
-                    }
-                }.addOnFailureListener { exception ->
-                    progressDialog.dismiss()
-                    Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
-
-                }.addOnProgressListener {
-                    val progress: Double =
-                        100.0 * it.bytesTransferred / it.totalByteCount
-                    progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+        storageRef!!.child("assignment/" + "${assignment.id}").putFile(file!!)
+            .addOnSuccessListener { taskSnapshot ->
+                progressDialog.dismiss()
+                taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+                    assignment.file = uri.toString()
+                    db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment").document(assignment.id!!)
+                        .set(assignment.getAssignmentHashMap())
                 }
-        }
+            }.addOnFailureListener { exception ->
+                progressDialog.dismiss()
+                Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
+
+            }.addOnProgressListener {
+                val progress: Double =
+                    100.0 * it.bytesTransferred / it.totalByteCount
+                progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+            }
+    }
 
     fun updateAssignment(assignment: Assignment,documentCourses:String,documentLecture:String,documentAssignment:String,file:Uri){
         storge = Firebase.storage
@@ -638,5 +672,6 @@ class FirebaseSource(val activity: Activity) {
 
 
 }
+
 
 

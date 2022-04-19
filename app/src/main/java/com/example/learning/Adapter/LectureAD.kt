@@ -1,6 +1,7 @@
 package com.example.learning.Adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,12 @@ class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
 
         holder.itemView.apply {
             name_lect.text = lecture.name
+
+            if(lecture.seeLecture==false){
+                cc_lect.setBackgroundColor(Color.GRAY)
+            }else{
+                cc_lect.setBackgroundColor(Color.WHITE)
+            }
 //            tv_desLecture.text = lecture.description
 //            if (lecture.video != null){
 //                val mediaController = MediaController(context)

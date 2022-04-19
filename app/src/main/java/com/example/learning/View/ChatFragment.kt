@@ -9,12 +9,11 @@ import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learning.Adapter.ChatAdapter
-import com.example.learning.Model.Chat
-import com.example.learning.Model.NotificationData
-import com.example.learning.Model.PushNotification
-import com.example.learning.Model.users
+import com.example.learning.Model.*
 import com.example.learning.R
 import com.example.learning.Notification.RetrofitInstance
+
+
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -35,10 +34,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     var firebaseUser: FirebaseUser? = null
     var reference: DatabaseReference? = null
     var chatList = java.util.ArrayList<Chat>()
-    var topic = ""
     val args:ChatFragmentArgs by navArgs()
     lateinit var rev:ArrayList<String>
     lateinit var auth: FirebaseAuth
+var course:myCourse?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel =(activity as Student).learningViewModel
@@ -50,10 +49,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 rev= arrayListOf()
 //        firebaseUser = FirebaseAuth.getInstance().currentUser
 //        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId!!)
-
+        course=args.chaat
 
         btnSendMessage.setOnClickListener {
-            val course=args.chat
+
 
             var message: String = etMessage.text.toString()
 
@@ -62,10 +61,10 @@ rev= arrayListOf()
                 etMessage.setText("")
             } else {
                 rev.clear()
-                for (userid in course.users!!){
+                for (userid in course!!.users!!){
 //                    val user =userid as HashMap<String,users>
                     rev.add(userid.id.toString())
-                    topic = "/topics/${userid.id.toString()}"
+                   val topic = "/topics/${userid.id.toString()}"
                     PushNotification(
                         NotificationData( "userName",message),
                         topic).also {
@@ -74,23 +73,25 @@ rev= arrayListOf()
                 }
 
 
-                sendMessage(auth.currentUser!!.uid, rev , message)
+                sendMessage(auth.currentUser!!.uid, rev , message,course!!.id.toString())
                 etMessage.setText("")
             }
 
         }
 
 //            val user =usrs as HashMap<String,users>
-          readMessage(auth.currentUser!!.uid, rev)
+          readMessage(auth.currentUser!!.uid, rev,course?.id.toString())
+        Toast.makeText(activity, "${course!!.id}", Toast.LENGTH_SHORT).show()
 //
 
     }
-    private fun sendMessage(senderId: String, receiverId: ArrayList<String>, message: String) {
+    private fun sendMessage(senderId: String, receiverId: ArrayList<String>, message: String,idcorse:String) {
         var reference: DatabaseReference? = FirebaseDatabase.getInstance().getReference()
 
         var hashMap: HashMap<String, Any> = HashMap()
         hashMap.put("senderId", senderId)
         hashMap.put("receiverId", receiverId)
+        hashMap.put("idcorse", idcorse)
         hashMap.put("message", message)
 
         reference!!.child("Chat").push().setValue(hashMap)
@@ -98,7 +99,7 @@ rev= arrayListOf()
     }
 
 
-    fun readMessage(senderId: String, receiverId: ArrayList<String>) {
+    fun readMessage(senderId: String, receiverId: ArrayList<String>,idcorse: String) {
         val databaseReference: DatabaseReference =
             FirebaseDatabase.getInstance().getReference("Chat")
 
@@ -112,18 +113,21 @@ rev= arrayListOf()
                 for (dataSnapShot: DataSnapshot in snapshot.children) {
                     val chat = dataSnapShot.getValue(Chat::class.java)
 
-                    chatList.add(chat!!)
-                        for (i in receiverId) {
+                  chatList.add(chat!!)
 
-                            if (chat!!.senderId.equals(i) && chat!!.receiverId!!.equals(
-                                    receiverId
-                                ) || chat!!.senderId.equals(i) && chat!!.receiverId!!.equals(
-                                    senderId
-                                )
-                            ) {
 
-                            }
-                        }
+
+//                        for (i in receiverId) {
+//
+//                            if (chat!!.senderId.equals(i) && chat!!.receiverId!!.equals(
+//                                    receiverId
+//                                ) || chat!!.senderId.equals(i) && chat!!.receiverId!!.equals(
+//                                    senderId
+//                                )
+//                            ) {
+//
+//                            }
+//                        }
                 }
 
                 val chatAdapter = activity?.let { ChatAdapter(it, chatList) }
@@ -148,5 +152,6 @@ rev= arrayListOf()
             Log.e("TAG", e.toString())
         }
     }
+
 
 }

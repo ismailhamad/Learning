@@ -10,8 +10,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="334dp"
-        android:layout_height="253dp"
+        android:layout_width="261dp"
+        android:layout_height="197dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="20dp"
@@ -27,12 +27,13 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="0dp"
-                android:layout_height="221dp"
+                android:layout_width="268dp"
+                android:layout_height="129dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="1dp"
                 android:layout_marginBottom="3dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/web2"
                 app:layout_constraintBottom_toTopOf="@+id/nameCourseD"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -98,8 +99,9 @@
         android:id="@+id/Desc"
         android:layout_width="376dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/baloo_bhai_2"
-        android:text="djcbkdbdhbcddjcbkdbdhbclbddbcdhbcdhbchdbcdkcbdcbkdbchdbckdbcdbchdbchdbchdbc"
+        android:text="djcbkdbdhbcddjcbkdbdhbclbddbcdhbcdhbchdbcdkcbdcbkdbchdbckdbcdbchdbcdjcbkdbdhbcddjcbkdbdhbclbddbcdhbcdhbchdbcdkcbdcbkdbchdbckdbcdbchdbchdbchdbchdbchdbc"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -137,12 +139,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+
                 <ImageView
                     android:id="@+id/imageView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    tools:src="@tools:sample/avatars" />
+                    android:src="@drawable/man" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -217,8 +219,7 @@
                     android:id="@+id/imageView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
-                    tools:src="@tools:sample/avatars" />
+                    android:src="@drawable/man1" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -233,10 +234,9 @@
 
                 <ImageView
                     android:id="@+id/imageView8"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:src="@tools:sample/avatars" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/man1" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -253,7 +253,7 @@
                     android:id="@+id/imageView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:src="@tools:sample/avatars" />
+                    android:src="@drawable/man1" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -274,14 +274,14 @@
 
     <Button
         android:id="@+id/but_Buy"
-        android:layout_width="0dp"
-        android:layout_height="49dp"
+        android:layout_width="282dp"
+        android:layout_height="54dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="23dp"
         android:text="Buy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView9" />
 

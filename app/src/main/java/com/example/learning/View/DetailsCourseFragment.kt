@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
@@ -32,7 +31,7 @@ class DetailsCourseFragment : Fragment(R.layout.fragment_details_course) {
         titlle.text=course.name
         nameCourseD.text=course.name
         Desc.text=course.description
-        countUsers.text=course.users!!.count().toString()
+        countUsers.text="+${(course.users?.count()?.minus(1))}"
         But_Back.setOnClickListener {
             findNavController().navigate(R.id.action_detailsCourseFragment_to_homeFragment)
         }

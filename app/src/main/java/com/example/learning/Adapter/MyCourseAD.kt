@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Model.course
 import com.example.learning.Model.myCourse
 import com.example.learning.R
+import com.example.learning.View.MyCourseFragment.Companion.xx
 import kotlinx.android.synthetic.main.item_mycourse.view.*
 
 

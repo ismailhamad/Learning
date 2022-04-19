@@ -11,18 +11,14 @@ import com.example.learning.ViewModel.LearningRepository
 import com.example.learning.ViewModel.LearningViewModel
 import com.example.learning.ViewModel.LearningViewModelProviderFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
-class Student : AppCompatActivity() {
+class Teacher : AppCompatActivity() {
     lateinit var learningViewModel: LearningViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_student)
-        val navView:BottomNavigationView=findViewById(R.id.bottomNavigationView)
-        val navHostFragment=supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        setContentView(R.layout.activity_teacher)
+        val navView: BottomNavigationView =findViewById(R.id.bottomNavigationView2)
+        val navHostFragment=supportFragmentManager.findFragmentById(R.id.fragmentContainerView2) as NavHostFragment
         val navController = navHostFragment.navController
         navView.setupWithNavController(navController)
 
@@ -31,5 +27,4 @@ class Student : AppCompatActivity() {
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
     }
-
 }

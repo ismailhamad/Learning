@@ -5,9 +5,9 @@ class users {
      var name:String=""
     var lastName:String=""
     var email:String =""
-    var numCourse:Int=0
+    var numCourse:Int?=0
     constructor()
-    constructor(id:String?,name:String,lastName:String,email:String,numCourse:Int){
+    constructor(id:String?, name:String, lastName:String, email:String, numCourse: Int?){
         this.id = id
         this.name = name
         this.lastName = lastName

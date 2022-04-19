@@ -6,10 +6,12 @@ import java.io.Serializable
      var senderId:String = ""
      var receiverId:ArrayList<String>?=null
      var message:String = ""
+     var idcourse:String = ""
 constructor()
-     constructor(senderId:String,receiverId:ArrayList<String>?, message:String){
+     constructor(senderId:String,receiverId:ArrayList<String>?, message:String,idcourse:String){
          this.senderId=senderId
          this.receiverId=receiverId
          this.message=message
+         this.idcourse = idcourse
      }
 }

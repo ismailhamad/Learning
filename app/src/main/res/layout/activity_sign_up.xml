@@ -151,7 +151,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/but_SignUp"
-        android:layout_width="375dp"
+        android:layout_width="300dp"
         android:layout_height="56dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="#2196F3"
@@ -168,7 +168,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="160dp"
+                android:layout_marginStart="132dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginBottom="17dp"
                 android:fontFamily="@font/baloo_bhai_2"
@@ -176,7 +176,8 @@
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

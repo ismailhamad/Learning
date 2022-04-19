@@ -29,27 +29,27 @@ class AddCourse : AppCompatActivity() {
             openMedia()
         }
         btn_addCourse.setOnClickListener {
-            learningViewModel.AddCourse(
-                course(
-                    UUID.randomUUID().toString(),
-                    ed_nameCourse.editText!!.text.toString(),
-                    ed_descriptionCourse.editText!!.text.toString(),
-                    imgUrl.toString(),null,null
-                ),imgUrl!!
-            )
+//            learningViewModel.AddCourse(
+//                course(
+//                    UUID.randomUUID().toString(),
+//                    ed_nameCourse.editText!!.text.toString(),
+//                    ed_descriptionCourse.editText!!.text.toString(),
+//                    imgUrl.toString(),null,null
+//                ),imgUrl!!
+//            )
 
         }
 
-        btn_updateCourse.setOnClickListener {
-            learningViewModel.updateCourse(
-                course(
-                    UUID.randomUUID().toString(),
-                    ed_nameCourse.editText!!.text.toString(),
-                    ed_descriptionCourse.editText!!.text.toString(),
-                    imgUrl.toString(),null,null
-                ),imgUrl!!,"93da687e-4aea-4420-96c6-3f0ed3f222d2"
-            )
-        }
+//        btn_updateCourse.setOnClickListener {
+//            learningViewModel.updateCourse(
+//                course(
+//                    UUID.randomUUID().toString(),
+//                    ed_nameCourse.editText!!.text.toString(),
+//                    ed_descriptionCourse.editText!!.text.toString(),
+//                    imgUrl.toString(),null,null
+//                ),imgUrl!!,"93da687e-4aea-4420-96c6-3f0ed3f222d2"
+//            )
+//        }
 
         btn_delCourse.setOnClickListener {
             learningViewModel.deleteCourse("aa724ec3-382d-4982-88a3-9ced1cd8048a")
