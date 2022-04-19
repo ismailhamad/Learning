@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_assignment.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_course.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_lecture.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_sign_up.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/item_courses.xml" value="0.24635416666666668" />
         <entry key="app/src/main/res/drawable/back_but.xml" value="0.2205" />
         <entry key="app/src/main/res/drawable/back_butf.xml" value="0.249" />
         <entry key="app/src/main/res/drawable/back_search.xml" value="0.249" />

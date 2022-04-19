@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.learning.Constants.Constants
 import com.example.learning.Model.course
 import com.example.learning.Model.users
 import com.example.learning.View.Teacher
@@ -37,11 +38,20 @@ lateinit var ArrayList:ArrayList<users>
         Add_Course.setOnClickListener {
             val user=users(null,"","","",null)
             ArrayList.add(user)
-            learningViewModel.AddCourse(course(
-                UUID.randomUUID().toString(),Text_NameCourse.text.toString(),Text_description.text.toString(),
-                imgUrl.toString(),ArrayList as ArrayList<Any>,null,auth.currentUser!!.uid),
-                imgUrl
-            )
+            if (Text_NameCourse.text.isNotEmpty() && Text_description.text.isNotEmpty() && imgUrl != null){
+                learningViewModel.AddCourse(view,course(
+                    UUID.randomUUID().toString(),Text_NameCourse.text.toString(),Text_description.text.toString(),
+                    imgUrl.toString(),ArrayList as ArrayList<Any>,null,auth.currentUser!!.uid),
+                    imgUrl
+                )
+            }else{
+                Constants.showSnackBar(
+                    view, "إملا الحقول المطلوبة",
+                    Constants.redColor
+                )
+            }
+
+
         }
 
 

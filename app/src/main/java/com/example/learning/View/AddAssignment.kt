@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.example.learning.Constants.Constants
 import com.example.learning.Firebase.FirebaseSource
 import com.example.learning.Model.Assignment
 import com.example.learning.R
@@ -30,16 +31,25 @@ class AddAssignment : AppCompatActivity() {
             chooseFile()
         }
         btn_addAssignment.setOnClickListener {
-            learningViewModel.addAssignment(
-                Assignment(
-                    UUID.randomUUID().toString(),
-                    ed_nameAssignment.editText!!.text.toString(),
-                    ed_descriptionAssignment.editText!!.text.toString(),
-                    fileUri.toString()
-                ),"93da687e-4aea-4420-96c6-3f0ed3f222d2",
-                "1af2fe1b-4df6-4b36-8bb0-7cf06792af0d",
-                fileUri!!
-            )
+            if(ed_nameAssignment.editText!!.text.isNotEmpty() && ed_descriptionAssignment.editText!!.text.isNotEmpty()){
+                learningViewModel.addAssignment(
+                    findViewById(android.R.id.content),
+                    Assignment(
+                        UUID.randomUUID().toString(),
+                        ed_nameAssignment.editText!!.text.toString(),
+                        ed_descriptionAssignment.editText!!.text.toString(),
+                        fileUri.toString()
+                    ),"93da687e-4aea-4420-96c6-3f0ed3f222d2",
+                    "1af2fe1b-4df6-4b36-8bb0-7cf06792af0d",
+                    fileUri!!
+                )
+            }else{
+                Constants.showSnackBar(
+                    findViewById(android.R.id.content), "إملا الحقول المطلوبة",
+                    Constants.redColor)
+
+            }
+
         }
 
     }

@@ -1,6 +1,7 @@
 package com.example.learning.ViewModel
 
 import android.net.Uri
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -31,24 +32,24 @@ private val learningRepository: LearningRepository
         MyCourse = learningRepository.getMyCourse()
     }
 
-    fun Sign_in(Email:String,Password:String){
-      learningRepository.Sign_in(Email,Password)
+    fun Sign_in(view: View, Email:String, Password:String){
+       learningRepository.Sign_in(view,Email,Password)
   }
 
-    fun Sign_Up(password:String,users: users){
-        learningRepository.Sign_Up(password,users)
+    fun Sign_Up(view: View,password:String,users: users){
+        learningRepository.Sign_Up(view,password,users)
     }
 
-    fun AddCourse(course: course,imge:Uri?){
-        learningRepository.addcourse(course,imge)
+    fun AddCourse(view: View,course: course,imge:Uri?){
+        learningRepository.addcourse(view,course,imge)
     }
 
     fun getTeacherCourse(uid: String) {
         CourseT = learningRepository.getTeacherCourse(uid)
     }
 
-    fun addLecture(lecture: lecture, uriVideo: Uri?, uriFile: Uri?, document: String, code: String) {
-        learningRepository.addLecture(lecture,uriVideo,uriFile,document,code)
+    fun addLecture(view:View,lecture: lecture, uriVideo: Uri?, uriFile: Uri?, document: String, code: String) {
+        learningRepository.addLecture(view,lecture,uriVideo,uriFile,document,code)
     }
 
 //    fun AddMyCourse(myCourse: myCourse) = viewModelScope.launch {
@@ -59,8 +60,8 @@ private val learningRepository: LearningRepository
 //    }
 
 
-    fun updateUsers(idCourse:String,users: users) = viewModelScope.launch {
-        learningRepository.updateUsers(idCourse,users)
+    fun updateUsers(view: View,idCourse:String,users: users) = viewModelScope.launch {
+        learningRepository.updateUsers(view,idCourse,users)
     }
 
     fun getLecture(document:String) {
@@ -73,12 +74,12 @@ private val learningRepository: LearningRepository
 //        learningRepository.updateCourse(course,img,document)
 //    }
 
-    fun deleteCourse(document: String) {
-        learningRepository.deleteCourse(document)
+    fun deleteCourse(view:View,document: String) {
+        learningRepository.deleteCourse(view,document)
     }
 
-    fun addAssignment(assignment: Assignment, documentCourses:String, documentLecture:String, file:Uri){
-        learningRepository.addAssignment(assignment,documentCourses,documentLecture,file)
+    fun addAssignment(view: View,assignment: Assignment, documentCourses:String, documentLecture:String, file:Uri){
+        learningRepository.addAssignment(view,assignment,documentCourses,documentLecture,file)
     }
 //    fun updateLecture(lecture: lecture, idcourse: String?){
 //        learningRepository.updateLecture(lecture,idcourse)

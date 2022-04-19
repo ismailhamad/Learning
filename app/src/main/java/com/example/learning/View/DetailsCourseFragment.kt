@@ -39,7 +39,7 @@ class DetailsCourseFragment : Fragment(R.layout.fragment_details_course) {
 
 
         but_Buy.setOnClickListener {
-            learningViewModel.updateUsers(course.id.toString(),users(auth.currentUser!!.uid,"","","",0))
+            learningViewModel.updateUsers(view,course.id.toString(),users(auth.currentUser!!.uid,"","","",0))
            // learningViewModel.AddMyCourse(myCourse(course.id.toString(),course.name.toString(),course.description,course.image,auth.currentUser!!.uid,course.lecture))
 
         }

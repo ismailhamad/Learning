@@ -3,6 +3,7 @@ package com.example.learning.View
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.example.learning.Constants.Constants
 import com.example.learning.Firebase.FirebaseSource
 import com.example.learning.Model.users
 import com.example.learning.R
@@ -22,10 +23,30 @@ class Sign_Up : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
         auth = Firebase.auth
         val repository = LearningRepository(FirebaseSource(this))
-        val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
-        learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
+        val viewModelProviderFactory = LearningViewModelProviderFactory(repository)
+        learningViewModel =
+            ViewModelProvider(this, viewModelProviderFactory).get(LearningViewModel::class.java)
         but_SignUp.setOnClickListener {
-           learningViewModel.Sign_Up(Password_SignUp.text.toString(),users(null,TextName_SignUp.text.toString(),TextLName_SignUp.text.toString(),Email_SignUp.text.toString(),0))
+            if (Password_SignUp.text.isNotEmpty() && TextName_SignUp.text.isNotEmpty() && Email_SignUp.text.isNotEmpty() && TextLName_SignUp.text.isNotEmpty()) {
+                learningViewModel.Sign_Up(
+                    findViewById(android.R.id.content),
+                    Password_SignUp.text.toString(),
+                    users(
+                        null,
+                        TextName_SignUp.text.toString(),
+                        TextLName_SignUp.text.toString(),
+                        Email_SignUp.text.toString(),
+                        0
+                    )
+                )
+
+            } else {
+                Constants.showSnackBar(
+                    findViewById(android.R.id.content), "إملا الحقول المطلوبة",
+                    Constants.redColor
+                )
+            }
+
         }
 
     }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
+import com.example.learning.Constants.Constants
 import com.example.learning.Model.lecture
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
@@ -17,37 +18,82 @@ import java.util.*
 
 
 class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
-lateinit var learningViewModel: LearningViewModel
+    lateinit var learningViewModel: LearningViewModel
     var videoUrl: Uri? = null
     var fileUri: Uri? = null
-    val args:AddLectureFragmentArgs by navArgs()
+    val args: AddLectureFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        learningViewModel =(activity as Teacher).learningViewModel
-val lecture=args.idCourseL
+        learningViewModel = (activity as Teacher).learningViewModel
+        val lecture = args.idCourseL
 
         Add_lect.setOnClickListener {
             if (videoUrl != null && fileUri == null) {
-                learningViewModel.addLecture(lecture(UUID.randomUUID().toString(),Text_NameLecture.text.toString(),Text_descriptionLecture.text.toString(),"",true,videoUrl.toString()),videoUrl,
-                    Uri.parse(""),lecture,"5000")
+                if (Text_NameLecture.text.isNotEmpty() && Text_descriptionLecture.text.isNotEmpty()) {
+                    learningViewModel.addLecture(
+                        view,
+                        lecture(
+                            UUID.randomUUID().toString(),
+                            Text_NameLecture.text.toString(),
+                            Text_descriptionLecture.text.toString(),
+                            "",
+                            true,
+                            videoUrl.toString()
+                        ),
+                        videoUrl,
+                        Uri.parse(""),
+                        lecture,
+                        "5000"
+                    )
+                } else {
+                    Constants.showSnackBar(
+                        view, "إملا الحقول المطلوبة",
+                        Constants.redColor
+                    )
+                }
+
             } else if (fileUri != null && videoUrl == null) {
-                learningViewModel.addLecture(
-                    lecture(
-                        UUID.randomUUID().toString(),
-                        Text_NameLecture.text.toString(),Text_descriptionLecture.text.toString(),"",true,
-                        fileUri.toString()
-                    ), Uri.parse(""),
-                    fileUri,lecture,"4000"
-                )
+                if (Text_NameLecture.text.isNotEmpty() && Text_descriptionLecture.text.isNotEmpty()) {
+                    learningViewModel.addLecture(
+                        view,
+                        lecture(
+                            UUID.randomUUID().toString(),
+                            Text_NameLecture.text.toString(),
+                            Text_descriptionLecture.text.toString(),
+                            "",
+                            true,
+                            fileUri.toString()
+                        ), Uri.parse(""),
+                        fileUri, lecture, "4000"
+                    )
+                } else {
+                    Constants.showSnackBar(
+                        view, "إملا الحقول المطلوبة",
+                        Constants.redColor
+                    )
+                }
+
             } else {
-                learningViewModel.addLecture(
-                    lecture(
-                        UUID.randomUUID().toString(),
-                        Text_NameLecture.text.toString(),Text_descriptionLecture.text.toString(),"",true,
-                        videoUrl.toString(),
-                        fileUri.toString()
-                    ), videoUrl, fileUri,lecture,"6000"
-                )
+                if (Text_NameLecture.text.isNotEmpty() && Text_descriptionLecture.text.isNotEmpty()) {
+                    learningViewModel.addLecture(
+                        view,
+                        lecture(
+                            UUID.randomUUID().toString(),
+                            Text_NameLecture.text.toString(),
+                            Text_descriptionLecture.text.toString(),
+                            "",
+                            true,
+                            videoUrl.toString(),
+                            fileUri.toString()
+                        ), videoUrl, fileUri, lecture, "6000"
+                    )
+                } else {
+                    Constants.showSnackBar(
+                        view, "إملا الحقول المطلوبة",
+                        Constants.redColor
+                    )
+                }
+
             }
         }
 
@@ -59,7 +105,6 @@ val lecture=args.idCourseL
             chooseFile()
         }
     }
-
 
 
     private fun chooseVideo() {
@@ -80,7 +125,7 @@ val lecture=args.idCourseL
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 5000 && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
             videoUrl = data.data
-          Text_VideoLecture.append(videoUrl.toString())
+            Text_VideoLecture.append(videoUrl.toString())
 
         } else if (requestCode == 4000 && resultCode == AppCompatActivity.RESULT_OK && data != null && data.data != null) {
             fileUri = data.data

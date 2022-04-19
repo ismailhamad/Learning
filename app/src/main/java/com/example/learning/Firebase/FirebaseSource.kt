@@ -5,8 +5,10 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.example.learning.Constants.Constants
 import com.example.learning.Model.*
 
 import com.example.learning.View.Student
@@ -42,46 +44,50 @@ class FirebaseSource(val activity: Activity) {
 
 
     //Log in to the account
-    fun Sign_in(Email: String, Password: String) {
+    fun Sign_in(view: View, Email: String, Password: String) {
         progressDialog = ProgressDialog(activity)
         progressDialog.setCancelable(false)
         progressDialog.setMessage("Loading...")
         progressDialog.show()
 
-
         auth = Firebase.auth
         auth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener {
             if (it.isSuccessful) {
                 if (auth.currentUser!!.isEmailVerified) {
-                    if (Email=="joehamad2060@gmail.com"){
+                    if (Email == "joehamad2060@gmail.com") {
                         val i = Intent(activity, Teacher::class.java)
                         activity.startActivity(i)
-                    }else{
+                    } else {
                         val i = Intent(activity, Student::class.java)
                         activity.startActivity(i)
                     }
 
                 } else {
                     progressDialog.dismiss()
-                    Toast.makeText(activity, "Please verify your email address", Toast.LENGTH_SHORT)
-                        .show()
+                    Constants.showSnackBar(
+                        view,
+                        "يرجى التحقق من عنوان البريد الإلكتروني الخاص بك",
+                        Constants.redColor
+                    )
                 }
 
             } else {
                 progressDialog.dismiss()
-                Toast.makeText(
-                    activity, it.exception!!.message,
-                    Toast.LENGTH_SHORT
-                ).show()
+                Constants.showSnackBar(
+                    view,
+                    "يرجى التحقق من اسم المستخدم أو كلمة السر الخاص بك",
+                    Constants.redColor
+                )
             }
 
         }
+
 
     }
 
 
     //Sign up for the account
-    fun Sign_up(password: String, users: users) {
+    fun Sign_up(view: View, password: String, users: users) {
         auth = Firebase.auth
         progressDialog = ProgressDialog(activity)
         progressDialog.setCancelable(false)
@@ -101,16 +107,20 @@ class FirebaseSource(val activity: Activity) {
                             )
                         )
                         progressDialog.dismiss()
-                        Toast.makeText(
-                            activity, "Registered successully. please check your email",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Constants.showSnackBar(
+                            view,
+                            "تم تسجيلك بنجاح. تفقد بريدك الالكتروني لتأكيد الحساب",
+                            Constants.greenColor
+                        )
+
                     } else {
                         progressDialog.dismiss()
-                        Toast.makeText(
-                            activity, "Authentication failed.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Constants.showSnackBar(
+                            view,
+                            "فشل التحقق",
+                            Constants.redColor
+                        )
+
                     }
                 }
 
@@ -118,10 +128,11 @@ class FirebaseSource(val activity: Activity) {
                 val user = auth.currentUser
             } else {
                 progressDialog.dismiss()
-                Toast.makeText(
-                    activity, "Authentication failed.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Constants.showSnackBar(
+                    view,
+                    "فشل تسجيل الحساب",
+                    Constants.redColor
+                )
             }
         }
     }
@@ -139,7 +150,7 @@ class FirebaseSource(val activity: Activity) {
     }
 
     //addcousrs by lecture
-    fun addCourse(course: course,imgeUri:Uri?) {
+    fun addCourse(view: View, course: course, imgeUri: Uri?) {
 
         storge = Firebase.storage
         storageRef = storge!!.reference
@@ -156,14 +167,21 @@ class FirebaseSource(val activity: Activity) {
                         course.image = uri.toString()
                         db.collection("courses").document(course.id.toString()).set(course)
                             .addOnSuccessListener {
-                                Toast.makeText(activity, "تم اضافة الكورس", Toast.LENGTH_LONG).show()
+                                Constants.showSnackBar(
+                                    view,
+                                    "تم اضافة الكورس",
+                                    Constants.greenColor
+                                )
 
                             }
                     }
                 }.addOnFailureListener { exception ->
                     progressDialog.dismiss()
-                    Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
-
+                    Constants.showSnackBar(
+                        view,
+                        "فشل اضافة الكورس",
+                        Constants.redColor
+                    )
                 }.addOnProgressListener {
                     val progress: Double =
                         100.0 * it.bytesTransferred / it.totalByteCount
@@ -199,17 +217,17 @@ class FirebaseSource(val activity: Activity) {
         auth = Firebase.auth
         val Courselist = ArrayList<course>()
         CourseTeacherListMutableLiveData = MutableLiveData()
-        db.collection("courses").addSnapshotListener() { result,error ->
-            for (courses in result!!){
+        db.collection("courses").addSnapshotListener() { result, error ->
+            for (courses in result!!) {
                 val course = courses!!.toObject<course>()
-                if (uid == course.idTeacher){
+                if (uid == course.idTeacher) {
                     course?.let { Courselist.add(it) }
                     CourseTeacherListMutableLiveData.postValue(Courselist)
                 }
 
             }
 
-            }
+        }
 
 
 
@@ -219,10 +237,8 @@ class FirebaseSource(val activity: Activity) {
     }
 
 
-
-
     //addMyCourse by student
-    fun addMyCourse(myCourse: course) {
+    fun addMyCourse(view: View, myCourse: course) {
         db = Firebase.firestore
         auth = Firebase.auth
         progressDialog = ProgressDialog(activity)
@@ -233,13 +249,21 @@ class FirebaseSource(val activity: Activity) {
             val users = it.toObject<users>()
             if (users!!.numCourse!! < 5) {
                 db.collection("myCourse").add(myCourse).addOnSuccessListener {
-                    Toast.makeText(activity, "add successfully", Toast.LENGTH_SHORT).show()
+                    Constants.showSnackBar(
+                        view,
+                        "تم اضافة الكورس",
+                        Constants.greenColor
+                    )
                     progressDialog.dismiss()
                 }
             } else {
                 //Alert
                 progressDialog.dismiss()
-                Toast.makeText(activity, "no more course", Toast.LENGTH_SHORT).show()
+                Constants.showSnackBar(
+                    view,
+                    "لا يمكن إضافة أكثر من 5 كورسات",
+                    Constants.redColor
+                )
             }
 
         }
@@ -307,7 +331,7 @@ class FirebaseSource(val activity: Activity) {
 
 
     // Atomically add a new region to the "users" array field.
-    suspend fun updateUsers(idCourse: String, users: users) {
+    suspend fun updateUsers(view: View, idCourse: String, users: users) {
         val users = hashMapOf(
             "id" to users.id,
             "name" to users.name,
@@ -321,7 +345,7 @@ class FirebaseSource(val activity: Activity) {
         washingtonRef.update("users", FieldValue.arrayUnion(users)).addOnSuccessListener {
             db.collection("courses").document(idCourse).addSnapshotListener { value, error ->
                 val course = value!!.toObject<course>()
-                addMyCourse(course!!)
+                addMyCourse(view, course!!)
             }
         }
 
@@ -357,6 +381,7 @@ class FirebaseSource(val activity: Activity) {
 
 
     fun addLecture(
+        view: View,
         lecture: lecture,
         uriVideo: Uri?,
         uriFile: Uri?,
@@ -379,11 +404,19 @@ class FirebaseSource(val activity: Activity) {
                         lecture.video = uri.toString()
                         db.collection("courses/${document}/lecture/").document(lecture.id!!)
                             .set(lecture.getlectureHashMap())
+                        Constants.showSnackBar(
+                            view,
+                            "تم اضافة المحاضرة",
+                            Constants.greenColor
+                        )
                     }
                 }.addOnFailureListener { exception ->
                     progressDialog.dismiss()
-                    Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
-
+                    Constants.showSnackBar(
+                        view,
+                        "فشل اضافة المحاضرة",
+                        Constants.redColor
+                    )
                 }.addOnProgressListener {
                     val progress: Double =
                         100.0 * it.bytesTransferred / it.totalByteCount
@@ -397,12 +430,20 @@ class FirebaseSource(val activity: Activity) {
                         lecture.file = uri.toString()
                         db.collection("courses/${document}/lecture/").document(lecture.id!!)
                             .set(lecture.getlectureHashMap())
+                        Constants.showSnackBar(
+                            view,
+                            "تم اضافة المحاضرة",
+                            Constants.greenColor
+                        )
 
                     }
                 }.addOnFailureListener { exception ->
                     progressDialog.dismiss()
-                    Toast.makeText(activity, "filedUploadfiles", Toast.LENGTH_LONG).show()
-
+                    Constants.showSnackBar(
+                        view,
+                        "فشل اضافة المحاضرة",
+                        Constants.redColor
+                    )
                 }.addOnProgressListener {
                     val progress: Double =
                         100.0 * it.bytesTransferred / it.totalByteCount
@@ -420,6 +461,11 @@ class FirebaseSource(val activity: Activity) {
                                     lecture.video = uriv.toString()
                                     db.collection("courses/${document}/lecture/")
                                         .document(lecture.id!!).set(lecture.getlectureHashMap())
+                                    Constants.showSnackBar(
+                                        view,
+                                        "تم اضافة المحاضرة",
+                                        Constants.greenColor
+                                    )
 
                                 }
                             }
@@ -427,8 +473,11 @@ class FirebaseSource(val activity: Activity) {
                     }
                 }.addOnFailureListener { exception ->
                     progressDialog.dismiss()
-                    Toast.makeText(activity, "filedUploadfiles", Toast.LENGTH_LONG).show()
-
+                    Constants.showSnackBar(
+                        view,
+                        "فشل اضافة المحاضرة",
+                        Constants.redColor
+                    )
                 }.addOnProgressListener {
                     val progress: Double =
                         100.0 * it.bytesTransferred / it.totalByteCount
@@ -441,6 +490,7 @@ class FirebaseSource(val activity: Activity) {
     }
 
     fun updateLecture(
+        view: View,
         lecture: lecture,
         uriVideo: Uri?,
         uriFile: Uri?,
@@ -462,15 +512,22 @@ class FirebaseSource(val activity: Activity) {
                     progressDialog.dismiss()
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
                         lecture.video = uri.toString()
-                        Log.e("aaaa", "lecture.id!! ${lecture.id!!}")
 
                         db.collection("courses/${document}/lecture/").document(documentLecture)
                             .update(lecture.getlectureHashMap())
+                        Constants.showSnackBar(
+                            view,
+                            "تم تعديل المحاضرة",
+                            Constants.greenColor
+                        )
                     }
                 }.addOnFailureListener { exception ->
                     progressDialog.dismiss()
-                    Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
-
+                    Constants.showSnackBar(
+                        view,
+                        "فشل تعديل المحاضرة",
+                        Constants.redColor
+                    )
                 }.addOnProgressListener {
                     val progress: Double =
                         100.0 * it.bytesTransferred / it.totalByteCount
@@ -482,16 +539,22 @@ class FirebaseSource(val activity: Activity) {
                     progressDialog.dismiss()
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
                         lecture.file = uri.toString()
-                        Log.e("aaaa", "lecture.id!! ${lecture.id!!}")
-
                         db.collection("courses/${document}/lecture/").document(documentLecture)
                             .update(lecture.getlectureHashMap())
+                        Constants.showSnackBar(
+                            view,
+                            "تم تعديل المحاضرة",
+                            Constants.greenColor
+                        )
 
                     }
                 }.addOnFailureListener { exception ->
                     progressDialog.dismiss()
-                    Toast.makeText(activity, "filedUploadfiles", Toast.LENGTH_LONG).show()
-
+                    Constants.showSnackBar(
+                        view,
+                        "فشل تعديل المحاضرة",
+                        Constants.redColor
+                    )
                 }.addOnProgressListener {
                     val progress: Double =
                         100.0 * it.bytesTransferred / it.totalByteCount
@@ -511,15 +574,22 @@ class FirebaseSource(val activity: Activity) {
                                     db.collection("courses/${document}/lecture/")
                                         .document(documentLecture)
                                         .update(lecture.getlectureHashMap())
-
+                                    Constants.showSnackBar(
+                                        view,
+                                        "تم تعديل المحاضرة",
+                                        Constants.greenColor
+                                    )
                                 }
                             }
 
                     }
                 }.addOnFailureListener { exception ->
                     progressDialog.dismiss()
-                    Toast.makeText(activity, "filedUploadfiles", Toast.LENGTH_LONG).show()
-
+                    Constants.showSnackBar(
+                        view,
+                        "فشل تعديل المحاضرة",
+                        Constants.redColor
+                    )
                 }.addOnProgressListener {
                     val progress: Double =
                         100.0 * it.bytesTransferred / it.totalByteCount
@@ -531,7 +601,7 @@ class FirebaseSource(val activity: Activity) {
 
     }
 
-    fun deleteLecture(document: String, documentLecture: String) {
+    fun deleteLecture( view: View,document: String, documentLecture: String) {
         storge = Firebase.storage
         storageRef = storge!!.reference
         db = Firebase.firestore
@@ -540,21 +610,36 @@ class FirebaseSource(val activity: Activity) {
                 storageRef!!.child("video/${it.get("id")}").delete()
                 storageRef!!.child("files/${it.get("id")}").delete()
                 db.collection("courses/${document}/lecture/").document(documentLecture).delete()
+                Constants.showSnackBar(
+                    view,
+                    "تم حذف المحاضرة",
+                    Constants.greenColor
+                )
 
             }
 
     }
 
-    fun seeLecture(document: String, documentLecture: String) {
+    fun seeLecture(view: View,document: String, documentLecture: String) {
         db = Firebase.firestore
         db.collection("courses/${document}/lecture/").document(documentLecture).get()
             .addOnSuccessListener {
                 if (it.get("seeLecture") == true) {
                     db.collection("courses/${document}/lecture/").document(documentLecture)
                         .update("seeLecture", false)
+                    Constants.showSnackBar(
+                        view,
+                        "تم اخفاء المحاضرة",
+                        Constants.greenColor
+                    )
                 } else {
                     db.collection("courses/${document}/lecture/").document(documentLecture)
                         .update("seeLecture", true)
+                    Constants.showSnackBar(
+                        view,
+                        "تم اضهار المحاضرة",
+                        Constants.greenColor
+                    )
 
                 }
             }
@@ -590,7 +675,7 @@ class FirebaseSource(val activity: Activity) {
 //            }
 //    }
 
-    fun deleteCourse(document: String) {
+    fun deleteCourse(view: View,document: String) {
         storge = Firebase.storage
         storageRef = storge!!.reference
         db = Firebase.firestore
@@ -598,12 +683,22 @@ class FirebaseSource(val activity: Activity) {
             .addOnSuccessListener {
                 storageRef!!.child("image/${it.get("id")}").delete()
                 db.collection("courses").document(document).delete()
+                Constants.showSnackBar(
+                    view,
+                    "تم حذف الكورس",
+                    Constants.greenColor)
 
             }
 
     }
 
-    fun addAssignment(assignment: Assignment,documentCourses:String,documentLecture:String,file:Uri){
+    fun addAssignment(
+        view: View,
+        assignment: Assignment,
+        documentCourses: String,
+        documentLecture: String,
+        file: Uri
+    ) {
         storge = Firebase.storage
         storageRef = storge!!.reference
         progressDialog = ProgressDialog(activity)
@@ -616,13 +711,22 @@ class FirebaseSource(val activity: Activity) {
                 progressDialog.dismiss()
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
                     assignment.file = uri.toString()
-                    db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment").document(assignment.id!!)
+                    db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment")
+                        .document(assignment.id!!)
                         .set(assignment.getAssignmentHashMap())
+                    Constants.showSnackBar(
+                        view,
+                        "تم اضافة الواجب",
+                        Constants.greenColor
+                    )
                 }
             }.addOnFailureListener { exception ->
                 progressDialog.dismiss()
-                Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
-
+                Constants.showSnackBar(
+                    view,
+                    "فشل اضافة الواجب",
+                    Constants.redColor
+                )
             }.addOnProgressListener {
                 val progress: Double =
                     100.0 * it.bytesTransferred / it.totalByteCount
@@ -630,7 +734,14 @@ class FirebaseSource(val activity: Activity) {
             }
     }
 
-    fun updateAssignment(assignment: Assignment,documentCourses:String,documentLecture:String,documentAssignment:String,file:Uri){
+    fun updateAssignment(
+        view: View,
+        assignment: Assignment,
+        documentCourses: String,
+        documentLecture: String,
+        documentAssignment: String,
+        file: Uri
+    ) {
         storge = Firebase.storage
         storageRef = storge!!.reference
         progressDialog = ProgressDialog(activity)
@@ -643,13 +754,22 @@ class FirebaseSource(val activity: Activity) {
                 progressDialog.dismiss()
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
                     assignment.file = uri.toString()
-                    db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment").document(documentAssignment)
+                    db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment")
+                        .document(documentAssignment)
                         .update(assignment.getAssignmentHashMap())
+                    Constants.showSnackBar(
+                        view,
+                        "تم تعديل الواجب",
+                        Constants.greenColor
+                    )
                 }
             }.addOnFailureListener { exception ->
                 progressDialog.dismiss()
-                Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
-
+                Constants.showSnackBar(
+                    view,
+                    "فشل تعديل الواجب",
+                    Constants.redColor
+                )
             }.addOnProgressListener {
                 val progress: Double =
                     100.0 * it.bytesTransferred / it.totalByteCount
@@ -657,14 +777,26 @@ class FirebaseSource(val activity: Activity) {
             }
     }
 
-    fun deleteAssignment(documentCourses:String,documentLecture:String,documentAssignment:String) {
+    fun deleteAssignment(
+        view: View,
+        documentCourses: String,
+        documentLecture: String,
+        documentAssignment: String
+    ) {
         storge = Firebase.storage
         storageRef = storge!!.reference
         db = Firebase.firestore
-        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment").document(documentAssignment).get()
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment")
+            .document(documentAssignment).get()
             .addOnSuccessListener {
                 storageRef!!.child("assignment/${it.get("id")}").delete()
-                db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment").document(documentLecture).delete()
+                db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment")
+                    .document(documentLecture).delete()
+                Constants.showSnackBar(
+                    view,
+                    "تم حذف الواجب",
+                    Constants.greenColor
+                )
 
             }
 

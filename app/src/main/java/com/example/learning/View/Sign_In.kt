@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import com.example.learning.Constants.Constants
 import com.example.learning.Firebase.FirebaseSource
 import com.example.learning.Model.users
 import com.example.learning.R
@@ -26,7 +27,11 @@ class Sign_In : AppCompatActivity() {
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
 
         sign_In.setOnClickListener {
-            learningViewModel.Sign_in(TextEmail.text.toString(),TextPassword.text.toString())
+            if (TextEmail.text.isNotEmpty() && TextPassword.text.isNotEmpty()){
+               learningViewModel.Sign_in(findViewById(android.R.id.content),TextEmail.text.toString(),TextPassword.text.toString())
+            }else{
+                Constants.showSnackBar(findViewById(android.R.id.content),"إملا الحقول المطلوبة",Constants.redColor)
+            }
             //finish()
         }
         sign_Up.setOnClickListener {

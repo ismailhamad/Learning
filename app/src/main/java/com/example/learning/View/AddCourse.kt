@@ -52,7 +52,7 @@ class AddCourse : AppCompatActivity() {
 //        }
 
         btn_delCourse.setOnClickListener {
-            learningViewModel.deleteCourse("aa724ec3-382d-4982-88a3-9ced1cd8048a")
+            learningViewModel.deleteCourse( findViewById(android.R.id.content),"aa724ec3-382d-4982-88a3-9ced1cd8048a")
         }
     }
 
