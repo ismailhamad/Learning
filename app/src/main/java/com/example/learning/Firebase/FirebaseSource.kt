@@ -38,6 +38,7 @@ class FirebaseSource(val activity: Activity) {
     lateinit var CourseTeacherListMutableLiveData: MutableLiveData<List<course>>
     lateinit var MyCourseListMutableLiveData: MutableLiveData<List<myCourse>>
     lateinit var LectureListMutableLiveData: MutableLiveData<List<lecture>>
+    lateinit var MessageListMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var course: course
 
     var BuyONot: Boolean = false
@@ -230,8 +231,6 @@ class FirebaseSource(val activity: Activity) {
         }
 
 
-
-
         return CourseTeacherListMutableLiveData
 
     }
@@ -245,17 +244,19 @@ class FirebaseSource(val activity: Activity) {
         progressDialog.setCancelable(false)
         progressDialog.setMessage("Loading...")
         progressDialog.show()
+        var bool = false
         db.collection("users").document(auth.currentUser!!.uid).get().addOnSuccessListener { it ->
             val users = it.toObject<users>()
             if (users!!.numCourse!! < 5) {
-                db.collection("myCourse").add(myCourse).addOnSuccessListener {
-                    Constants.showSnackBar(
-                        view,
-                        "تم اضافة الكورس",
-                        Constants.greenColor
-                    )
-                    progressDialog.dismiss()
-                }
+                db.collection("myCourse").document(myCourse.id!!).set(myCourse).addOnSuccessListener {
+                            Constants.showSnackBar(
+                                view,
+                                "تم اضافة الكورس",
+                                Constants.greenColor
+                            )
+                            progressDialog.dismiss()
+                        }
+
             } else {
                 //Alert
                 progressDialog.dismiss()
@@ -601,7 +602,7 @@ class FirebaseSource(val activity: Activity) {
 
     }
 
-    fun deleteLecture( view: View,document: String, documentLecture: String) {
+    fun deleteLecture(view: View, document: String, documentLecture: String) {
         storge = Firebase.storage
         storageRef = storge!!.reference
         db = Firebase.firestore
@@ -620,7 +621,7 @@ class FirebaseSource(val activity: Activity) {
 
     }
 
-    fun seeLecture(view: View,document: String, documentLecture: String) {
+    fun seeLecture(view: View, document: String, documentLecture: String) {
         db = Firebase.firestore
         db.collection("courses/${document}/lecture/").document(documentLecture).get()
             .addOnSuccessListener {
@@ -675,7 +676,7 @@ class FirebaseSource(val activity: Activity) {
 //            }
 //    }
 
-    fun deleteCourse(view: View,document: String) {
+    fun deleteCourse(view: View, document: String) {
         storge = Firebase.storage
         storageRef = storge!!.reference
         db = Firebase.firestore
@@ -686,7 +687,8 @@ class FirebaseSource(val activity: Activity) {
                 Constants.showSnackBar(
                     view,
                     "تم حذف الكورس",
-                    Constants.greenColor)
+                    Constants.greenColor
+                )
 
             }
 
@@ -798,10 +800,70 @@ class FirebaseSource(val activity: Activity) {
                     Constants.greenColor
                 )
 
+            }.addOnFailureListener {
+                Constants.showSnackBar(
+                    view,
+                    "فشل حذف الواجب",
+                    Constants.redColor
+                )
             }
 
     }
 
+    fun sendMessageCourse(chat: Chat, documentMyCourses: String) {
+        db = Firebase.firestore
+        db.collection("myCourse/${documentMyCourses}/message").document(chat.id)
+            .set(chat.getMessageHashMap())
+    }
+
+    fun getMessageCourse(documentMyCourses: String): ArrayList<Chat> {
+        db = Firebase.firestore
+        val chatList = ArrayList<Chat>()
+        db.collection("myCourse/${documentMyCourses}/message").addSnapshotListener { value, error ->
+            chatList.clear()
+            for (document in value!!) {
+                val chat = document.toObject<Chat>()
+                chatList.add(chat)
+            }
+        }
+        return chatList
+    }
+
+     fun sendMessagePrivate(chat: Chat, documentUsers: String) {
+        db = Firebase.firestore
+        db.collection("users/${documentUsers}/message").document(chat.id)
+            .set(chat.getMessageHashMap())
+    }
+
+    fun getMessagePrivate(documentUsers: String): ArrayList<Chat> {
+        db = Firebase.firestore
+        val chatList = ArrayList<Chat>()
+        db.collection("users/${documentUsers}/message").addSnapshotListener { value, error ->
+            chatList.clear()
+            for (document in value!!) {
+                val chat = document.toObject<Chat>()
+                chatList.add(chat)
+            }
+        }
+        return chatList
+    }
+
+    fun deleteMyCourse(view: View,users: users,document:String){
+        db = Firebase.firestore
+        db.collection("myCourse").document(document).update("users",FieldValue.arrayRemove(users)).addOnSuccessListener {
+            Constants.showSnackBar(
+                view,
+                "تم حذف الكورس",
+                Constants.greenColor
+            )
+        }.addOnFailureListener {
+            Constants.showSnackBar(
+                view,
+                "فشل حذف الكورس",
+                Constants.redColor
+            )
+        }
+    }
 
 }
 

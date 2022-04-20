@@ -12,20 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Learning">
         <activity
+            android:name=".View.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".View.AddAssignment"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".View.AddCourse"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".View.Teacher"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".View.AddLecture"
             android:exported="true">
@@ -39,10 +36,7 @@
         </activity>
         <activity
             android:name=".View.Student"
-            android:exported="true">
-
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".View.SplashScreen"
             android:exported="false" />
@@ -51,13 +45,13 @@
             android:exported="false" />
         <activity
             android:name=".View.Sign_In"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".View.MainActivity"
             android:exported="true" />
