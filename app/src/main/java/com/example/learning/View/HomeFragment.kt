@@ -40,7 +40,7 @@ lateinit var auth: FirebaseAuth
         auth =Firebase.auth
         setupReceycleView()
         imageButton.setOnClickListener {
-            startActivity(Intent(context, AddLecture::class.java))
+            startActivity(Intent(context, AddAssignment::class.java))
         }
 //        cardViewAll.setOnClickListener {
 //            var courses = users(null,"","","",0)
