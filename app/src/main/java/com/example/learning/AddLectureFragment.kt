@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.lecture
@@ -22,10 +23,21 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
     var videoUrl: Uri? = null
     var fileUri: Uri? = null
     val args: AddLectureFragmentArgs by navArgs()
+    lateinit var idLecture:UUID
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Teacher).learningViewModel
         val lecture = args.idCourseL
+idLecture = UUID.randomUUID()
+
+
+        Go_to_AddAssi.setOnClickListener {
+            val Bundle=Bundle().apply {
+               putString("idlectureAssi",idLecture.toString())
+                putString("idCourseAssi",lecture)
+            }
+findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragment,Bundle)
+        }
 
         Add_lect.setOnClickListener {
             if (videoUrl != null && fileUri == null) {
@@ -33,7 +45,7 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
                     learningViewModel.addLecture(
                         view,
                         lecture(
-                            UUID.randomUUID().toString(),
+                            idLecture.toString(),
                             Text_NameLecture.text.toString(),
                             Text_descriptionLecture.text.toString(),
                             "",
@@ -57,7 +69,7 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
                     learningViewModel.addLecture(
                         view,
                         lecture(
-                            UUID.randomUUID().toString(),
+                            idLecture.toString(),
                             Text_NameLecture.text.toString(),
                             Text_descriptionLecture.text.toString(),
                             "",
@@ -78,7 +90,7 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
                     learningViewModel.addLecture(
                         view,
                         lecture(
-                            UUID.randomUUID().toString(),
+                            idLecture.toString(),
                             Text_NameLecture.text.toString(),
                             Text_descriptionLecture.text.toString(),
                             "",

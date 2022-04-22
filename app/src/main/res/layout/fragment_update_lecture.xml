@@ -5,18 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F3F5F9"
-    tools:context=".AddLectureFragment">
-
+    tools:context=".UpdateLectureFragment">
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="159dp"
         android:fontFamily="@font/baloo_bhai_2"
-        android:text="Add New Lecture"
+        android:text="Update Lecture"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -25,38 +24,39 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView25"
+
+        android:id="@+id/textView27"
         android:layout_width="257dp"
         android:layout_height="85dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/baloo_bhai_2"
-        android:text="Enter the lecture details to add the course"
+        android:text="Enter the lecture details to update the  lecture"
         android:textAlignment="center"
         android:textColor="#757272"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView24"
-        app:layout_constraintStart_toStartOf="@+id/textView24"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+        app:layout_constraintEnd_toEndOf="@+id/textView26"
+        app:layout_constraintStart_toStartOf="@+id/textView26"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView17"
         android:layout_width="0dp"
         android:layout_height="221dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="59dp"
         android:layout_marginEnd="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25">
+        app:layout_constraintTop_toBottomOf="@+id/textView27">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/Text_NameLecture"
+                android:id="@+id/Text_NameLectureUp"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
                 android:layout_marginTop="5dp"
@@ -78,7 +78,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Text_NameLecture" />
+                app:layout_constraintTop_toBottomOf="@+id/Text_NameLectureUp" />
 
             <View
                 android:id="@+id/view4"
@@ -89,21 +89,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Text_descriptionLecture" />
+                app:layout_constraintTop_toBottomOf="@+id/Text_descriptionLectureUp" />
 
             <View
-                android:id="@+id/view8"
-                android:layout_width="0dp"
+                android:id="@+id/view9"
+                android:layout_width="371dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
                 android:background="#97CCCACA"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Text_VideoLecture" />
+                app:layout_constraintTop_toBottomOf="@+id/Text_VideoLectureUp" />
 
             <EditText
-                android:id="@+id/Text_descriptionLecture"
+                android:id="@+id/Text_descriptionLectureUp"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
                 android:layout_marginTop="5dp"
@@ -117,7 +116,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <EditText
-                android:id="@+id/Text_VideoLecture"
+                android:id="@+id/Text_VideoLectureUp"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
                 android:layout_marginTop="5dp"
@@ -131,7 +130,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view4" />
 
             <EditText
-                android:id="@+id/Text_pdfLecture"
+                android:id="@+id/Text_pdfLectureUp"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
                 android:layout_marginTop="5dp"
@@ -142,37 +141,19 @@
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Text_VideoLecture" />
+                app:layout_constraintTop_toBottomOf="@+id/Text_VideoLectureUp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/textView29"
-        android:layout_width="315dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="14dp"
-        android:text="Do you want to add an assignment to this lecture?"
+    <Button
+        android:id="@+id/update"
+        android:layout_width="138dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="21dp"
+        android:text="update"
+        app:layout_constraintEnd_toEndOf="@+id/cardView17"
         app:layout_constraintStart_toStartOf="@+id/cardView17"
         app:layout_constraintTop_toBottomOf="@+id/cardView17" />
 
-    <TextView
-        android:id="@+id/Go_to_AddAssi"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
-        android:text="Add"
-        android:textColor="#2196F3"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView29"
-        app:layout_constraintStart_toEndOf="@+id/textView29"
-        app:layout_constraintTop_toTopOf="@+id/textView29" />
 
-    <Button
-        android:id="@+id/Add_lect"
-        android:layout_width="148dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="8dp"
-        android:text="Add"
-        app:layout_constraintEnd_toEndOf="@+id/cardView17"
-        app:layout_constraintStart_toStartOf="@+id/cardView17"
-        app:layout_constraintTop_toBottomOf="@+id/textView29" />
 </androidx.constraintlayout.widget.ConstraintLayout>

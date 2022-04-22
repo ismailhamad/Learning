@@ -3,6 +3,7 @@ package com.example.learning.View
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.learning.Model.users
@@ -19,6 +20,7 @@ class DetailsCourseFragment : Fragment(R.layout.fragment_details_course) {
     lateinit var learningViewModel: LearningViewModel
     val args:DetailsCourseFragmentArgs by navArgs()
     lateinit var auth: FirebaseAuth
+    var users: users?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel =(activity as Student).learningViewModel
@@ -35,11 +37,15 @@ class DetailsCourseFragment : Fragment(R.layout.fragment_details_course) {
         But_Back.setOnClickListener {
             findNavController().navigate(R.id.action_detailsCourseFragment_to_homeFragment)
         }
-
+learningViewModel.users!!.observe(viewLifecycleOwner, Observer { it->
+    for (item in it){
+        users = item
+    }
+})
 
 
         but_Buy.setOnClickListener {
-            learningViewModel.updateUsers(view,course.id.toString(),users(auth.currentUser!!.uid,"","","",0))
+            users?.let { it1 -> learningViewModel.updateUsers(view,course.id.toString(), it1) }
            // learningViewModel.AddMyCourse(myCourse(course.id.toString(),course.name.toString(),course.description,course.image,auth.currentUser!!.uid,course.lecture))
 
         }

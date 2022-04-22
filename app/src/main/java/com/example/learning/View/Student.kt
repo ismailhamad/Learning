@@ -30,6 +30,8 @@ class Student : AppCompatActivity() {
         val repository = LearningRepository(FirebaseSource(this))
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
+
+        learningViewModel.getUser()
     }
 
 }

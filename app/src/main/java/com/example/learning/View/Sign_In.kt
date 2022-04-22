@@ -27,6 +27,7 @@ class Sign_In : AppCompatActivity() {
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
 
         sign_In.setOnClickListener {
+
             if (TextEmail.text.isNotEmpty() && TextPassword.text.isNotEmpty()){
                learningViewModel.Sign_in(findViewById(android.R.id.content),TextEmail.text.toString(),TextPassword.text.toString())
             }else{

@@ -2,21 +2,20 @@ package com.example.learning.Adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.navigation.findNavController
+import android.view.*
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learning.Model.course
 import com.example.learning.R
+import kotlinx.android.synthetic.main.item_corse_tech.view.*
 import kotlinx.android.synthetic.main.item_courses.view.*
 import java.util.*
 
-
-class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
+class CourseTechAD: RecyclerView.Adapter<CourseTechAD.ViewHolder>() {
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
     private val differCallback = object : DiffUtil.ItemCallback<course>() {
@@ -34,10 +33,11 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_courses, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_corse_tech, parent, false)
         )
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val course = differ.currentList[position]
 
@@ -55,17 +55,44 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
 //            val draw = GradientDrawable()
 //            draw.shape = GradientDrawable.RECTANGLE
 //            draw.setColor(Color.rgb(red, green, blue))
-            item_c.setCardBackgroundColor(color)
-            nameCourse.text=course.name
-            Glide.with(this).load(course.image).into(imageCourse)
+            item_cT.setCardBackgroundColor(color)
+            nameCourseT.text=course.name
+            Glide.with(this).load(course.image).into(imageCourseT)
+
             setOnClickListener {
                 onItemClickListener?.let { it(course) }
+
             }
+            popmune.setOnClickListener {
+                val popupMenu: PopupMenu = PopupMenu(context,popmune)
+                popupMenu.menuInflater.inflate(R.menu.menu_edit,popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                    when(item.itemId) {
+                        R.id.updateCourse ->
+                            Toast.makeText(context, "You Clicked : " + item.title, Toast.LENGTH_SHORT).show()
+                        R.id.deleteCourse ->
+                            Toast.makeText(context, "You Clicked : " + item.title, Toast.LENGTH_SHORT).show()
+
+                    }
+                    true
+                })
+                popupMenu.show()
+            }
+
+
+
+
+
+
+
 
 
         }
 
-    }
+
+        }
+
+
 
 
     override fun getItemCount(): Int {
@@ -75,5 +102,11 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
     private var onItemClickListener: ((course) -> Unit)? = null
     fun setOnItemClickListener(listener: (course) -> Unit) {
         onItemClickListener = listener
+    }
+
+    private var onItemClickListener2: ((course) -> Unit)? = null
+    fun setOnItemClickListener2(listener: (course) -> Unit) {
+        onItemClickListener2 = listener
+        notifyDataSetChanged()
     }
 }

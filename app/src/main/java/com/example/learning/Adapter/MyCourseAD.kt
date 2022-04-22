@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_mycourse.view.*
 
 
 class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
-     var rowindex = 0
+     var rowindex:Int? = null
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
     private val differCallback = object : DiffUtil.ItemCallback<myCourse>() {
@@ -51,12 +51,12 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
             }
             if (rowindex==position){
                 item_card.radius=20f
-                item_card.setBackgroundColor(Color.parseColor("#9B67F6"))
+                item_card.setCardBackgroundColor(Color.parseColor("#9B67F6"))
                 item_card.cardElevation=20f
             }else{
                 item_card.cardElevation=0f
                 item_card.radius=20f
-                item_card.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
+                item_card.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
                 item_card.elevation=0f
             }
 

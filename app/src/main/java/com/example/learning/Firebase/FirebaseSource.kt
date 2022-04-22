@@ -16,6 +16,7 @@ import com.example.learning.View.Teacher
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FieldValue.arrayRemove
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -40,6 +41,7 @@ class FirebaseSource(val activity: Activity) {
     lateinit var LectureListMutableLiveData: MutableLiveData<List<lecture>>
     lateinit var MessageListMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var AssignmentListMutableLiveData: MutableLiveData<List<Assignment>>
+    lateinit var usersListMutableLiveData: MutableLiveData<List<users>>
     lateinit var course: course
 
     var BuyONot: Boolean = false
@@ -380,6 +382,19 @@ class FirebaseSource(val activity: Activity) {
             }
         return LectureListMutableLiveData
 
+    }
+
+    fun getUser(): MutableLiveData<List<users>> {
+        db = Firebase.firestore
+        auth = Firebase.auth
+        val userslist = ArrayList<users>()
+        usersListMutableLiveData = MutableLiveData()
+        db.collection("users").document(auth.currentUser!!.uid).get().addOnSuccessListener {
+            val users = it.toObject<users>()
+            users?.let { it1 -> userslist.add(it1) }
+            usersListMutableLiveData.postValue(userslist)
+        }
+        return usersListMutableLiveData
     }
 
 
@@ -795,7 +810,7 @@ class FirebaseSource(val activity: Activity) {
             .addOnSuccessListener {
                 storageRef!!.child("assignment/${it.get("id")}").delete()
                 db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment")
-                    .document(documentAssignment).delete()
+                    .document(documentLecture).delete()
                 Constants.showSnackBar(
                     view,
                     "تم حذف الواجب",
@@ -852,23 +867,35 @@ class FirebaseSource(val activity: Activity) {
 
     fun deleteMyCourse(view: View, users: users, document: String) {
         db = Firebase.firestore
-        db.collection("myCourse").document(document).update("users", FieldValue.arrayRemove(users))
+        val userss = hashMapOf(
+            "id" to users.id,
+            "name" to users.name,
+            "lastName" to users.lastName,
+            "email" to users.email
+        ) as Map<String, Any>
+        db.collection("courses").document(document).update("users", FieldValue.arrayRemove(userss))
             .addOnSuccessListener {
-                Constants.showSnackBar(
-                    view,
-                    "تم حذف الكورس",
-                    Constants.greenColor
-                )
-            }.addOnFailureListener {
-                Constants.showSnackBar(
-                    view,
-                    "فشل حذف الكورس",
-                    Constants.redColor
-                )
+                db.collection("myCourse").document(document)
+                    .update("users", FieldValue.arrayRemove(userss))
+                    .addOnSuccessListener {
+                        Constants.showSnackBar(
+                            view,
+                            "تم حذف الكورس",
+                            Constants.greenColor
+                        )
+                    }.addOnFailureListener {
+                        Constants.showSnackBar(
+                            view,
+                            "فشل حذف الكورس",
+                            Constants.redColor
+                        )
+                    }
             }
+
+
+
+
     }
-
-
     fun getAssignment(
         documentCourses: String,
         documentLecture: String,
@@ -878,145 +905,14 @@ class FirebaseSource(val activity: Activity) {
         db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment")
             .addSnapshotListener { result, error ->
                 val assignment = result!!.toObjects<Assignment>()
+                for (itm in assignment){
+                    Toast.makeText(activity, "${itm.name}", Toast.LENGTH_SHORT).show()
+                }
                 AssignmentListMutableLiveData.postValue(assignment)
             }
         return AssignmentListMutableLiveData
 
     }
-
-    fun userAddAssignment(
-        view: View,
-        users: users,
-        documentCourses: String,
-        documentLecture: String,
-        documentAssignment: String,
-        file: Uri,
-        fileString: String
-    ) {
-        storge = Firebase.storage
-        storageRef = storge!!.reference
-        progressDialog = ProgressDialog(activity)
-        progressDialog.setCancelable(false)
-        progressDialog.setMessage("Loading...")
-        progressDialog.show()
-        db = Firebase.firestore
-        var data = hashMapOf<String,Any>(
-            "id" to users.id!!,
-            "name" to users.name!!,
-            "lastName" to users.lastName!!,
-            "email" to users.email!!,
-            "file" to fileString
-        )
-        storageRef!!.child("assignment/" + "${users.id}").putFile(file!!)
-            .addOnSuccessListener { taskSnapshot ->
-                progressDialog.dismiss()
-                taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
-                    data["file"] = uri.toString()
-                    db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
-                        .document(users.id!!)
-                        .set(data)
-
-                    Constants.showSnackBar(
-                        view,
-                        "تم تسليم الواجب",
-                        Constants.greenColor
-                    )
-                }
-            }.addOnFailureListener { exception ->
-                progressDialog.dismiss()
-                Constants.showSnackBar(
-                    view,
-                    "فشل تسليم الواجب",
-                    Constants.redColor
-                )
-            }.addOnProgressListener {
-                val progress: Double =
-                    100.0 * it.bytesTransferred / it.totalByteCount
-                progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
-            }
-    }
-
-    fun updateUserAssignment(
-        view: View,
-        users: users,
-        documentCourses: String,
-        documentLecture: String,
-        documentAssignment: String,
-        file: Uri,
-        fileString: String
-    ) {
-        storge = Firebase.storage
-        storageRef = storge!!.reference
-        progressDialog = ProgressDialog(activity)
-        progressDialog.setCancelable(false)
-        progressDialog.setMessage("Loading...")
-        progressDialog.show()
-        db = Firebase.firestore
-        var data = hashMapOf<String,Any>(
-            "file" to fileString
-        )
-        storageRef!!.child("assignment/" + "${users.id}").putFile(file!!)
-            .addOnSuccessListener { taskSnapshot ->
-                progressDialog.dismiss()
-                taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
-                    data["file"] = uri.toString()
-                    db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
-                        .document(users.id!!)
-                        .update(data)
-
-                    Constants.showSnackBar(
-                        view,
-                        "تم تعديل  تسليم الواجب",
-                        Constants.greenColor
-                    )
-                }
-            }.addOnFailureListener { exception ->
-                progressDialog.dismiss()
-                Constants.showSnackBar(
-                    view,
-                    "فشل تعديل تسليم الواجب",
-                    Constants.redColor
-                )
-            }.addOnProgressListener {
-                val progress: Double =
-                    100.0 * it.bytesTransferred / it.totalByteCount
-                progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
-            }
-    }
-
-    fun deleteUserAssignment(
-        view: View,
-        documentCourses: String,
-        documentLecture: String,
-        documentAssignment: String,
-        documentUserAssignment: String
-    ) {
-        storge = Firebase.storage
-        storageRef = storge!!.reference
-        db = Firebase.firestore
-        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
-            .document(documentUserAssignment).get()
-            .addOnSuccessListener {
-                storageRef!!.child("assignment/${it.get("id")}").delete()
-                db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
-                    .document(documentUserAssignment).delete()
-                Constants.showSnackBar(
-                    view,
-                    "تم حذف التسليم",
-                    Constants.greenColor
-                )
-
-            }.addOnFailureListener {
-                Constants.showSnackBar(
-                    view,
-                    "فشل حذف التسليم",
-                    Constants.redColor
-                )
-            }
-
-    }
-
-
 }
 
 

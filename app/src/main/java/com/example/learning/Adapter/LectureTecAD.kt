@@ -2,21 +2,18 @@ package com.example.learning.Adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.MediaController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.learning.Model.course
 import com.example.learning.Model.lecture
 import com.example.learning.R
 import kotlinx.android.synthetic.main.item_lecture.view.*
-import kotlinx.android.synthetic.main.lecture_item.view.*
+import kotlinx.android.synthetic.main.item_lecture_tech.view.*
 
-class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
+class LectureTecAD: RecyclerView.Adapter<LectureTecAD.ViewHolder>() {
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
 
@@ -36,7 +33,7 @@ class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_lecture, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_lecture_tech, parent, false)
         )
     }
 
@@ -44,15 +41,22 @@ class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
         val lecture = differ.currentList[position]
 
         holder.itemView.apply {
-
-
+            name_lectTec.text = lecture.name
             if(lecture.seeLecture==false){
-                cc_lect.visibility =View.GONE
-                check_seee.visibility =View.GONE
+                name_lectTec.setTextColor(Color.parseColor("#689A9797"));
+                cc_lectTEC.setCardBackgroundColor(Color.parseColor("#689A9797"))
+                check_seeeTech.setCardBackgroundColor(Color.parseColor("#689A9797"))
             }else{
-                name_lect.text = lecture.name
-                cc_lect.setCardBackgroundColor(Color.WHITE)
+
+                cc_lectTEC.setCardBackgroundColor(Color.WHITE)
             }
+
+
+            but_hidden.setOnClickListener {
+                onItemClickListener2?.let { it(lecture) }
+            }
+
+
 //            tv_desLecture.text = lecture.description
 //            if (lecture.video != null){
 //                val mediaController = MediaController(context)
@@ -79,5 +83,10 @@ class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
     private var onItemClickListener: ((lecture) -> Unit)? = null
     fun setOnItemClickListener(listener: (lecture) -> Unit) {
         onItemClickListener = listener
+    }
+
+    private var onItemClickListener2: ((lecture) -> Unit)? = null
+    fun setOnItemClickListener2(listener: (lecture) -> Unit) {
+        onItemClickListener2 = listener
     }
 }

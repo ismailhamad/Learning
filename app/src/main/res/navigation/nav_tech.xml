@@ -33,6 +33,12 @@
         <action
             android:id="@+id/action_detailsCourseTechFragment_to_addLectureFragment"
             app:destination="@id/addLectureFragment" />
+        <action
+            android:id="@+id/action_detailsCourseTechFragment_to_updateLectureFragment"
+            app:destination="@id/updateLectureFragment" />
+        <action
+            android:id="@+id/action_detailsCourseTechFragment_to_details_LectureTechFragment"
+            app:destination="@id/details_LectureTechFragment" />
     </fragment>
     <fragment
         android:id="@+id/addLectureFragment"
@@ -42,5 +48,50 @@
         <argument
             android:name="idCourseL"
             app:argType="string" />
+        <action
+            android:id="@+id/action_addLectureFragment_to_addAssigmentFragment"
+            app:destination="@id/addAssigmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateLectureFragment"
+        android:name="com.example.learning.UpdateLectureFragment"
+        android:label="fragment_update_lecture"
+        tools:layout="@layout/fragment_update_lecture" >
+        <argument
+            android:name="updateLecture"
+            app:argType="com.example.learning.Model.lecture" />
+        <argument
+            android:name="idcoursee"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addAssigmentFragment"
+        android:name="com.example.learning.AddAssigmentFragment"
+        android:label="fragment_add_assigment"
+        tools:layout="@layout/fragment_add_assigment" >
+        <argument
+            android:name="idlectureAssi"
+            app:argType="string" />
+        <argument
+            android:name="idCourseAssi"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/details_LectureTechFragment"
+        android:name="com.example.learning.Details_LectureTechFragment"
+        android:label="fragment_details__lecture_tech"
+        tools:layout="@layout/fragment_details__lecture_tech" >
+        <argument
+            android:name="detailsLecture"
+            app:argType="com.example.learning.Model.lecture" />
+        <argument
+            android:name="imageCourse"
+            app:argType="string" />
+        <argument
+            android:name="idcourse"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_details_LectureTechFragment_to_addAssigmentFragment"
+            app:destination="@id/addAssigmentFragment" />
     </fragment>
 </navigation>

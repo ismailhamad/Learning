@@ -56,38 +56,38 @@ class AddAssignment : AppCompatActivity() {
 //            }
 //
 //        }
-        btn_addAssignment.setOnClickListener {
-                learningViewModel.userAddAssignment(
-                    findViewById(android.R.id.content),
-                    users(auth.currentUser!!.uid, "saleem", "mater", auth.currentUser!!.email!!, 0),
-                    "e658a5c6-bcd5-498d-a41f-92f18b82bee9",
-                    "1e56d6c8-3daf-4bfc-91ff-55e67b0a59d9",
-                    "4859bc86-1cda-40b2-bb13-94674e3c4c90",
-                    fileUri!!,fileUri.toString()
-                )
-
-        }
-
-        btn_updateAssignment.setOnClickListener {
-            learningViewModel.updateUserAssignment(
-                findViewById(android.R.id.content),
-                users(auth.currentUser!!.uid, "saleem", "mater", auth.currentUser!!.email!!, 0),
-                "e658a5c6-bcd5-498d-a41f-92f18b82bee9",
-                "1e56d6c8-3daf-4bfc-91ff-55e67b0a59d9",
-                "4859bc86-1cda-40b2-bb13-94674e3c4c90",
-                fileUri!!,fileUri.toString()
-            )
-        }
-
-        btn_delAssignment.setOnClickListener {
-            learningViewModel.deleteUserAssignment(
-                findViewById(android.R.id.content),
-                "e658a5c6-bcd5-498d-a41f-92f18b82bee9",
-                "1e56d6c8-3daf-4bfc-91ff-55e67b0a59d9",
-                "4859bc86-1cda-40b2-bb13-94674e3c4c90",
-                auth.currentUser!!.uid
-            )
-        }
+//        btn_addAssignment.setOnClickListener {
+//                learningViewModel.userAddAssignment(
+//                    findViewById(android.R.id.content),
+//                    users(auth.currentUser!!.uid, "saleem", "mater", auth.currentUser!!.email!!, 0),
+//                    "e658a5c6-bcd5-498d-a41f-92f18b82bee9",
+//                    "1e56d6c8-3daf-4bfc-91ff-55e67b0a59d9",
+//                    "4859bc86-1cda-40b2-bb13-94674e3c4c90",
+//                    fileUri!!,fileUri.toString()
+//                )
+//
+//        }
+//
+//        btn_updateAssignment.setOnClickListener {
+//            learningViewModel.updateUserAssignment(
+//                findViewById(android.R.id.content),
+//                users(auth.currentUser!!.uid, "saleem", "mater", auth.currentUser!!.email!!, 0),
+//                "e658a5c6-bcd5-498d-a41f-92f18b82bee9",
+//                "1e56d6c8-3daf-4bfc-91ff-55e67b0a59d9",
+//                "4859bc86-1cda-40b2-bb13-94674e3c4c90",
+//                fileUri!!,fileUri.toString()
+//            )
+//        }
+//
+//        btn_delAssignment.setOnClickListener {
+//            learningViewModel.deleteUserAssignment(
+//                findViewById(android.R.id.content),
+//                "e658a5c6-bcd5-498d-a41f-92f18b82bee9",
+//                "1e56d6c8-3daf-4bfc-91ff-55e67b0a59d9",
+//                "4859bc86-1cda-40b2-bb13-94674e3c4c90",
+//                auth.currentUser!!.uid
+//            )
+//        }
 
     }
 

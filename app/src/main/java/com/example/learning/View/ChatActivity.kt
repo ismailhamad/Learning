@@ -28,36 +28,37 @@ class ChatActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
-        firebaseSource = FirebaseSource(this)
-        auth = Firebase.auth
-//        setupReceycleView()
-        var idCourse = intent.getStringExtra("idCourse")
-        Log.e("aaa","idCourse $idCourse")
-        chatAD = ChatAdapter(this,firebaseSource.getMessageCourse(idCourse!!))
-        chatRecyclerView.adapter = chatAD
-        chatRecyclerView.layoutManager = LinearLayoutManager(this)
-        btnSendMessage.setOnClickListener {
-            if (etMessage.editableText.isNotEmpty()){
-                firebaseSource.sendMessageCourse(
-                    Chat(
-                        UUID.randomUUID().toString(),
-                        auth.uid.toString(),
-                        null,
-                        etMessage.editableText.toString(),
-                        idCourse
-                    ), idCourse
-                )
-                etMessage.setText("")
-            }
-        }
-
-    }
-
-    fun setupReceycleView(){
-        chatAD = ChatAdapter(this,firebaseSource.getMessageCourse("190J8SRyfHyCjIrK7VnP"))
-        chatRecyclerView.apply {
-            adapter=chatAD
-            layoutManager= LinearLayoutManager(this@ChatActivity)
-        }
+//        firebaseSource = FirebaseSource(this)
+//        auth = Firebase.auth
+////        setupReceycleView()
+//        var idCourse = intent.getStringExtra("idCourse")
+//        Log.e("aaa","idCourse $idCourse")
+//        chatAD = ChatAdapter(this,firebaseSource.getMessageCourse(idCourse!!))
+//        chatRecyclerView.adapter = chatAD
+//        chatRecyclerView.layoutManager = LinearLayoutManager(this)
+//        btnSendMessage.setOnClickListener {
+//            if (etMessage.editableText.isNotEmpty()){
+//                firebaseSource.sendMessageCourse(
+//                    Chat(
+//                        UUID.randomUUID().toString(),
+//                        auth.uid.toString(),
+//                        null,
+//                        etMessage.editableText.toString(),
+//                        idCourse
+//                    ), idCourse
+//                )
+//                etMessage.setText("")
+//            }
+//        }
+//
+//    }
+//
+//    fun setupReceycleView(){
+//        chatAD = ChatAdapter(this,firebaseSource.getMessageCourse("190J8SRyfHyCjIrK7VnP"))
+//        chatRecyclerView.apply {
+//            adapter=chatAD
+//            layoutManager= LinearLayoutManager(this@ChatActivity)
+//        }
+//    }
     }
 }
