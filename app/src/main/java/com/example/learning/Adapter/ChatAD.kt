@@ -11,7 +11,7 @@ import com.example.learning.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class ChatAdapter(private val context: Context, private val chatList: ArrayList<Chat>) :
+class ChatAdapter(private val context: Context, private val chatList: List<Chat>) :
     RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
     private val MESSAGE_TYPE_LEFT = 0

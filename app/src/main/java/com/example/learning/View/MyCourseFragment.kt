@@ -36,23 +36,25 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Student).learningViewModel
 
-        learningViewModel.getMyCourse()
-        setupRecycleView()
-        setupRecycleView2()
-        learningViewModel.MyCourse!!.observe(viewLifecycleOwner, Observer {
-            myCourseAD.differ.submitList(it)
-        })
-        myCourseAD.setOnItemClickListener {
-
-            textView7.visibility = View.GONE
-            learningViewModel.getLecture(it.id.toString())
-            idCourse = it.id
-
-            course = it
-            learningViewModel.lecture?.observe(viewLifecycleOwner, Observer {
-                lectureAD.differ.submitList(it)
+            learningViewModel.getMyCourse()
+            setupRecycleView()
+            setupRecycleView2()
+            learningViewModel.MyCourse!!.observe(viewLifecycleOwner, Observer {
+                myCourseAD.differ.submitList(it)
             })
-        }
+            myCourseAD.setOnItemClickListener {
+
+                textView7.visibility = View.GONE
+                learningViewModel.getLecture(it.id.toString())
+                idCourse = it.id
+
+                course = it
+                learningViewModel.lecture?.observe(viewLifecycleOwner, Observer {
+                    lectureAD.differ.submitList(it)
+                })
+            }
+
+
 
         learningViewModel.users!!.observe(viewLifecycleOwner, Observer {
             for (item in  it){
@@ -63,6 +65,7 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
         lectureAD.setOnItemClickListener {
             val Bundle = Bundle().apply {
                 putSerializable("watch", it)
+                putString("idCourse",idCourse)
             }
             findNavController().navigate(R.id.action_myCourseFragment_to_WCourseFragment, Bundle)
         }
@@ -73,14 +76,13 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
         Go_Chat.setOnClickListener {
             if (course != null) {
                 val Bundle = Bundle().apply {
-                    putSerializable("chat", course)
+                    putSerializable("chaat", course)
                 }
-//                findNavController().navigate(R.id.action_myCourseFragment_to_chatFragment, Bundle)
-
-                    val i = Intent(activity,ChatActivity::class.java)
-                    i.putExtra("idCourse",idCourse)
-                    startActivity(i)
-
+              findNavController().navigate(R.id.action_myCourseFragment_to_chatFragment, Bundle)
+//
+//                    val i = Intent(activity,ChatActivity::class.java)
+//                    i.putExtra("idCourse",idCourse)
+//                    startActivity(i)
 
             } else {
                 Constants.showSnackBar(

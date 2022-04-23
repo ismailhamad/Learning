@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F3F5F9"
+    tools:context=".AddAssigmentFragment">
+
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="update Assigment"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView25"
+        app:layout_constraintEnd_toEndOf="@+id/textView24"
+        app:layout_constraintStart_toStartOf="@+id/textView24"
+        app:layout_constraintTop_toBottomOf="@+id/textView24"
+        android:layout_width="257dp"
+        android:layout_height="85dp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="Enter the Assigment details to update the Assigment"
+        android:textAlignment="center"
+        android:textColor="#757272"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="80dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView17"
+        android:layout_width="370dp"
+        android:layout_height="192dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView25">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/Text_NameUpAssig"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Enter Name"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="#97CCCACA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Text_NameUpAssig" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="#97CCCACA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Text_descriptionUpAssig" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="#97CCCACA"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Text_pdfUpAssig" />
+
+            <EditText
+                android:id="@+id/Text_descriptionUpAssig"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Enter description"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+
+            <EditText
+                android:id="@+id/Text_pdfUpAssig"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:ems="10"
+                android:hint="Enter pdf"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/update_Assigment"
+        android:layout_width="148dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="23dp"
+        android:text="update"
+        app:layout_constraintEnd_toEndOf="@+id/cardView17"
+        app:layout_constraintStart_toStartOf="@+id/cardView17"
+        app:layout_constraintTop_toBottomOf="@+id/cardView17" />
+</androidx.constraintlayout.widget.ConstraintLayout>

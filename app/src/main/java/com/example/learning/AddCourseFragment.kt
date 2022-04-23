@@ -36,7 +36,7 @@ lateinit var ArrayList:ArrayList<users>
         ArrayList= arrayListOf()
         auth =Firebase.auth
         Add_Course.setOnClickListener {
-            val user=users(null,"","","",null)
+            val user=users("","","","",0)
             ArrayList.add(user)
             if (Text_NameCourse.text.isNotEmpty() && Text_description.text.isNotEmpty() && imgUrl != null){
                 learningViewModel.AddCourse(view,course(

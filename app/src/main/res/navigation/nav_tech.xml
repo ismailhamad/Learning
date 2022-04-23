@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_detailsCourseTechFragment_to_details_LectureTechFragment"
             app:destination="@id/details_LectureTechFragment" />
+        <action
+            android:id="@+id/action_detailsCourseTechFragment_to_show_StudentFragment"
+            app:destination="@id/show_StudentFragment" />
     </fragment>
     <fragment
         android:id="@+id/addLectureFragment"
@@ -93,5 +96,32 @@
         <action
             android:id="@+id/action_details_LectureTechFragment_to_addAssigmentFragment"
             app:destination="@id/addAssigmentFragment" />
+        <action
+            android:id="@+id/action_details_LectureTechFragment_to_updateAssigmentFragment"
+            app:destination="@id/updateAssigmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateAssigmentFragment"
+        android:name="com.example.learning.updateAssigmentFragment"
+        android:label="fragment_update_assigment"
+        tools:layout="@layout/fragment_update_assigment" >
+        <argument
+            android:name="assigmentt"
+            app:argType="com.example.learning.Model.Assignment" />
+        <argument
+            android:name="idcoursee"
+            app:argType="string" />
+        <argument
+            android:name="idlecturee"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/show_StudentFragment"
+        android:name="com.example.learning.show_StudentFragment"
+        android:label="fragment_show__student"
+        tools:layout="@layout/fragment_show__student" >
+        <argument
+            android:name="courseStudent"
+            app:argType="com.example.learning.Model.course" />
     </fragment>
 </navigation>

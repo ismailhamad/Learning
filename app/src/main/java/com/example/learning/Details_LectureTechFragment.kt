@@ -12,7 +12,9 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learning.Adapter.assigmentAD
 import com.example.learning.View.Teacher
@@ -78,6 +80,48 @@ val args:Details_LectureTechFragmentArgs by navArgs()
             }
             findNavController().navigate(R.id.action_details_LectureTechFragment_to_addAssigmentFragment,Bundle)
         }
+
+        val itemTouchHelperCallback=object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+        ){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position=viewHolder.adapterPosition
+                val assigment=assigmentAD.differ.currentList[position]
+                if (direction == ItemTouchHelper.LEFT){
+               learningViewModel.deleteAssignment(view,idCourse,lecture.id.toString(),assigment.id.toString())
+                }else if (direction == ItemTouchHelper.RIGHT){
+                    val Bundle =Bundle().apply {
+                        putSerializable("assigmentt",assigment)
+                        putString("idcoursee",idCourse)
+                        putString("idlecturee",lecture.id.toString())
+
+                    }
+                    findNavController().navigate(R.id.action_details_LectureTechFragment_to_updateAssigmentFragment,Bundle)
+
+
+                }
+
+
+            }
+
+        }
+        ItemTouchHelper(itemTouchHelperCallback).apply {
+            attachToRecyclerView(rv_assig)
+        }
+
+
+
+
+
 
     }
     fun setupRecyclview(){

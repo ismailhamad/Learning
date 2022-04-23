@@ -33,7 +33,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/pdf" />
+                app:srcCompat="@drawable/document" />
 
             <TextView
                 android:id="@+id/name_assigment"

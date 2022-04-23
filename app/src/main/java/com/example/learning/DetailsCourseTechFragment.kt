@@ -103,7 +103,12 @@ learningViewModel =(activity as Teacher).learningViewModel
         }
 
 
-
+        Go_showStudent.setOnClickListener {
+            val Bundle = Bundle().apply {
+                putSerializable("courseStudent",course)
+            }
+            findNavController().navigate(R.id.action_detailsCourseTechFragment_to_show_StudentFragment,Bundle)
+        }
 
 
 
