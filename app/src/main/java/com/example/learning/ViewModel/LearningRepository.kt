@@ -34,4 +34,8 @@ class LearningRepository(
     fun sendMessageCourse(chat: Chat, documentMyCourses: String) =firebaseSource.sendMessageCourse(chat,documentMyCourses)
     fun getMessageCourse(documentMyCourses: String) = firebaseSource.getMessageCourse(documentMyCourses)
     fun getStudentrCourse(uid: String,documentCourses: String) = firebaseSource.getStudentrCourse(uid, documentCourses)
+    fun getUserShowLecture(documentCourses: String,documentLecture: String) = firebaseSource.getUserShowLecture(documentCourses, documentLecture)
+    fun showUserLecture(users: users,documentCourses: String,documentLecture: String) = firebaseSource.showUserLecture(users,documentCourses, documentLecture)
+
+
 }

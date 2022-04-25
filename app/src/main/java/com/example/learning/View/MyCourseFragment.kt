@@ -61,13 +61,44 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
                 users = item
             }
         })
-
-        lectureAD.setOnItemClickListener {
+        lectureAD.setOnItemClickListener { itLec ->
             val Bundle = Bundle().apply {
-                putSerializable("watch", it)
+                putSerializable("watch", itLec)
                 putString("idCourse",idCourse)
             }
-            findNavController().navigate(R.id.action_myCourseFragment_to_WCourseFragment, Bundle)
+
+            val indexLec = lectureAD.differ.currentList.indexOf(itLec)
+            if (indexLec == 0){
+                val idLect = lectureAD.differ.currentList[indexLec].id
+                learningViewModel.getUserShowLecture(idCourse!!, idLect!!)
+                learningViewModel.showUserLecture(users!!, idCourse!!, itLec.id!!)
+
+            }else{
+                val idLect = lectureAD.differ.currentList[indexLec-1].id
+                learningViewModel.getUserShowLecture(idCourse!!, idLect!!)
+            }
+
+
+            learningViewModel.usersLectureMu!!.observe(viewLifecycleOwner, Observer { itlist ->
+                itlist.forEach { iii ->
+                    if (iii.id == users!!.id) {
+                        findNavController().navigate(
+                            R.id.action_myCourseFragment_to_WCourseFragment,
+                            Bundle
+                        )
+                        learningViewModel.showUserLecture(users!!, idCourse!!, itLec.id!!)
+
+
+                    } else {
+                        Constants.showSnackBar(
+                            view, "عليك مشاهدة المحاضرات السابقة أولا",
+                            Constants.redColor
+                        )
+                    }
+                }
+
+            })
+
         }
 
 

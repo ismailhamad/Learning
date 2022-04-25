@@ -18,6 +18,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FieldValue.arrayRemove
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
@@ -43,6 +44,7 @@ class FirebaseSource(val activity: Activity) {
     lateinit var MessageListMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var AssignmentListMutableLiveData: MutableLiveData<List<Assignment>>
     lateinit var usersListMutableLiveData: MutableLiveData<List<users>>
+    lateinit var usersLectureListMutableLiveData: MutableLiveData<List<users>>
     lateinit var chatListMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var usersAddAssiListMutableLiveData: MutableLiveData<HashMap<String,Any?>>
     lateinit var course: course
@@ -401,7 +403,7 @@ class FirebaseSource(val activity: Activity) {
     fun getLecture(document: String): MutableLiveData<List<lecture>> {
         db = Firebase.firestore
         LectureListMutableLiveData = MutableLiveData()
-        db.collection("courses").document(document).collection("lecture")
+        db.collection("courses").document(document).collection("lecture").orderBy("time",Query.Direction.ASCENDING)
             .addSnapshotListener { result, error ->
                 val course11 = result!!.toObjects<lecture>()
 
@@ -1095,6 +1097,39 @@ class FirebaseSource(val activity: Activity) {
                 )
             }
 
+    }
+
+
+    fun getUserShowLecture(
+        documentCourses: String,
+        documentLecture: String,
+    ): MutableLiveData<List<users>> {
+        db = Firebase.firestore
+        usersLectureListMutableLiveData = MutableLiveData()
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/users")
+            .addSnapshotListener { result, error ->
+                val user = result!!.toObjects<users>()
+                for (itm in user) {
+                    Toast.makeText(activity, "${itm.email}", Toast.LENGTH_SHORT).show()
+                }
+                usersLectureListMutableLiveData.postValue(user)
+            }
+        return usersLectureListMutableLiveData
+
+    }
+
+
+
+
+    fun showUserLecture(
+        users: users,
+        documentCourses: String,
+        documentLecture: String,
+    ) {
+        db = Firebase.firestore
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/users")
+            .document(users.id!!)
+            .set(users)
     }
 
 

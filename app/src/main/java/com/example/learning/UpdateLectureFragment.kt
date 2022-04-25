@@ -31,7 +31,8 @@ val args:UpdateLectureFragmentArgs by navArgs()
         Text_pdfLectureUp.append(lecturee.file)
 
         update.setOnClickListener {
-            val newLecture = lecture(lecturee.id.toString(),Text_NameLectureUp.text.toString(),Text_descriptionLectureUp.text.toString(),"",true,Text_VideoLectureUp.text.toString(),Text_pdfLectureUp.text.toString())
+            var time = System.currentTimeMillis()
+            val newLecture = lecture(lecturee.id.toString(),Text_NameLectureUp.text.toString(),Text_descriptionLectureUp.text.toString(),"",time,true,Text_VideoLectureUp.text.toString(),Text_pdfLectureUp.text.toString())
 
             if (videoUrl != null && fileUri == null) {
                 learningViewModel.updateLecture(view,newLecture,

@@ -14,6 +14,7 @@ private val learningRepository: LearningRepository
 
     var Course: MutableLiveData<List<course>>? = null
     var users: MutableLiveData<List<users>>? = null
+    var usersLectureMu: MutableLiveData<List<users>>? = null
     var CourseT: MutableLiveData<List<course>>? = null
     var ShowstudentT: MutableLiveData<List<course>>? = null
     var MyCourse: MutableLiveData<List<myCourse>>? = null
@@ -136,6 +137,10 @@ private val learningRepository: LearningRepository
         learningRepository.sendMessageCourse(chat, documentMyCourses)
     }
     fun getMessageCourse(documentMyCourses: String)= learningRepository.getMessageCourse(documentMyCourses)
+    fun getUserShowLecture(documentCourses: String,documentLecture: String){
+        usersLectureMu = learningRepository.getUserShowLecture(documentCourses,documentLecture)
+    }
+    fun showUserLecture(users: users,documentCourses: String,documentLecture: String) = learningRepository.showUserLecture(users,documentCourses,documentLecture)
 
 
 

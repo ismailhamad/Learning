@@ -3,6 +3,7 @@ package com.example.learning
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,10 +37,13 @@ idLecture = UUID.randomUUID()
                putString("idlectureAssi",idLecture.toString())
                 putString("idCourseAssi",lecture)
             }
+
 findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragment,Bundle)
         }
 
         Add_lect.setOnClickListener {
+            var time = System.currentTimeMillis()
+            Log.e("aaa","time $time")
             if (videoUrl != null && fileUri == null) {
                 if (Text_NameLecture.text.isNotEmpty() && Text_descriptionLecture.text.isNotEmpty()) {
                     learningViewModel.addLecture(
@@ -49,6 +53,7 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
                             Text_NameLecture.text.toString(),
                             Text_descriptionLecture.text.toString(),
                             "",
+                            time,
                             true,
                             videoUrl.toString()
                         ),
@@ -73,6 +78,7 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
                             Text_NameLecture.text.toString(),
                             Text_descriptionLecture.text.toString(),
                             "",
+                            time,
                             true,
                             fileUri.toString()
                         ), Uri.parse(""),
@@ -94,6 +100,7 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
                             Text_NameLecture.text.toString(),
                             Text_descriptionLecture.text.toString(),
                             "",
+                            time,
                             true,
                             videoUrl.toString(),
                             fileUri.toString()
