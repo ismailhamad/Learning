@@ -3,6 +3,7 @@ package com.example.learning
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +12,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.Assignment
+import com.example.learning.Model.NotificationData
+import com.example.learning.Model.PushNotification
+import com.example.learning.Model.users
+import com.example.learning.Notification.RetrofitInstance
+
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_add_assignment.*
 import kotlinx.android.synthetic.main.fragment_add_assigment.*
 import kotlinx.android.synthetic.main.fragment_add_lecture.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 import java.util.*
 
 
@@ -31,9 +42,23 @@ lateinit var learningViewModel: LearningViewModel
         Text_pdfAssig.setOnClickListener {
             chooseFile()
         }
+
         Add_Assigment.setOnClickListener {
             if(Text_NameAssig.text.toString().isNotEmpty() && Text_descriptionAssig.text.toString().isNotEmpty()){
-                learningViewModel.addAssignment(view,Assignment(UUID.randomUUID().toString(),Text_NameAssig.text.toString(),Text_descriptionAssig.text.toString(),fileUri.toString()),idCourse,idlecture, fileUri!!)
+                learningViewModel.addAssignment(view,Assignment(UUID.randomUUID().toString(),Text_NameAssig.text.toString(),Text_descriptionAssig.text.toString(),fileUri.toString()),idCourse.id.toString(),idlecture, fileUri!!)
+
+                for (users in idCourse.users!!){
+                    users as HashMap<String, users>
+                    if (users.get("id").toString()!=""){
+                        val topic = "/topics/${users.get("id").toString()}"
+                        PushNotification(
+                            NotificationData( "a new assignment","A new assignment has been added to the ${idCourse.name} course"),
+                            topic).also {
+                           learningViewModel.sendNotification(it)
+                        }
+                    }
+
+                }
 
             }else{
                 Constants.showSnackBar(
@@ -42,24 +67,7 @@ lateinit var learningViewModel: LearningViewModel
             }
 
 
-//            if(Text_NameAssig.text.isNotEmpty() && Text_descriptionAssig.text.isNotEmpty()){
-//                learningViewModel.addAssignment(
-//                    findViewById(android.R.id.content),
-//                    Assignment(
-//                        UUID.randomUUID().toString(),
-//                        ed_nameAssignment.editText!!.text.toString(),
-//                        ed_descriptionAssignment.editText!!.text.toString(),
-//                        fileUri.toString()
-//                    ),"93da687e-4aea-4420-96c6-3f0ed3f222d2",
-//                    "1af2fe1b-4df6-4b36-8bb0-7cf06792af0d",
-//                    fileUri!!
-//                )
-//            }else{
-//                Constants.showSnackBar(
-//                    findViewById(android.R.id.content), "إملا الحقول المطلوبة",
-//                    Constants.redColor)
-//
-//            }
+
         }
 
     }
@@ -78,5 +86,6 @@ lateinit var learningViewModel: LearningViewModel
             Text_pdfAssig.append(fileUri.toString())
         }
     }
+
 
 }

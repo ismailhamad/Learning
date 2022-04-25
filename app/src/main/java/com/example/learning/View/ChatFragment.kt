@@ -73,16 +73,24 @@ var course:myCourse?=null
 //                }
           learningViewModel.sendMessageCourse(Chat(UUID.randomUUID().toString(), auth.uid.toString(), null, etMessage.editableText.toString(), course!!.id.toString())
           ,course!!.id.toString())
+                for (users in course?.users!!){
+                    users as java.util.HashMap<String, users>
+                    if (users.get("id").toString()!=""){
+                        val topic = "/topics/${users.get("id").toString()}"
+                        PushNotification(
+                            NotificationData( "massge",etMessage.text.toString()),
+                            topic).also {
+                            learningViewModel.sendNotification(it)
+                        }
+                    }
+
+                }
                 etMessage.setText("")
             }
 
         }
 
-//
-////            val user =usrs as HashMap<String,users>
-//          readMessage(auth.currentUser!!.uid, rev,course?.id.toString())
-//        Toast.makeText(activity, "${course!!.id}", Toast.LENGTH_SHORT).show()
-////
+
         learningViewModel.getMessageCourse(course?.id!!).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             val chatAdapter = ChatAdapter(requireActivity(),it)
                 chatRecyclerView.adapter = chatAdapter
@@ -90,73 +98,12 @@ var course:myCourse?=null
         })
 
     }
-//    private fun sendMessage(senderId: String, receiverId: ArrayList<String>, message: String,idcorse:String) {
-//        var reference: DatabaseReference? = FirebaseDatabase.getInstance().getReference()
-//
-//        var hashMap: HashMap<String, Any> = HashMap()
-//        hashMap.put("senderId", senderId)
-//        hashMap.put("receiverId", receiverId)
-//        hashMap.put("idcorse", idcorse)
-//        hashMap.put("message", message)
-//
-//        reference!!.child("Chat").push().setValue(hashMap)
-//
-//    }
-//
-//
-//    fun readMessage(senderId: String, receiverId: ArrayList<String>,idcorse: String) {
-//        val databaseReference: DatabaseReference =
-//            FirebaseDatabase.getInstance().getReference("Chat")
-//
-//        databaseReference.addValueEventListener(object : ValueEventListener {
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                chatList.clear()
-//                for (dataSnapShot: DataSnapshot in snapshot.children) {
-//                    val chat = dataSnapShot.getValue(Chat::class.java)
-//
-//                  chatList.add(chat!!)
-//
-//
-//
-////                        for (i in receiverId) {
-////
-////                            if (chat!!.senderId.equals(i) && chat!!.receiverId!!.equals(
-////                                    receiverId
-////                                ) || chat!!.senderId.equals(i) && chat!!.receiverId!!.equals(
-////                                    senderId
-////                                )
-////                            ) {
-////
-////                            }
-////                        }
-//                }
-//
-//                val chatAdapter = activity?.let { ChatAdapter(it, chatList) }
-//
-//                chatRecyclerView.adapter = chatAdapter
-//            }
-//        })
-//    }
 
 
 
 
-    private fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
-        try {
-            val response = RetrofitInstance.api.postNotification(notification)
-            if(response.isSuccessful) {
-                Log.d("TAG", "Response: ${Gson().toJson(response)}")
-            } else {
-                Log.e("TAG", response.errorBody()!!.string())
-            }
-        } catch(e: Exception) {
-            Log.e("TAG", e.toString())
-        }
-    }
+
+
 
 
 }

@@ -77,7 +77,7 @@
             app:argType="string" />
         <argument
             android:name="idCourseAssi"
-            app:argType="string" />
+            app:argType="com.example.learning.Model.course" />
     </fragment>
     <fragment
         android:id="@+id/details_LectureTechFragment"
@@ -92,7 +92,7 @@
             app:argType="string" />
         <argument
             android:name="idcourse"
-            app:argType="string" />
+            app:argType="com.example.learning.Model.course" />
         <action
             android:id="@+id/action_details_LectureTechFragment_to_addAssigmentFragment"
             app:destination="@id/addAssigmentFragment" />

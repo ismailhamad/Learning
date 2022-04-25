@@ -14,6 +14,7 @@ import com.example.learning.ViewModel.LearningViewModelProviderFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class Sign_In : AppCompatActivity() {
@@ -25,11 +26,11 @@ class Sign_In : AppCompatActivity() {
         val repository = LearningRepository(FirebaseSource(this))
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
-
         sign_In.setOnClickListener {
 
             if (TextEmail.text.isNotEmpty() && TextPassword.text.isNotEmpty()){
                learningViewModel.Sign_in(findViewById(android.R.id.content),TextEmail.text.toString(),TextPassword.text.toString())
+
             }else{
                 Constants.showSnackBar(findViewById(android.R.id.content),"إملا الحقول المطلوبة",Constants.redColor)
             }
@@ -43,5 +44,6 @@ class Sign_In : AppCompatActivity() {
 
 
     }
+
 
 }

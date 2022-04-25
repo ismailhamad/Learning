@@ -1,12 +1,18 @@
 package com.example.learning.ViewModel
 
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.learning.Model.*
+import com.example.learning.Notification.RetrofitInstance
+import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class LearningViewModel(
 private val learningRepository: LearningRepository
@@ -143,7 +149,19 @@ private val learningRepository: LearningRepository
     fun showUserLecture(users: users,documentCourses: String,documentLecture: String) = learningRepository.showUserLecture(users,documentCourses,documentLecture)
 
 
-
+   fun sendNotification(notification: PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+        try {
+            val response = RetrofitInstance.api.postNotification(notification)
+            if(response.isSuccessful) {
+                Log.d("TAG", "Response: ${Gson().toJson(response)}")
+            } else {
+                Log.e("TAG", response.errorBody()!!.string())
+            }
+        } catch(e: Exception) {
+            Log.e("TAG", e.toString())
+        }
+    }
+    fun searchCourse(text:String) = learningRepository.searchCourse(text)
 
 
 }

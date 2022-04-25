@@ -41,7 +41,7 @@ val args:Details_LectureTechFragmentArgs by navArgs()
         dec_lectTech.text=lecture.description
         Glide.with(this).load(iamge).into(imgeLectureTech)
         setupRecyclview()
-        lecture.id?.let { learningViewModel.getAssignment(idCourse, it) }
+        lecture.id?.let { learningViewModel.getAssignment(idCourse.id.toString(), it) }
 
 
         val player = ExoPlayer.Builder(requireActivity()).build()
@@ -76,7 +76,7 @@ val args:Details_LectureTechFragmentArgs by navArgs()
         Go_to_addAssigment.setOnClickListener {
             val Bundle = Bundle().apply {
                 putString("idlectureAssi", lecture.id)
-                putString("idCourseAssi", idCourse)
+                putSerializable("idCourseAssi", idCourse)
             }
             findNavController().navigate(R.id.action_details_LectureTechFragment_to_addAssigmentFragment,Bundle)
         }
@@ -97,11 +97,11 @@ val args:Details_LectureTechFragmentArgs by navArgs()
                 val position=viewHolder.adapterPosition
                 val assigment=assigmentAD.differ.currentList[position]
                 if (direction == ItemTouchHelper.LEFT){
-               learningViewModel.deleteAssignment(view,idCourse,lecture.id.toString(),assigment.id.toString())
+               learningViewModel.deleteAssignment(view,idCourse.id.toString(),lecture.id.toString(),assigment.id.toString())
                 }else if (direction == ItemTouchHelper.RIGHT){
                     val Bundle =Bundle().apply {
                         putSerializable("assigmentt",assigment)
-                        putString("idcoursee",idCourse)
+                        putString("idcoursee",idCourse.id.toString())
                         putString("idlecturee",lecture.id.toString())
 
                     }

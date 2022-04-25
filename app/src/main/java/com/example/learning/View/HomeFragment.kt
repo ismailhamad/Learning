@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -29,6 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
   lateinit var ArrayListusers:ArrayList<users>
   lateinit var courseAD: CourseAD
 lateinit var auth: FirebaseAuth
+  var serach:String?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel =(activity as Student).learningViewModel
@@ -42,23 +44,12 @@ lateinit var auth: FirebaseAuth
         imageButton.setOnClickListener {
             startActivity(Intent(context, AddAssignment::class.java))
         }
-//        cardViewAll.setOnClickListener {
-//            var courses = users(null,"","","",0)
-//            ArrayListusers.add(courses)
-//            learningViewModel.AddCourse(course(uuid.toString(),"hhh","kmsksmsmsksms",null,ArrayListusers as ArrayList<Any>,null))
-//            //learningViewModel.AddCourse(course())
-//        }
+        learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
+            courseAD.differ.submitList(it)
+        })
 
         courseAD.setOnItemClickListener {
-//         learningViewModel.BuyCourseOrNot(it.id!!)
-//
-//        if (learningViewModel.BuyNot!!){
-//            findNavController().navigate(R.id.action_homeFragment_to_WCourseFragment)
-//
-//        }else{
-//
-//
-//        }
+
 
             val Bundle=Bundle().apply {
                 putSerializable("course",it)
@@ -66,13 +57,36 @@ lateinit var auth: FirebaseAuth
             findNavController().navigate(R.id.action_homeFragment_to_detailsCourseFragment,Bundle)
 
 
-
-
         }
 
-        learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
-           courseAD.differ.submitList(it)
+        Text_Search.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query=="" || query ==null){
+                    learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
+                        courseAD.differ.submitList(it)
+                    })
+                }else{
+                    learningViewModel.searchCourse(query.toString()).observe(viewLifecycleOwner,
+                        Observer {itt->
+                            courseAD.differ.submitList(itt)
+                        })
+                }
+
+               return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
         })
+
+
+
+
+
+
     }
 
 

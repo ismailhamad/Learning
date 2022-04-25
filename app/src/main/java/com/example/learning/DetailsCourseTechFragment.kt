@@ -57,7 +57,8 @@ learningViewModel =(activity as Teacher).learningViewModel
             val Bundle=Bundle().apply {
                 putSerializable("detailsLecture",it)
                 putString("imageCourse",course.image)
-                putString("idcourse",course.id)
+                putSerializable("idcourse",course)
+
             }
             findNavController().navigate(R.id.action_detailsCourseTechFragment_to_details_LectureTechFragment,Bundle)
         }

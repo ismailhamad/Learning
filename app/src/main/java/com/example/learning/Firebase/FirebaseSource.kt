@@ -23,6 +23,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
@@ -37,6 +38,7 @@ class FirebaseSource(val activity: Activity) {
     var storge: FirebaseStorage? = null
     private var storageRef: StorageReference? = null
     lateinit var CourseListMutableLiveData: MutableLiveData<List<course>>
+    lateinit var searchListMutableLiveData: MutableLiveData<List<course>>
     lateinit var CourseTeacherListMutableLiveData: MutableLiveData<List<course>>
     lateinit var show_StudentListMutableLiveData: MutableLiveData<List<course>>
     lateinit var MyCourseListMutableLiveData: MutableLiveData<List<myCourse>>
@@ -62,8 +64,10 @@ class FirebaseSource(val activity: Activity) {
         auth = Firebase.auth
         auth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener {
             if (it.isSuccessful) {
+                FirebaseMessaging.getInstance().subscribeToTopic(auth.currentUser!!.uid)
                 if (auth.currentUser!!.isEmailVerified) {
                     if (Email == "joehamad2060@gmail.com") {
+
                         val i = Intent(activity, Teacher::class.java)
                         activity.startActivity(i)
                     } else {
@@ -1130,6 +1134,23 @@ class FirebaseSource(val activity: Activity) {
         db.collection("courses/${documentCourses}/lecture/${documentLecture}/users")
             .document(users.id!!)
             .set(users)
+    }
+
+    fun searchCourse(text:String): MutableLiveData<List<course>> {
+        db = Firebase.firestore
+        val Courselist = ArrayList<course>()
+        searchListMutableLiveData = MutableLiveData()
+        Toast.makeText(activity, "$text", Toast.LENGTH_SHORT).show()
+        db.collection("courses").whereEqualTo("name",text).addSnapshotListener { value, error ->
+            for (item in value!!){
+
+                val course = item.toObject<course>()
+                Courselist.add(course)
+                searchListMutableLiveData.postValue(Courselist)
+            }
+        }
+
+        return searchListMutableLiveData
     }
 
 
