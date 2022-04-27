@@ -9,18 +9,18 @@ class course :Serializable{
     var image:String?=""
     var idTeacher:String?=""
     var users:List<Any>?=null
-    var lecture:ArrayList<lecture>?=null
+    var techer:String?=""
 
   constructor(){
 
   }
-    constructor(id:String?,name:String?,description:String?,image:String?,users:List<Any>?,lecture:ArrayList<lecture>?,idTeacher:String?){
+    constructor(id:String?,name:String?,description:String?,image:String?,users:List<Any>?,techer:String?,idTeacher:String?){
         this.id=id
         this.name=name
         this.description=description
         this.image=image
         this.users=users
-        this.lecture=lecture
+        this.techer=techer
         this.idTeacher=idTeacher
     }
 

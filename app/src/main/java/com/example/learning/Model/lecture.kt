@@ -8,6 +8,7 @@ class lecture:Serializable {
     var description:String?=""
     var idAssignment:String?=""
     var time:Long?=0
+
     var seeLecture = true
     var video:String?=""
     var file:String?=""

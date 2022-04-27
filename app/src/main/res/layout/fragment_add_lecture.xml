@@ -20,8 +20,8 @@
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -30,12 +30,12 @@
         android:layout_height="85dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/baloo_bhai_2"
-        android:text="Enter the lecture details to add the course"
+        android:text="Enter the lecture details to add the lecture"
         android:textAlignment="center"
         android:textColor="#757272"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView24"
-        app:layout_constraintStart_toStartOf="@+id/textView24"
+        app:layout_constraintRight_toRightOf="@+id/textView24"
+        app:layout_constraintLeft_toLeftOf="@+id/textView24"
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <androidx.cardview.widget.CardView
@@ -47,8 +47,8 @@
         android:layout_marginEnd="20dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView25">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,8 +65,8 @@
                 android:hint="Enter Name"
                 android:inputType="textPersonName"
                 android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
@@ -75,9 +75,9 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
                 android:background="#97CCCACA"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Text_NameLecture" />
 
             <View
@@ -86,9 +86,9 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
                 android:background="#97CCCACA"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Text_descriptionLecture" />
 
             <View
@@ -97,9 +97,9 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="5dp"
                 android:background="#97CCCACA"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Text_VideoLecture" />
 
             <EditText
@@ -112,8 +112,8 @@
                 android:hint="Enter description"
                 android:inputType="textPersonName"
                 android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view2" />
 
             <EditText
@@ -126,8 +126,8 @@
                 android:hint="Enter Video"
                 android:inputType="textPersonName"
                 android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view4" />
 
             <EditText
@@ -140,8 +140,8 @@
                 android:hint="Enter pdf"
                 android:inputType="textPersonName"
                 android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Text_VideoLecture" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -152,7 +152,7 @@
         android:layout_height="19dp"
         android:layout_marginTop="14dp"
         android:text="Do you want to add an assignment to this lecture?"
-        app:layout_constraintStart_toStartOf="@+id/cardView17"
+        app:layout_constraintLeft_toLeftOf="@+id/cardView17"
         app:layout_constraintTop_toBottomOf="@+id/cardView17" />
 
     <TextView
@@ -163,7 +163,7 @@
         android:textColor="#2196F3"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView29"
-        app:layout_constraintStart_toEndOf="@+id/textView29"
+        app:layout_constraintLeft_toRightOf="@+id/textView29"
         app:layout_constraintTop_toTopOf="@+id/textView29" />
 
     <Button
@@ -172,7 +172,7 @@
         android:layout_height="53dp"
         android:layout_marginTop="8dp"
         android:text="Add"
-        app:layout_constraintEnd_toEndOf="@+id/cardView17"
-        app:layout_constraintStart_toStartOf="@+id/cardView17"
+        app:layout_constraintRight_toRightOf="@+id/cardView17"
+        app:layout_constraintLeft_toLeftOf="@+id/cardView17"
         app:layout_constraintTop_toBottomOf="@+id/textView29" />
 </androidx.constraintlayout.widget.ConstraintLayout>

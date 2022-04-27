@@ -10,12 +10,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Adapter.CourseAD
-import com.example.learning.Adapter.CourseTechAD
-import com.example.learning.Model.course
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -25,15 +21,15 @@ import kotlinx.android.synthetic.main.fragment_home_t.*
 
 class HomeTFragment : Fragment(R.layout.fragment_home_t) {
     lateinit var learningViewModel: LearningViewModel
-    lateinit var CourseTechAD: CourseTechAD
+    lateinit var CourseTechAD: CourseAD
     lateinit var auth: FirebaseAuth
     var idCourse: String = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Teacher).learningViewModel
-        val navBar: BottomNavigationView =
-            requireActivity().findViewById(R.id.bottomNavigationView2)
-        navBar.visibility = View.VISIBLE
+//        val navBar: BottomNavigationView =
+//            requireActivity().findViewById(R.id.bottomNavigationView2)
+//        navBar.visibility = View.VISIBLE
         auth = Firebase.auth
         learningViewModel.getTeacherCourse(auth.currentUser!!.uid)
         setupReceyclview()
@@ -100,7 +96,7 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
         }
     }
  fun setupReceyclview(){
-     CourseTechAD= CourseTechAD()
+     CourseTechAD= CourseAD()
      recyclerView.apply {
          adapter = CourseTechAD
          layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)

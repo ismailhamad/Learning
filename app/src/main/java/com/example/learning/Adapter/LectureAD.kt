@@ -13,11 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Model.course
 import com.example.learning.Model.lecture
 import com.example.learning.R
+import com.example.learning.ViewModel.LearningViewModel
+
 import kotlinx.android.synthetic.main.item_lecture.view.*
 import kotlinx.android.synthetic.main.lecture_item.view.*
 
 class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
-    inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
+
+    inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item){
+
+    }
 
 
     private val differCallback = object : DiffUtil.ItemCallback<lecture>() {
@@ -44,6 +49,10 @@ class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
         val lecture = differ.currentList[position]
 
         holder.itemView.apply {
+
+
+
+
 
 
             if(lecture.seeLecture==false){

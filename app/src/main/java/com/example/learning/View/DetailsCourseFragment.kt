@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
@@ -29,10 +30,11 @@ class DetailsCourseFragment : Fragment(R.layout.fragment_details_course) {
         navBar.visibility=View.GONE
 
         val course = args.course
-
+Glide.with(this).load(course.image).into(imageView4)
         titlle.text=course.name
         nameCourseD.text=course.name
         Desc.text=course.description
+        name_techer.text =course.techer
         countUsers.text="+${(course.users?.count()?.minus(1))}"
         But_Back.setOnClickListener {
             findNavController().navigate(R.id.action_detailsCourseFragment_to_homeFragment)

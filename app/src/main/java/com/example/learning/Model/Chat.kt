@@ -5,11 +5,11 @@ import java.io.Serializable
  class Chat:Serializable{
      var id :String = ""
      var senderId:String = ""
-     var receiverId:ArrayList<String>?=null
+     var receiverId:String?= ""
      var message:String = ""
      var idcourse:String = ""
 constructor()
-     constructor(id:String,senderId:String,receiverId:ArrayList<String>?, message:String,idcourse:String){
+     constructor(id:String,senderId:String,receiverId:String?, message:String,idcourse:String){
          this.id = id
          this.senderId=senderId
          this.receiverId=receiverId

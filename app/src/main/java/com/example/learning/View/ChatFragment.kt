@@ -1,8 +1,6 @@
 package com.example.learning.View
 
-import android.content.Intent.getIntent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -11,24 +9,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learning.Adapter.ChatAdapter
 import com.example.learning.Model.*
 import com.example.learning.R
-import com.example.learning.Notification.RetrofitInstance
 
 
 import com.example.learning.ViewModel.LearningViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_chat.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 
 class ChatFragment : Fragment(R.layout.fragment_chat) {
@@ -44,14 +36,16 @@ var course:myCourse?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel =(activity as Student).learningViewModel
-        chatRecyclerView.layoutManager = LinearLayoutManager(activity)
+        chatactivityRecyclerView.layoutManager = LinearLayoutManager(activity)
+        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        navBar.visibility=View.GONE
       auth = Firebase.auth
 
      rev= arrayListOf()
 
         course=args.chaat
 
-        btnSendMessage.setOnClickListener {
+        btnSendMessageactiv.setOnClickListener {
 
 
             var message: String = etMessage.text.toString()
@@ -71,12 +65,12 @@ var course:myCourse?=null
 //                        sendNotification(it)
 //                    }
 //                }
-          learningViewModel.sendMessageCourse(Chat(UUID.randomUUID().toString(), auth.uid.toString(), null, etMessage.editableText.toString(), course!!.id.toString())
+          learningViewModel.sendMessageCourse(Chat(UUID.randomUUID().toString(), auth.currentUser!!.uid, null, etMessage.editableText.toString(), course!!.id.toString())
           ,course!!.id.toString())
                 for (users in course?.users!!){
-                    users as java.util.HashMap<String, users>
-                    if (users.get("id").toString()!=""){
-                        val topic = "/topics/${users.get("id").toString()}"
+                    if (users.id!="" && users.id!=auth.currentUser!!.uid){
+
+                        val topic = "/topics/${users.id}"
                         PushNotification(
                             NotificationData( "massge",etMessage.text.toString()),
                             topic).also {
@@ -93,7 +87,7 @@ var course:myCourse?=null
 
         learningViewModel.getMessageCourse(course?.id!!).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             val chatAdapter = ChatAdapter(requireActivity(),it)
-                chatRecyclerView.adapter = chatAdapter
+                chatactivityRecyclerView.adapter = chatAdapter
 
         })
 

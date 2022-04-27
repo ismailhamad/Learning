@@ -16,7 +16,6 @@ import com.example.learning.View.Teacher
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FieldValue.arrayRemove
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -48,6 +47,7 @@ class FirebaseSource(val activity: Activity) {
     lateinit var usersListMutableLiveData: MutableLiveData<List<users>>
     lateinit var usersLectureListMutableLiveData: MutableLiveData<List<users>>
     lateinit var chatListMutableLiveData: MutableLiveData<List<Chat>>
+    lateinit var chatListprivMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var usersAddAssiListMutableLiveData: MutableLiveData<HashMap<String,Any?>>
     lateinit var course: course
 
@@ -70,9 +70,11 @@ class FirebaseSource(val activity: Activity) {
 
                         val i = Intent(activity, Teacher::class.java)
                         activity.startActivity(i)
+                        activity.finish()
                     } else {
                         val i = Intent(activity, Student::class.java)
                         activity.startActivity(i)
+                        activity.finish()
                     }
 
                 } else {
@@ -211,8 +213,8 @@ class FirebaseSource(val activity: Activity) {
         db = Firebase.firestore
         val Courselist = ArrayList<course>()
         CourseListMutableLiveData = MutableLiveData()
-        db.collection("courses").get().addOnSuccessListener { result ->
-            for (document in result!!) {
+        db.collection("courses").addSnapshotListener { value, error ->
+            for (document in value!!) {
                 val course = document.toObject<course>()
                 Courselist.add(course)
                 CourseListMutableLiveData.postValue(Courselist)
@@ -225,6 +227,7 @@ class FirebaseSource(val activity: Activity) {
 
     }
 
+    //احضار دورات المعلم الخاصة به
     fun getTeacherCourse(uid: String): MutableLiveData<List<course>> {
         db = Firebase.firestore
         auth = Firebase.auth
@@ -246,6 +249,7 @@ class FirebaseSource(val activity: Activity) {
         return CourseTeacherListMutableLiveData
 
     }
+
     fun getStudentrCourse(uid: String,documentCourses: String): MutableLiveData<List<course>> {
         db = Firebase.firestore
         auth = Firebase.auth
@@ -267,9 +271,6 @@ class FirebaseSource(val activity: Activity) {
         return show_StudentListMutableLiveData
 
     }
-
-
-
 
 
     //addMyCourse by student
@@ -336,36 +337,6 @@ class FirebaseSource(val activity: Activity) {
 
     }
 
-
-//    fun BuyCourseOrNot(id:String):Boolean{
-//        db=Firebase.firestore
-//        auth =  Firebase.auth
-//        db.collection("myCourse").whereEqualTo("idcourse",id).addSnapshotListener { result, error ->
-//            for (document in result!!){
-//                val course = document.toObject<myCourse>()
-//                 //val usesrs = course.users
-//                     if (auth.currentUser!!.uid==course.idusers){
-//                        BuyONot = true
-//                         Toast.makeText(activity, "yes", Toast.LENGTH_SHORT).show()
-//                    }else{
-//                         BuyONot = false
-//                         Toast.makeText(activity, "no", Toast.LENGTH_SHORT).show()
-//                     }
-//
-////                for (user in usesrs!!){
-////                    val user =user as HashMap<String,users>
-////                    if (auth.currentUser!!.uid==user.get("id").toString()){
-////                        BuyONot = true
-////                    }
-////                }
-//
-//
-//            }
-//        }
-//
-//     return BuyONot
-//
-//    }
 
 
     // Atomically add a new region to the "users" array field.
@@ -887,17 +858,19 @@ class FirebaseSource(val activity: Activity) {
             .set(chat.getMessageHashMap())
     }
 
-    fun getMessagePrivate(documentUsers: String): ArrayList<Chat> {
+    fun getMessagePrivate(documentUsers: String): MutableLiveData<List<Chat>>  {
         db = Firebase.firestore
         val chatList = ArrayList<Chat>()
+        chatListprivMutableLiveData= MutableLiveData()
         db.collection("users/${documentUsers}/message").addSnapshotListener { value, error ->
             chatList.clear()
             for (document in value!!) {
                 val chat = document.toObject<Chat>()
                 chatList.add(chat)
+                chatListprivMutableLiveData.postValue(chatList)
             }
         }
-        return chatList
+        return chatListprivMutableLiveData
     }
 
     fun deleteMyCourse(view: View, users: users, document: String) {
@@ -908,11 +881,14 @@ class FirebaseSource(val activity: Activity) {
             "lastName" to users.lastName,
             "email" to users.email
         ) as Map<String, Any>
-        db.collection("courses").document(document).update("users", FieldValue.arrayRemove(userss))
-            .addOnSuccessListener {
+
                 db.collection("myCourse").document(document)
                     .update("users", FieldValue.arrayRemove(userss))
                     .addOnSuccessListener {
+                      db.collection("courses").document(document).update("users", FieldValue.arrayRemove(userss))
+                    .addOnSuccessListener {
+                    }
+
                         Constants.showSnackBar(
                             view,
                             "تم حذف الكورس",
@@ -925,7 +901,7 @@ class FirebaseSource(val activity: Activity) {
                             Constants.redColor
                         )
                     }
-            }
+
 
 
 
@@ -1113,9 +1089,7 @@ class FirebaseSource(val activity: Activity) {
         db.collection("courses/${documentCourses}/lecture/${documentLecture}/users")
             .addSnapshotListener { result, error ->
                 val user = result!!.toObjects<users>()
-                for (itm in user) {
-                    Toast.makeText(activity, "${itm.email}", Toast.LENGTH_SHORT).show()
-                }
+
                 usersLectureListMutableLiveData.postValue(user)
             }
         return usersLectureListMutableLiveData

@@ -35,8 +35,8 @@ lateinit var course:course
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 learningViewModel =(activity as Teacher).learningViewModel
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView2)
-        navBar.visibility=View.GONE
+//        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView2)
+//        navBar.visibility=View.GONE
          course = args.courseTech
        learningViewModel.getLectureTecher(course.id.toString())
         Glide.with(this).load(course.image).into(image_D_T)
@@ -48,7 +48,7 @@ learningViewModel =(activity as Teacher).learningViewModel
         })
         Go_Add_Lect.setOnClickListener {
             val Bundle=Bundle().apply {
-                putSerializable("idCourseL",course.id)
+                putSerializable("idCourseL",course)
 
             }
    findNavController().navigate(R.id.action_detailsCourseTechFragment_to_addLectureFragment,Bundle)

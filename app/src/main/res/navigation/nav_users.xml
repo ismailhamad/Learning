@@ -58,7 +58,7 @@
             app:argType="com.example.learning.Model.lecture" />
         <argument
             android:name="idCourse"
-            app:argType="string" />
+            app:argType="com.example.learning.Model.myCourse" />
         <action
             android:id="@+id/action_WCourseFragment_to_detailsAssigmentFragment"
             app:destination="@id/detailsAssigmentFragment" />

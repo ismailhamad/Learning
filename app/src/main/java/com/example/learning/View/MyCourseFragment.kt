@@ -1,6 +1,5 @@
 package com.example.learning.View
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,6 +20,7 @@ import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_home_t.*
 import kotlinx.android.synthetic.main.fragment_my_course.*
 
@@ -35,7 +35,8 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Student).learningViewModel
-
+        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        navBar.visibility=View.VISIBLE
             learningViewModel.getMyCourse()
             setupRecycleView()
             setupRecycleView2()
@@ -62,9 +63,10 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
             }
         })
         lectureAD.setOnItemClickListener { itLec ->
+
             val Bundle = Bundle().apply {
                 putSerializable("watch", itLec)
-                putString("idCourse",idCourse)
+                putSerializable("idCourse",course)
             }
 
             val indexLec = lectureAD.differ.currentList.indexOf(itLec)
@@ -76,20 +78,24 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
             }else{
                 val idLect = lectureAD.differ.currentList[indexLec-1].id
                 learningViewModel.getUserShowLecture(idCourse!!, idLect!!)
+                learningViewModel.showUserLecture(users(users?.id,"a","","",0), idCourse!!, itLec.id!!)
             }
 
 
-            learningViewModel.usersLectureMu!!.observe(viewLifecycleOwner, Observer { itlist ->
+            learningViewModel.usersLectureMu?.observe(viewLifecycleOwner, Observer { itlist ->
                 itlist.forEach { iii ->
-                    if (iii.id == users!!.id) {
+                    if (iii.name+iii.lastName == users?.name+users!!.lastName) {
                         findNavController().navigate(
                             R.id.action_myCourseFragment_to_WCourseFragment,
                             Bundle
                         )
+
                         learningViewModel.showUserLecture(users!!, idCourse!!, itLec.id!!)
 
 
-                    } else {
+                    }
+                    if(iii?.name=="a") {
+
                         Constants.showSnackBar(
                             view, "عليك مشاهدة المحاضرات السابقة أولا",
                             Constants.redColor
@@ -146,6 +152,7 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
                 val Course = myCourseAD.differ.currentList[position]
 
                 if (direction == ItemTouchHelper.UP) {
+                    lectureAD.differ.submitList(null)
                     users?.let {
                         learningViewModel.deleteMyCourse(view,
                             it,Course.id!!)
@@ -183,8 +190,9 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
             layoutManager = LinearLayoutManager(activity)
         }
     }
-
-    companion object {
-        var xx: myCourse? = null
+    companion object{
+        var bb :Boolean=false
     }
+
+
 }

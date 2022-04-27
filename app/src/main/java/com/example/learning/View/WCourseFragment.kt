@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learning.Adapter.assigmentAD
+import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.android.exoplayer2.ExoPlayer
@@ -31,6 +32,7 @@ lateinit var learningViewModel: LearningViewModel
 lateinit var assigmentAD: assigmentAD
    val args:WCourseFragmentArgs by navArgs()
 var mydownload:Long = 0
+    var users:users?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel =(activity as Student).learningViewModel
@@ -47,19 +49,32 @@ var mydownload:Long = 0
             MediaItem.fromUri(Uri.parse("${lecture.video}"))
         player.setMediaItem(mediaItem)
         player.prepare()
-        learningViewModel.getAssignment(idCourse,lecture.id.toString())
+        learningViewModel.getAssignment(idCourse.id.toString(),lecture.id.toString())
 
         learningViewModel.assignment?.observe(viewLifecycleOwner, Observer {
             assigmentAD.differ.submitList(it)
         })
+        learningViewModel.users?.observe(viewLifecycleOwner, Observer {
+           for (item in it){
+               users = item
+           }
+
+        })
+
+        ask_techer.setOnClickListener {
+            val i =Intent(activity,ChatActivity::class.java)
+            i.putExtra("id",users)
+            i.putExtra("course",idCourse)
+            startActivity(i)
+        }
 
 
         assigmentAD.setOnItemClickListener {
-            learningViewModel.getuserAddAssigment(idCourse,lecture.id.toString(),it.id.toString())
+            learningViewModel.getuserAddAssigment(idCourse.id.toString(),lecture.id.toString(),it.id.toString())
             val Bundle=Bundle().apply {
                 putSerializable("assigment",it)
                 putString("idlecture",lecture.id)
-                putString("idcoursee",idCourse)
+                putString("idcoursee",idCourse.id.toString())
 
             }
             findNavController().navigate(R.id.action_WCourseFragment_to_detailsAssigmentFragment,Bundle)

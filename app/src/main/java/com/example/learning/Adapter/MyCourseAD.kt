@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Model.course
 import com.example.learning.Model.myCourse
 import com.example.learning.R
-import com.example.learning.View.MyCourseFragment.Companion.xx
+
 import kotlinx.android.synthetic.main.item_mycourse.view.*
 
 
@@ -50,14 +50,13 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
                 notifyDataSetChanged();
             }
             if (rowindex==position){
-                item_card.radius=20f
                 item_card.setCardBackgroundColor(Color.parseColor("#9B67F6"))
-                item_card.cardElevation=20f
+                item_card.cardElevation=30f
             }else{
                 item_card.cardElevation=0f
-                item_card.radius=20f
-                item_card.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-                item_card.elevation=0f
+
+                item_card.setCardBackgroundColor(Color.parseColor("#C4A6FA"))
+
             }
 
 

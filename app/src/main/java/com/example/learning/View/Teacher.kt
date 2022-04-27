@@ -17,10 +17,10 @@ class Teacher : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher)
-        val navView: BottomNavigationView =findViewById(R.id.bottomNavigationView2)
+//        val navView: BottomNavigationView =findViewById(R.id.bottomNavigationView2)
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.fragmentContainerView2) as NavHostFragment
         val navController = navHostFragment.navController
-        navView.setupWithNavController(navController)
+       // navView.setupWithNavController(navController)
 
 
         val repository = LearningRepository(FirebaseSource(this))

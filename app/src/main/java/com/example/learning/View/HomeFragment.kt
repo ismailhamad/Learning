@@ -47,6 +47,11 @@ lateinit var auth: FirebaseAuth
         learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
             courseAD.differ.submitList(it)
         })
+        learningViewModel.users?.observe(viewLifecycleOwner, Observer {
+            for (item in it){
+                name_user.text="Hi,${item.name}"
+            }
+        })
 
         courseAD.setOnItemClickListener {
 
@@ -62,21 +67,22 @@ lateinit var auth: FirebaseAuth
         Text_Search.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query=="" || query ==null){
-                    learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
-                        courseAD.differ.submitList(it)
-                    })
-                }else{
+
                     learningViewModel.searchCourse(query.toString()).observe(viewLifecycleOwner,
                         Observer {itt->
                             courseAD.differ.submitList(itt)
                         })
-                }
+
 
                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText=="" || newText ==null){
+                    learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
+                        courseAD.differ.submitList(it)
+                    })
+                }
                 return true
             }
 

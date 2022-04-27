@@ -28,20 +28,26 @@ lateinit var learningViewModel: LearningViewModel
 lateinit var auth: FirebaseAuth
 lateinit var ArrayList:ArrayList<users>
     var imgUrl: Uri? = null
+    var nametecher:String?=null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Teacher).learningViewModel
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView2)
-        navBar.visibility=View.GONE
+//        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView2)
+//        navBar.visibility=View.GONE
         ArrayList= arrayListOf()
         auth =Firebase.auth
+        learningViewModel.users?.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            for (item in it){
+                nametecher = item.name
+            }
+        })
         Add_Course.setOnClickListener {
             val user=users("","","","",0)
             ArrayList.add(user)
             if (Text_NameCourse.text.isNotEmpty() && Text_description.text.isNotEmpty() && imgUrl != null){
                 learningViewModel.AddCourse(view,course(
                     UUID.randomUUID().toString(),Text_NameCourse.text.toString(),Text_description.text.toString(),
-                    imgUrl.toString(),ArrayList as ArrayList<Any>,null,auth.currentUser!!.uid),
+                    imgUrl.toString(),ArrayList as ArrayList<Any>,nametecher,auth.currentUser!!.uid),
                     imgUrl
                 )
             }else{

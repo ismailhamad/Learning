@@ -20,17 +20,17 @@
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="614dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameLectTech"
         app:layout_constraintVertical_bias="0.0">
 
@@ -41,10 +41,10 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView13"
                 android:layout_width="0dp"
-                android:layout_height="178dp"
-                android:layout_marginStart="50dp"
+                android:layout_height="176dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="43dp"
+                android:layout_marginEnd="30dp"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,11 +61,11 @@
                 android:id="@+id/dec_lectTech"
                 android:layout_width="331dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:text="A biology investigation usually starts with an observation—that is, something that catches the biologist’s attention. For instance, a cancer biologist might notice that a certain kind of cancer can't be treated with chemotherapy and wonder why this is the case. A marine ecologist, seeing that the coral reefs of her field sites are bleaching—turning white—might set out to understand why."
-                app:layout_constraintEnd_toEndOf="@+id/cardView13"
-                app:layout_constraintHorizontal_bias="0.687"
-                app:layout_constraintStart_toStartOf="@+id/cardView13"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="@+id/cardView13"
+                app:layout_constraintRight_toRightOf="@+id/cardView13"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <TextView
@@ -77,7 +77,7 @@
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/cardView13"
+                app:layout_constraintLeft_toLeftOf="@+id/cardView13"
                 app:layout_constraintTop_toBottomOf="@+id/cardView13" />
 
             <androidx.cardview.widget.CardView
@@ -87,14 +87,15 @@
                 android:layout_marginTop="20dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/dec_lectTech"
-                app:layout_constraintStart_toStartOf="@+id/dec_lectTech"
+                app:layout_constraintLeft_toLeftOf="@+id/dec_lectTech"
+                app:layout_constraintRight_toRightOf="@+id/dec_lectTech"
                 app:layout_constraintTop_toBottomOf="@+id/dec_lectTech">
 
                 <com.google.android.exoplayer2.ui.PlayerView
                     android:id="@+id/videoViewTech"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -105,8 +106,8 @@
                 android:visibility="visible"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/cardView15"
-                app:layout_constraintStart_toStartOf="@+id/cardView15"
+                app:layout_constraintLeft_toLeftOf="@+id/cardView15"
+                app:layout_constraintRight_toRightOf="@+id/cardView15"
                 app:layout_constraintTop_toBottomOf="@+id/cardView15">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -120,7 +121,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="3dp"
                         android:src="@drawable/pdf"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -132,7 +133,7 @@
                         android:textColor="#000000"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-                        app:layout_constraintStart_toEndOf="@+id/imageView11"
+                        app:layout_constraintLeft_toRightOf="@+id/imageView11"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -143,11 +144,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="21dp"
                 android:text="assignments"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/rv_assig"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pdfTech" />
 
             <ImageButton
@@ -158,7 +161,7 @@
                 android:layout_marginEnd="41dp"
                 android:backgroundTint="#00FFFFFF"
                 android:src="@drawable/ic_baseline_add_24"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pdfTech" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -170,8 +173,8 @@
                 android:layout_marginEnd="41dp"
                 android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Go_to_addAssigment"
                 tools:listitem="@layout/item_assigment" />
 
@@ -186,7 +189,7 @@
         android:layout_marginTop="28dp"
         android:backgroundTint="#00FFFFFF"
         android:src="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

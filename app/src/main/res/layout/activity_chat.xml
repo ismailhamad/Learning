@@ -14,23 +14,26 @@
         android:layout_weight="0.5"
         android:padding="5dp"
         android:src="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chatRecyclerView"
+        android:id="@+id/chRecyclerView"
         android:layout_width="401dp"
         android:layout_height="597dp"
-        app:layout_constraintBottom_toTopOf="@+id/etMessage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/etaMessage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgBack" />
 
     <EditText
-        android:id="@+id/etMessage"
+        android:id="@+id/etaMessage"
         android:layout_width="339dp"
         android:layout_height="58dp"
+        android:layout_marginEnd="60dp"
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:background="#f5f5f5"
@@ -40,10 +43,11 @@
         android:padding="12dp"
         android:textColor="#8C8A8A"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnSendMessage"
+        android:id="@+id/btnSend"
         android:layout_width="45dp"
         android:layout_height="40dp"
         android:layout_marginStart="11dp"
@@ -51,9 +55,9 @@
         android:src="@drawable/ic_send"
         android:text="sign_up"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/etMessage"
-        app:layout_constraintStart_toEndOf="@+id/etMessage"
-        app:layout_constraintTop_toTopOf="@+id/etMessage" />
+        app:layout_constraintBottom_toBottomOf="@+id/etaMessage"
+        app:layout_constraintLeft_toRightOf="@+id/etaMessage"
+        app:layout_constraintTop_toTopOf="@+id/etaMessage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

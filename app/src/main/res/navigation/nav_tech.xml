@@ -50,7 +50,7 @@
         tools:layout="@layout/fragment_add_lecture" >
         <argument
             android:name="idCourseL"
-            app:argType="string" />
+            app:argType="com.example.learning.Model.course" />
         <action
             android:id="@+id/action_addLectureFragment_to_addAssigmentFragment"
             app:destination="@id/addAssigmentFragment" />

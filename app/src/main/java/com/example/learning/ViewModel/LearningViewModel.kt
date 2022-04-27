@@ -162,6 +162,9 @@ private val learningRepository: LearningRepository
         }
     }
     fun searchCourse(text:String) = learningRepository.searchCourse(text)
-
+    fun sendMessagePrivate(chat: Chat, documentUsers: String) {
+        learningRepository.sendMessagePrivate(chat, documentUsers)
+    }
+    fun getMessagePrivate(documentUsers: String) = learningRepository.getMessagePrivate(documentUsers)
 
 }

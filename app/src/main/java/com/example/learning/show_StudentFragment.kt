@@ -1,5 +1,6 @@
 package com.example.learning
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.learning.Adapter.showStudentAD
 import com.example.learning.Model.users
+import com.example.learning.View.ChatActivity
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -51,6 +53,11 @@ val args:show_StudentFragmentArgs by navArgs()
             }
 
         })
+        showStudentAD.setOnItemClickListener {
+            val i =Intent(activity,ChatActivity::class.java)
+            i.putExtra("usersT",it)
+            startActivity(i)
+        }
 
 
 

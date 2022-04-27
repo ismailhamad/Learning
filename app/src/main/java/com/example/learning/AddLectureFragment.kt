@@ -28,14 +28,14 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Teacher).learningViewModel
-        val lecture = args.idCourseL
+       val course = args.idCourseL
 idLecture = UUID.randomUUID()
 
 
         Go_to_AddAssi.setOnClickListener {
             val Bundle=Bundle().apply {
                putString("idlectureAssi",idLecture.toString())
-                putString("idCourseAssi",lecture)
+                putSerializable("idCourseAssi",course)
             }
 
 findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragment,Bundle)
@@ -59,7 +59,7 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
                         ),
                         videoUrl,
                         Uri.parse(""),
-                        lecture,
+                        course.id.toString(),
                         "5000"
                     )
                 } else {
@@ -82,7 +82,7 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
                             true,
                             fileUri.toString()
                         ), Uri.parse(""),
-                        fileUri, lecture, "4000"
+                        fileUri, course.id.toString(), "4000"
                     )
                 } else {
                     Constants.showSnackBar(
@@ -104,7 +104,7 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
                             true,
                             videoUrl.toString(),
                             fileUri.toString()
-                        ), videoUrl, fileUri, lecture, "6000"
+                        ), videoUrl, fileUri, course.id.toString(), "6000"
                     )
                 } else {
                     Constants.showSnackBar(
