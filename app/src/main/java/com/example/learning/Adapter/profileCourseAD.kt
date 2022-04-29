@@ -4,22 +4,20 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.learning.Model.course
+import com.bumptech.glide.Glide
 import com.example.learning.Model.myCourse
 import com.example.learning.R
-
+import kotlinx.android.synthetic.main.item_course_profile.view.*
 import kotlinx.android.synthetic.main.item_mycourse.view.*
 import java.util.*
 
-
-class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
-     var rowindex:Int? = null
+class profileCourseAD : RecyclerView.Adapter<profileCourseAD.ViewHolder>() {
+    var rowindex:Int? = null
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
     private val differCallback = object : DiffUtil.ItemCallback<myCourse>() {
@@ -37,7 +35,7 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_mycourse, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_course_profile, parent, false)
         )
     }
 
@@ -72,31 +70,22 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
                 )
             )
 
-
-            name_myCourse.text=course.name
+            Glide.with(this).load(course.image).into(imageViewprof)
+            name_myCoursepro.text=course.name
             setOnClickListener {
                 onItemClickListener?.let { it(course) }
                 rowindex = position
                 notifyDataSetChanged();
             }
-            goChat.setOnClickListener {
-                onItemClickListener2?.let { it(course) }
-            }
 
 
 
 
-    if (rowindex == position){
-       // item_card.alpha= 100F
-        gd.cornerRadius =80f
-        item_card.background =gd
-        item_card.cardElevation = 10f
-        goChat.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-    }else{
-        gd2.cornerRadius =80f
-        item_card.background = gd2
-        goChat.setCardBackgroundColor(Color.parseColor("#52E6E3E3"))
-    }
+
+                gd.cornerRadius =80f
+                item_cardprof.background =gd
+                item_cardprof.cardElevation = 10f
+
 
 
         }

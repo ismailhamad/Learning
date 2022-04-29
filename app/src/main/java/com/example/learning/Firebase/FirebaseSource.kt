@@ -884,13 +884,13 @@ class FirebaseSource(val activity: Activity) {
         chatListMutableLiveData = MutableLiveData()
         db.collection("myCourse/${documentMyCourses}/message")
             .orderBy("time", Query.Direction.ASCENDING).addSnapshotListener { value, error ->
-            chatList.clear()
-            for (document in value!!) {
-                val chat = document.toObject<Chat>()
-                chatList.add(chat)
-                chatListMutableLiveData.postValue(chatList)
+                chatList.clear()
+                for (document in value!!) {
+                    val chat = document.toObject<Chat>()
+                    chatList.add(chat)
+                    chatListMutableLiveData.postValue(chatList)
+                }
             }
-        }
         return chatListMutableLiveData
     }
 
@@ -983,14 +983,14 @@ class FirebaseSource(val activity: Activity) {
                 .document(
                     it
                 ).addSnapshotListener { value, error ->
-                val idusers = value?.get("id")
-                val file = value?.get("file")
-                val data = hashMapOf<String, Any?>(
-                    "id" to idusers,
-                    "file" to file
-                )
-                usersAddAssiListMutableLiveData?.postValue(data)
-            }
+                    val idusers = value?.get("id")
+                    val file = value?.get("file")
+                    val data = hashMapOf<String, Any?>(
+                        "id" to idusers,
+                        "file" to file
+                    )
+                    usersAddAssiListMutableLiveData?.postValue(data)
+                }
 
         }
 

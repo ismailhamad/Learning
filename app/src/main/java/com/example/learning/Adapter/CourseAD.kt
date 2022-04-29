@@ -2,10 +2,13 @@ package com.example.learning.Adapter
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +20,7 @@ import java.util.*
 
 
 class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
+    var rowindex:Int = 0
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
     private val differCallback = object : DiffUtil.ItemCallback<course>() {
@@ -42,25 +46,77 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
         val course = differ.currentList[position]
 
         holder.itemView.apply {
-//            val remainder: Int = getAdapterPosition() % colorsArray.size()
-//            mView.setCardBackgroundColor(Color.parseColor(colorsArray.get(remainder)))
+
+            setOnTouchListener { v, event ->
+                val action = event.action
+                when(action){
+
+                    MotionEvent.ACTION_DOWN -> {
+
+
+
+
+                    }
+
+
+                    MotionEvent.ACTION_MOVE -> {
+                        rowindex = position
+                    }
+
+                    MotionEvent.ACTION_UP -> {
+                        onItemClickListener?.let { it(course,imageCourse,nameCourse) }
+
+                    }
+
+                    MotionEvent.ACTION_CANCEL -> {
+                        notifyDataSetChanged()
+                    }
+
+                    else ->{
+
+                    }
+
+                }
+                true
+
+            }
+
+            if (rowindex==position){
+                y = -50f
+
+            }else{
+                y = +40f
+                item_c.elevation = -3f
+
+            }
+            val gd = GradientDrawable(
+                GradientDrawable.Orientation.BOTTOM_TOP, intArrayOf(-0x9e9d9f, -0xececed)
+            )
+
+
             val random = Random()
             val color =
-                Color.argb(100, random.nextInt(255), random.nextInt(40), random.nextInt(200))
-//            val r = Random()
-//            val red: Int = r.nextInt(100 - 0 + 1) + 0
-//            val green: Int = r.nextInt(40 - 0 + 1) + 0
-//            val blue: Int = r.nextInt(200 - 0 + 1) + 0
-//
-//            val draw = GradientDrawable()
-//            draw.shape = GradientDrawable.RECTANGLE
-//            draw.setColor(Color.rgb(red, green, blue))
+                Color.argb(200, random.nextInt(255), random.nextInt(50), random.nextInt(200))
+            val color2 =
+                Color.argb(100, random.nextInt(255), random.nextInt(50), random.nextInt(200))
+                gd.setColors(
+                    intArrayOf(
+                        color,
+                        color2,
+                    )
+                )
+
+
             item_c.setCardBackgroundColor(color)
             nameCourse.text=course.name
+            item_c.background =gd
+            gd.cornerRadius =80f
             Glide.with(this).load(course.image).into(imageCourse)
-            setOnClickListener {
-                onItemClickListener?.let { it(course) }
-            }
+            imageCourse.transitionName=course.image.toString()
+            nameCourse.transitionName=course.name.toString()
+//            setOnClickListener {
+//                onItemClickListener?.let { it(course,imageCourse,nameCourse) }
+//            }
 
 
         }
@@ -72,8 +128,8 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((course) -> Unit)? = null
-    fun setOnItemClickListener(listener: (course) -> Unit) {
+    private var onItemClickListener: ((course,ImageView,TextView) -> Unit)? = null
+    fun setOnItemClickListener(listener: (course,ImageView,TextView) -> Unit) {
         onItemClickListener = listener
     }
 }

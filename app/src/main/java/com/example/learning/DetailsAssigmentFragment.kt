@@ -47,6 +47,7 @@ class DetailsAssigmentFragment : Fragment(R.layout.fragment_details_assigment) {
                 }
                 delete_assii.setOnClickListener {
                     learningViewModel.deleteUserAssignment(view,idCourse,idlecture,assigment.id.toString(),users!!.id.toString())
+                    fileassi.text = ""
                 }
                 fileassi.text = it?.get("file").toString()
                 button_adduserAssi.visibility =View.GONE

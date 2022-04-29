@@ -7,28 +7,30 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.learning.Model.course
-import com.example.learning.Model.myCourse
 import com.example.learning.R
-
+import kotlinx.android.synthetic.main.item_courses.view.*
+import kotlinx.android.synthetic.main.item_exploer.view.*
 import kotlinx.android.synthetic.main.item_mycourse.view.*
 import java.util.*
 
-
-class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
-     var rowindex:Int? = null
+class exploerAD: RecyclerView.Adapter<exploerAD.ViewHolder>() {
+    var rowindex:Int = 0
     inner class ViewHolder(item: View) : RecyclerView.ViewHolder(item)
 
-    private val differCallback = object : DiffUtil.ItemCallback<myCourse>() {
-        override fun areItemsTheSame(oldItem: myCourse, newItem: myCourse): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<course>() {
+        override fun areItemsTheSame(oldItem: course, newItem: course): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: myCourse, newItem: myCourse): Boolean {
+        override fun areContentsTheSame(oldItem: course, newItem: course): Boolean {
             return oldItem == newItem
         }
 
@@ -37,29 +39,28 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_mycourse, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_exploer, parent, false)
         )
     }
 
-    @SuppressLint("Range")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val course = differ.currentList[position]
 
-
         holder.itemView.apply {
+
+//            if (rowindex==position){
+//                y = -50f
+//
+//            }else{
+//                y = +50f
+//                item_card.elevation = -3f
+//
+//            }
             val gd = GradientDrawable(
                 GradientDrawable.Orientation.BR_TL, intArrayOf(-0x9e9d9f, -0xececed)
             )
-            val gd2 = GradientDrawable(
-                GradientDrawable.Orientation.BR_TL, intArrayOf(-0x9e9d9f, -0xececed)
-            )
 
-            gd2.setColors(
-                intArrayOf(
-                    Color.parseColor("#A4B2CEE4"),
-                    Color.parseColor("#A4B2CEE4"),
-                )
-            )
+
             val random = Random()
             val color =
                 Color.argb(200, random.nextInt(255), random.nextInt(50), random.nextInt(200))
@@ -73,30 +74,16 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
             )
 
 
-            name_myCourse.text=course.name
+
+            name_exp.text=course.name
+            item_card_ex.background =gd
+            gd.cornerRadius =80f
+            Glide.with(this).load(course.image).into(imageView_ex)
+//            imageView10.transitionName=course.image.toString()
+//            name_myCourse.transitionName=course.name.toString()
             setOnClickListener {
-                onItemClickListener?.let { it(course) }
-                rowindex = position
-                notifyDataSetChanged();
+                onItemClickListener?.let { it(course,imageView_ex,name_exp) }
             }
-            goChat.setOnClickListener {
-                onItemClickListener2?.let { it(course) }
-            }
-
-
-
-
-    if (rowindex == position){
-       // item_card.alpha= 100F
-        gd.cornerRadius =80f
-        item_card.background =gd
-        item_card.cardElevation = 10f
-        goChat.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
-    }else{
-        gd2.cornerRadius =80f
-        item_card.background = gd2
-        goChat.setCardBackgroundColor(Color.parseColor("#52E6E3E3"))
-    }
 
 
         }
@@ -108,12 +95,8 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((myCourse) -> Unit)? = null
-    fun setOnItemClickListener(listener: (myCourse) -> Unit) {
+    private var onItemClickListener: ((course, ImageView, TextView) -> Unit)? = null
+    fun setOnItemClickListener(listener: (course, ImageView, TextView) -> Unit) {
         onItemClickListener = listener
-    }
-    private var onItemClickListener2: ((myCourse) -> Unit)? = null
-    fun setOnItemClickListener2(listener: (myCourse) -> Unit) {
-        onItemClickListener2 = listener
     }
 }

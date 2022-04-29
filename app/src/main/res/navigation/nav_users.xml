@@ -11,10 +11,25 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_detailsCourseFragment"
-            app:destination="@id/detailsCourseFragment" />
+            app:destination="@id/detailsCourseFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_homeFragment_to_WCourseFragment"
             app:destination="@id/WCourseFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"/>
+        <action
+            android:id="@+id/action_homeFragment_to_profileuserFragment"
+            app:destination="@id/profileuserFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/detailsCourseFragment"
@@ -88,4 +103,28 @@
             android:name="idcoursee"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/profileuserFragment"
+        android:name="com.example.learning.profileuserFragment"
+        android:label="fragment_profileuser"
+        tools:layout="@layout/fragment_profileuser" >
+        <action
+            android:id="@+id/action_profileuserFragment_to_bottomSheetLecFragment"
+            app:destination="@id/bottomSheetLecFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/bottomSheetLecFragment"
+        android:name="com.example.learning.bottomSheetLecFragment"
+        android:label="fragment_bottom_sheet_lec"
+        tools:layout="@layout/fragment_bottom_sheet_lec" >
+        <action
+            android:id="@+id/action_bottomSheetLecFragment_to_profileuserFragment"
+            app:destination="@id/profileuserFragment" />
+        <argument
+            android:name="myCoursee"
+            app:argType="com.example.learning.Model.myCourse" />
+        <action
+            android:id="@+id/action_bottomSheetLecFragment_to_WCourseFragment"
+            app:destination="@id/WCourseFragment" />
+    </dialog>
 </navigation>

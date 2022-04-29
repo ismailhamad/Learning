@@ -217,7 +217,7 @@
         android:layout_height="54dp"
         android:layout_marginTop="35dp"
         android:text="Add"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="@+id/cardView19"
         app:layout_constraintRight_toRightOf="@+id/cardView19"
         app:layout_constraintTop_toBottomOf="@+id/cardView19" />
@@ -246,6 +246,7 @@
         android:background="@null"
         android:backgroundTint="#65CF69"
         android:text="Edit"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/delete_assii"
         app:layout_constraintTop_toBottomOf="@+id/cardView19" />
@@ -257,6 +258,7 @@
         android:background="@null"
         android:backgroundTint="#CA5151"
         android:text="delete"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button_Edit"
         app:layout_constraintLeft_toRightOf="@+id/button_Edit"
         app:layout_constraintRight_toRightOf="parent"

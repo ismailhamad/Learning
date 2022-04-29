@@ -131,7 +131,7 @@ private val learningRepository: LearningRepository
         learningRepository.deleteAssignment(view, documentCourses, documentLecture, documentAssignment)
     }
 
-
+    fun searchCourse(text:String) = learningRepository.searchCourse(text)
 
     fun updateUserAssignment(view: View, documentCourses: String, documentLecture: String, documentAssignment: String, file: Uri, fileString: String) {
         learningRepository.updateUserAssignment(view, documentCourses, documentLecture, documentAssignment, file, fileString)
@@ -161,7 +161,7 @@ private val learningRepository: LearningRepository
             Log.e("TAG", e.toString())
         }
     }
-    fun searchCourse(text:String) = learningRepository.searchCourse(text)
+
     fun sendMessagePrivate(chat: Chat, documentUsers: String) {
         learningRepository.sendMessagePrivate(chat, documentUsers)
     }

@@ -13,6 +13,7 @@ import com.example.learning.ViewModel.LearningViewModelProviderFactory
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -24,7 +25,7 @@ class Student : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student)
-        val navView:BottomNavigationView=findViewById(R.id.bottomNavigationView)
+        val navView: NavigationView =findViewById(R.id.bottomNavigationView)
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         navView.setupWithNavController(navController)

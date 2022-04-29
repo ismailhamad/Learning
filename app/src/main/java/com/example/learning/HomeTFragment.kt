@@ -24,6 +24,10 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
     lateinit var CourseTechAD: CourseAD
     lateinit var auth: FirebaseAuth
     var idCourse: String = ""
+
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Teacher).learningViewModel
@@ -40,9 +44,9 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
         learningViewModel.CourseT?.observe(viewLifecycleOwner, Observer {
             CourseTechAD.differ.submitList(it)
         })
-        CourseTechAD.setOnItemClickListener {
+        CourseTechAD.setOnItemClickListener { course,image,text ->
             val Bundle = Bundle().apply {
-                putSerializable("courseTech", it)
+                putSerializable("courseTech", course)
             }
 
             findNavController().navigate(

@@ -36,8 +36,7 @@ var mydownload:Long = 0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel =(activity as Student).learningViewModel
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
-        navBar.visibility=View.GONE
+
         val lecture = args.watch
         val idCourse = args.idCourse
         setupRecyclview()

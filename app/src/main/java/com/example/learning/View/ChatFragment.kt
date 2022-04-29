@@ -1,21 +1,15 @@
 package com.example.learning.View
 
 import android.content.Intent
-import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Adapter.ChatAdapter
 import com.example.learning.Model.*
 import com.example.learning.R
@@ -28,9 +22,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_add_course.*
 import kotlinx.android.synthetic.main.fragment_chat.*
-import kotlinx.android.synthetic.main.fragment_my_course.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -51,8 +43,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Student).learningViewModel
         chatactivityRecyclerView.layoutManager = LinearLayoutManager(activity)
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
-        navBar.visibility = View.GONE
+
         auth = Firebase.auth
 
         rev = arrayListOf()

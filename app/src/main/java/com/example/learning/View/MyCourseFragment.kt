@@ -1,13 +1,8 @@
 package com.example.learning.View
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,8 +15,6 @@ import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.fragment_home_t.*
 import kotlinx.android.synthetic.main.fragment_my_course.*
 
 
@@ -35,8 +28,8 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Student).learningViewModel
-        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
-        navBar.visibility=View.VISIBLE
+//        val navBar: BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+//        navBar.visibility=View.VISIBLE
             learningViewModel.getMyCourse()
             setupRecycleView()
             setupRecycleView2()
@@ -116,10 +109,7 @@ class MyCourseFragment : Fragment(R.layout.fragment_my_course) {
                     putSerializable("chaat", course)
                 }
               findNavController().navigate(R.id.action_myCourseFragment_to_chatFragment, Bundle)
-//
-//                    val i = Intent(activity,ChatActivity::class.java)
-//                    i.putExtra("idCourse",idCourse)
-//                    startActivity(i)
+
 
             } else {
                 Constants.showSnackBar(

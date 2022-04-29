@@ -28,14 +28,15 @@
         android:id="@+id/textView15"
         android:layout_width="244dp"
         android:layout_height="81dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/baloo_bhai_2"
         android:text="What would you like to learn today? Search below."
         android:textAlignment="center"
         android:textColor="#757272"
         android:textSize="20sp"
-        app:layout_constraintRight_toRightOf="@+id/textView8"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintLeft_toLeftOf="@+id/textView8"
+        app:layout_constraintRight_toRightOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <androidx.cardview.widget.CardView
@@ -80,8 +81,8 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/baloo_bhai_2"
         android:text="Courses"
         android:textColor="#000000"
