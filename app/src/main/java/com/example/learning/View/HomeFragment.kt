@@ -3,6 +3,7 @@ package com.example.learning.View
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -15,6 +16,10 @@ import com.example.learning.Model.course
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -40,6 +45,12 @@ lateinit var auth: FirebaseAuth
         navBar.visibility=View.VISIBLE
         ArrayListusers= arrayListOf()
         auth =Firebase.auth
+
+
+
+        MobileAds.initialize(activity) {}
+        val adRequest = AdRequest.Builder().build()
+        adViewHome.loadAd(adRequest)
         setupReceycleView()
         imageButton.setOnClickListener {
             startActivity(Intent(context, AddAssignment::class.java))
@@ -90,7 +101,30 @@ lateinit var auth: FirebaseAuth
 
 
 
+        adViewHome.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                Log.e("benner","onAdLoaded")
+            }
 
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                Log.e("benner","LoadAdError")
+                Log.e("benner","adError ${adError.message}")
+                Log.e("benner","adError ${adError.domain}")
+            }
+
+            override fun onAdOpened() {
+                Log.e("benner","onAdOpened")
+            }
+
+            override fun onAdClicked() {
+                Log.e("benner","onAdClicked")
+            }
+
+            override fun onAdClosed() {
+                Log.e("benner","onAdClosed")
+
+            }
+        }
 
 
     }

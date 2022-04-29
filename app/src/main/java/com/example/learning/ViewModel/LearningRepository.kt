@@ -31,7 +31,7 @@ class LearningRepository(
     fun deleteUserAssignment(view: View, documentCourses: String, documentLecture: String, documentAssignment: String, documentUserAssignment: String) = firebaseSource.deleteUserAssignment(view, documentCourses, documentLecture, documentAssignment, documentUserAssignment)
     fun updateAssignment(view: View, assignment: Assignment, documentCourses: String, documentLecture: String, documentAssignment: String, file: Uri) = firebaseSource.updateAssignment(view, assignment, documentCourses, documentLecture, documentAssignment, file)
     fun deleteAssignment(view: View, documentCourses: String, documentLecture: String, documentAssignment: String) = firebaseSource.deleteAssignment(view, documentCourses, documentLecture, documentAssignment)
-    fun sendMessageCourse(chat: Chat, documentMyCourses: String) =firebaseSource.sendMessageCourse(chat,documentMyCourses)
+    fun sendMessageCourse(chat: Chat, documentMyCourses: String,imge: Uri?) =firebaseSource.sendMessageCourse(chat,documentMyCourses,imge)
     fun getMessageCourse(documentMyCourses: String) = firebaseSource.getMessageCourse(documentMyCourses)
     fun getStudentrCourse(uid: String,documentCourses: String) = firebaseSource.getStudentrCourse(uid, documentCourses)
     fun showUserLecture(users: users, documentCourses: String, documentLecture: String) = firebaseSource.showUserLecture(users, documentCourses, documentLecture)
@@ -39,4 +39,7 @@ class LearningRepository(
     fun searchCourse(text:String) = firebaseSource.searchCourse(text)
     fun sendMessagePrivate(chat: Chat, documentUsers: String) = firebaseSource.sendMessagePrivate(chat, documentUsers)
     fun getMessagePrivate(documentUsers: String) = firebaseSource.getMessagePrivate(documentUsers)
+    fun deleteMessageCourse(documentMyCourses: String,documentChat:String) = firebaseSource.deleteMessageCourse(documentMyCourses, documentChat)
+    fun deleteMessagePrivate(documentUsers: String,documentChat:String) = firebaseSource.deleteMessagePrivate(documentUsers, documentChat)
+
 }

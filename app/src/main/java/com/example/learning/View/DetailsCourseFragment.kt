@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.learning.Model.SendEmail
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
@@ -48,6 +49,14 @@ learningViewModel.users!!.observe(viewLifecycleOwner, Observer { it->
 
         but_Buy.setOnClickListener {
             users?.let { it1 -> learningViewModel.updateUsers(view,course.id.toString(), it1) }
+            SendEmail.sendEmail(
+                activity as Student,"learing@gmail.com","shroud123shroud@gmail.com","اشتراك بالكورس",
+            "<h1>learing Course</h1>" +
+                    "<p>" +
+                    "<b>اشتراك بالكورس<br>" +
+                    "<b>وصف الكورس<br>" +
+                    "<b>Email: </b>'shroud123shroud@gmail.com'<br>" +
+                    "</p>")
            // learningViewModel.AddMyCourse(myCourse(course.id.toString(),course.name.toString(),course.description,course.image,auth.currentUser!!.uid,course.lecture))
 
         }

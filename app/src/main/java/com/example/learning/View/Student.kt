@@ -10,10 +10,13 @@ import com.example.learning.R
 import com.example.learning.ViewModel.LearningRepository
 import com.example.learning.ViewModel.LearningViewModel
 import com.example.learning.ViewModel.LearningViewModelProviderFactory
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class Student : AppCompatActivity() {
     lateinit var learningViewModel: LearningViewModel
@@ -25,8 +28,6 @@ class Student : AppCompatActivity() {
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         navView.setupWithNavController(navController)
-
-
         val repository = LearningRepository(FirebaseSource(this))
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)

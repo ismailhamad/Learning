@@ -48,7 +48,7 @@ class FirebaseSource(val activity: Activity) {
     lateinit var usersLectureListMutableLiveData: MutableLiveData<List<users>>
     lateinit var chatListMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var chatListprivMutableLiveData: MutableLiveData<List<Chat>>
-    lateinit var usersAddAssiListMutableLiveData: MutableLiveData<HashMap<String,Any?>>
+    lateinit var usersAddAssiListMutableLiveData: MutableLiveData<HashMap<String, Any?>>
     lateinit var course: course
 
     var BuyONot: Boolean = false
@@ -70,10 +70,12 @@ class FirebaseSource(val activity: Activity) {
 
                         val i = Intent(activity, Teacher::class.java)
                         activity.startActivity(i)
+                        progressDialog.dismiss()
                         activity.finish()
                     } else {
                         val i = Intent(activity, Student::class.java)
                         activity.startActivity(i)
+                        progressDialog.dismiss()
                         activity.finish()
                     }
 
@@ -250,20 +252,20 @@ class FirebaseSource(val activity: Activity) {
 
     }
 
-    fun getStudentrCourse(uid: String,documentCourses: String): MutableLiveData<List<course>> {
+    fun getStudentrCourse(uid: String, documentCourses: String): MutableLiveData<List<course>> {
         db = Firebase.firestore
         auth = Firebase.auth
         val Courselist = ArrayList<course>()
         show_StudentListMutableLiveData = MutableLiveData()
         db.collection("courses").document(documentCourses).addSnapshotListener() { result, error ->
 
-                val course = result!!.toObject<course>()
-                if (uid == course?.idTeacher) {
-                    course.let { Courselist.add(it) }
-                    show_StudentListMutableLiveData.postValue(Courselist)
-                }
-
+            val course = result!!.toObject<course>()
+            if (uid == course?.idTeacher) {
+                course.let { Courselist.add(it) }
+                show_StudentListMutableLiveData.postValue(Courselist)
             }
+
+        }
 
 
 
@@ -338,7 +340,6 @@ class FirebaseSource(val activity: Activity) {
     }
 
 
-
     // Atomically add a new region to the "users" array field.
     suspend fun updateUsers(view: View, idCourse: String, users: users) {
         val users = hashMapOf(
@@ -378,7 +379,8 @@ class FirebaseSource(val activity: Activity) {
     fun getLecture(document: String): MutableLiveData<List<lecture>> {
         db = Firebase.firestore
         LectureListMutableLiveData = MutableLiveData()
-        db.collection("courses").document(document).collection("lecture").orderBy("time",Query.Direction.ASCENDING)
+        db.collection("courses").document(document).collection("lecture")
+            .orderBy("time", Query.Direction.ASCENDING)
             .addSnapshotListener { result, error ->
                 val course11 = result!!.toObjects<lecture>()
 
@@ -831,17 +833,57 @@ class FirebaseSource(val activity: Activity) {
 
     }
 
-    fun sendMessageCourse(chat: Chat, documentMyCourses: String) {
+    //    fun sendMessageCourse(chat: Chat, documentMyCourses: String) {
+//        db = Firebase.firestore
+//        db.collection("myCourse/${documentMyCourses}/message").document(chat.id)
+//            .set(chat.getMessageHashMap())
+//    }
+    fun sendMessageCourse(chat: Chat, documentMyCourses: String, imgeUri: Uri?) {
+        progressDialog = ProgressDialog(activity)
+        progressDialog.setCancelable(false)
+        progressDialog.setMessage("Loading...")
+        progressDialog.show()
         db = Firebase.firestore
-        db.collection("myCourse/${documentMyCourses}/message").document(chat.id)
-            .set(chat.getMessageHashMap())
+        storge = Firebase.storage
+        storageRef = storge!!.reference
+        if (imgeUri != null){
+            Log.e("aa","imgeUri Fi $imgeUri")
+            storageRef!!.child("imageMessageCourse/" + "${chat.id}").putFile(imgeUri)
+                .addOnSuccessListener { taskSnapshot ->
+                    progressDialog.dismiss()
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+                        chat.image = uri.toString()
+                        db.collection("myCourse/${documentMyCourses}/message").document(chat.id)
+                            .set(chat.getMessageHashMap())
+                    }
+                }.addOnFailureListener { exception ->
+                }.addOnProgressListener {
+                    val progress: Double =
+                        100.0 * it.bytesTransferred / it.totalByteCount
+                    progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
+                }
+        }else{
+            Log.e("aa","imgeUri els $imgeUri")
+            progressDialog.dismiss()
+            db.collection("myCourse/${documentMyCourses}/message").document(chat.id)
+                .set(chat.getMessageHashMap())
+        }
+
+
+
+    }
+
+    fun deleteMessageCourse(documentMyCourses: String, documentChat: String) {
+        db = Firebase.firestore
+        db.collection("myCourse/${documentMyCourses}/message").document(documentChat).delete()
     }
 
     fun getMessageCourse(documentMyCourses: String): MutableLiveData<List<Chat>> {
         db = Firebase.firestore
-        val chatList:ArrayList<Chat> = arrayListOf()
+        val chatList: ArrayList<Chat> = arrayListOf()
         chatListMutableLiveData = MutableLiveData()
-        db.collection("myCourse/${documentMyCourses}/message").addSnapshotListener { value, error ->
+        db.collection("myCourse/${documentMyCourses}/message")
+            .orderBy("time", Query.Direction.ASCENDING).addSnapshotListener { value, error ->
             chatList.clear()
             for (document in value!!) {
                 val chat = document.toObject<Chat>()
@@ -858,18 +900,24 @@ class FirebaseSource(val activity: Activity) {
             .set(chat.getMessageHashMap())
     }
 
-    fun getMessagePrivate(documentUsers: String): MutableLiveData<List<Chat>>  {
+    fun deleteMessagePrivate(documentUsers: String, documentChat: String) {
+        db = Firebase.firestore
+        db.collection("users/${documentUsers}/message").document(documentChat).delete()
+    }
+
+    fun getMessagePrivate(documentUsers: String): MutableLiveData<List<Chat>> {
         db = Firebase.firestore
         val chatList = ArrayList<Chat>()
-        chatListprivMutableLiveData= MutableLiveData()
-        db.collection("users/${documentUsers}/message").addSnapshotListener { value, error ->
-            chatList.clear()
-            for (document in value!!) {
-                val chat = document.toObject<Chat>()
-                chatList.add(chat)
-                chatListprivMutableLiveData.postValue(chatList)
+        chatListprivMutableLiveData = MutableLiveData()
+        db.collection("users/${documentUsers}/message").orderBy("time", Query.Direction.ASCENDING)
+            .addSnapshotListener { value, error ->
+                chatList.clear()
+                for (document in value!!) {
+                    val chat = document.toObject<Chat>()
+                    chatList.add(chat)
+                    chatListprivMutableLiveData.postValue(chatList)
+                }
             }
-        }
         return chatListprivMutableLiveData
     }
 
@@ -882,31 +930,30 @@ class FirebaseSource(val activity: Activity) {
             "email" to users.email
         ) as Map<String, Any>
 
-                db.collection("myCourse").document(document)
+        db.collection("myCourse").document(document)
+            .update("users", FieldValue.arrayRemove(userss))
+            .addOnSuccessListener {
+                db.collection("courses").document(document)
                     .update("users", FieldValue.arrayRemove(userss))
                     .addOnSuccessListener {
-                      db.collection("courses").document(document).update("users", FieldValue.arrayRemove(userss))
-                    .addOnSuccessListener {
                     }
 
-                        Constants.showSnackBar(
-                            view,
-                            "تم حذف الكورس",
-                            Constants.greenColor
-                        )
-                    }.addOnFailureListener {
-                        Constants.showSnackBar(
-                            view,
-                            "فشل حذف الكورس",
-                            Constants.redColor
-                        )
-                    }
-
-
-
+                Constants.showSnackBar(
+                    view,
+                    "تم حذف الكورس",
+                    Constants.greenColor
+                )
+            }.addOnFailureListener {
+                Constants.showSnackBar(
+                    view,
+                    "فشل حذف الكورس",
+                    Constants.redColor
+                )
+            }
 
 
     }
+
     fun getAssignment(
         documentCourses: String,
         documentLecture: String,
@@ -923,24 +970,29 @@ class FirebaseSource(val activity: Activity) {
 
     }
 
-    fun getuserAddAssigment(documentCourses: String,documentLecture: String, documentAssignment: String): MutableLiveData<HashMap<String, Any?>> {
-        db =Firebase.firestore
+    fun getuserAddAssigment(
+        documentCourses: String,
+        documentLecture: String,
+        documentAssignment: String
+    ): MutableLiveData<HashMap<String, Any?>> {
+        db = Firebase.firestore
         auth = Firebase.auth
         usersAddAssiListMutableLiveData = MutableLiveData()
         auth.currentUser!!.uid.let {
-            db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment").document(
-                it
-            ).addSnapshotListener { value, error ->
+            db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
+                .document(
+                    it
+                ).addSnapshotListener { value, error ->
                 val idusers = value?.get("id")
-                val  file = value?.get("file")
-    val data = hashMapOf<String,Any?>(
-        "id" to idusers,
-        "file" to file
-    )
-    usersAddAssiListMutableLiveData?.postValue(data)
-}
-
+                val file = value?.get("file")
+                val data = hashMapOf<String, Any?>(
+                    "id" to idusers,
+                    "file" to file
+                )
+                usersAddAssiListMutableLiveData?.postValue(data)
             }
+
+        }
 
         return usersAddAssiListMutableLiveData
 
@@ -963,7 +1015,7 @@ class FirebaseSource(val activity: Activity) {
         progressDialog.setMessage("Loading...")
         progressDialog.show()
         db = Firebase.firestore
-        var data = hashMapOf<String,Any>(
+        var data = hashMapOf<String, Any>(
             "id" to users.id!!,
             "name" to users.name!!,
             "lastName" to users.lastName!!,
@@ -1015,7 +1067,7 @@ class FirebaseSource(val activity: Activity) {
         progressDialog.setMessage("Loading...")
         progressDialog.show()
         db = Firebase.firestore
-        var data = hashMapOf<String,Any>(
+        var data = hashMapOf<String, Any>(
             "file" to fileString
         )
         storageRef!!.child("assignment/" + "${auth.currentUser!!.uid}").putFile(file!!)
@@ -1097,8 +1149,6 @@ class FirebaseSource(val activity: Activity) {
     }
 
 
-
-
     fun showUserLecture(
         users: users,
         documentCourses: String,
@@ -1110,13 +1160,13 @@ class FirebaseSource(val activity: Activity) {
             .set(users)
     }
 
-    fun searchCourse(text:String): MutableLiveData<List<course>> {
+    fun searchCourse(text: String): MutableLiveData<List<course>> {
         db = Firebase.firestore
         val Courselist = ArrayList<course>()
         searchListMutableLiveData = MutableLiveData()
         Toast.makeText(activity, "$text", Toast.LENGTH_SHORT).show()
-        db.collection("courses").whereEqualTo("name",text).addSnapshotListener { value, error ->
-            for (item in value!!){
+        db.collection("courses").whereEqualTo("name", text).addSnapshotListener { value, error ->
+            for (item in value!!) {
 
                 val course = item.toObject<course>()
                 Courselist.add(course)

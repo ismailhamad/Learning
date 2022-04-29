@@ -2,6 +2,8 @@ package com.example.learning.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,14 +42,14 @@ class ChatActivity : AppCompatActivity() {
         auth =Firebase.auth
         btnSend.setOnClickListener {
             var message: String = etaMessage.text.toString()
-
+            var time = System.currentTimeMillis()
             if (message.isEmpty()) {
                 Toast.makeText(this, "message is empty", Toast.LENGTH_SHORT).show()
                 etMessage.setText("")
             } else {
                 if (ii?.idTeacher==null){
                     Toast.makeText(this, "ccccc", Toast.LENGTH_SHORT).show()
-                learningViewModel.sendMessagePrivate(Chat(UUID.randomUUID().toString(), auth.currentUser!!.uid, auth.currentUser!!.uid, etaMessage.editableText.toString(), ""),iT?.id.toString())
+                learningViewModel.sendMessagePrivate(Chat(UUID.randomUUID().toString(), auth.currentUser!!.uid, auth.currentUser!!.uid, etaMessage.editableText.toString(), "",time,null),iT?.id.toString())
                     val topic = "/topics/${iT?.id.toString()}"
                     PushNotification(
                         NotificationData( "massge",etaMessage.text.toString()),
@@ -55,7 +57,7 @@ class ChatActivity : AppCompatActivity() {
                         learningViewModel.sendNotification(it)
                     }
                 }else{
-                    learningViewModel.sendMessagePrivate(Chat(UUID.randomUUID().toString(), auth.currentUser!!.uid, ii?.idTeacher.toString(), etaMessage.editableText.toString(), ""),auth.currentUser!!.uid)
+                    learningViewModel.sendMessagePrivate(Chat(UUID.randomUUID().toString(), auth.currentUser!!.uid, ii?.idTeacher.toString(), etaMessage.editableText.toString(), "",time,null),auth.currentUser!!.uid)
                     val topic = "/topics/${ii?.idTeacher.toString()}"
                     PushNotification(
                         NotificationData( "massge",etaMessage.text.toString()),
@@ -73,17 +75,35 @@ class ChatActivity : AppCompatActivity() {
             learningViewModel.getMessagePrivate(iT?.id.toString()).observe(this, androidx.lifecycle.Observer {
                 val chatAdapter = ChatAdapter(this,it)
                 chRecyclerView.adapter = chatAdapter
+                chatAdapter.setOnItemClickListener { chat ,textView ->
+                    textView.setOnLongClickListener(View.OnLongClickListener {
+                        img_delete_message_user.visibility = View.VISIBLE
+                        img_delete_message_user.setOnClickListener {
+                            learningViewModel.deleteMessageCourse(iT!!.id!!,chat.id)
+                            img_delete_message_user.visibility = View.INVISIBLE
+                        }
+                        true
+                    })
+
+                }
             })
         }else{
             learningViewModel.getMessagePrivate(auth.currentUser!!.uid).observe(this, androidx.lifecycle.Observer {
                 val chatAdapter = ChatAdapter(this,it)
                 chRecyclerView.adapter = chatAdapter
+                chatAdapter.setOnItemClickListener { chat ,textView ->
+                    textView.setOnLongClickListener(View.OnLongClickListener {
+                        img_delete_message_user.visibility = View.VISIBLE
+                        img_delete_message_user.setOnClickListener {
+                            learningViewModel.deleteMessagePrivate(auth.currentUser!!.uid,chat.id)
+                            img_delete_message_user.visibility = View.INVISIBLE
+                        }
+                        true
+                    })
+
+                }
             })
         }
-
-
-
-
 
 
 

@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".View.ChatActivity">
 
-    <ImageView
-        android:id="@+id/imgBack"
-        android:layout_width="44dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.5"
-        android:padding="5dp"
-        android:src="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -27,7 +17,7 @@
         app:layout_constraintBottom_toTopOf="@+id/etaMessage"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgBack" />
+        app:layout_constraintTop_toBottomOf="@+id/linear_view" />
 
     <EditText
         android:id="@+id/etaMessage"
@@ -58,6 +48,38 @@
         app:layout_constraintBottom_toBottomOf="@+id/etaMessage"
         app:layout_constraintLeft_toRightOf="@+id/etaMessage"
         app:layout_constraintTop_toTopOf="@+id/etaMessage" />
+
+    <LinearLayout
+        android:id="@+id/linear_view"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="44dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:layout_marginEnd="200dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            />
+        <ImageView
+            android:id="@+id/img_delete_message_user"
+            android:layout_width="44dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:src="@drawable/car_ui_icon_delete"
+            android:layout_marginStart="10dp"
+            android:visibility="invisible"
+            />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

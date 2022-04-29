@@ -30,11 +30,14 @@
             android:layout_marginRight="20dp"
             tools:text="farhan" />
 
-
-
-
-
     </LinearLayout>
+    <ImageView
+        android:id="@+id/img_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:visibility="invisible"
+        />
 
 
 </LinearLayout>

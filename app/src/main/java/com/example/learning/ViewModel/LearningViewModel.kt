@@ -139,8 +139,8 @@ private val learningRepository: LearningRepository
     fun deleteUserAssignment(view: View, documentCourses: String, documentLecture: String, documentAssignment: String, documentUserAssignment: String) {
         learningRepository.deleteUserAssignment(view, documentCourses, documentLecture, documentAssignment, documentUserAssignment)
     }
-    fun sendMessageCourse(chat: Chat, documentMyCourses: String) {
-        learningRepository.sendMessageCourse(chat, documentMyCourses)
+    fun sendMessageCourse(chat: Chat, documentMyCourses: String,imge: Uri?) {
+        learningRepository.sendMessageCourse(chat, documentMyCourses,imge)
     }
     fun getMessageCourse(documentMyCourses: String)= learningRepository.getMessageCourse(documentMyCourses)
     fun getUserShowLecture(documentCourses: String,documentLecture: String){
@@ -166,5 +166,10 @@ private val learningRepository: LearningRepository
         learningRepository.sendMessagePrivate(chat, documentUsers)
     }
     fun getMessagePrivate(documentUsers: String) = learningRepository.getMessagePrivate(documentUsers)
-
+    fun deleteMessageCourse(documentMyCourses: String,documentChat:String) {
+        learningRepository.deleteMessageCourse(documentMyCourses, documentChat)
+    }
+    fun deleteMessagePrivate(documentUsers: String,documentChat:String) {
+        learningRepository.deleteMessagePrivate(documentUsers, documentChat)
+    }
 }
