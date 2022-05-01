@@ -51,7 +51,7 @@
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
-        android:id="@+id/myCourseFragment"
+        android:id="@+id/profileuserFragment"
         android:name="com.example.learning.View.MyCourseFragment"
         android:label="fragment_my_course"
         tools:layout="@layout/fragment_my_course" >

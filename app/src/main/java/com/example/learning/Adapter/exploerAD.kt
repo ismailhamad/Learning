@@ -75,7 +75,7 @@ class exploerAD: RecyclerView.Adapter<exploerAD.ViewHolder>() {
 
 
 
-            name_exp.text=course.name
+            name_exp.text=course.namecourse
             item_card_ex.background =gd
             gd.cornerRadius =80f
             Glide.with(this).load(course.image).into(imageView_ex)

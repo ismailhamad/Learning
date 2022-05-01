@@ -54,10 +54,10 @@ class DetailsCourseFragment : Fragment() {
 
         val course = args.course
         imageView4.transitionName = course.image
-        nameCourseD.transitionName = course.name
+        nameCourseD.transitionName = course.namecourse
 Glide.with(this).load(course.image).into(imageView4)
         //titlle.text=course.name
-        nameCourseD.text=course.name
+        nameCourseD.text=course.namecourse
         Desc.text=course.description
         name_techer.text =course.techer
         countUsers.text="+${(course.users?.count()?.minus(1))}"

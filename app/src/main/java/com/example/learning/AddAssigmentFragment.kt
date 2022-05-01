@@ -52,7 +52,7 @@ lateinit var learningViewModel: LearningViewModel
                     if (users.get("id").toString()!=""){
                         val topic = "/topics/${users.get("id").toString()}"
                         PushNotification(
-                            NotificationData( "a new assignment","A new assignment has been added to the ${idCourse.name} course"),
+                            NotificationData( "a new assignment","A new assignment has been added to the ${idCourse.namecourse} course"),
                             topic).also {
                            learningViewModel.sendNotification(it)
                         }

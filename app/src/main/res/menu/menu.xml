@@ -10,7 +10,7 @@
         android:icon="@drawable/ic_baseline_favorite_24"
         android:title="favorite" />
     <item
-        android:id="@+id/myCourseFragment"
-        android:icon="@drawable/ic_baseline_menu_book_24"
-        android:title="myCourse" />
+        android:id="@+id/profileuserFragment"
+        android:icon="@drawable/ic_baseline_face_24"
+        android:title="profile" />
 </menu>

@@ -73,7 +73,7 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
             )
 
 
-            name_myCourse.text=course.name
+            name_myCourse.text=course.namecourse
             setOnClickListener {
                 onItemClickListener?.let { it(course) }
                 rowindex = position

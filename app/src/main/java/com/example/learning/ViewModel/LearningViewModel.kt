@@ -23,6 +23,7 @@ private val learningRepository: LearningRepository
     var usersLectureMu: MutableLiveData<List<users>>? = null
     var CourseT: MutableLiveData<List<course>>? = null
     var ShowstudentT: MutableLiveData<List<course>>? = null
+    var search: MutableLiveData<List<course>>? = null
     var MyCourse: MutableLiveData<List<myCourse>>? = null
     var lecture: MutableLiveData<List<lecture>>? = null
     var lectureT: MutableLiveData<List<lecture>>? = null
@@ -131,7 +132,9 @@ private val learningRepository: LearningRepository
         learningRepository.deleteAssignment(view, documentCourses, documentLecture, documentAssignment)
     }
 
-    fun searchCourse(text:String) = learningRepository.searchCourse(text)
+    fun searchCourse(text:String){
+        search=learningRepository.searchCourse(text)
+    }
 
     fun updateUserAssignment(view: View, documentCourses: String, documentLecture: String, documentAssignment: String, file: Uri, fileString: String) {
         learningRepository.updateUserAssignment(view, documentCourses, documentLecture, documentAssignment, file, fileString)

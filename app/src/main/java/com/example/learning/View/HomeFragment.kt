@@ -104,7 +104,7 @@ class HomeFragment : Fragment() {
         courseAD.setOnItemClickListener { course, imageView, textView ->
             val extras = FragmentNavigatorExtras(
                 imageView to course.image.toString(),
-                textView to course.name.toString()
+                textView to course.namecourse.toString()
             )
             val Bundle = Bundle().apply {
                 putSerializable("course", course)
@@ -228,11 +228,10 @@ class HomeFragment : Fragment() {
             android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
-                learningViewModel.searchCourse(query.toString()).observe(viewLifecycleOwner,
-                    Observer { itt ->
-                        courseAD.differ.submitList(itt)
-                    })
-
+                learningViewModel.searchCourse(query.toString())
+                learningViewModel.search?.observe(viewLifecycleOwner, Observer {
+                    courseAD.differ.submitList(it)
+                })
 
                 return true
             }

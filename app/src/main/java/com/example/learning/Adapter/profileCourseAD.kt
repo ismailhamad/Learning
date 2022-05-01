@@ -71,7 +71,7 @@ class profileCourseAD : RecyclerView.Adapter<profileCourseAD.ViewHolder>() {
             )
 
             Glide.with(this).load(course.image).into(imageViewprof)
-            name_myCoursepro.text=course.name
+            name_myCoursepro.text=course.namecourse
             setOnClickListener {
                 onItemClickListener?.let { it(course) }
                 rowindex = position

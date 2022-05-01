@@ -1160,14 +1160,12 @@ class FirebaseSource(val activity: Activity) {
             .set(users)
     }
 
-    fun searchCourse(text: String): MutableLiveData<List<course>> {
+   fun searchCourse(text: String): MutableLiveData<List<course>> {
         db = Firebase.firestore
         val Courselist = ArrayList<course>()
         searchListMutableLiveData = MutableLiveData()
-        Toast.makeText(activity, "$text", Toast.LENGTH_SHORT).show()
-        db.collection("courses").whereEqualTo("name", text).addSnapshotListener { value, error ->
+        db.collection("courses").whereEqualTo("namecourse",text).addSnapshotListener { value, error ->
             for (item in value!!) {
-
                 val course = item.toObject<course>()
                 Courselist.add(course)
                 searchListMutableLiveData.postValue(Courselist)

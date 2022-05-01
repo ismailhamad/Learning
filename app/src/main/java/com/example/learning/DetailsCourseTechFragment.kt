@@ -42,7 +42,7 @@ learningViewModel =(activity as Teacher).learningViewModel
         Glide.with(this).load(course.image).into(image_D_T)
         setupReceycleview()
      //   image_D_T.setImageURI(Uri.parse(course.image))
-        nameCorseT.text =course.name
+        nameCorseT.text =course.namecourse
         learningViewModel.lectureT!!.observe(viewLifecycleOwner, Observer {
             LectureTecAD.differ.submitList(it)
         })

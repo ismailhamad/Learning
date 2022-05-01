@@ -108,12 +108,12 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
 
 
             item_c.setCardBackgroundColor(color)
-            nameCourse.text=course.name
+            nameCourse.text=course.namecourse
             item_c.background =gd
             gd.cornerRadius =80f
             Glide.with(this).load(course.image).into(imageCourse)
             imageCourse.transitionName=course.image.toString()
-            nameCourse.transitionName=course.name.toString()
+            nameCourse.transitionName=course.namecourse.toString()
 //            setOnClickListener {
 //                onItemClickListener?.let { it(course,imageCourse,nameCourse) }
 //            }

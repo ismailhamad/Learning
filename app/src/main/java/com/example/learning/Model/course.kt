@@ -4,7 +4,7 @@ import java.io.Serializable
 
 class course :Serializable{
     var id:String? =""
-    var name:String?=""
+    var namecourse:String?=""
     var description:String?=""
     var image:String?=""
     var idTeacher:String?=""
@@ -14,9 +14,9 @@ class course :Serializable{
   constructor(){
 
   }
-    constructor(id:String?,name:String?,description:String?,image:String?,users:List<Any>?,techer:String?,idTeacher:String?){
+    constructor(id:String?,namecourse:String?,description:String?,image:String?,users:List<Any>?,techer:String?,idTeacher:String?){
         this.id=id
-        this.name=name
+        this.namecourse=namecourse
         this.description=description
         this.image=image
         this.users=users
