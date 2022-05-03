@@ -46,4 +46,5 @@ class LearningRepository(
     fun deleteFavorite(view:View,documentUsers: String,documentCourses: String) = firebaseSource.deleteFavorite(view,documentUsers,documentCourses)
     fun getCourseExplore() = firebaseSource.getCourseExplore()
     fun getCountUserShowLecture(documentCourses: String,documentLecture: String) = firebaseSource.getCountUserShowLecture(documentCourses,documentLecture)
+    fun getAlluserAddAssigment(documentCourses: String, documentLecture: String, documentAssignment: String) = firebaseSource.getAlluserAddAssigment(documentCourses, documentLecture, documentAssignment)
 }

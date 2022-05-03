@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E7EEFB"
-    tools:context=".profileuserFragment">
+    tools:context=".View.student.profileuserFragment">
 
 
     <com.github.captain_miao.optroundcardview.OptRoundCardView

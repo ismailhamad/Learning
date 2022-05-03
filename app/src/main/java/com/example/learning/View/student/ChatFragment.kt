@@ -1,4 +1,4 @@
-package com.example.learning.View
+package com.example.learning.View.student
 
 import android.content.Intent
 import android.net.Uri
@@ -16,7 +16,6 @@ import com.example.learning.R
 
 
 import com.example.learning.ViewModel.LearningViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth

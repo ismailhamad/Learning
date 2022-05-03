@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeTFragment"
-        android:name="com.example.learning.HomeTFragment"
+        android:name="com.example.learning.View.teacher.HomeTFragment"
         android:label="fragment_home_t"
         tools:layout="@layout/fragment_home_t" >
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/addCourseFragment"
-        android:name="com.example.learning.AddCourseFragment"
+        android:name="com.example.learning.View.teacher.AddCourseFragment"
         android:label="fragment_add_course"
         tools:layout="@layout/fragment_add_course" />
     <fragment
         android:id="@+id/detailsCourseTechFragment"
-        android:name="com.example.learning.DetailsCourseTechFragment"
+        android:name="com.example.learning.View.teacher.DetailsCourseTechFragment"
         android:label="fragment_details_course_tech"
         tools:layout="@layout/fragment_details_course_tech" >
         <argument
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/addLectureFragment"
-        android:name="com.example.learning.AddLectureFragment"
+        android:name="com.example.learning.View.teacher.AddLectureFragment"
         android:label="fragment_add_lecture"
         tools:layout="@layout/fragment_add_lecture" >
         <argument
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateLectureFragment"
-        android:name="com.example.learning.UpdateLectureFragment"
+        android:name="com.example.learning.View.teacher.UpdateLectureFragment"
         android:label="fragment_update_lecture"
         tools:layout="@layout/fragment_update_lecture" >
         <argument
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/addAssigmentFragment"
-        android:name="com.example.learning.AddAssigmentFragment"
+        android:name="com.example.learning.View.teacher.AddAssigmentFragment"
         android:label="fragment_add_assigment"
         tools:layout="@layout/fragment_add_assigment" >
         <argument
@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/details_LectureTechFragment"
-        android:name="com.example.learning.Details_LectureTechFragment"
+        android:name="com.example.learning.View.teacher.Details_LectureTechFragment"
         android:label="fragment_details__lecture_tech"
         tools:layout="@layout/fragment_details__lecture_tech" >
         <argument
@@ -99,10 +99,13 @@
         <action
             android:id="@+id/action_details_LectureTechFragment_to_updateAssigmentFragment"
             app:destination="@id/updateAssigmentFragment" />
+        <action
+            android:id="@+id/action_details_LectureTechFragment_to_allUserAssigmentFragment"
+            app:destination="@id/allUserAssigmentFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateAssigmentFragment"
-        android:name="com.example.learning.updateAssigmentFragment"
+        android:name="com.example.learning.View.teacher.updateAssigmentFragment"
         android:label="fragment_update_assigment"
         tools:layout="@layout/fragment_update_assigment" >
         <argument
@@ -117,11 +120,25 @@
     </fragment>
     <fragment
         android:id="@+id/show_StudentFragment"
-        android:name="com.example.learning.show_StudentFragment"
+        android:name="com.example.learning.View.teacher.show_StudentFragment"
         android:label="fragment_show__student"
         tools:layout="@layout/fragment_show__student" >
         <argument
             android:name="courseStudent"
             app:argType="com.example.learning.Model.course" />
+    </fragment>
+    <fragment
+        android:id="@+id/allUserAssigmentFragment"
+        android:name="com.example.learning.View.teacher.AllUserAssigmentFragment"
+        android:label="fragment_all_user_assigment"
+        tools:layout="@layout/fragment_all_user_assigment" >
+        <argument
+            android:name="idcourse"
+            app:argType="string" />
+        <argument
+            android:name="idlecture"
+            app:argType="string" />
+        <argument android:name="idassi"
+            app:argType="string" />
     </fragment>
 </navigation>

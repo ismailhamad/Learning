@@ -1,17 +1,11 @@
-package com.example.learning.View
+package com.example.learning.View.student
 
-import android.annotation.SuppressLint
 import android.app.DownloadManager
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Context.DOWNLOAD_SERVICE
 import android.content.Intent
-import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -20,10 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learning.Adapter.assigmentAD
 import com.example.learning.Model.users
 import com.example.learning.R
+import com.example.learning.View.ChatActivity
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_w_course.*
 
 
@@ -60,8 +54,10 @@ var mydownload:Long = 0
 
         })
 
+
+
         ask_techer.setOnClickListener {
-            val i =Intent(activity,ChatActivity::class.java)
+            val i =Intent(activity, ChatActivity::class.java)
             i.putExtra("id",users)
             i.putExtra("course",idCourse)
             startActivity(i)

@@ -3,16 +3,18 @@ package com.example.learning.Firebase
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.*
 
-import com.example.learning.View.Student
+import com.example.learning.View.student.Student
 import com.example.learning.View.Teacher
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
@@ -32,7 +34,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import kotlin.collections.ArrayList
 
-class FirebaseSource(val activity: Activity,view: View) {
+class FirebaseSource(val activity: Activity,val vieww: View) {
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
     lateinit var analytics: FirebaseAnalytics
@@ -55,7 +57,8 @@ class FirebaseSource(val activity: Activity,view: View) {
     lateinit var chatListMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var chatListprivMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var usersAddAssiListMutableLiveData: MutableLiveData<HashMap<String, Any?>>
-    lateinit var course: course
+    lateinit var usersAllAddAssiListMutableLiveData: MutableLiveData<List<HashMap<String, Any?>>>
+     var course: course?=null
     lateinit var countUserListprivMutableLiveData: MutableLiveData<Int>
     lateinit var countUserAddAssigmentListprivMutableLiveData: MutableLiveData<Int>
     var BuyONot: Boolean = false
@@ -93,7 +96,7 @@ class FirebaseSource(val activity: Activity,view: View) {
                 } else {
                     progressDialog.dismiss()
                     Constants.showSnackBar(
-                        view,
+                        vieww,
                         "يرجى التحقق من عنوان البريد الإلكتروني الخاص بك",
                         Constants.redColor
                     )
@@ -102,7 +105,7 @@ class FirebaseSource(val activity: Activity,view: View) {
             } else {
                 progressDialog.dismiss()
                 Constants.showSnackBar(
-                    view,
+                    vieww,
                     "يرجى التحقق من اسم المستخدم أو كلمة السر الخاص بك",
                     Constants.redColor
                 )
@@ -231,6 +234,7 @@ class FirebaseSource(val activity: Activity,view: View) {
         val Courselist = ArrayList<course>()
         CourseListMutableLiveData = MutableLiveData()
         db.collection("courses").orderBy("time",Query.Direction.ASCENDING).addSnapshotListener { value, error ->
+            Courselist.clear()
             for (document in value!!) {
                 val course = document.toObject<course>()
                 Courselist.add(course)
@@ -306,21 +310,21 @@ class FirebaseSource(val activity: Activity,view: View) {
                 db.collection("myCourse").document(myCourse.id!!).set(myCourse)
                     .addOnSuccessListener {
                         Constants.showSnackBar(
-                            view,
+                            vieww,
                             "تم اضافة الكورس",
                             Constants.greenColor
                         )
                         progressDialog.dismiss()
-                        analytics.logEvent("addMyCourse"){
-                            param("name_course", course.namecourse!!)
-                        }
+//                        analytics.logEvent("addMyCourse"){
+//                            param("name_course", course!!.namecourse!!)
+//                        }
                     }
 
             } else {
                 //Alert
                 progressDialog.dismiss()
                 Constants.showSnackBar(
-                    view,
+                    vieww,
                     "لا يمكن إضافة أكثر من 5 كورسات",
                     Constants.redColor
                 )
@@ -337,6 +341,7 @@ class FirebaseSource(val activity: Activity,view: View) {
         MyCourseListMutableLiveData = MutableLiveData()
         auth = Firebase.auth
         db.collection("myCourse").addSnapshotListener { result, error ->
+            Courselist.clear()
             for (document in result!!) {
                 val course = document.toObject<myCourse>()
                 val cousree = course.users
@@ -664,7 +669,7 @@ class FirebaseSource(val activity: Activity,view: View) {
                 storageRef!!.child("files/${it.get("id")}").delete()
                 db.collection("courses/${document}/lecture/").document(documentLecture).delete()
                 Constants.showSnackBar(
-                    view,
+                    vieww,
                     "تم حذف المحاضرة",
                     Constants.greenColor
                 )
@@ -712,7 +717,7 @@ class FirebaseSource(val activity: Activity,view: View) {
                 storageRef!!.child("image/${it.get("id")}").delete()
                 db.collection("courses").document(document).delete()
                 Constants.showSnackBar(
-                    view,
+                    vieww,
                     "تم حذف الكورس",
                     Constants.greenColor
                 )
@@ -944,19 +949,20 @@ class FirebaseSource(val activity: Activity,view: View) {
                 db.collection("courses").document(document)
                     .update("users", FieldValue.arrayRemove(userss))
                     .addOnSuccessListener {
+                        Snackbar.make(view, "تم حذف الكورس", Snackbar.LENGTH_LONG).apply {
+                            animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+                            setBackgroundTint(Color.parseColor(Constants.greenColor))
+                            setTextColor(Color.parseColor("#FFFFFF"))
+                            show()
+                        }
                     }
-
-                Constants.showSnackBar(
-                    view,
-                    "تم حذف الكورس",
-                    Constants.greenColor
-                )
             }.addOnFailureListener {
-                Constants.showSnackBar(
-                    view,
-                    "فشل حذف الكورس",
-                    Constants.redColor
-                )
+                Snackbar.make(view, "فشل حذف الكورس", Snackbar.LENGTH_LONG).apply {
+                    animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+                    setBackgroundTint(Color.parseColor(Constants.redColor))
+                    setTextColor(Color.parseColor("#FFFFFF"))
+                    show()
+                }
             }
 
 
@@ -988,14 +994,14 @@ class FirebaseSource(val activity: Activity,view: View) {
         usersAddAssiListMutableLiveData = MutableLiveData()
         auth.currentUser!!.uid.let {
             db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
-                .document(
-                    it
-                ).addSnapshotListener { value, error ->
+                .document(it).addSnapshotListener { value, error ->
                     val idusers = value?.get("id")
                     val file = value?.get("file")
+                    val name = value?.get("name")
                     val data = hashMapOf<String, Any?>(
                         "id" to idusers,
-                        "file" to file
+                        "file" to file,
+                        "name" to name
                     )
                     usersAddAssiListMutableLiveData?.postValue(data)
                 }
@@ -1005,6 +1011,46 @@ class FirebaseSource(val activity: Activity,view: View) {
         return usersAddAssiListMutableLiveData
 
     }
+
+
+    fun getAlluserAddAssigment(
+        documentCourses: String,
+        documentLecture: String,
+        documentAssignment: String
+    ): MutableLiveData<List<HashMap<String, Any?>>> {
+        db = Firebase.firestore
+        auth = Firebase.auth
+        val arrayList = arrayListOf<HashMap<String, Any?>>()
+        usersAllAddAssiListMutableLiveData = MutableLiveData()
+            db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment").addSnapshotListener { value, error ->
+                for (i in value!!){
+                    val idusers = i?.get("id")
+                    val file = i?.get("file")
+                    val name = i?.get("name")
+                    val data = hashMapOf<String, Any?>(
+                        "id" to idusers,
+                        "file" to file,
+                        "name" to name
+                    )
+                    arrayList.add(data)
+
+                    usersAllAddAssiListMutableLiveData?.postValue(arrayList)
+                }
+
+                }
+        return usersAllAddAssiListMutableLiveData
+
+    }
+
+
+
+
+
+
+
+
+
+
 
 
     fun userAddAssignment(
@@ -1174,6 +1220,7 @@ class FirebaseSource(val activity: Activity,view: View) {
 
     fun searchCourse(text: String): MutableLiveData<List<course>> {
         db = Firebase.firestore
+        analytics = Firebase.analytics
         val Courselist = ArrayList<course>()
         searchListMutableLiveData = MutableLiveData()
         db.collection("courses").whereEqualTo("namecourse",text).addSnapshotListener { value, error ->
@@ -1183,7 +1230,7 @@ class FirebaseSource(val activity: Activity,view: View) {
                 searchListMutableLiveData.postValue(Courselist)
             }
             analytics.logEvent("searchCourse"){
-                param("name_course", course.namecourse!!)
+                param("name_course", course?.namecourse!!)
             }
         }
 
@@ -1217,6 +1264,7 @@ class FirebaseSource(val activity: Activity,view: View) {
         val favoritelist = ArrayList<course>()
         favoriteListMutableLiveData = MutableLiveData()
         db.collection("users/${documentUsers}/Favorite").addSnapshotListener { value, error ->
+            favoritelist.clear()
             for (document in value!!) {
                 val course = document.toObject<course>()
                 favoritelist.add(course)

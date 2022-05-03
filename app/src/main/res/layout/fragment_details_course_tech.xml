@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F5F9"
-    tools:context=".DetailsCourseTechFragment">
+    android:background="#E7EEFB"
+    tools:context=".View.teacher.DetailsCourseTechFragment">
 
 
     <ImageButton

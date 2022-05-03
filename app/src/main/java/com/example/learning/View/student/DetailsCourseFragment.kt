@@ -1,4 +1,4 @@
-package com.example.learning.View
+package com.example.learning.View.student
 
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -16,9 +16,6 @@ import com.example.learning.Model.SendEmail
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

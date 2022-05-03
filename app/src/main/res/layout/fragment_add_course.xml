@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F5F9"
+    android:background="#E7EEFB"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AddCourseFragment">
+    tools:context=".View.teacher.AddCourseFragment">
 
 
     <TextView

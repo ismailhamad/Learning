@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.learning.View.HomeFragment"
+        android:name="com.example.learning.View.student.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsCourseFragment"
-        android:name="com.example.learning.View.DetailsCourseFragment"
+        android:name="com.example.learning.View.student.DetailsCourseFragment"
         android:label="fragment_details_course"
         tools:layout="@layout/fragment_details_course" >
         <argument
@@ -54,12 +54,16 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.learning.View.FavoriteFragment"
+        android:name="com.example.learning.View.student.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailsCourseFragment"
+            app:destination="@id/detailsCourseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileuserFragment"
-        android:name="com.example.learning.View.MyCourseFragment"
+        android:name="com.example.learning.View.student.MyCourseFragment"
         android:label="fragment_my_course"
         tools:layout="@layout/fragment_my_course" >
         <action
@@ -71,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/WCourseFragment"
-        android:name="com.example.learning.View.WCourseFragment"
+        android:name="com.example.learning.View.student.WCourseFragment"
         android:label="fragment_w_course"
         tools:layout="@layout/fragment_w_course" >
 
@@ -87,7 +91,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.learning.View.ChatFragment"
+        android:name="com.example.learning.View.student.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
 
@@ -97,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsAssigmentFragment"
-        android:name="com.example.learning.DetailsAssigmentFragment"
+        android:name="com.example.learning.View.student.DetailsAssigmentFragment"
         android:label="fragment_details_assigment"
         tools:layout="@layout/fragment_details_assigment" >
         <argument
@@ -112,7 +116,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileuserFragment"
-        android:name="com.example.learning.profileuserFragment"
+        android:name="com.example.learning.View.student.profileuserFragment"
         android:label="fragment_profileuser"
         tools:layout="@layout/fragment_profileuser" >
         <action
@@ -121,7 +125,7 @@
     </fragment>
     <dialog
         android:id="@+id/bottomSheetLecFragment"
-        android:name="com.example.learning.bottomSheetLecFragment"
+        android:name="com.example.learning.View.student.bottomSheetLecFragment"
         android:label="fragment_bottom_sheet_lec"
         tools:layout="@layout/fragment_bottom_sheet_lec" >
         <action

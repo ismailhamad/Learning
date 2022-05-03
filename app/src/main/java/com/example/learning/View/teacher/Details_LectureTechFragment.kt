@@ -1,4 +1,4 @@
-package com.example.learning
+package com.example.learning.View.teacher
 
 import android.app.DownloadManager
 import android.content.Context
@@ -6,10 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -19,14 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learning.Adapter.assigmentAD
 import com.example.learning.Firebase.FirebaseSource
+import com.example.learning.R
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import kotlinx.android.synthetic.main.fragment_details__lecture_tech.*
-import kotlinx.android.synthetic.main.fragment_details_course_tech.*
-import kotlinx.android.synthetic.main.fragment_w_course.*
-import kotlinx.android.synthetic.main.fragment_w_course.pdf
 
 
 class Details_LectureTechFragment : Fragment(R.layout.fragment_details__lecture_tech) {
@@ -62,6 +57,20 @@ val args:Details_LectureTechFragmentArgs by navArgs()
         }else{
             pdfTech.visibility=View.VISIBLE
         }
+
+
+        assigmentAD.setOnItemClickListener {
+            val Bundle = Bundle().apply {
+                putString("idcourse",idCourse.id)
+                putString("idlecture",lecture.id)
+                putString("idassi",it.id)
+            }
+            findNavController().navigate(R.id.action_details_LectureTechFragment_to_allUserAssigmentFragment,Bundle)
+        }
+
+
+
+
         pdfTech.setOnClickListener {
 
             var request= DownloadManager.Request(Uri.parse(lecture.file))
@@ -86,6 +95,8 @@ val args:Details_LectureTechFragmentArgs by navArgs()
             }
             findNavController().navigate(R.id.action_details_LectureTechFragment_to_addAssigmentFragment,Bundle)
         }
+
+
 
         val itemTouchHelperCallback=object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,

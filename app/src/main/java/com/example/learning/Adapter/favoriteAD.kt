@@ -72,7 +72,7 @@ class favoriteAD : RecyclerView.Adapter<favoriteAD.ViewHolder>() {
 //            imageView10.transitionName=course.image.toString()
 //            name_myCourse.transitionName=course.name.toString()
             setOnClickListener {
-                onItemClickListener?.let { it(course,imageView_ex,name_exp,intArray) }
+                onItemClickListener?.let { it(course,imageView_fav,name_fav,intArray) }
             }
 
 

@@ -1,14 +1,8 @@
-package com.example.learning
+package com.example.learning.View.teacher
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Switch
-import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -16,13 +10,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.learning.Adapter.LectureAD
 import com.example.learning.Adapter.LectureTecAD
 import com.example.learning.Model.course
+import com.example.learning.R
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_details_course_tech.*
 
 

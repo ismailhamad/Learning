@@ -1,13 +1,10 @@
-package com.example.learning
+package com.example.learning.View.teacher
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import com.example.learning.Constants.Constants
@@ -15,18 +12,11 @@ import com.example.learning.Model.Assignment
 import com.example.learning.Model.NotificationData
 import com.example.learning.Model.PushNotification
 import com.example.learning.Model.users
-import com.example.learning.Notification.RetrofitInstance
+import com.example.learning.R
 
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_add_assignment.*
 import kotlinx.android.synthetic.main.fragment_add_assigment.*
-import kotlinx.android.synthetic.main.fragment_add_lecture.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.util.*
 
 

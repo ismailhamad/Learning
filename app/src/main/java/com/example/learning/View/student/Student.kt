@@ -1,4 +1,4 @@
-package com.example.learning.View
+package com.example.learning.View.student
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +11,6 @@ import com.example.learning.ViewModel.LearningRepository
 import com.example.learning.ViewModel.LearningViewModel
 import com.example.learning.ViewModel.LearningViewModelProviderFactory
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.fragment_add_course.*
 
 class Student : AppCompatActivity() {
     lateinit var learningViewModel: LearningViewModel

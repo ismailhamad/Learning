@@ -1,4 +1,4 @@
-package com.example.learning.View
+package com.example.learning.View.student
 
 import android.content.Intent
 import android.net.Uri

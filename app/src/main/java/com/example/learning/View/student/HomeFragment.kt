@@ -1,14 +1,11 @@
-package com.example.learning.View
+package com.example.learning.View.student
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.transition.TransitionInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.doOnPreDraw
 import androidx.drawerlayout.widget.DrawerLayout
@@ -24,22 +21,18 @@ import com.example.learning.Adapter.LectureAD
 import com.example.learning.Adapter.MyCourseAD
 import com.example.learning.Adapter.exploerAD
 import com.example.learning.Constants.Constants
-import com.example.learning.Model.course
 import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.android.gms.ads.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.delay
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class HomeFragment : Fragment() {
     lateinit var learningViewModel: LearningViewModel
@@ -215,7 +208,6 @@ class HomeFragment : Fragment() {
             learningViewModel.usersLectureMu?.observe(viewLifecycleOwner, Observer { itlist ->
                 itlist.forEach { iii ->
                     if (iii.name + iii.lastName == users?.name + users!!.lastName) {
-                        Toast.makeText(activity, "ddddd", Toast.LENGTH_SHORT).show()
                         findNavController().navigate(
                             R.id.action_homeFragment_to_WCourseFragment,
                             Bundle

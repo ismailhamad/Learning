@@ -1,7 +1,6 @@
-package com.example.learning
+package com.example.learning.View.student
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learning.Adapter.LectureAD
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.users
-import com.example.learning.View.Student
+import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.fragment_bottom_sheet_lec.*

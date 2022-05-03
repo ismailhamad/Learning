@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F3F5F9"
-    tools:context=".AddAssigmentFragment">
+    android:background="#E7EEFB"
+    tools:context=".View.teacher.AddAssigmentFragment">
 
 
     <TextView

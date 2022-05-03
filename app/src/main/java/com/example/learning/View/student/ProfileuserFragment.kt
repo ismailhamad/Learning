@@ -1,13 +1,11 @@
-package com.example.learning
+package com.example.learning.View.student
 
 
 import android.os.Bundle
-import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,10 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Adapter.profileCourseAD
 import com.example.learning.Model.users
-import com.example.learning.View.Student
+import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home_t.*
 import kotlinx.android.synthetic.main.fragment_profileuser.*
 
 

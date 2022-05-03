@@ -1,4 +1,4 @@
-package com.example.learning
+package com.example.learning.View.teacher
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Adapter.CourseAD
+import com.example.learning.R
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_details_course_tech.*
 import kotlinx.android.synthetic.main.fragment_home_t.*
 
 

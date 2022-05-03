@@ -30,6 +30,8 @@ private val learningRepository: LearningRepository
     var lectureT: MutableLiveData<List<lecture>>? = null
     var assignment: MutableLiveData<List<Assignment>>? = null
     var userADDASS = MutableLiveData<HashMap<String, Any?>>()
+    var userassi = MutableLiveData<List<HashMap<String, Any?>>>()
+    var favorite: MutableLiveData<List<course>>? = null
     var BuyNot:Boolean?=null
     var countUser: MutableLiveData<Int>? = null
    init {
@@ -186,12 +188,16 @@ private val learningRepository: LearningRepository
         learningRepository.deleteFavorite(view,documentUsers, documentCourses)
     }
     fun getFavorite(documentUsers: String) {
-        learningRepository.getFavorite(documentUsers)
+        favorite = learningRepository.getFavorite(documentUsers)
     }
     fun getCourseExplore() {
         courseExplore = learningRepository.getCourseExplore()
     }
     fun getCountUserShowLecture(documentCourses: String,documentLecture: String) {
         countUser  = learningRepository.getCountUserShowLecture(documentCourses,documentLecture)
+    }
+
+    fun getAlluserAddAssigment(documentCourses: String, documentLecture: String, documentAssignment: String) {
+        userassi = learningRepository.getAlluserAddAssigment(documentCourses, documentLecture, documentAssignment)
     }
 }

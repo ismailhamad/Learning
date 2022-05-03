@@ -1,4 +1,4 @@
-package com.example.learning.View
+package com.example.learning.View.student
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

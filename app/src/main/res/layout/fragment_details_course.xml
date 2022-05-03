@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E7EEFB"
-    tools:context=".View.DetailsCourseFragment">
+    tools:context=".View.student.DetailsCourseFragment">
 
     <com.github.captain_miao.optroundcardview.OptRoundCardView
         android:id="@+id/cardView"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:backgroundTint="#838C8A8A"
+                android:backgroundTint="#008C8A8A"
                 android:src="@drawable/ic_baseline_close_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -61,10 +61,10 @@
                 android:id="@+id/btn_favorite"
                 android:layout_width="31dp"
                 android:layout_height="29dp"
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="24dp"
                 android:src="@drawable/ic_baseline_favorite_24"
-                android:tint="#FB6A6A"
+                android:tint="#E9F8F8F8"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints,NotSibling" />
