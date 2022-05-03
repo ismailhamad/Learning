@@ -5,10 +5,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.example.learning.Constants.Constants
 import com.example.learning.Firebase.FirebaseSource
-import com.example.learning.Model.Assignment
-import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningRepository
 import com.example.learning.ViewModel.LearningViewModel
@@ -17,8 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_add_assignment.*
-import kotlinx.android.synthetic.main.activity_add_lecture.*
-import java.util.*
+import kotlinx.android.synthetic.main.fragment_add_course.*
 
 class AddAssignment : AppCompatActivity() {
     lateinit var learningViewModel: LearningViewModel
@@ -27,7 +23,7 @@ class AddAssignment : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_assignment)
-        val repository = LearningRepository(FirebaseSource(this))
+        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)))
         val viewModelProviderFactory = LearningViewModelProviderFactory(repository)
         learningViewModel =
             ViewModelProvider(this, viewModelProviderFactory).get(LearningViewModel::class.java)

@@ -72,7 +72,7 @@ class exploerAD: RecyclerView.Adapter<exploerAD.ViewHolder>() {
                     color2,
                 )
             )
-
+val intArray = intArrayOf(color, color2,)
 
 
             name_exp.text=course.namecourse
@@ -82,7 +82,7 @@ class exploerAD: RecyclerView.Adapter<exploerAD.ViewHolder>() {
 //            imageView10.transitionName=course.image.toString()
 //            name_myCourse.transitionName=course.name.toString()
             setOnClickListener {
-                onItemClickListener?.let { it(course,imageView_ex,name_exp) }
+                onItemClickListener?.let { it(course,imageView_ex,name_exp,intArray) }
             }
 
 
@@ -95,8 +95,8 @@ class exploerAD: RecyclerView.Adapter<exploerAD.ViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((course, ImageView, TextView) -> Unit)? = null
-    fun setOnItemClickListener(listener: (course, ImageView, TextView) -> Unit) {
+    private var onItemClickListener: ((course, ImageView, TextView,IntArray) -> Unit)? = null
+    fun setOnItemClickListener(listener: (course, ImageView, TextView,IntArray) -> Unit) {
         onItemClickListener = listener
     }
 }

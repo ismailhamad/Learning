@@ -2,7 +2,6 @@ package com.example.learning.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -18,9 +17,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.fragment_add_course.*
 
 import kotlinx.android.synthetic.main.fragment_chat.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
 class ChatActivity : AppCompatActivity() {
@@ -33,7 +32,7 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
         chRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        val repository = LearningRepository(FirebaseSource(this))
+        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)))
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
         val i = intent.getSerializableExtra("id") as users?

@@ -16,6 +16,7 @@ import com.example.learning.View.Teacher
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
+
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
@@ -31,11 +32,10 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import kotlin.collections.ArrayList
 
-
-class FirebaseSource(val activity: Activity) {
+class FirebaseSource(val activity: Activity,view: View) {
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
-     lateinit var analytics: FirebaseAnalytics
+    lateinit var analytics: FirebaseAnalytics
     lateinit var progressDialog: ProgressDialog
     var coursea: course? = null
     var storge: FirebaseStorage? = null
@@ -1172,7 +1172,7 @@ class FirebaseSource(val activity: Activity) {
             .set(users)
     }
 
-   fun searchCourse(text: String): MutableLiveData<List<course>> {
+    fun searchCourse(text: String): MutableLiveData<List<course>> {
         db = Firebase.firestore
         val Courselist = ArrayList<course>()
         searchListMutableLiveData = MutableLiveData()
@@ -1292,12 +1292,12 @@ class FirebaseSource(val activity: Activity) {
         auth = Firebase.auth
         countUserAddAssigmentListprivMutableLiveData = MutableLiveData()
         var count = 0
-            db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment").get().addOnSuccessListener {
-                for (i in it){
-                    Log.e("aa","name ddd ${i.get("id")}")
-                    countUserAddAssigmentListprivMutableLiveData.postValue(++count)
-                }
-                }
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment").get().addOnSuccessListener {
+            for (i in it){
+                Log.e("aa","name ddd ${i.get("id")}")
+                countUserAddAssigmentListprivMutableLiveData.postValue(++count)
+            }
+        }
 
         return countUserAddAssigmentListprivMutableLiveData
 
@@ -1306,6 +1306,7 @@ class FirebaseSource(val activity: Activity) {
 
 
 }
+
 
 
 

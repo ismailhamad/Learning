@@ -8,13 +8,12 @@ import android.provider.MediaStore
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.learning.Firebase.FirebaseSource
-import com.example.learning.Model.course
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningRepository
 import com.example.learning.ViewModel.LearningViewModel
 import com.example.learning.ViewModel.LearningViewModelProviderFactory
 import kotlinx.android.synthetic.main.activity_add_course.*
-import java.util.*
+import kotlinx.android.synthetic.main.fragment_add_course.*
 
 class AddCourse : AppCompatActivity() {
     lateinit var learningViewModel: LearningViewModel
@@ -22,7 +21,7 @@ class AddCourse : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_course)
-        val repository = LearningRepository(FirebaseSource(this))
+        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)))
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
         img_AddImgCourse.setOnClickListener {

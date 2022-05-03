@@ -44,7 +44,7 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
         learningViewModel.CourseT?.observe(viewLifecycleOwner, Observer {
             CourseTechAD.differ.submitList(it)
         })
-        CourseTechAD.setOnItemClickListener { course,image,text ->
+        CourseTechAD.setOnItemClickListener { course,image,text,Color ->
             val Bundle = Bundle().apply {
                 putSerializable("courseTech", course)
             }

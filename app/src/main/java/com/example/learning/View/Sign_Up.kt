@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.fragment_add_course.*
 
 class Sign_Up : AppCompatActivity() {
     lateinit var learningViewModel: LearningViewModel
@@ -23,7 +24,7 @@ class Sign_Up : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         auth = Firebase.auth
-        val repository = LearningRepository(FirebaseSource(this))
+        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)))
         val viewModelProviderFactory = LearningViewModelProviderFactory(repository)
         learningViewModel =
             ViewModelProvider(this, viewModelProviderFactory).get(LearningViewModel::class.java)

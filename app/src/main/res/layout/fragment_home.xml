@@ -170,7 +170,7 @@
             android:layout_marginEnd="26dp"
             android:layout_marginBottom="3dp"
             app:adSize="BANNER"
-            app:adUnitId="@string/app_banner_test"
+            app:adUnitId="@string/app_banner_live"
             app:layout_constraintBottom_toTopOf="@+id/rv_ex"
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints" />

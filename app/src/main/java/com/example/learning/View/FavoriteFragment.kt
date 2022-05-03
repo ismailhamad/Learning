@@ -2,35 +2,36 @@ package com.example.learning.View
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learning.Adapter.LectureAD
+import com.example.learning.Adapter.favoriteAD
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_favorite.*
 
 class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     lateinit var learningViewModel: LearningViewModel
-    lateinit var lectureAD: LectureAD
+    lateinit var favoriteAD: favoriteAD
+    lateinit var auth: FirebaseAuth
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Student).learningViewModel
+        auth = Firebase.auth
         setupReceycleView()
-//        learningViewModel.getLecture("93da687e-4aea-4420-96c6-3f0ed3f222d2")
-//        learningViewModel.lecture!!.observe(viewLifecycleOwner, Observer {
-//            lectureAD.differ.submitList(it)
-//        })
+
+
     }
 
 
     fun setupReceycleView() {
-        lectureAD = LectureAD()
-        rv_lecture.apply {
-            adapter = lectureAD
+        favoriteAD = favoriteAD()
+        rv_fav.apply {
+            adapter = favoriteAD
             layoutManager = LinearLayoutManager(activity)
         }
     }

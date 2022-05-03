@@ -32,8 +32,8 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/img_chat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="136dp"
+        android:layout_height="137dp"
         android:layout_marginRight="20dp"
         android:visibility="invisible"
         />

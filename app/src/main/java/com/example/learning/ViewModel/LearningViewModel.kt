@@ -41,6 +41,7 @@ private val learningRepository: LearningRepository
   }
 
      fun getCourse() {
+       Course = MutableLiveData()
    Course = learningRepository.getCourse()
      }
     fun getMyCourse() {

@@ -3,115 +3,110 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#F3F5F9"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F3F5F9">
 
 
-<!--    <ImageView-->
-<!--        android:id="@+id/imgBack"-->
-<!--        android:layout_width="44dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_weight="0.5"-->
-<!--        android:padding="5dp"-->
-<!--        android:src="@drawable/ic_baseline_arrow_back_24"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/imgBack"-->
+    <!--        android:layout_width="44dp"-->
+    <!--        android:layout_height="40dp"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:layout_weight="0.5"-->
+    <!--        android:padding="5dp"-->
+    <!--        android:src="@drawable/ic_baseline_arrow_back_24"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatactivityRecyclerView"
-        android:layout_width="0dp"
+        android:layout_width="413dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintBottom_toTopOf="@+id/etMessage"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_view" />
+
 
     <EditText
         android:id="@+id/etMessage"
-        android:layout_width="300dp"
+        android:layout_width="0dp"
         android:layout_height="53dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
-        android:background="#75D8D3D3"
+        android:background="@drawable/back_view"
         android:fontFamily="@font/give_you_glory"
         android:hint="Type Message"
         android:inputType="text"
         android:padding="12dp"
         android:textColor="#8C8A8A"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/linear_bottom"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSendMessageactiv"
+        app:layout_constraintStart_toEndOf="@+id/btnSendImage" />
+
+    <ImageButton
+        android:id="@+id/btnSendMessageactiv"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/back_butf"
+        android:src="@drawable/ic_send"
+        android:text="sign_up"
+        android:textColor="#FFFFFF"
+        android:tint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chatactivityRecyclerView" />
+
+    <ImageButton
+        android:id="@+id/btnSendImage"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/back_butf"
+        android:src="@drawable/ic_gallery"
+        android:text="sign_up"
+        android:textColor="#FFFFFF"
+        android:tint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chatactivityRecyclerView" />
 
     <LinearLayout
-        android:id="@+id/linear_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/etMessage"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/etMessage"
-        app:layout_constraintTop_toTopOf="@+id/etMessage"
-        >
-        <ImageButton
-            android:id="@+id/btnSendMessageactiv"
-            android:layout_width="45dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/back_butf"
-            android:src="@drawable/ic_send"
-            android:text="sign_up"
-            android:textColor="#FFFFFF"
-            />
-        <ImageButton
-            android:id="@+id/btnSendImage"
-            android:layout_width="45dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/back_butf"
-            android:src="@drawable/ic_gallery"
-            android:text="sign_up"
-            android:textColor="#FFFFFF"
-            />
-    </LinearLayout>
-
-
-
-    <LinearLayout
         android:id="@+id/linear_view"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_width="411dp"
+        android:layout_height="53dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
-            <ImageView
-                android:id="@+id/imgBack"
-                android:layout_width="44dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="0.5"
-                android:padding="5dp"
-                android:layout_marginEnd="200dp"
-                android:src="@drawable/ic_baseline_arrow_back_24"
-             />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="44dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="200dp"
+            android:layout_weight="0.5"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
         <ImageView
             android:id="@+id/img_delete_message"
             android:layout_width="44dp"
             android:layout_height="40dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_weight="0.5"
             android:padding="5dp"
             android:src="@drawable/car_ui_icon_delete"
-            android:layout_marginStart="10dp"
-            android:visibility="invisible"
-            />
+            android:visibility="invisible" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

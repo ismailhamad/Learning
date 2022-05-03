@@ -12,8 +12,6 @@
         android:id="@+id/optRoundCardView"
         android:layout_width="0dp"
         android:layout_height="268dp"
-
-        android:backgroundTint="#2D2F31"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -7,17 +7,14 @@
     android:background="#E7EEFB"
     tools:context=".View.DetailsCourseFragment">
 
-    <androidx.cardview.widget.CardView
+    <com.github.captain_miao.optroundcardview.OptRoundCardView
         android:id="@+id/cardView"
-        android:layout_width="417dp"
-        android:layout_height="313dp"
-        android:layout_marginBottom="44dp"
-        android:backgroundTint="#2196F3"
-        app:cardElevation="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView5"
+        android:layout_width="409dp"
+        android:layout_height="334dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:optRoundCardElevation="30dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -25,15 +22,13 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="3dp"
+                android:layout_width="308dp"
+                android:layout_height="241dp"
+                android:layout_marginTop="14dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/web2"
-                app:layout_constraintBottom_toTopOf="@+id/nameCourseD"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/But_Back"
+                app:layout_constraintStart_toEndOf="@+id/btn_favorite"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -55,8 +50,8 @@
                 android:id="@+id/But_Back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
                 android:backgroundTint="#838C8A8A"
                 android:src="@drawable/ic_baseline_close_24"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -64,18 +59,18 @@
 
             <ImageView
                 android:id="@+id/btn_favorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="180dp"
+                android:layout_width="31dp"
+                android:layout_height="29dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="24dp"
                 android:src="@drawable/ic_baseline_favorite_24"
-                app:layout_constraintTop_toBottomOf="@id/imageView4"
-                app:layout_constraintStart_toEndOf="@id/nameCourseD"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:tint="#FB6A6A"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints,NotSibling" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.github.captain_miao.optroundcardview.OptRoundCardView>
 
     <TextView
         android:id="@+id/textView16"

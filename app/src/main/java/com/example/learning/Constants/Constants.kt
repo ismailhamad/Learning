@@ -13,7 +13,7 @@ class Constants {
         const val redColor = "#E30425"
         const val greenColor = "#1AD836"
 
-        fun showSnackBar(view: View, title:String, color:String){
+        fun showSnackBar(view:View, title:String, color:String){
             Snackbar.make(view, title, Snackbar.LENGTH_LONG).apply {
                 animationMode = ANIMATION_MODE_SLIDE
                 setBackgroundTint(Color.parseColor(color))

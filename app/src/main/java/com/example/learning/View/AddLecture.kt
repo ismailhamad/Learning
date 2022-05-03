@@ -4,12 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.learning.Firebase.FirebaseSource
-import com.example.learning.Model.lecture
 import com.example.learning.R
 import kotlinx.android.synthetic.main.activity_add_lecture.*
-import java.util.*
+import kotlinx.android.synthetic.main.fragment_add_course.*
 
 class AddLecture : AppCompatActivity() {
     var videoUrl: Uri? = null
@@ -23,7 +21,7 @@ class AddLecture : AppCompatActivity() {
 //        player.setMediaItem(mediaItem)
 //        player.prepare()
 //        player.play()
-        var firebaseSource = FirebaseSource(this)
+        var firebaseSource = FirebaseSource(this,findViewById(android.R.id.content))
 
         video_addLecture.setOnClickListener {
             chooseVideo()

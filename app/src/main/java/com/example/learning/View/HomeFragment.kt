@@ -68,6 +68,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Student).learningViewModel
+
         BottomSheetBehavior.from(sheet).apply {
             peekHeight = 150
             this.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -112,6 +113,7 @@ class HomeFragment : Fragment() {
         setupReceycleView2()
         setupReceycleView3()
         setupReceycleView4()
+
         learningViewModel.MyCourse!!.observe(viewLifecycleOwner, Observer {
             myCourseAD.differ.submitList(it)
         })
@@ -125,6 +127,8 @@ class HomeFragment : Fragment() {
         })
         learningViewModel.courseExplore!!.observe(viewLifecycleOwner, Observer {
             exploerAD.differ.submitList(it)
+            sizeCourse.text = "${it.size.toString()} courses, more coming"
+
         })
         learningViewModel.users?.observe(viewLifecycleOwner, Observer {
             for (item in it) {
@@ -135,13 +139,14 @@ class HomeFragment : Fragment() {
         go_profile.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_profileuserFragment)
         }
-        courseAD.setOnItemClickListener { course, imageView, textView ->
+        courseAD.setOnItemClickListener { course, imageView, textView,Color ->
             val extras = FragmentNavigatorExtras(
                 imageView to course.image.toString(),
                 textView to course.namecourse.toString()
             )
             val Bundle = Bundle().apply {
                 putSerializable("course", course)
+                putIntArray("color",Color)
             }
             findNavController().navigate(
                 R.id.action_homeFragment_to_detailsCourseFragment,
@@ -153,10 +158,11 @@ class HomeFragment : Fragment() {
 
         }
 
-        exploerAD.setOnItemClickListener { course, imageView, textView ->
+        exploerAD.setOnItemClickListener { course, imageView, textView,Color ->
 
             val Bundle = Bundle().apply {
                 putSerializable("course", course)
+                putIntArray("color",Color)
             }
             findNavController().navigate(
                 R.id.action_homeFragment_to_detailsCourseFragment,
@@ -167,6 +173,8 @@ class HomeFragment : Fragment() {
 
 
         }
+
+
         myCourseAD.setOnItemClickListener {
             textView7show.visibility = View.GONE
             learningViewModel.getLecture(it.id.toString())
@@ -230,6 +238,7 @@ class HomeFragment : Fragment() {
 
         }
 
+
         myCourseAD.setOnItemClickListener2 {
             if (course != null) {
                 val Bundle = Bundle().apply {
@@ -282,6 +291,7 @@ class HomeFragment : Fragment() {
         })
 
 
+
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT,
             ItemTouchHelper.UP
@@ -291,7 +301,7 @@ class HomeFragment : Fragment() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                myCourseAD.notifyDataSetChanged()
+               // myCourseAD.notifyDataSetChanged()
                 return true
             }
 
@@ -338,10 +348,7 @@ class HomeFragment : Fragment() {
 
     fun setupReceycleView2() {
         myCourseAD = MyCourseAD()
-
         rrr.apply {
-
-
             adapter = myCourseAD
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 

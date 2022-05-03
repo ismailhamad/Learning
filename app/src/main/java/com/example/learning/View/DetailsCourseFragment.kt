@@ -1,5 +1,6 @@
 package com.example.learning.View
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -50,9 +51,16 @@ class DetailsCourseFragment : Fragment() {
     auth = Firebase.auth
         val navBar: DrawerLayout = requireActivity().findViewById(R.id.drawerLayout)
         navBar.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        val gd = GradientDrawable(
+            GradientDrawable.Orientation.BOTTOM_TOP, intArrayOf(-0x9e9d9f, -0xececed)
+        )
 
 
         val course = args.course
+        val color = args.color
+        gd.setColors(color)
+        cardView.background = gd
+        cardView.cardElevation = 100f
         imageView4.transitionName = course.image
         nameCourseD.transitionName = course.namecourse
 Glide.with(this).load(course.image).into(imageView4)
