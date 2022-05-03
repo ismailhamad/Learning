@@ -13,6 +13,9 @@ import com.example.learning.Model.*
 
 import com.example.learning.View.Student
 import com.example.learning.View.Teacher
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
@@ -32,11 +35,14 @@ import kotlin.collections.ArrayList
 class FirebaseSource(val activity: Activity) {
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
+     lateinit var analytics: FirebaseAnalytics
     lateinit var progressDialog: ProgressDialog
     var coursea: course? = null
     var storge: FirebaseStorage? = null
     private var storageRef: StorageReference? = null
     lateinit var CourseListMutableLiveData: MutableLiveData<List<course>>
+    lateinit var favoriteListMutableLiveData: MutableLiveData<List<course>>
+    lateinit var courseExploreListMutableLiveData: MutableLiveData<List<course>>
     lateinit var searchListMutableLiveData: MutableLiveData<List<course>>
     lateinit var CourseTeacherListMutableLiveData: MutableLiveData<List<course>>
     lateinit var show_StudentListMutableLiveData: MutableLiveData<List<course>>
@@ -50,7 +56,8 @@ class FirebaseSource(val activity: Activity) {
     lateinit var chatListprivMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var usersAddAssiListMutableLiveData: MutableLiveData<HashMap<String, Any?>>
     lateinit var course: course
-
+    lateinit var countUserListprivMutableLiveData: MutableLiveData<Int>
+    lateinit var countUserAddAssigmentListprivMutableLiveData: MutableLiveData<Int>
     var BuyONot: Boolean = false
 
 
@@ -60,23 +67,27 @@ class FirebaseSource(val activity: Activity) {
         progressDialog.setCancelable(false)
         progressDialog.setMessage("Loading...")
         progressDialog.show()
-
+        analytics = Firebase.analytics
         auth = Firebase.auth
         auth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener {
             if (it.isSuccessful) {
                 FirebaseMessaging.getInstance().subscribeToTopic(auth.currentUser!!.uid)
                 if (auth.currentUser!!.isEmailVerified) {
                     if (Email == "joehamad2060@gmail.com") {
-
                         val i = Intent(activity, Teacher::class.java)
                         activity.startActivity(i)
                         progressDialog.dismiss()
                         activity.finish()
+                        analytics.setUserProperty("User_type","Teacher")
                     } else {
                         val i = Intent(activity, Student::class.java)
                         activity.startActivity(i)
                         progressDialog.dismiss()
                         activity.finish()
+                        analytics.setUserProperty("User_type","Student")
+                    }
+                    analytics.logEvent("my_login") {
+                        param("email_name", auth.currentUser!!.email.toString())
                     }
 
                 } else {
@@ -176,6 +187,7 @@ class FirebaseSource(val activity: Activity) {
         progressDialog.setMessage("Loading...")
         progressDialog.show()
         db = Firebase.firestore
+        analytics = Firebase.analytics
         imgeUri?.let {
             storageRef!!.child("image/" + "${course.id}").putFile(it)
                 .addOnSuccessListener { taskSnapshot ->
@@ -189,6 +201,9 @@ class FirebaseSource(val activity: Activity) {
                                     "تم اضافة الكورس",
                                     Constants.greenColor
                                 )
+                                analytics.logEvent("addCourse"){
+                                    param("name_course", course.namecourse!!)
+                                }
 
                             }
                     }
@@ -215,7 +230,7 @@ class FirebaseSource(val activity: Activity) {
         db = Firebase.firestore
         val Courselist = ArrayList<course>()
         CourseListMutableLiveData = MutableLiveData()
-        db.collection("courses").addSnapshotListener { value, error ->
+        db.collection("courses").orderBy("time",Query.Direction.ASCENDING).addSnapshotListener { value, error ->
             for (document in value!!) {
                 val course = document.toObject<course>()
                 Courselist.add(course)
@@ -279,6 +294,7 @@ class FirebaseSource(val activity: Activity) {
     fun addMyCourse(view: View, myCourse: course) {
         db = Firebase.firestore
         auth = Firebase.auth
+        analytics = Firebase.analytics
         progressDialog = ProgressDialog(activity)
         progressDialog.setCancelable(false)
         progressDialog.setMessage("Loading...")
@@ -295,6 +311,9 @@ class FirebaseSource(val activity: Activity) {
                             Constants.greenColor
                         )
                         progressDialog.dismiss()
+                        analytics.logEvent("addMyCourse"){
+                            param("name_course", course.namecourse!!)
+                        }
                     }
 
             } else {
@@ -414,6 +433,7 @@ class FirebaseSource(val activity: Activity) {
     ) {
         storge = Firebase.storage
         storageRef = storge!!.reference
+        analytics = Firebase.analytics
         progressDialog = ProgressDialog(activity)
         progressDialog.setCancelable(false)
         progressDialog.setMessage("Loading...")
@@ -433,6 +453,9 @@ class FirebaseSource(val activity: Activity) {
                             "تم اضافة المحاضرة",
                             Constants.greenColor
                         )
+                    }
+                    analytics.logEvent("addLecture"){
+                        param("name_lecture", lecture.name!!)
                     }
                 }.addOnFailureListener { exception ->
                     progressDialog.dismiss()
@@ -459,6 +482,9 @@ class FirebaseSource(val activity: Activity) {
                             "تم اضافة المحاضرة",
                             Constants.greenColor
                         )
+                        analytics.logEvent("addLecture"){
+                            param("name_lecture", lecture.name!!)
+                        }
 
                     }
                 }.addOnFailureListener { exception ->
@@ -490,6 +516,9 @@ class FirebaseSource(val activity: Activity) {
                                         "تم اضافة المحاضرة",
                                         Constants.greenColor
                                     )
+                                    analytics.logEvent("addLecture"){
+                                        param("name_lecture", lecture.name!!)
+                                    }
 
                                 }
                             }
@@ -646,6 +675,7 @@ class FirebaseSource(val activity: Activity) {
 
     fun seeLecture(view: View, document: String, documentLecture: String) {
         db = Firebase.firestore
+        analytics = Firebase.analytics
         db.collection("courses/${document}/lecture/").document(documentLecture).get()
             .addOnSuccessListener {
                 if (it.get("seeLecture") == true) {
@@ -656,6 +686,9 @@ class FirebaseSource(val activity: Activity) {
                         "تم اخفاء المحاضرة",
                         Constants.greenColor
                     )
+                    analytics.logEvent("seeLecture"){
+                        param("name_lecture", it.get("name").toString())
+                    }
                 } else {
                     db.collection("courses/${document}/lecture/").document(documentLecture)
                         .update("seeLecture", true)
@@ -669,35 +702,6 @@ class FirebaseSource(val activity: Activity) {
             }
     }
 
-
-//    fun updateCourse(course:course,img: Uri?,document:String){
-//        storge = Firebase.storage
-//        storageRef = storge!!.reference
-//        progressDialog = ProgressDialog(activity)
-//        progressDialog.setCancelable(false)
-//        progressDialog.setMessage("Loading...")
-//        progressDialog.show()
-//        db = Firebase.firestore
-//        storageRef!!.child("image/" + "${course.id}").putFile(img!!)
-//            .addOnSuccessListener { taskSnapshot ->
-//                progressDialog.dismiss()
-//                taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
-//                    course.image = uri.toString()
-//                    db.collection("courses").document(document).update(course.getCourseHashMap())
-//                        .addOnSuccessListener {
-//                            Toast.makeText(activity, "تم تعديل الكورس", Toast.LENGTH_LONG).show()
-//                        }
-//                }
-//            }.addOnFailureListener { exception ->
-//                progressDialog.dismiss()
-//                Toast.makeText(activity, "filedUploadvideo", Toast.LENGTH_LONG).show()
-//
-//            }.addOnProgressListener {
-//                val progress: Double =
-//                    100.0 * it.bytesTransferred / it.totalByteCount
-//                progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
-//            }
-//    }
 
     fun deleteCourse(view: View, document: String) {
         storge = Firebase.storage
@@ -726,6 +730,7 @@ class FirebaseSource(val activity: Activity) {
     ) {
         storge = Firebase.storage
         storageRef = storge!!.reference
+        analytics = Firebase.analytics
         progressDialog = ProgressDialog(activity)
         progressDialog.setCancelable(false)
         progressDialog.setMessage("Loading...")
@@ -744,6 +749,9 @@ class FirebaseSource(val activity: Activity) {
                         "تم اضافة الواجب",
                         Constants.greenColor
                     )
+                    analytics.logEvent("addAssignment"){
+                        param("name_Assignment", assignment.name.toString())
+                    }
                 }
             }.addOnFailureListener { exception ->
                 progressDialog.dismiss()
@@ -780,7 +788,7 @@ class FirebaseSource(val activity: Activity) {
                 taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
                     assignment.file = uri.toString()
                     db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment")
-                        .document(assignment.id.toString())
+                        .document(documentAssignment)
                         .update(assignment.getAssignmentHashMap())
                     Constants.showSnackBar(
                         view,
@@ -1015,6 +1023,7 @@ class FirebaseSource(val activity: Activity) {
         progressDialog.setMessage("Loading...")
         progressDialog.show()
         db = Firebase.firestore
+        analytics = Firebase.analytics
         var data = hashMapOf<String, Any>(
             "id" to users.id!!,
             "name" to users.name!!,
@@ -1036,6 +1045,9 @@ class FirebaseSource(val activity: Activity) {
                         "تم تسليم الواجب",
                         Constants.greenColor
                     )
+                    analytics.logEvent("userAddAssignment"){
+                        param("name_User", users.name)
+                    }
                 }
             }.addOnFailureListener { exception ->
                 progressDialog.dismiss()
@@ -1170,10 +1182,127 @@ class FirebaseSource(val activity: Activity) {
                 Courselist.add(course)
                 searchListMutableLiveData.postValue(Courselist)
             }
+            analytics.logEvent("searchCourse"){
+                param("name_course", course.namecourse!!)
+            }
         }
 
         return searchListMutableLiveData
     }
+
+    fun addFavorite(view:View,course: course, documentUsers: String) {
+        db = Firebase.firestore
+        analytics = Firebase.analytics
+        db.collection("users/${documentUsers}/Favorite").document(course.id!!)
+            .set(course).addOnSuccessListener {
+                Constants.showSnackBar(
+                    view,
+                    "تم اضافة الكورس الى المفضلة",
+                    Constants.greenColor
+                )
+                analytics.logEvent("addFavorite"){
+                    param("name_course", course.namecourse!!)
+                }
+            }.addOnFailureListener {
+                Constants.showSnackBar(
+                    view,
+                    "فشل اضافة الكورس الى المفضلة",
+                    Constants.redColor
+                )
+            }
+    }
+
+    fun getFavorite(documentUsers: String): MutableLiveData<List<course>> {
+        db = Firebase.firestore
+        val favoritelist = ArrayList<course>()
+        favoriteListMutableLiveData = MutableLiveData()
+        db.collection("users/${documentUsers}/Favorite").addSnapshotListener { value, error ->
+            for (document in value!!) {
+                val course = document.toObject<course>()
+                favoritelist.add(course)
+                favoriteListMutableLiveData.postValue(favoritelist)
+            }
+
+
+        }
+
+        return favoriteListMutableLiveData
+
+    }
+
+    fun getCourseExplore(): MutableLiveData<List<course>> {
+        db = Firebase.firestore
+        val Courselist = ArrayList<course>()
+        courseExploreListMutableLiveData = MutableLiveData()
+        db.collection("courses").orderBy("time",Query.Direction.DESCENDING).addSnapshotListener { value, error ->
+            for (document in value!!) {
+                val course = document.toObject<course>()
+                Courselist.add(course)
+                courseExploreListMutableLiveData.postValue(Courselist)
+            }
+
+
+        }
+
+        return courseExploreListMutableLiveData
+
+    }
+
+    fun deleteFavorite(view:View,documentUsers: String,documentCourses: String) {
+        db = Firebase.firestore
+        db.collection("users/${documentUsers}/Favorite").document(documentCourses).delete()
+            .addOnSuccessListener {
+                Constants.showSnackBar(
+                    view,
+                    "تم حذف الكورس من المفضلة",
+                    Constants.greenColor
+                )
+            }.addOnFailureListener {
+                Constants.showSnackBar(
+                    view,
+                    "فشل حذف الكورس",
+                    Constants.redColor
+                )
+            }
+    }
+
+    fun getCountUserShowLecture(
+        documentCourses: String,
+        documentLecture: String,
+    ): MutableLiveData<Int> {
+        db = Firebase.firestore
+        var count = 0
+        countUserListprivMutableLiveData = MutableLiveData()
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/users").get().addOnSuccessListener {
+            for (i in it){
+                countUserListprivMutableLiveData.postValue(count++)
+            }
+        }
+
+        return countUserListprivMutableLiveData
+
+    }
+
+    fun getCountUserAddAssigment(
+        documentCourses: String,
+        documentLecture: String,
+        documentAssignment: String
+    ): MutableLiveData<Int> {
+        db = Firebase.firestore
+        auth = Firebase.auth
+        countUserAddAssigmentListprivMutableLiveData = MutableLiveData()
+        var count = 0
+            db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment").get().addOnSuccessListener {
+                for (i in it){
+                    Log.e("aa","name ddd ${i.get("id")}")
+                    countUserAddAssigmentListprivMutableLiveData.postValue(++count)
+                }
+                }
+
+        return countUserAddAssigmentListprivMutableLiveData
+
+    }
+
 
 
 }

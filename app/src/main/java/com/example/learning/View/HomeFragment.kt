@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.transition.TransitionInflater
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ import com.example.learning.Model.myCourse
 import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.ViewModel.LearningViewModel
+import com.google.android.gms.ads.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.FirebaseAuth
@@ -51,7 +53,7 @@ class HomeFragment : Fragment() {
     var idCourse: String? = ""
     var users: users? = null
     var serach: String? = null
-
+    lateinit var mAdView : AdView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,8 +72,37 @@ class HomeFragment : Fragment() {
             peekHeight = 150
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
+        MobileAds.initialize(activity) {}
+
+        val adRequest = AdRequest.Builder().build()
+        adViewHome.loadAd(adRequest)
+
+        adViewHome.adListener = object: AdListener() {
+            override fun onAdLoaded() {
+                Log.e("aa","onAdLoaded")
+            }
+
+            override fun onAdFailedToLoad(adError : LoadAdError) {
+                Log.e("aa","onAdFailedToLoad  ${adError.message}")
+            }
+
+            override fun onAdOpened() {
+                Log.e("aa","onAdOpened")
+
+            }
+
+            override fun onAdClicked() {
+                Log.e("aa","onAdClicked")
+            }
+
+            override fun onAdClosed() {
+                Log.e("aa","onAdClosed")
+            }
+        }
+
         val uuid = UUID.randomUUID()
         learningViewModel.getCourse()
+        learningViewModel.getCourseExplore()
 
         //  navBar.visibility=View.VISIBLE
         learningViewModel.getMyCourse()
@@ -90,6 +121,9 @@ class HomeFragment : Fragment() {
         }
         learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
             courseAD.differ.submitList(it)
+//            exploerAD.differ.submitList(it)
+        })
+        learningViewModel.courseExplore!!.observe(viewLifecycleOwner, Observer {
             exploerAD.differ.submitList(it)
         })
         learningViewModel.users?.observe(viewLifecycleOwner, Observer {

@@ -19,6 +19,7 @@ private val learningRepository: LearningRepository
 ):ViewModel() {
 
     var Course: MutableLiveData<List<course>>? = null
+    var courseExplore: MutableLiveData<List<course>>? = null
     var users: MutableLiveData<List<users>>? = null
     var usersLectureMu: MutableLiveData<List<users>>? = null
     var CourseT: MutableLiveData<List<course>>? = null
@@ -30,7 +31,7 @@ private val learningRepository: LearningRepository
     var assignment: MutableLiveData<List<Assignment>>? = null
     var userADDASS = MutableLiveData<HashMap<String, Any?>>()
     var BuyNot:Boolean?=null
-
+    var countUser: MutableLiveData<Int>? = null
    init {
      //  getUser()
 //   //
@@ -174,5 +175,22 @@ private val learningRepository: LearningRepository
     }
     fun deleteMessagePrivate(documentUsers: String,documentChat:String) {
         learningRepository.deleteMessagePrivate(documentUsers, documentChat)
+    }
+
+
+    fun addFavorite(view:View,course: course, documentUsers: String) {
+        learningRepository.addFavorite(view,course, documentUsers)
+    }
+    fun deleteFavorite(view:View,documentUsers: String,documentCourses: String) {
+        learningRepository.deleteFavorite(view,documentUsers, documentCourses)
+    }
+    fun getFavorite(documentUsers: String) {
+        learningRepository.getFavorite(documentUsers)
+    }
+    fun getCourseExplore() {
+        courseExplore = learningRepository.getCourseExplore()
+    }
+    fun getCountUserShowLecture(documentCourses: String,documentLecture: String) {
+        countUser  = learningRepository.getCountUserShowLecture(documentCourses,documentLecture)
     }
 }

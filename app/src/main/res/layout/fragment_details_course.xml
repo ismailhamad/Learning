@@ -62,6 +62,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/btn_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="180dp"
+                android:src="@drawable/ic_baseline_favorite_24"
+                app:layout_constraintTop_toBottomOf="@id/imageView4"
+                app:layout_constraintStart_toEndOf="@id/nameCourseD"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints,NotSibling" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

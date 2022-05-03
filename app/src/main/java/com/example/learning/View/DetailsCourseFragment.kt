@@ -86,6 +86,11 @@ learningViewModel.users!!.observe(viewLifecycleOwner, Observer { it->
 
         }
 
+        btn_favorite.setOnClickListener {
+            learningViewModel.addFavorite(view,course,users!!.id!!)
+
+        }
+
 
     }
 

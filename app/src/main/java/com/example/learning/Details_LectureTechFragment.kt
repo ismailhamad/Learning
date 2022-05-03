@@ -4,6 +4,7 @@ import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learning.Adapter.assigmentAD
+import com.example.learning.Firebase.FirebaseSource
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.android.exoplayer2.ExoPlayer
@@ -50,6 +52,10 @@ val args:Details_LectureTechFragmentArgs by navArgs()
             MediaItem.fromUri(Uri.parse("${lecture.video}"))
         player.setMediaItem(mediaItem)
         player.prepare()
+        val firebaseSource=FirebaseSource(requireActivity())
+        Log.e("aaa","count user ${firebaseSource.getCountUserShowLecture(idCourse.id!!,lecture.id!!).value}")
+        learningViewModel.getCountUserShowLecture(idCourse.id!!,lecture.id!!)
+        Log.e("aaa","count user ${learningViewModel.countUser!!.value}")
 
         if (lecture.file==""){
             pdfTech.visibility=View.GONE

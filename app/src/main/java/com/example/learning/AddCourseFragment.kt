@@ -47,7 +47,7 @@ lateinit var ArrayList:ArrayList<users>
             if (Text_NameCourse.text.isNotEmpty() && Text_description.text.isNotEmpty() && imgUrl != null){
                 learningViewModel.AddCourse(view,course(
                     UUID.randomUUID().toString(),Text_NameCourse.text.toString(),Text_description.text.toString(),
-                    imgUrl.toString(),ArrayList as ArrayList<Any>,nametecher,auth.currentUser!!.uid),
+                    imgUrl.toString(),System.currentTimeMillis(),ArrayList as ArrayList<Any>,nametecher,auth.currentUser!!.uid),
                     imgUrl
                 )
             }else{

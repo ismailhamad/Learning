@@ -10,11 +10,12 @@ class course :Serializable{
     var idTeacher:String?=""
     var users:List<Any>?=null
     var techer:String?=""
+    var time:Long?=0
 
   constructor(){
 
   }
-    constructor(id:String?,namecourse:String?,description:String?,image:String?,users:List<Any>?,techer:String?,idTeacher:String?){
+    constructor(id:String?,namecourse:String?,description:String?,image:String?,time:Long,users:List<Any>?,techer:String?,idTeacher:String?){
         this.id=id
         this.namecourse=namecourse
         this.description=description
@@ -22,6 +23,7 @@ class course :Serializable{
         this.users=users
         this.techer=techer
         this.idTeacher=idTeacher
+        this.time=time
     }
 
 //    fun getCourseHashMap(): HashMap<String, Any?> {

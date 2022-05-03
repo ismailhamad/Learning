@@ -41,5 +41,9 @@ class LearningRepository(
     fun getMessagePrivate(documentUsers: String) = firebaseSource.getMessagePrivate(documentUsers)
     fun deleteMessageCourse(documentMyCourses: String,documentChat:String) = firebaseSource.deleteMessageCourse(documentMyCourses, documentChat)
     fun deleteMessagePrivate(documentUsers: String,documentChat:String) = firebaseSource.deleteMessagePrivate(documentUsers, documentChat)
-
+    fun addFavorite(view:View,course: course, documentUsers: String) = firebaseSource.addFavorite(view,course,documentUsers)
+    fun getFavorite(documentUsers: String) = firebaseSource.getFavorite(documentUsers)
+    fun deleteFavorite(view:View,documentUsers: String,documentCourses: String) = firebaseSource.deleteFavorite(view,documentUsers,documentCourses)
+    fun getCourseExplore() = firebaseSource.getCourseExplore()
+    fun getCountUserShowLecture(documentCourses: String,documentLecture: String) = firebaseSource.getCountUserShowLecture(documentCourses,documentLecture)
 }
