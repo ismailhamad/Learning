@@ -16,6 +16,7 @@ import com.example.learning.ViewModel.LearningViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.fragment_add_assigment.*
 import kotlinx.android.synthetic.main.fragment_add_course.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,6 +49,7 @@ lateinit var ArrayList:ArrayList<users>
                     imgUrl.toString(),System.currentTimeMillis(),ArrayList as ArrayList<Any>,nametecher,auth.currentUser!!.uid),
                     imgUrl
                 )
+                cleanText()
             }else{
                 Constants.showSnackBar(
                     view, "إملا الحقول المطلوبة",
@@ -77,6 +79,12 @@ lateinit var ArrayList:ArrayList<users>
             image_course.setImageURI(imgUrl)
             //Glide.with(this).load(imgUrl).into(img_AddImgCourse)
         }
+    }
+
+    fun cleanText(){
+        Text_NameCourse.text = null
+        Text_description.text = null
+        image_course.setImageURI(null)
     }
 
 

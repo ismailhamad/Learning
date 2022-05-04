@@ -17,6 +17,7 @@ import com.example.learning.R
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
 import kotlinx.android.synthetic.main.fragment_add_assigment.*
+import kotlinx.android.synthetic.main.fragment_add_lecture.*
 import java.util.*
 
 
@@ -36,7 +37,6 @@ lateinit var learningViewModel: LearningViewModel
         Add_Assigment.setOnClickListener {
             if(Text_NameAssig.text.toString().isNotEmpty() && Text_descriptionAssig.text.toString().isNotEmpty()){
                 learningViewModel.addAssignment(view,Assignment(UUID.randomUUID().toString(),Text_NameAssig.text.toString(),Text_descriptionAssig.text.toString(),fileUri.toString()),idCourse.id.toString(),idlecture, fileUri!!)
-
                 for (users in idCourse.users!!){
                     users as HashMap<String, users>
                     if (users.get("id").toString()!=""){
@@ -49,6 +49,7 @@ lateinit var learningViewModel: LearningViewModel
                     }
 
                 }
+                cleanText()
 
             }else{
                 Constants.showSnackBar(
@@ -75,6 +76,11 @@ lateinit var learningViewModel: LearningViewModel
             fileUri = data.data
             Text_pdfAssig.append(fileUri.toString())
         }
+    }
+    fun cleanText(){
+        Text_NameAssig.text = null
+        Text_descriptionAssig.text = null
+        Text_pdfAssig.text = null
     }
 
 

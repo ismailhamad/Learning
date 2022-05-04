@@ -23,26 +23,29 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
     var videoUrl: Uri? = null
     var fileUri: Uri? = null
     val args: AddLectureFragmentArgs by navArgs()
-    lateinit var idLecture:UUID
+    lateinit var idLecture: UUID
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Teacher).learningViewModel
-       val course = args.idCourseL
-idLecture = UUID.randomUUID()
+        val course = args.idCourseL
+        idLecture = UUID.randomUUID()
 
 
         Go_to_AddAssi.setOnClickListener {
-            val Bundle=Bundle().apply {
-               putString("idlectureAssi",idLecture.toString())
-                putSerializable("idCourseAssi",course)
+            val Bundle = Bundle().apply {
+                putString("idlectureAssi", idLecture.toString())
+                putSerializable("idCourseAssi", course)
             }
 
-findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragment,Bundle)
+            findNavController().navigate(
+                R.id.action_addLectureFragment_to_addAssigmentFragment,
+                Bundle
+            )
         }
 
         Add_lect.setOnClickListener {
             var time = System.currentTimeMillis()
-            Log.e("aaa","time $time")
+            Log.e("aaa", "time $time")
             if (videoUrl != null && fileUri == null) {
                 if (Text_NameLecture.text.isNotEmpty() && Text_descriptionLecture.text.isNotEmpty()) {
                     learningViewModel.addLecture(
@@ -61,6 +64,7 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
                         course.id.toString(),
                         "5000"
                     )
+                    cleanText()
                 } else {
                     Constants.showSnackBar(
                         view, "إملا الحقول المطلوبة",
@@ -83,6 +87,7 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
                         ), Uri.parse(""),
                         fileUri, course.id.toString(), "4000"
                     )
+                    cleanText()
                 } else {
                     Constants.showSnackBar(
                         view, "إملا الحقول المطلوبة",
@@ -105,6 +110,7 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
                             fileUri.toString()
                         ), videoUrl, fileUri, course.id.toString(), "6000"
                     )
+                    cleanText()
                 } else {
                     Constants.showSnackBar(
                         view, "إملا الحقول المطلوبة",
@@ -149,6 +155,15 @@ findNavController().navigate(R.id.action_addLectureFragment_to_addAssigmentFragm
             fileUri = data.data
             Text_pdfLecture.append(fileUri.toString())
         }
+    }
+
+    fun cleanText(){
+        idLecture = UUID.randomUUID()
+        Text_NameLecture.text = null
+        Text_descriptionLecture.text = null
+        Text_VideoLecture.text = null
+        Text_pdfLecture.text = null
+
     }
 
 

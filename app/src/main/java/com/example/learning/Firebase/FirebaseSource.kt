@@ -5,11 +5,14 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation.findNavController
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.*
+import com.example.learning.R
 
 import com.example.learning.View.student.Student
 import com.example.learning.View.Teacher
@@ -34,7 +37,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import kotlin.collections.ArrayList
 
-class FirebaseSource(val activity: Activity,val vieww: View) {
+class FirebaseSource(val activity: Activity, val vieww: View) {
     lateinit var db: FirebaseFirestore
     lateinit var auth: FirebaseAuth
     lateinit var analytics: FirebaseAnalytics
@@ -58,7 +61,7 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
     lateinit var chatListprivMutableLiveData: MutableLiveData<List<Chat>>
     lateinit var usersAddAssiListMutableLiveData: MutableLiveData<HashMap<String, Any?>>
     lateinit var usersAllAddAssiListMutableLiveData: MutableLiveData<List<HashMap<String, Any?>>>
-     var course: course?=null
+    var course: course? = null
     lateinit var countUserListprivMutableLiveData: MutableLiveData<Int>
     lateinit var countUserAddAssigmentListprivMutableLiveData: MutableLiveData<Int>
     var BuyONot: Boolean = false
@@ -81,13 +84,13 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                         activity.startActivity(i)
                         progressDialog.dismiss()
                         activity.finish()
-                        analytics.setUserProperty("User_type","Teacher")
+                        analytics.setUserProperty("User_type", "Teacher")
                     } else {
                         val i = Intent(activity, Student::class.java)
                         activity.startActivity(i)
                         progressDialog.dismiss()
                         activity.finish()
-                        analytics.setUserProperty("User_type","Student")
+                        analytics.setUserProperty("User_type", "Student")
                     }
                     analytics.logEvent("my_login") {
                         param("email_name", auth.currentUser!!.email.toString())
@@ -204,7 +207,7 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                                     "تم اضافة الكورس",
                                     Constants.greenColor
                                 )
-                                analytics.logEvent("addCourse"){
+                                analytics.logEvent("addCourse") {
                                     param("name_course", course.namecourse!!)
                                 }
 
@@ -233,16 +236,17 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
         db = Firebase.firestore
         val Courselist = ArrayList<course>()
         CourseListMutableLiveData = MutableLiveData()
-        db.collection("courses").orderBy("time",Query.Direction.ASCENDING).addSnapshotListener { value, error ->
-            Courselist.clear()
-            for (document in value!!) {
-                val course = document.toObject<course>()
-                Courselist.add(course)
-                CourseListMutableLiveData.postValue(Courselist)
+        db.collection("courses").orderBy("time", Query.Direction.ASCENDING)
+            .addSnapshotListener { value, error ->
+                Courselist.clear()
+                for (document in value!!) {
+                    val course = document.toObject<course>()
+                    Courselist.add(course)
+                    CourseListMutableLiveData.postValue(Courselist)
+                }
+
+
             }
-
-
-        }
 
         return CourseListMutableLiveData
 
@@ -315,9 +319,9 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                             Constants.greenColor
                         )
                         progressDialog.dismiss()
-//                        analytics.logEvent("addMyCourse"){
-//                            param("name_course", course!!.namecourse!!)
-//                        }
+                        analytics.logEvent("addMyCourse") {
+                            param("name_course", myCourse!!.namecourse!!)
+                        }
                     }
 
             } else {
@@ -459,7 +463,7 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                             Constants.greenColor
                         )
                     }
-                    analytics.logEvent("addLecture"){
+                    analytics.logEvent("addLecture") {
                         param("name_lecture", lecture.name!!)
                     }
                 }.addOnFailureListener { exception ->
@@ -487,7 +491,7 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                             "تم اضافة المحاضرة",
                             Constants.greenColor
                         )
-                        analytics.logEvent("addLecture"){
+                        analytics.logEvent("addLecture") {
                             param("name_lecture", lecture.name!!)
                         }
 
@@ -521,7 +525,7 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                                         "تم اضافة المحاضرة",
                                         Constants.greenColor
                                     )
-                                    analytics.logEvent("addLecture"){
+                                    analytics.logEvent("addLecture") {
                                         param("name_lecture", lecture.name!!)
                                     }
 
@@ -543,8 +547,6 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                 }
 
         }
-
-
     }
 
     fun updateLecture(
@@ -691,7 +693,7 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                         "تم اخفاء المحاضرة",
                         Constants.greenColor
                     )
-                    analytics.logEvent("seeLecture"){
+                    analytics.logEvent("seeLecture") {
                         param("name_lecture", it.get("name").toString())
                     }
                 } else {
@@ -754,7 +756,7 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                         "تم اضافة الواجب",
                         Constants.greenColor
                     )
-                    analytics.logEvent("addAssignment"){
+                    analytics.logEvent("addAssignment") {
                         param("name_Assignment", assignment.name.toString())
                     }
                 }
@@ -859,8 +861,8 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
         db = Firebase.firestore
         storge = Firebase.storage
         storageRef = storge!!.reference
-        if (imgeUri != null){
-            Log.e("aa","imgeUri Fi $imgeUri")
+        if (imgeUri != null) {
+            Log.e("aa", "imgeUri Fi $imgeUri")
             storageRef!!.child("imageMessageCourse/" + "${chat.id}").putFile(imgeUri)
                 .addOnSuccessListener { taskSnapshot ->
                     progressDialog.dismiss()
@@ -875,13 +877,12 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                         100.0 * it.bytesTransferred / it.totalByteCount
                     progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                 }
-        }else{
-            Log.e("aa","imgeUri els $imgeUri")
+        } else {
+            Log.e("aa", "imgeUri els $imgeUri")
             progressDialog.dismiss()
             db.collection("myCourse/${documentMyCourses}/message").document(chat.id)
                 .set(chat.getMessageHashMap())
         }
-
 
 
     }
@@ -1022,8 +1023,9 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
         auth = Firebase.auth
         val arrayList = arrayListOf<HashMap<String, Any?>>()
         usersAllAddAssiListMutableLiveData = MutableLiveData()
-            db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment").addSnapshotListener { value, error ->
-                for (i in value!!){
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
+            .addSnapshotListener { value, error ->
+                for (i in value!!) {
                     val idusers = i?.get("id")
                     val file = i?.get("file")
                     val name = i?.get("name")
@@ -1037,20 +1039,10 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                     usersAllAddAssiListMutableLiveData?.postValue(arrayList)
                 }
 
-                }
+            }
         return usersAllAddAssiListMutableLiveData
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
     fun userAddAssignment(
@@ -1091,7 +1083,7 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                         "تم تسليم الواجب",
                         Constants.greenColor
                     )
-                    analytics.logEvent("userAddAssignment"){
+                    analytics.logEvent("userAddAssignment") {
                         param("name_User", users.name)
                     }
                 }
@@ -1223,21 +1215,22 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
         analytics = Firebase.analytics
         val Courselist = ArrayList<course>()
         searchListMutableLiveData = MutableLiveData()
-        db.collection("courses").whereEqualTo("namecourse",text).addSnapshotListener { value, error ->
-            for (item in value!!) {
-                val course = item.toObject<course>()
-                Courselist.add(course)
-                searchListMutableLiveData.postValue(Courselist)
+        db.collection("courses").whereEqualTo("namecourse", text)
+            .addSnapshotListener { value, error ->
+                for (item in value!!) {
+                    val course = item.toObject<course>()
+                    Courselist.add(course)
+                    searchListMutableLiveData.postValue(Courselist)
+                }
+                analytics.logEvent("searchCourse") {
+                    param("name_course", course?.namecourse!!)
+                }
             }
-            analytics.logEvent("searchCourse"){
-                param("name_course", course?.namecourse!!)
-            }
-        }
 
         return searchListMutableLiveData
     }
 
-    fun addFavorite(view:View,course: course, documentUsers: String) {
+    fun addFavorite(view: View, course: course, documentUsers: String) {
         db = Firebase.firestore
         analytics = Firebase.analytics
         db.collection("users/${documentUsers}/Favorite").document(course.id!!)
@@ -1247,7 +1240,7 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
                     "تم اضافة الكورس الى المفضلة",
                     Constants.greenColor
                 )
-                analytics.logEvent("addFavorite"){
+                analytics.logEvent("addFavorite") {
                     param("name_course", course.namecourse!!)
                 }
             }.addOnFailureListener {
@@ -1282,21 +1275,22 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
         db = Firebase.firestore
         val Courselist = ArrayList<course>()
         courseExploreListMutableLiveData = MutableLiveData()
-        db.collection("courses").orderBy("time",Query.Direction.DESCENDING).addSnapshotListener { value, error ->
-            for (document in value!!) {
-                val course = document.toObject<course>()
-                Courselist.add(course)
-                courseExploreListMutableLiveData.postValue(Courselist)
+        db.collection("courses").orderBy("time", Query.Direction.DESCENDING)
+            .addSnapshotListener { value, error ->
+                for (document in value!!) {
+                    val course = document.toObject<course>()
+                    Courselist.add(course)
+                    courseExploreListMutableLiveData.postValue(Courselist)
+                }
+
+
             }
-
-
-        }
 
         return courseExploreListMutableLiveData
 
     }
 
-    fun deleteFavorite(view:View,documentUsers: String,documentCourses: String) {
+    fun deleteFavorite(view: View, documentUsers: String, documentCourses: String) {
         db = Firebase.firestore
         db.collection("users/${documentUsers}/Favorite").document(documentCourses).delete()
             .addOnSuccessListener {
@@ -1321,11 +1315,12 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
         db = Firebase.firestore
         var count = 0
         countUserListprivMutableLiveData = MutableLiveData()
-        db.collection("courses/${documentCourses}/lecture/${documentLecture}/users").get().addOnSuccessListener {
-            for (i in it){
-                countUserListprivMutableLiveData.postValue(count++)
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/users").get()
+            .addOnSuccessListener {
+                for (i in it) {
+                    countUserListprivMutableLiveData.postValue(count++)
+                }
             }
-        }
 
         return countUserListprivMutableLiveData
 
@@ -1340,17 +1335,17 @@ class FirebaseSource(val activity: Activity,val vieww: View) {
         auth = Firebase.auth
         countUserAddAssigmentListprivMutableLiveData = MutableLiveData()
         var count = 0
-        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment").get().addOnSuccessListener {
-            for (i in it){
-                Log.e("aa","name ddd ${i.get("id")}")
-                countUserAddAssigmentListprivMutableLiveData.postValue(++count)
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
+            .get().addOnSuccessListener {
+                for (i in it) {
+                    Log.e("aa", "name ddd ${i.get("id")}")
+                    countUserAddAssigmentListprivMutableLiveData.postValue(++count)
+                }
             }
-        }
 
         return countUserAddAssigmentListprivMutableLiveData
 
     }
-
 
 
 }

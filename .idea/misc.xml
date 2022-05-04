@@ -5,6 +5,16 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.34205128205128205" />
         <entry key="../../../Library/Android/sdk/platforms/android-32/data/res/layout/auto_complete_list.xml" value="0.1" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/activity_add_assignment.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/activity_add_course.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_add_assigment.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_add_course.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_add_lecture.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_all_user_assigment.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_bottom_sheet_lec.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_chat.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_update_assigment.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_update_lecture.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_assignment.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_course.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_lecture.xml" value="0.24635416666666668" />

@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_addLectureFragment_to_addAssigmentFragment"
             app:destination="@id/addAssigmentFragment" />
+        <action
+            android:id="@+id/action_addLectureFragment_to_detailsCourseTechFragment"
+            app:destination="@id/detailsCourseTechFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateLectureFragment"

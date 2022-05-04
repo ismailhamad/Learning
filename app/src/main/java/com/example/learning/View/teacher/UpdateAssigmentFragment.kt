@@ -11,6 +11,7 @@ import com.example.learning.Model.Assignment
 import com.example.learning.R
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
+import kotlinx.android.synthetic.main.fragment_add_course.*
 import kotlinx.android.synthetic.main.fragment_update_assigment.*
 
 
