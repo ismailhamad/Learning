@@ -15,7 +15,7 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-        val repository = LearningRepository(FirebaseSource(this, viewz))
+        val repository = LearningRepository(FirebaseSource(this, viewz),this)
         val viewModelProviderFactory=LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
 

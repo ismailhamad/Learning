@@ -32,7 +32,7 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
         chRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)))
+        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)),this)
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
         val i = intent.getSerializableExtra("id") as users?

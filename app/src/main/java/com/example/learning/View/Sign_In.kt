@@ -21,7 +21,7 @@ class Sign_In : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)))
+        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)),this)
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
         sign_In.setOnClickListener {

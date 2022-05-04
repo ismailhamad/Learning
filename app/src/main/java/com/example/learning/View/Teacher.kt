@@ -22,7 +22,7 @@ class Teacher : AppCompatActivity() {
        // navView.setupWithNavController(navController)
 
 
-        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)))
+        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)),this)
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
 

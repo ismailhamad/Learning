@@ -22,7 +22,7 @@ class Student : AppCompatActivity() {
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         navView.setupWithNavController(navController)
-        val repository = LearningRepository(FirebaseSource(this, findViewById(android.R.id.content)))
+        val repository = LearningRepository(FirebaseSource(this, findViewById(android.R.id.content)),this)
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
 

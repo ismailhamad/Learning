@@ -23,7 +23,7 @@ class AddAssignment : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_assignment)
-        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)))
+        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)),findViewById(android.R.id.content))
         val viewModelProviderFactory = LearningViewModelProviderFactory(repository)
         learningViewModel =
             ViewModelProvider(this, viewModelProviderFactory).get(LearningViewModel::class.java)

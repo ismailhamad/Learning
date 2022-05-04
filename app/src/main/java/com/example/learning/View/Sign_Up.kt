@@ -24,7 +24,7 @@ class Sign_Up : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
         auth = Firebase.auth
-        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)))
+        val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)),this)
         val viewModelProviderFactory = LearningViewModelProviderFactory(repository)
         learningViewModel =
             ViewModelProvider(this, viewModelProviderFactory).get(LearningViewModel::class.java)
