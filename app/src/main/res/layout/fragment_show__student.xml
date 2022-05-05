@@ -21,4 +21,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_show_student" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView5"
+        android:layout_width="343dp"
+        android:layout_height="301dp"
+
+        android:layout_marginTop="68dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_showS"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_5035qbsq.json" />
+
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="لا يوجد طلاب مشتركين في هذا الكورس"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/animationView5"
+        app:layout_constraintStart_toStartOf="@+id/animationView5"
+        app:layout_constraintTop_toBottomOf="@+id/animationView5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

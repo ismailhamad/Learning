@@ -109,6 +109,7 @@ class HomeFragment : Fragment() {
 
         learningViewModel.MyCourse!!.observe(viewLifecycleOwner, Observer {
             myCourseAD.differ.submitList(it)
+            rrr.adapter?.notifyDataSetChanged()
         })
         imageButton.setOnClickListener {
             val navBar: DrawerLayout = requireActivity().findViewById(R.id.drawerLayout)
@@ -116,12 +117,11 @@ class HomeFragment : Fragment() {
         }
         learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
             courseAD.differ.submitList(it)
+            sizeCourse.text = "${it.size.toString()} courses, more coming"
 //            exploerAD.differ.submitList(it)
         })
         learningViewModel.courseExplore!!.observe(viewLifecycleOwner, Observer {
             exploerAD.differ.submitList(it)
-            sizeCourse.text = "${it.size.toString()} courses, more coming"
-
         })
         learningViewModel.users?.observe(viewLifecycleOwner, Observer {
             for (item in it) {
@@ -172,14 +172,24 @@ class HomeFragment : Fragment() {
             textView7show.visibility = View.GONE
             learningViewModel.getLecture(it.id.toString())
             idCourse = it.id
-
             course = it
             learningViewModel.lecture?.observe(viewLifecycleOwner, Observer {
-
+                animationView7.visibility = View.GONE
+                textView42.visibility = View.GONE
                 lectureAD.differ.submitList(it)
-            })
-        }
+                if (it.isEmpty()){
+                    lectureAD.differ.submitList(null)
+                    animationView7.visibility = View.VISIBLE
+                    textView42.visibility = View.VISIBLE
+                }else{
+                    animationView7.visibility = View.GONE
+                    textView42.visibility = View.GONE
+                    lectureAD.differ.submitList(it)
+                }
 
+            })
+
+        }
 
         lectureAD.setOnItemClickListener { itLec ->
 
@@ -300,14 +310,14 @@ class HomeFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val Course = myCourseAD.differ.currentList[position]
-
-                if (direction == ItemTouchHelper.UP) {
+                    lectureAD.differ.submitList(null)
                     users?.let {
-                        learningViewModel.deleteMyCourse(view, it, Course.id.toString())
+                        learningViewModel.deleteMyCourse(view, it, Course.id!!)
+
 
                     }
 
-                }
+
 
 
             }

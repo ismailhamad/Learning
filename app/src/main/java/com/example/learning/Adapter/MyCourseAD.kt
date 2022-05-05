@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.learning.Model.course
 import com.example.learning.Model.myCourse
 import com.example.learning.R
@@ -24,7 +25,7 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
 
     private val differCallback = object : DiffUtil.ItemCallback<myCourse>() {
         override fun areItemsTheSame(oldItem: myCourse, newItem: myCourse): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.idTeacher == newItem.idTeacher
         }
 
         @SuppressLint("DiffUtilEquals")
@@ -74,6 +75,7 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
 
 
             name_myCourse.text=course.namecourse
+            Glide.with(this).load(course.image).into(imageViewmC)
             setOnClickListener {
                 onItemClickListener?.let { it(course) }
                 rowindex = position

@@ -29,6 +29,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         setupReceycleView()
         learningViewModel.favorite?.observe(viewLifecycleOwner, Observer {
             favoriteAD.differ.submitList(it)
+            rv_fav.adapter?.notifyDataSetChanged()
         })
 
 
@@ -51,6 +52,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
+
                 return true
             }
 
@@ -59,6 +61,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
                 val favorite=favoriteAD.differ.currentList[position]
 
         learningViewModel.deleteFavorite(view,auth.currentUser!!.uid.toString(),favorite.id.toString())
+
 
             }
 

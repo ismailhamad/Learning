@@ -254,6 +254,33 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rrr" />
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationView7"
+                android:layout_width="291dp"
+                android:layout_height="164dp"
+
+                android:layout_marginTop="12dp"
+                android:scaleType="fitCenter"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rrr"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_url="https://assets2.lottiefiles.com/packages/lf20_VqLwPC.json" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="لا يوجد محاضرات حتى الان"
+                android:textColor="#050505"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/textView7show"
+                app:layout_constraintStart_toStartOf="@+id/textView7show"
+                app:layout_constraintTop_toBottomOf="@+id/animationView7" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

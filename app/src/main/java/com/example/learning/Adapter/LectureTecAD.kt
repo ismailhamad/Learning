@@ -47,8 +47,9 @@ class LectureTecAD: RecyclerView.Adapter<LectureTecAD.ViewHolder>() {
                 cc_lectTEC.setCardBackgroundColor(Color.parseColor("#689A9797"))
                 check_seeeTech.setCardBackgroundColor(Color.parseColor("#689A9797"))
             }else{
-
+                name_lectTec.setTextColor(Color.BLACK);
                 cc_lectTEC.setCardBackgroundColor(Color.WHITE)
+                check_seeeTech.setCardBackgroundColor(Color.WHITE)
             }
 
 

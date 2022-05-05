@@ -38,12 +38,17 @@ val args:show_StudentFragmentArgs by navArgs()
                 for (users in item.users!!){
                     users as HashMap<String,users>
                     if (users.get("id").toString()!=""){
+                        animationView5.visibility = View.GONE
+                        textView38.visibility = View.GONE
                         val items = users(users.get("id").toString(),
                             users.get("name").toString(),
                             users.get("lastName").toString(),
                             users.get("email").toString(),null)
                         userss.add(items)
                         showStudentAD.differ.submitList(userss)
+                    }else{
+                        animationView5.visibility = View.VISIBLE
+                        textView38.visibility = View.VISIBLE
                     }
 
                 }

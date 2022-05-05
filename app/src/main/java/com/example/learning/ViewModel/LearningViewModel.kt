@@ -43,7 +43,6 @@ private val learningRepository: LearningRepository
   }
 
      fun getCourse() {
-       Course = MutableLiveData()
    Course = learningRepository.getCourse()
      }
     fun getMyCourse() {
@@ -81,7 +80,7 @@ private val learningRepository: LearningRepository
 //    }
 
 
-    fun updateUsers(view: View,idCourse:String,users: users) = viewModelScope.launch {
+    fun updateUsers(view: View,idCourse:String,users: users)  {
         learningRepository.updateUsers(view,idCourse,users)
     }
 

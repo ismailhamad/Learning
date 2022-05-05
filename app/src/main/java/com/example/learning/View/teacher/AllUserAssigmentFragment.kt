@@ -40,7 +40,14 @@ var pdf:Any?=null
         learningViewModel.getAlluserAddAssigment(idcourse,idlecture,idAssi)
         setupReceyclview()
         learningViewModel.userassi.observe(viewLifecycleOwner, Observer {
-            alluserAssi.differ.submitList(it)
+            if(it.isEmpty()){
+                animationView8.visibility =View.VISIBLE
+                textView44.visibility = View.VISIBLE
+            }else{
+                alluserAssi.differ.submitList(it)
+                animationView8.visibility =View.GONE
+                textView44.visibility = View.GONE
+            }
         })
 
         alluserAssi.setOnItemClickListener {

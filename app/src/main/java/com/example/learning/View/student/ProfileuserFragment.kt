@@ -38,6 +38,7 @@ lateinit var profileCourseAD: profileCourseAD
         setupReceycleview()
         learningViewModel.MyCourse?.observe(viewLifecycleOwner, Observer {
             profileCourseAD.differ.submitList(it)
+            rv_course_profile.adapter?.notifyDataSetChanged()
         })
 
         profileCourseAD.setOnItemClickListener {
@@ -72,7 +73,7 @@ lateinit var profileCourseAD: profileCourseAD
                 val Course = profileCourseAD.differ.currentList[position]
 
                 if (direction == ItemTouchHelper.UP) {
-                    users?.let { learningViewModel.deleteMyCourse(view, it,Course.id.toString())
+                    users?.let { learningViewModel.deleteMyCourse(view, it,Course.id!!)
 
                     }
 

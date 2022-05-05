@@ -83,6 +83,7 @@ class FirebaseSourceCourseTR(val activity: Activity) {
         val Courselist = ArrayList<course>()
         CourseTeacherListMutableLiveData = MutableLiveData()
         db.collection("courses").addSnapshotListener() { result, error ->
+            Courselist.clear()
             for (courses in result!!) {
                 val course = courses!!.toObject<course>()
                 if (uid == course.idTeacher) {

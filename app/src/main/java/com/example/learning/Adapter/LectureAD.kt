@@ -62,17 +62,6 @@ class LectureAD:RecyclerView.Adapter<LectureAD.ViewHolder>() {
                 name_lect.text = lecture.name
                 cc_lect.setCardBackgroundColor(Color.WHITE)
             }
-//            tv_desLecture.text = lecture.description
-//            if (lecture.video != null){
-//                val mediaController = MediaController(context)
-//                mediaController.setAnchorView(video_getLecture)
-//                val uri = Uri.parse("${lecture.video}")
-//                video_getLecture.setMediaController(mediaController)
-//                video_getLecture.setVideoURI(uri)
-//                video_getLecture.requestFocus()
-//            }else{
-//                video_getLecture.visibility = View.INVISIBLE
-//            }
             setOnClickListener {
                 onItemClickListener?.let { it(lecture) }
             }

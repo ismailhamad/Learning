@@ -32,7 +32,6 @@ class FirebaseSourceLectureST(val activity: Activity) {
             .orderBy("time", Query.Direction.ASCENDING)
             .addSnapshotListener { result, error ->
                 val course11 = result!!.toObjects<lecture>()
-
                 LectureListMutableLiveData.postValue(course11)
             }
         return LectureListMutableLiveData

@@ -5,17 +5,6 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.34205128205128205" />
         <entry key="../../../Library/Android/sdk/platforms/android-32/data/res/layout/auto_complete_list.xml" value="0.1" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/activity_add_assignment.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/activity_add_course.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_add_assigment.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_add_course.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_add_lecture.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_all_user_assigment.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_bottom_sheet_lec.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_chat.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_show__student.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_update_assigment.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning/app/src/main/res/layout/fragment_update_lecture.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_assignment.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_course.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_lecture.xml" value="0.24635416666666668" />
@@ -59,7 +48,7 @@
         <entry key="app/src/main/res/layout/fragment_add_assigment.xml" value="0.3306884765624999" />
         <entry key="app/src/main/res/layout/fragment_add_course.xml" value="0.26103871663411454" />
         <entry key="app/src/main/res/layout/fragment_add_lecture.xml" value="0.33574789988354464" />
-        <entry key="app/src/main/res/layout/fragment_all_user_assigment.xml" value="0.3574074074074074" />
+        <entry key="app/src/main/res/layout/fragment_all_user_assigment.xml" value="0.2568862915039063" />
         <entry key="app/src/main/res/layout/fragment_bottom_sheet_lec.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.24655625999872408" />
         <entry key="app/src/main/res/layout/fragment_details__lecture_tech.xml" value="0.2496868160599513" />
@@ -67,18 +56,18 @@
         <entry key="app/src/main/res/layout/fragment_details_course.xml" value="0.34183349609375" />
         <entry key="app/src/main/res/layout/fragment_details_course_tech.xml" value="0.29329274866702776" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.28606193101877136" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1111111111111111" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home_t.xml" value="0.25962219238281253" />
         <entry key="app/src/main/res/layout/fragment_my_course.xml" value="0.2873504638671875" />
         <entry key="app/src/main/res/layout/fragment_profileuser.xml" value="0.24841003417968752" />
-        <entry key="app/src/main/res/layout/fragment_show__student.xml" value="0.22554347826086957" />
+        <entry key="app/src/main/res/layout/fragment_show__student.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_update_assigment.xml" value="0.27595367431640627" />
         <entry key="app/src/main/res/layout/fragment_update_lecture.xml" value="0.29285698207557626" />
         <entry key="app/src/main/res/layout/fragment_w_course.xml" value="0.19767666139464463" />
         <entry key="app/src/main/res/layout/header_nav.xml" value="0.11716688594798791" />
         <entry key="app/src/main/res/layout/item_alluser_ass.xml" value="0.24488525390625002" />
         <entry key="app/src/main/res/layout/item_assigment.xml" value="0.325611382561761" />
-        <entry key="app/src/main/res/layout/item_corse_tech.xml" value="0.41650848388671874" />
+        <entry key="app/src/main/res/layout/item_corse_tech.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_course_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_courses.xml" value="0.259923807779948" />
         <entry key="app/src/main/res/layout/item_exploer.xml" value="0.23301849365234373" />
@@ -86,7 +75,7 @@
         <entry key="app/src/main/res/layout/item_lecture.xml" value="0.2864776611328126" />
         <entry key="app/src/main/res/layout/item_lecture_tech.xml" value="0.3743021647135417" />
         <entry key="app/src/main/res/layout/item_left.xml" value="0.3115942028985507" />
-        <entry key="app/src/main/res/layout/item_mycourse.xml" value="0.45196469968503655" />
+        <entry key="app/src/main/res/layout/item_mycourse.xml" value="0.3373493975903614" />
         <entry key="app/src/main/res/layout/item_right.xml" value="0.2224273681640625" />
         <entry key="app/src/main/res/layout/item_show_student.xml" value="0.2656588347061821" />
         <entry key="app/src/main/res/layout/lecture_item.xml" value="0.3115942028985507" />

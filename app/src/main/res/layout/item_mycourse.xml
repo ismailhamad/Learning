@@ -26,7 +26,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView10"
+                android:id="@+id/imageViewmC"
                 android:layout_width="103dp"
                 android:layout_height="112dp"
                 android:layout_marginTop="15dp"

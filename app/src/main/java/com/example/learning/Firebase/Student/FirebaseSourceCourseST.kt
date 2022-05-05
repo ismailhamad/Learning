@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.graphics.Color
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.course
@@ -65,7 +66,7 @@ class FirebaseSourceCourseST(val activity: Activity) {
         val Courselist = ArrayList<course>()
         show_StudentListMutableLiveData = MutableLiveData()
         db.collection("courses").document(documentCourses).addSnapshotListener() { result, error ->
-
+            Courselist.clear()
             val course = result!!.toObject<course>()
             if (uid == course?.idTeacher) {
                 course.let { Courselist.add(it) }
@@ -81,47 +82,9 @@ class FirebaseSourceCourseST(val activity: Activity) {
 
     }
 
-    fun addMyCourse(view: View, myCourse: course) {
-        db = Firebase.firestore
-        auth = Firebase.auth
-        analytics = Firebase.analytics
-        progressDialog = ProgressDialog(activity)
-        progressDialog.setCancelable(false)
-        progressDialog.setMessage("Loading...")
-        progressDialog.show()
-        var bool = false
-        db.collection("users").document(auth.currentUser!!.uid).get().addOnSuccessListener { it ->
-            val users = it.toObject<users>()
-            if (users!!.numCourse!! < 5) {
-                db.collection("myCourse").document(myCourse.id!!).set(myCourse)
-                    .addOnSuccessListener {
-                        Constants.showSnackBar(
-                            view,
-                            "تم اضافة الكورس",
-                            Constants.greenColor
-                        )
-                        progressDialog.dismiss()
-                        analytics.logEvent("addMyCourse") {
-                            param("name_course", myCourse!!.namecourse!!)
-                        }
-                    }
-
-            } else {
-                //Alert
-                progressDialog.dismiss()
-                Constants.showSnackBar(
-                    view,
-                    "لا يمكن إضافة أكثر من 5 كورسات",
-                    Constants.redColor
-                )
-            }
-
-        }
 
 
-    }
-
-    suspend fun updateUsers(view: View, idCourse: String, users: users) {
+     fun updateUsers(view: View, idCourse: String, users: users) {
         val users = hashMapOf(
             "id" to users.id,
             "name" to users.name,
@@ -141,6 +104,49 @@ class FirebaseSourceCourseST(val activity: Activity) {
 
 
     }
+
+    fun addMyCourse(view: View, myCourse: course) {
+        db = Firebase.firestore
+        auth = Firebase.auth
+        analytics = Firebase.analytics
+        db.collection("users").document(auth.currentUser!!.uid).get().addOnSuccessListener { it ->
+            val users = it.toObject<users>()
+            if (users!!.numCourse!! < 5) {
+                db.collection("myCourse").document(myCourse.id!!).set(myCourse)
+                    .addOnSuccessListener {
+//                        Snackbar.make(view, "تم اضافة الكورس", Snackbar.LENGTH_LONG).apply {
+//                            animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+//                            setBackgroundTint(Color.parseColor(Constants.greenColor))
+//                            setTextColor(Color.parseColor("#FFFFFF"))
+//                            show()
+//                        }
+                        Toast.makeText(activity, "تم اضافة الكورس", Toast.LENGTH_SHORT).show()
+
+                        analytics.logEvent("addMyCourse") {
+                            param("name_course", myCourse!!.namecourse!!)
+                        }
+                    }
+
+            } else {
+                //Alert
+
+                Snackbar.make(view, "لا يمكن اضافة اكثر من ٥ كورسات", Snackbar.LENGTH_LONG).apply {
+                    animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+                    setBackgroundTint(Color.parseColor(Constants.greenColor))
+                    setTextColor(Color.parseColor("#FFFFFF"))
+                    show()
+                }
+            }
+
+        }
+
+
+    }
+
+
+
+
+
 
     fun getMyCourse(): MutableLiveData<List<myCourse>> {
         db = Firebase.firestore

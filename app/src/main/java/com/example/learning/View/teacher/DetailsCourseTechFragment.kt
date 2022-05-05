@@ -37,6 +37,7 @@ learningViewModel =(activity as Teacher).learningViewModel
         nameCorseT.text =course.namecourse
         learningViewModel.lectureT!!.observe(viewLifecycleOwner, Observer {
             LectureTecAD.differ.submitList(it)
+            rv_lectureTech.adapter?.notifyDataSetChanged()
         })
         Go_Add_Lect.setOnClickListener {
             val Bundle=Bundle().apply {

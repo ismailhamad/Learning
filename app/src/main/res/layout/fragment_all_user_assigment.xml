@@ -17,4 +17,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_alluser_ass" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView8"
+        android:layout_width="362dp"
+        android:layout_height="274dp"
+
+        android:layout_marginTop="100dp"
+        android:scaleType="fitCenter"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets2.lottiefiles.com/packages/lf20_VqLwPC.json" />
+
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="لا يوجد تسليمات حتى الان"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/animationView8"
+        app:layout_constraintStart_toStartOf="@+id/animationView8"
+        app:layout_constraintTop_toBottomOf="@+id/animationView8" />
 </androidx.constraintlayout.widget.ConstraintLayout>

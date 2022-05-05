@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Adapter.CourseAD
+import com.example.learning.Adapter.CourseTechAD
 import com.example.learning.R
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_home_t.*
 
 class HomeTFragment : Fragment(R.layout.fragment_home_t) {
     lateinit var learningViewModel: LearningViewModel
-    lateinit var CourseTechAD: CourseAD
+    lateinit var CourseTechAD: CourseTechAD
     lateinit var auth: FirebaseAuth
     var idCourse: String = ""
 
@@ -43,8 +44,9 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
 
         learningViewModel.CourseT?.observe(viewLifecycleOwner, Observer {
             CourseTechAD.differ.submitList(it)
+            recyclerView.adapter?.notifyDataSetChanged()
         })
-        CourseTechAD.setOnItemClickListener { course,image,text,Color ->
+        CourseTechAD.setOnItemClickListener { course,Color ->
             val Bundle = Bundle().apply {
                 putSerializable("courseTech", course)
             }
@@ -59,7 +61,7 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
 
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT,
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN
+            ItemTouchHelper.UP
         ) {
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -75,19 +77,9 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
                 val Course = CourseTechAD.differ.currentList[position]
                 //   viewModel.deleteNote(article)
                 if (direction == ItemTouchHelper.UP) {
-                    Toast.makeText(activity, "up up", Toast.LENGTH_SHORT).show()
-//                    val Bundle= Bundle().apply {
-//                        putSerializable("updateLecture",lecture)
-//                        putString("idcoursee",course.id)
-//                    }
-//                    findNavController().navigate(R.id.action_detailsCourseTechFragment_to_updateLectureFragment,Bundle)
-                } else if (direction == ItemTouchHelper.DOWN) {
-                    // learningViewModel.deleteLecture(view,course.id.toString(),lecture.id.toString())
                     learningViewModel.deleteCourse(view, Course.id.toString())
 
-
                 }
-                // Toast.makeText(activity, "DOWN up", Toast.LENGTH_SHORT).show()
 
             }
 
@@ -100,7 +92,7 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
         }
     }
  fun setupReceyclview(){
-     CourseTechAD= CourseAD()
+     CourseTechAD= CourseTechAD()
      recyclerView.apply {
          adapter = CourseTechAD
          layoutManager = LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL,false)
