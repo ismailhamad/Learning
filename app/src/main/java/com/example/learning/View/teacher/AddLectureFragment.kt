@@ -95,7 +95,7 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
                     )
                 }
 
-            } else {
+            } else if (fileUri != null && videoUrl != null){
                 if (Text_NameLecture.text.isNotEmpty() && Text_descriptionLecture.text.isNotEmpty()) {
                     learningViewModel.addLecture(
                         view,
@@ -108,7 +108,7 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
                             true,
                             videoUrl.toString(),
                             fileUri.toString()
-                        ), videoUrl, fileUri, course.id.toString(), "6000"
+                        ), videoUrl, fileUri, course.id.toString(), "7000"
                     )
                     cleanText()
                 } else {
@@ -118,6 +118,26 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
                     )
                 }
 
+            }else{
+                if (Text_NameLecture.text.isNotEmpty() && Text_descriptionLecture.text.isNotEmpty()) {
+                    learningViewModel.addLecture(
+                        view,
+                        lecture(
+                            idLecture.toString(),
+                            Text_NameLecture.text.toString(),
+                            Text_descriptionLecture.text.toString(),
+                            "",
+                            time,
+                            true,
+                        ), null, null, course.id.toString(), "8000"
+                    )
+                    cleanText()
+                } else {
+                    Constants.showSnackBar(
+                        view, "إملا الحقول المطلوبة",
+                        Constants.redColor
+                    )
+                }
             }
         }
 

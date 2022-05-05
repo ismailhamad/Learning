@@ -6,6 +6,70 @@ const admin = require('firebase-admin');
 
 admin.initializeApp();
 
+// BEFORE RUNNING:
+// ---------------
+// 1. If not already done, enable the Identity and Access Management (IAM) API
+//    and check the quota for your project at
+//    https://console.developers.google.com/apis/api/iam
+// 2. This sample uses Application Default Credentials for authentication.
+//    If not already done, install the gcloud CLI from
+//    https://cloud.google.com/sdk and run
+//    `gcloud beta auth application-default login`.
+//    For more information, see
+//    https://developers.google.com/identity/protocols/application-default-credentials
+// 3. Install the Node.js client library by running
+//    `npm install googleapis --save`
+
+const {google} = require('googleapis');
+const iam = google.iam('v1');
+
+async function main () {
+  const authClient = await authorize();
+  const request = {
+    // The `name` parameter's value depends on the target resource for the
+    // request, namely
+    // [`roles`](/iam/reference/rest/v1/roles),
+    // [`projects`](/iam/reference/rest/v1/projects.roles), or
+    // [`organizations`](/iam/reference/rest/v1/organizations.roles). Each
+    // resource type's `name` value format is described below:
+    // * [`roles.get()`](/iam/reference/rest/v1/roles/get): `roles/{ROLE_NAME}`.
+    // This method returns results from all
+    // [predefined roles](/iam/docs/understanding-roles#predefined_roles) in
+    // Cloud IAM. Example request URL:
+    // `https://iam.googleapis.com/v1/roles/{ROLE_NAME}`
+    // * [`projects.roles.get()`](/iam/reference/rest/v1/projects.roles/get):
+    // `projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`. This method returns only
+    // [custom roles](/iam/docs/understanding-custom-roles) that have been
+    // created at the project level. Example request URL:
+    // `https://iam.googleapis.com/v1/projects/{PROJECT_ID}/roles/{CUSTOM_ROLE_ID}`
+    // * [`organizations.roles.get()`](/iam/reference/rest/v1/organizations.roles/get):
+    // `organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`. This method
+    // returns only [custom roles](/iam/docs/understanding-custom-roles) that
+    // have been created at the organization level. Example request URL:
+    // `https://iam.googleapis.com/v1/organizations/{ORGANIZATION_ID}/roles/{CUSTOM_ROLE_ID}`
+    // Note: Wildcard (*) values are invalid; you must specify a complete project
+    // ID or organization ID.
+    name: 'roles/my-role',  // TODO: Update placeholder value.
+
+    auth: authClient,
+  };
+
+  try {
+    const response = (await iam.roles.get(request)).data;
+    // TODO: Change code below to process the `response` object:
+    console.log(JSON.stringify(response, null, 2));
+  } catch (err) {
+    console.error(err);
+  }
+}
+main();
+
+async function authorize() {
+  const auth = new google.auth.GoogleAuth({
+    scopes: ['https://www.googleapis.com/auth/cloud-platform']
+  });
+  return await auth.getClient();
+}
 
 // Take the text parameter passed to this HTTP endpoint and insert it into 
 // Firestore under the path /messages/:documentId/original

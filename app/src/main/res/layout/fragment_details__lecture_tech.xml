@@ -7,31 +7,61 @@
     android:background="#E7EEFB"
     tools:context=".View.teacher.Details_LectureTechFragment">
 
-
-    <TextView
-        android:id="@+id/nameLectTech"
-        android:layout_width="252dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/baloo_bhai_2"
-        android:text="Biology  The Scientific Method"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold"
+    <LinearLayout
+        android:id="@+id/linearLLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/nameLectTech"
+            android:layout_width="200dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/baloo_bhai_2"
+            android:text="Biology  The Scientific Method"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_seen"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/hidden" />
+
+        <TextView
+            android:id="@+id/tv_countSeeLec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/baloo_bhai_2"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000000"
+
+            />
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="614dp"
         android:layout_marginTop="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameLectTech"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLLL"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout

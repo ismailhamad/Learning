@@ -155,6 +155,7 @@ class FirebaseSourceCourseTR(val activity: Activity) {
             .addOnSuccessListener {
                 storageRef!!.child("image/${it.get("id")}").delete()
                 db.collection("courses").document(document).delete()
+                db.collection("myCourse").document(document).delete()
                 Constants.showSnackBar(
                     view,
                     "تم حذف الكورس",

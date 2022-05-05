@@ -58,21 +58,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/editTextTextPersonName2"
+            <SearchView
+                android:id="@+id/Text_Search"
                 android:layout_width="0dp"
-                android:layout_height="62dp"
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="1dp"
+                android:layout_height="0dp"
                 android:background="@drawable/back_search"
                 android:ems="10"
                 android:hint="Search"
                 android:inputType="textPersonName"
                 android:padding="10dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

@@ -15,18 +15,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learning.Adapter.assigmentAD
+import com.example.learning.Constants.Constants
 import com.example.learning.Firebase.FirebaseSource
+import com.example.learning.Firebase.Teacher.FirebaseSourceLectureTR
 import com.example.learning.R
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_details__lecture_tech.*
 
 
 class Details_LectureTechFragment : Fragment(R.layout.fragment_details__lecture_tech) {
 lateinit var learningViewModel: LearningViewModel
 lateinit var assigmentAD: assigmentAD
+    lateinit var db: FirebaseFirestore
+
 val args:Details_LectureTechFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,10 +54,20 @@ val args:Details_LectureTechFragmentArgs by navArgs()
             MediaItem.fromUri(Uri.parse("${lecture.video}"))
         player.setMediaItem(mediaItem)
         player.prepare()
-//        val firebaseSource=FirebaseSource(requireActivity(),view)
-//        Log.e("aaa","count user ${firebaseSource.getCountUserShowLecture(idCourse.id!!,lecture.id!!).value}")
+        val firebaseSourceLectureTR= FirebaseSourceLectureTR(requireActivity())
+        db = Firebase.firestore
+        var count = 0
+        db.collection("courses/${idCourse.id!!}/lecture/${lecture.id!!}/users")
+            .addSnapshotListener { value, error ->
+                count = value!!.size()
+                tv_countSeeLec.text = count.toString()
+            }
+//        Log.e("aaa","count user ${firebaseSourceLectureTR.getCountUserShowLecture(idCourse.id!!,lecture.id!!).value}")
+        Log.e("aaa","idCourse ${idCourse.id}")
+        Log.e("aaa","lecture.id!! ${lecture.id!!}")
         learningViewModel.getCountUserShowLecture(idCourse.id!!,lecture.id!!)
-        Log.e("aaa","count user ${learningViewModel.countUser!!.value}")
+//        Log.e("aaa","count user ${learningViewModel.countUser!!.value}")
+        Log.e("aaa","count user ${firebaseSourceLectureTR.getCountUserShowLecture(idCourse.id!!,lecture.id!!)}")
 
         if (lecture.file==""){
             pdfTech.visibility=View.GONE
@@ -82,7 +99,11 @@ val args:Details_LectureTechFragmentArgs by navArgs()
 
             val dm = requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             dm!!.enqueue(request)
-
+            Constants.showSnackBar(
+                view,
+                "جاري تحميل الملف",
+                Constants.greenColor
+            )
         }
         learningViewModel.assignment!!.observe(viewLifecycleOwner, Observer {
 

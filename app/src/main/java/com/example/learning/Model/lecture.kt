@@ -32,6 +32,14 @@ class lecture:Serializable {
         this.seeLecture=seeLecture
         this.video=video
     }
+    constructor(id:String,name:String,description:String,idAssignment:String,time:Long,seeLecture:Boolean){
+        this.id=id
+        this.name=name
+        this.description=description
+        this.idAssignment=idAssignment
+        this.time=time
+        this.seeLecture=seeLecture
+    }
 
     fun getlectureHashMap(): HashMap<String, Any?> {
         val data = hashMapOf<String, Any?>(

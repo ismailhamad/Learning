@@ -192,9 +192,16 @@ private val learningRepository: LearningRepository
     fun getCourseExplore() {
         courseExplore = learningRepository.getCourseExplore()
     }
-    fun getCountUserShowLecture(documentCourses: String,documentLecture: String) {
-        countUser  = learningRepository.getCountUserShowLecture(documentCourses,documentLecture)
-    }
+//    fun getCountUserShowLecture(documentCourses: String,documentLecture: String) {
+//        countUser  = learningRepository.getCountUserShowLecture(documentCourses,documentLecture)
+//        Log.e("aaa",countUser!!.value.toString())
+//
+//    }
+fun getCountUserShowLecture(documentCourses: String,documentLecture: String) {
+    learningRepository.getCountUserShowLecture(documentCourses,documentLecture)
+//    Log.e("aaa",countUser!!.value.toString())
+
+}
 
     fun getAlluserAddAssigment(documentCourses: String, documentLecture: String, documentAssignment: String) {
         userassi = learningRepository.getAlluserAddAssigment(documentCourses, documentLecture, documentAssignment)

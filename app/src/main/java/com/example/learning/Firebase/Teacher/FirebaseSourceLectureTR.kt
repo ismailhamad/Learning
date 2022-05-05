@@ -28,7 +28,6 @@ class FirebaseSourceLectureTR(val activity: Activity) {
     var storge: FirebaseStorage? = null
     private var storageRef: StorageReference? = null
     lateinit var countUserListprivMutableLiveData: MutableLiveData<Int>
-
     fun addLecture(
         view: View,
         lecture: lecture,
@@ -104,7 +103,7 @@ class FirebaseSourceLectureTR(val activity: Activity) {
                         100.0 * it.bytesTransferred / it.totalByteCount
                     progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                 }
-        } else {
+        } else if (code == "7000") {
             storageRef!!.child("files/" + "${lecture.id}").putFile(uriFile!!)
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
@@ -142,7 +141,25 @@ class FirebaseSourceLectureTR(val activity: Activity) {
                     progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                 }
 
+        }else {
+            progressDialog.dismiss()
+            db.collection("courses/${document}/lecture/")
+                .document(lecture.id!!).set(lecture.getlectureHashMap()).addOnSuccessListener {
+                    Constants.showSnackBar(
+                        view,
+                        "تم اضافة المحاضرة",
+                        Constants.greenColor
+                    )
+                }.addOnFailureListener { exception ->
+                    progressDialog.dismiss()
+                    Constants.showSnackBar(
+                        view,
+                        "فشل اضافة المحاضرة",
+                        Constants.redColor
+                    )
+                }
         }
+
     }
 
     fun updateLecture(
@@ -215,7 +232,7 @@ class FirebaseSourceLectureTR(val activity: Activity) {
                         100.0 * it.bytesTransferred / it.totalByteCount
                     progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                 }
-        } else {
+        } else if (code == "7000") {
             storageRef!!.child("files/" + "${lecture.id}").putFile(uriFile!!)
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
@@ -238,6 +255,7 @@ class FirebaseSourceLectureTR(val activity: Activity) {
                             }
 
                     }
+                    progressDialog.dismiss()
                 }.addOnFailureListener { exception ->
                     progressDialog.dismiss()
                     Constants.showSnackBar(
@@ -251,6 +269,24 @@ class FirebaseSourceLectureTR(val activity: Activity) {
                     progressDialog.setMessage("Uploaded " + progress.toInt() + "%")
                 }
 
+        } else {
+            progressDialog.dismiss()
+            db.collection("courses/${document}/lecture/")
+                .document(documentLecture)
+                .update(lecture.getlectureHashMap()).addOnSuccessListener {
+                    Constants.showSnackBar(
+                        view,
+                        "تم تعديل المحاضرة",
+                        Constants.greenColor
+                    )
+                }.addOnFailureListener { exception ->
+                    progressDialog.dismiss()
+                    Constants.showSnackBar(
+                        view,
+                        "فشل تعديل المحاضرة",
+                        Constants.redColor
+                    )
+                }
         }
 
 
@@ -304,22 +340,45 @@ class FirebaseSourceLectureTR(val activity: Activity) {
             }
     }
 
+//    fun getCountUserShowLecture(
+//        documentCourses: String,
+//        documentLecture: String,
+//    ): MutableLiveData<Int> {
+//        db = Firebase.firestore
+//        var count = 0
+//        countUserListprivMutableLiveData = MutableLiveData()
+//        db.collection("courses/${documentCourses}/lecture/${documentLecture}/users").get()
+//            .addOnSuccessListener {
+//                for (i in it) {
+//                    val dd = count++
+//                    countUserListprivMutableLiveData.value = dd
+//                    Log.e("aaa","countUserListprivMutableLiveData++++++ ${countUserListprivMutableLiveData.value}")
+//                    Log.e("aaa","count++++++ $count")
+//                }
+//                Log.e("aaa","forrrrrrrrrrrrrrrrr ${countUserListprivMutableLiveData.value}")
+//
+//            }
+//            Log.e("aaa","countUserListprivMutableLiveData ${countUserListprivMutableLiveData.value}")
+//            Log.e("aaa","count $count")
+//        return countUserListprivMutableLiveData
+//
+//    }
+
     fun getCountUserShowLecture(
         documentCourses: String,
         documentLecture: String,
-    ): MutableLiveData<Int> {
+    ):Int{
         db = Firebase.firestore
         var count = 0
-        countUserListprivMutableLiveData = MutableLiveData()
-        db.collection("courses/${documentCourses}/lecture/${documentLecture}/users").get()
-            .addOnSuccessListener {
-                for (i in it) {
-                    countUserListprivMutableLiveData.postValue(count++)
-                }
-            }
-
-        return countUserListprivMutableLiveData
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/users")
+            .addSnapshotListener { value, error ->
+            count = value!!.size()
+            Log.e("aaa","countasdddddd $count")
+        }
+        Log.e("aaa","countss $count")
+        return count
 
     }
+
 
 }

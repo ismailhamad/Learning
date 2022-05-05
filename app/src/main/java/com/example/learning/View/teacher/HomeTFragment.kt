@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,7 +18,9 @@ import com.example.learning.ViewModel.LearningViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home_t.*
+import kotlinx.android.synthetic.main.fragment_home_t.Text_Search
 
 
 class HomeTFragment : Fragment(R.layout.fragment_home_t) {
@@ -58,7 +61,28 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
         }
 
 
+        Text_Search.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
 
+                learningViewModel.searchCourse(query.toString())
+                learningViewModel.search?.observe(viewLifecycleOwner, Observer {
+                    CourseTechAD.differ.submitList(it)
+                })
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText == "" || newText == null) {
+                    learningViewModel.CourseT!!.observe(viewLifecycleOwner, Observer {
+                        CourseTechAD.differ.submitList(it)
+                    })
+                }
+                return true
+            }
+
+        })
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT,
             ItemTouchHelper.UP
