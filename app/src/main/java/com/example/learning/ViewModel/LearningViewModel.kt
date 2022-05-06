@@ -3,6 +3,7 @@ package com.example.learning.ViewModel
 import android.net.Uri
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -192,18 +193,16 @@ private val learningRepository: LearningRepository
     fun getCourseExplore() {
         courseExplore = learningRepository.getCourseExplore()
     }
-//    fun getCountUserShowLecture(documentCourses: String,documentLecture: String) {
-//        countUser  = learningRepository.getCountUserShowLecture(documentCourses,documentLecture)
-//        Log.e("aaa",countUser!!.value.toString())
-//
-//    }
-fun getCountUserShowLecture(documentCourses: String,documentLecture: String) {
-    learningRepository.getCountUserShowLecture(documentCourses,documentLecture)
-//    Log.e("aaa",countUser!!.value.toString())
 
+fun getCountUserShowLecture(documentCourses: String,documentLecture: String,textView:TextView) {
+    learningRepository.getCountUserShowLecture(documentCourses,documentLecture,textView)
 }
 
     fun getAlluserAddAssigment(documentCourses: String, documentLecture: String, documentAssignment: String) {
         userassi = learningRepository.getAlluserAddAssigment(documentCourses, documentLecture, documentAssignment)
+    }
+
+    fun getCountUserAddAssigment(documentCourses: String,documentLecture: String,documentAssignment: String,textView: TextView) {
+        learningRepository.getCountUserAddAssigment(documentCourses,documentLecture,documentAssignment,textView)
     }
 }

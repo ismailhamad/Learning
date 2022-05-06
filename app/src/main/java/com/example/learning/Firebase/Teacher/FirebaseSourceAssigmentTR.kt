@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.net.Uri
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.Assignment
@@ -212,21 +213,12 @@ class FirebaseSourceAssigmentTR(val activity: Activity) {
     fun getCountUserAddAssigment(
         documentCourses: String,
         documentLecture: String,
-        documentAssignment: String
-    ): MutableLiveData<Int> {
+        documentAssignment: String,
+        textView: TextView
+    ) {
         db = Firebase.firestore
-        auth = Firebase.auth
-        countUserAddAssigmentListprivMutableLiveData = MutableLiveData()
-        var count = 0
-        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
-            .get().addOnSuccessListener {
-                for (i in it) {
-                    Log.e("aa", "name ddd ${i.get("id")}")
-                    countUserAddAssigmentListprivMutableLiveData.postValue(++count)
-                }
-            }
-
-        return countUserAddAssigmentListprivMutableLiveData
-
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment").addSnapshotListener { value, error ->
+            textView.text =value!!.size().toString()
+        }
     }
 }

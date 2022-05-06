@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.net.Uri
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.course
@@ -340,44 +341,16 @@ class FirebaseSourceLectureTR(val activity: Activity) {
             }
     }
 
-//    fun getCountUserShowLecture(
-//        documentCourses: String,
-//        documentLecture: String,
-//    ): MutableLiveData<Int> {
-//        db = Firebase.firestore
-//        var count = 0
-//        countUserListprivMutableLiveData = MutableLiveData()
-//        db.collection("courses/${documentCourses}/lecture/${documentLecture}/users").get()
-//            .addOnSuccessListener {
-//                for (i in it) {
-//                    val dd = count++
-//                    countUserListprivMutableLiveData.value = dd
-//                    Log.e("aaa","countUserListprivMutableLiveData++++++ ${countUserListprivMutableLiveData.value}")
-//                    Log.e("aaa","count++++++ $count")
-//                }
-//                Log.e("aaa","forrrrrrrrrrrrrrrrr ${countUserListprivMutableLiveData.value}")
-//
-//            }
-//            Log.e("aaa","countUserListprivMutableLiveData ${countUserListprivMutableLiveData.value}")
-//            Log.e("aaa","count $count")
-//        return countUserListprivMutableLiveData
-//
-//    }
-
     fun getCountUserShowLecture(
         documentCourses: String,
         documentLecture: String,
-    ):Int{
+        textView: TextView
+    ){
         db = Firebase.firestore
-        var count = 0
         db.collection("courses/${documentCourses}/lecture/${documentLecture}/users")
             .addSnapshotListener { value, error ->
-            count = value!!.size()
-            Log.e("aaa","countasdddddd $count")
+            textView.text = value!!.size().toString()
         }
-        Log.e("aaa","countss $count")
-        return count
-
     }
 
 

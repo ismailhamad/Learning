@@ -3,6 +3,7 @@ package com.example.learning.ViewModel
 import android.app.Activity
 import android.net.Uri
 import android.view.View
+import android.widget.TextView
 import com.example.learning.Firebase.FirebaseSource
 import com.example.learning.Firebase.Student.FirebaseSourceAssigmentST
 import com.example.learning.Firebase.Student.FirebaseSourceCourseST
@@ -60,6 +61,7 @@ class LearningRepository(
     fun getFavorite(documentUsers: String) = firebaseSourceCourseST.getFavorite(documentUsers)
     fun deleteFavorite(view:View,documentUsers: String,documentCourses: String) = firebaseSourceCourseST.deleteFavorite(view,documentUsers,documentCourses)
     fun getCourseExplore() = firebaseSourceCourseST.getCourseExplore()
-    fun getCountUserShowLecture(documentCourses: String,documentLecture: String) = firebaseSourceLectureTR.getCountUserShowLecture(documentCourses,documentLecture)
+    fun getCountUserShowLecture(documentCourses: String,documentLecture: String,textView: TextView) = firebaseSourceLectureTR.getCountUserShowLecture(documentCourses,documentLecture,textView)
+    fun getCountUserAddAssigment(documentCourses: String,documentLecture: String,documentAssignment: String,textView: TextView) = firebaseSourceAssigmentTR.getCountUserAddAssigment(documentCourses,documentLecture,documentAssignment,textView)
     fun getAlluserAddAssigment(documentCourses: String, documentLecture: String, documentAssignment: String) = firebaseSourceAssigmentTR.getAlluserAddAssigment(documentCourses, documentLecture, documentAssignment)
 }
