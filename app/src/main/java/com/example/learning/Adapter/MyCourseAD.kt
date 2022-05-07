@@ -90,12 +90,12 @@ class MyCourseAD: RecyclerView.Adapter<MyCourseAD.ViewHolder>() {
 
     if (rowindex == position){
        // item_card.alpha= 100F
-        gd.cornerRadius =80f
+        gd.cornerRadius =50f
         item_card.background =gd
         item_card.cardElevation = 10f
         goChat.setCardBackgroundColor(Color.parseColor("#FFFFFFFF"))
     }else{
-        gd2.cornerRadius =80f
+        gd2.cornerRadius =50f
         item_card.background = gd2
         goChat.setCardBackgroundColor(Color.parseColor("#52E6E3E3"))
     }

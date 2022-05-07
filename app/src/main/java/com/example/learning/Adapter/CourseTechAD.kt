@@ -64,7 +64,6 @@ class CourseTechAD : RecyclerView.Adapter<CourseTechAD.ViewHolder>() {
             )
             var c =intArrayOf(color,color2)
 
-            item_Tech.setCardBackgroundColor(color)
             nameCourseTech.text=course.namecourse
             item_Tech.background =gd
             gd.cornerRadius =80f

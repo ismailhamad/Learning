@@ -21,5 +21,33 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_favorite" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView11"
+        android:layout_width="343dp"
+        android:layout_height="301dp"
+
+        android:layout_marginTop="136dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_fav"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_5035qbsq.json" />
+
+    <TextView
+        android:id="@+id/textView43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="لا يوجد في المفضلة شئ حتى الان"
+        android:textColor="#000000"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/animationView11"
+        app:layout_constraintStart_toStartOf="@+id/animationView11"
+        app:layout_constraintTop_toBottomOf="@+id/animationView11" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

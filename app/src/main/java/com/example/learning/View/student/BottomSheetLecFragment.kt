@@ -38,7 +38,15 @@ val args:bottomSheetLecFragmentArgs by navArgs()
         SetupReceycleciew()
         learningViewModel.getLecture(course.id!!)
         learningViewModel.lecture?.observe(viewLifecycleOwner, Observer {
-            lectureAD.differ.submitList(it)
+            if (it.isEmpty()){
+                animationView14.visibility = View.VISIBLE
+                textView47.visibility = View.VISIBLE
+            }else{
+                animationView14.visibility = View.GONE
+                textView47.visibility = View.GONE
+                lectureAD.differ.submitList(it)
+
+            }
         })
 
         learningViewModel.users?.observe(viewLifecycleOwner, Observer {

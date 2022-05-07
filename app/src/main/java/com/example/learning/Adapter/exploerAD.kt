@@ -77,7 +77,7 @@ val intArray = intArrayOf(color, color2,)
 
             name_exp.text=course.namecourse
             item_card_ex.background =gd
-            gd.cornerRadius =80f
+            gd.cornerRadius =50f
             Glide.with(this).load(course.image).into(imageView_ex)
 //            imageView10.transitionName=course.image.toString()
 //            name_myCourse.transitionName=course.name.toString()

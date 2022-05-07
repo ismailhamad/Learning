@@ -60,7 +60,7 @@ class DetailsCourseFragment : Fragment() {
         cardView.cardElevation = 100f
         imageView4.transitionName = course.image
         nameCourseD.transitionName = course.namecourse
-Glide.with(this).load(course.image).into(imageView4)
+        Glide.with(this).load(course.image).into(imageView4)
         //titlle.text=course.name
         nameCourseD.text=course.namecourse
         Desc.text=course.description

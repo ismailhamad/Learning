@@ -96,7 +96,7 @@ class FirebaseSourceCourseST(val activity: Activity) {
 
 // Atomically add a new region to the "users" array field.
         washingtonRef.update("users", FieldValue.arrayUnion(users)).addOnSuccessListener {
-            db.collection("courses").document(idCourse).addSnapshotListener { value, error ->
+            db.collection("courses").document(idCourse).get().addOnSuccessListener { value ->
                 val course = value!!.toObject<course>()
                 addMyCourse(view, course!!)
             }
@@ -114,14 +114,12 @@ class FirebaseSourceCourseST(val activity: Activity) {
             if (users!!.numCourse!! < 5) {
                 db.collection("myCourse").document(myCourse.id!!).set(myCourse)
                     .addOnSuccessListener {
-//                        Snackbar.make(view, "تم اضافة الكورس", Snackbar.LENGTH_LONG).apply {
-//                            animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
-//                            setBackgroundTint(Color.parseColor(Constants.greenColor))
-//                            setTextColor(Color.parseColor("#FFFFFF"))
-//                            show()
-//                        }
-                        Toast.makeText(activity, "تم اضافة الكورس", Toast.LENGTH_SHORT).show()
-
+                        Snackbar.make(view, "تم اضافة الكورس", Snackbar.LENGTH_LONG).apply {
+                            animationMode = BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+                            setBackgroundTint(Color.parseColor(Constants.greenColor))
+                            setTextColor(Color.parseColor("#FFFFFF"))
+                            show()
+                        }
                         analytics.logEvent("addMyCourse") {
                             param("name_course", myCourse!!.namecourse!!)
                         }
@@ -221,18 +219,22 @@ class FirebaseSourceCourseST(val activity: Activity) {
         analytics = Firebase.analytics
         val Courselist = ArrayList<course>()
         searchListMutableLiveData = MutableLiveData()
-        db.collection("courses").orderBy("namecourse").startAt(text)
+        db.collection("courses").whereEqualTo("namecourse",text)
             .addSnapshotListener { value, error ->
-                for (item in value!!) {
-                    val course = item.toObject<course>()
-                    Courselist.add(course)
-                    searchListMutableLiveData.postValue(Courselist)
-                }
-                analytics.logEvent("searchCourse") {
-                    param("search_name", text)
+                Courselist.clear()
+                if (value!!.isEmpty) {
+                    searchListMutableLiveData.postValue(null)
+                } else {
+                    for (item in value!!) {
+                        val course = item.toObject<course>()
+                        Courselist.add(course)
+                        searchListMutableLiveData.postValue(Courselist)
+                    }
+                    analytics.logEvent("searchCourse") {
+                        param("search_name", text)
+                    }
                 }
             }
-
         return searchListMutableLiveData
     }
 

@@ -2,12 +2,14 @@ package com.example.learning.View.teacher
 
 import android.app.DownloadManager
 import android.content.Context
+import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -27,6 +29,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.android.synthetic.main.fragment_details__lecture_tech.*
 
 
@@ -112,6 +115,10 @@ val args:Details_LectureTechFragmentArgs by navArgs()
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ){
+            val deleteColor = ContextCompat.getColor(context!!,R.color.redd)
+            val updateColor = ContextCompat.getColor(context!!,R.color.green)
+            val deleteicon = R.drawable.ic_baseline_delete_24
+            val updateicon = R.drawable.ic_baseline_edit_24
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: RecyclerView.ViewHolder,
@@ -138,6 +145,26 @@ val args:Details_LectureTechFragmentArgs by navArgs()
                 }
 
 
+            }
+
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                RecyclerViewSwipeDecorator.Builder(c, recyclerView,viewHolder, dX, dY, actionState, isCurrentlyActive)
+                    .addSwipeLeftBackgroundColor(deleteColor)
+                    .addSwipeLeftActionIcon(deleteicon)
+                    .addSwipeRightBackgroundColor(updateColor)
+                    .addSwipeRightActionIcon(updateicon)
+                    .create()
+                    .decorate()
+
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             }
 
         }

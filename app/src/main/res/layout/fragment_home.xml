@@ -41,6 +41,22 @@
             app:layout_constraintTop_toBottomOf="@+id/sizeCourse"
             tools:listitem="@layout/item_courses" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationViewx"
+            android:layout_width="374dp"
+            android:layout_height="273dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#F5F8FF"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.297"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sizeCourse"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_url="https://assets1.lottiefiles.com/packages/lf20_nrtm9xfr.json" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView4"
             android:layout_width="0dp"
@@ -142,13 +158,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="32dp"
             android:text="Explore"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/rv_ex"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_Course" />
 
@@ -156,8 +170,7 @@
             android:id="@+id/rv_ex"
             android:layout_width="401dp"
             android:layout_height="143dp"
-            android:layout_marginBottom="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10"
@@ -215,11 +228,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rrr"
-                android:layout_width="410dp"
+                android:layout_width="0dp"
                 android:layout_height="163dp"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="18dp"
-                android:layout_marginEnd="3dp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12"

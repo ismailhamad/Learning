@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_detailsCourseTechFragment_to_show_StudentFragment"
             app:destination="@id/show_StudentFragment" />
+        <argument
+            android:name="color"
+            app:argType="integer[]" />
     </fragment>
     <fragment
         android:id="@+id/addLectureFragment"

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.doOnPreDraw
 import androidx.drawerlayout.widget.DrawerLayout
@@ -275,7 +276,14 @@ class HomeFragment : Fragment() {
 
                 learningViewModel.searchCourse(query.toString())
                 learningViewModel.search?.observe(viewLifecycleOwner, Observer {
-                    courseAD.differ.submitList(it)
+                    if (it == null){
+                        courseAD.differ.submitList(null)
+                        animationViewx.visibility =View.VISIBLE
+                    }else{
+                        animationViewx.visibility =View.GONE
+                        courseAD.differ.submitList(it)
+
+                    }
                 })
 
                 return true
@@ -283,9 +291,12 @@ class HomeFragment : Fragment() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText == "" || newText == null) {
+                    animationViewx.visibility =View.GONE
+
                     learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
                         courseAD.differ.submitList(it)
                     })
+
                 }
                 return true
             }

@@ -24,15 +24,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="614dp"
+        android:layout_width="408dp"
+        android:layout_height="637dp"
         android:layout_marginTop="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameLect"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameLect">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -41,13 +39,15 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView13"
                 android:layout_width="0dp"
-                android:layout_height="178dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="43dp"
+                android:layout_height="229dp"
+
+                android:layout_marginLeft="25dp"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
                 app:cardCornerRadius="10dp"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
@@ -59,25 +59,28 @@
 
             <TextView
                 android:id="@+id/dec_lect"
-                android:layout_width="331dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="45dp"
                 android:text="A biology investigation usually starts with an observation—that is, something that catches the biologist’s attention. For instance, a cancer biologist might notice that a certain kind of cancer can't be treated with chemotherapy and wonder why this is the case. A marine ecologist, seeing that the coral reefs of her field sites are bleaching—turning white—might set out to understand why."
-                app:layout_constraintRight_toRightOf="@+id/cardView13"
-                app:layout_constraintHorizontal_bias="0.687"
-                app:layout_constraintLeft_toLeftOf="@+id/cardView13"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <TextView
                 android:id="@+id/textView9"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="20dp"
                 android:text="Introduction"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@+id/cardView13"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView13" />
 
             <androidx.cardview.widget.CardView
@@ -87,8 +90,8 @@
                 android:layout_marginTop="20dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="10dp"
-                app:layout_constraintRight_toRightOf="@+id/dec_lect"
                 app:layout_constraintLeft_toLeftOf="@+id/dec_lect"
+                app:layout_constraintRight_toRightOf="@+id/dec_lect"
                 app:layout_constraintTop_toBottomOf="@+id/dec_lect">
 
                 <com.google.android.exoplayer2.ui.PlayerView
@@ -99,14 +102,14 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/pdf"
-                android:layout_width="324dp"
-                android:layout_height="54dp"
+                android:layout_width="300dp"
+                android:layout_height="52dp"
                 android:layout_marginTop="20dp"
                 android:visibility="visible"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="10dp"
-                app:layout_constraintRight_toRightOf="@+id/cardView15"
                 app:layout_constraintLeft_toLeftOf="@+id/cardView15"
+                app:layout_constraintRight_toRightOf="@+id/cardView15"
                 app:layout_constraintTop_toBottomOf="@+id/cardView15">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -127,13 +130,14 @@
                         android:id="@+id/textView14"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="11dp"
-                        android:text="ismailhamad2001"
+                        android:layout_marginLeft="8dp"
+                        android:text="pdf "
                         android:textColor="#000000"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView11"
                         app:layout_constraintLeft_toRightOf="@+id/imageView11"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.64" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -161,8 +165,8 @@
                 android:layout_marginEnd="43dp"
                 android:layout_marginBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView30"
                 tools:listitem="@layout/item_assigment" />
 
@@ -184,7 +188,7 @@
         android:id="@+id/ask_techer"
         android:layout_width="38dp"
         android:layout_height="34dp"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="18dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp"
@@ -193,8 +197,8 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
             android:scaleType="fitCenter"
             android:src="@drawable/question" />
     </androidx.cardview.widget.CardView>

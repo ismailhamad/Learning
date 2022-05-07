@@ -40,14 +40,14 @@
             android:id="@+id/tv_countSeeLec"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="5"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/baloo_bhai_2"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:textColor="#000000"
+            android:fontFamily="@font/baloo_bhai_2"
+            android:text="5"
+            android:textAlignment="center"
+            android:textColor="#302F2F"
+            android:textSize="20sp"
+            android:textStyle="bold"
 
             />
     </LinearLayout>

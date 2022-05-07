@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Adapter.CourseAD
 import com.example.learning.Adapter.CourseTechAD
+import com.example.learning.Model.users
 import com.example.learning.R
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
@@ -28,16 +29,12 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
     lateinit var CourseTechAD: CourseTechAD
     lateinit var auth: FirebaseAuth
     var idCourse: String = ""
-
-
-
+    var user:users?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Teacher).learningViewModel
-//        val navBar: BottomNavigationView =
-//            requireActivity().findViewById(R.id.bottomNavigationView2)
-//        navBar.visibility = View.VISIBLE
+
         auth = Firebase.auth
         learningViewModel.getTeacherCourse(auth.currentUser!!.uid)
         setupReceyclview()
@@ -52,6 +49,7 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
         CourseTechAD.setOnItemClickListener { course,Color ->
             val Bundle = Bundle().apply {
                 putSerializable("courseTech", course)
+                putIntArray("color",Color)
             }
 
             findNavController().navigate(
@@ -59,6 +57,15 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
                 Bundle
             )
         }
+
+        learningViewModel.users?.observe(viewLifecycleOwner, Observer {
+            for (item in it){
+                user = item
+            }
+            textView8.text = "Hi, Ms ${user?.name}"
+
+        })
+
 
 
         Text_Search.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
@@ -104,6 +111,7 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
                     learningViewModel.deleteCourse(view, Course.id.toString())
 
                 }
+
 
             }
 
