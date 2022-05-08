@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E7EEFB"
-    android:id="@+id/homeFragment"
     tools:context=".View.student.HomeFragment">
 
 

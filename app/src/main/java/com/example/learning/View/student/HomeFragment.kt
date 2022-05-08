@@ -134,39 +134,36 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_profileuserFragment)
         }
         courseAD.setOnItemClickListener { course, imageView, textView,Color ->
-//            val extras = FragmentNavigatorExtras(
-//                imageView to course.image.toString(),
-//                textView to course.namecourse.toString()
-//            )
-            val Bundle = Bundle()
-             Bundle.apply {
+            val extras = FragmentNavigatorExtras(
+                imageView to course.image.toString(),
+                textView to course.namecourse.toString()
+            )
+            val Bundle = Bundle().apply {
                 putSerializable("course", course)
                 putIntArray("color",Color)
             }
-
-            if (findNavController().currentDestination?.id == R.id.homeFragment) {
-                findNavController().navigate(
-                    R.id.action_homeFragment_to_detailsCourseFragment,
-                    Bundle)            }
-
+            findNavController().navigate(
+                R.id.action_homeFragment_to_detailsCourseFragment,
+                Bundle,
+                null,
+                extras
+            )
 
 
         }
 
         exploerAD.setOnItemClickListener { course, imageView, textView,Color ->
 
-            val Bundle = Bundle()
-
-            Bundle.apply {
+            val Bundle = Bundle().apply {
                 putSerializable("course", course)
                 putIntArray("color",Color)
             }
-            if (findNavController().currentDestination?.id == R.id.homeFragment){
-                findNavController().navigate(
-                    R.id.action_homeFragment_to_detailsCourseFragment,
-                    Bundle)
-            }
-
+            findNavController().navigate(
+                R.id.action_homeFragment_to_detailsCourseFragment,
+                Bundle,
+                null,
+                null
+            )
 
 
         }

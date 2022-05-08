@@ -132,6 +132,12 @@
         <argument
             android:name="courseStudent"
             app:argType="com.example.learning.Model.course" />
+        <action
+            android:id="@+id/action_show_StudentFragment_to_sendEmailFragment"
+            app:destination="@id/sendEmailFragment" />
+        <action
+            android:id="@+id/action_show_StudentFragment_to_bottomSheetTecher"
+            app:destination="@id/bottomSheetTecher" />
     </fragment>
     <fragment
         android:id="@+id/allUserAssigmentFragment"
@@ -147,4 +153,25 @@
         <argument android:name="idassi"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/sendEmailFragment"
+        android:name="com.example.learning.View.teacher.SendEmailFragment"
+        android:label="fragment_send_email"
+        tools:layout="@layout/fragment_send_email" >
+        <argument
+            android:name="userEmail"
+            app:argType="com.example.learning.Model.users" />
+    </fragment>
+    <dialog
+        android:id="@+id/bottomSheetTecher"
+        android:name="com.example.learning.View.teacher.bottomSheetTecher"
+        android:label="fragment_bottom_sheet_techer"
+        tools:layout="@layout/fragment_bottom_sheet_techer" >
+        <argument
+            android:name="userSheet"
+            app:argType="com.example.learning.Model.users" />
+        <action
+            android:id="@+id/action_bottomSheetTecher_to_sendEmailFragment"
+            app:destination="@id/sendEmailFragment" />
+    </dialog>
 </navigation>

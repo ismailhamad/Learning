@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="692cdd68-13a4-442a-ab5f-7b82b7be1e3d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/View/teacher/BottomSheetTecher.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/View/teacher/SendEmailFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_bottom_sheet_techer.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_bottom_sheet_tecter_user.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_send_email.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/menu/menu_users.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/Adapter/showStudentAD.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/Adapter/showStudentAD.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/Constants/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/Constants/Constants.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/Model/SendEmail.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/Model/SendEmail.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/View/student/DetailsCourseFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/View/student/DetailsCourseFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/View/teacher/Show_StudentFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/learning/View/teacher/Show_StudentFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/item_show_student.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_show_student.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/navigation/nav_tech.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/navigation/nav_tech.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/../firebase.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="692cdd68-13a4-442a-ab5f-7b82b7be1e3d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,6 +54,7 @@
       <workItem from="1651937627144" duration="1924000" />
       <workItem from="1651948611239" duration="6540000" />
       <workItem from="1651992349141" duration="2653000" />
+      <workItem from="1652023956868" duration="613000" />
     </task>
     <servers />
   </component>

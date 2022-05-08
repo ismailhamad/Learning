@@ -79,7 +79,8 @@ val intArray = intArrayOf(color, color2,)
             item_card_ex.background =gd
             gd.cornerRadius =50f
             Glide.with(this).load(course.image).into(imageView_ex)
-
+//            imageView10.transitionName=course.image.toString()
+//            name_myCourse.transitionName=course.name.toString()
             setOnClickListener {
                 onItemClickListener?.let { it(course,imageView_ex,name_exp,intArray) }
             }

@@ -90,7 +90,6 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
                     }
 
                     else ->{
-                        onItemClickListener?.let { it(course,imageCourse,nameCourse,c) }
 
                     }
 
@@ -115,9 +114,11 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
             item_c.background =gd
             gd.cornerRadius =70f
             Glide.with(this).load(course.image).into(imageCourse)
-//            imageCourse.transitionName=course.image.toString()
-//            nameCourse.transitionName=course.namecourse.toString()
-
+            imageCourse.transitionName=course.image.toString()
+            nameCourse.transitionName=course.namecourse.toString()
+//            setOnClickListener {
+//                onItemClickListener?.let { it(course,imageCourse,nameCourse) }
+//            }
 
 
         }

@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.learning.Adapter.assigmentAD
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.users
@@ -39,7 +38,6 @@ class WCourseFragment : Fragment(R.layout.fragment_w_course) {
         setupRecyclview()
         nameLect.text = lecture.name
         dec_lect.text = lecture.description
-        Glide.with(view).load(idCourse.image).into(imageView5)
         val navBar: DrawerLayout = requireActivity().findViewById(R.id.drawerLayout)
         navBar.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         val player = ExoPlayer.Builder(requireActivity()).build()

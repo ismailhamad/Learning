@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -54,7 +55,7 @@ class showStudentAD : RecyclerView.Adapter<showStudentAD.ViewHolder>() {
 
 
             setOnClickListener {
-                onItemClickListener?.let { it(user) }
+                onItemClickListener?.let { it(user,imageView14) }
             }
 
 
@@ -67,8 +68,8 @@ class showStudentAD : RecyclerView.Adapter<showStudentAD.ViewHolder>() {
         return differ.currentList.size
     }
 
-    private var onItemClickListener: ((users) -> Unit)? = null
-    fun setOnItemClickListener(listener: (users) -> Unit) {
+    private var onItemClickListener: ((users, ImageView) -> Unit)? = null
+    fun setOnItemClickListener(listener: (users,ImageView) -> Unit) {
         onItemClickListener = listener
     }
 }

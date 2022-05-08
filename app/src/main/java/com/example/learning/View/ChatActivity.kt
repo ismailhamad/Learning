@@ -32,7 +32,6 @@ class ChatActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
         chRecyclerView.layoutManager = LinearLayoutManager(this)
 
-
         val repository = LearningRepository(FirebaseSource(this,findViewById(android.R.id.content)),this)
         val viewModelProviderFactory= LearningViewModelProviderFactory(repository)
         learningViewModel = ViewModelProvider(this,viewModelProviderFactory).get(LearningViewModel::class.java)
@@ -75,7 +74,6 @@ class ChatActivity : AppCompatActivity() {
             learningViewModel.getMessagePrivate(iT?.id.toString()).observe(this, androidx.lifecycle.Observer {
                 val chatAdapter = ChatAdapter(this,it)
                 chRecyclerView.adapter = chatAdapter
-                chRecyclerView.scrollToPosition(it.size - 1);
                 chatAdapter.setOnItemClickListener { chat ,textView ->
                     textView.setOnLongClickListener(View.OnLongClickListener {
                         img_delete_message_user.visibility = View.VISIBLE
@@ -92,7 +90,6 @@ class ChatActivity : AppCompatActivity() {
             learningViewModel.getMessagePrivate(auth.currentUser!!.uid).observe(this, androidx.lifecycle.Observer {
                 val chatAdapter = ChatAdapter(this,it)
                 chRecyclerView.adapter = chatAdapter
-                chRecyclerView.scrollToPosition(it.size - 1);
                 chatAdapter.setOnItemClickListener { chat ,textView ->
                     textView.setOnLongClickListener(View.OnLongClickListener {
                         img_delete_message_user.visibility = View.VISIBLE

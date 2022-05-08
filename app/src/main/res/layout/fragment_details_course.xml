@@ -78,49 +78,43 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="9dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/baloo_bhai_2_semibold"
         android:text="About this course"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Desc"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView9" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <TextView
+        android:id="@+id/Desc"
         android:layout_width="0dp"
-        android:layout_height="158dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="28dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="9dp"
+        android:fontFamily="@font/baloo_bhai_2"
+        android:text="This course was written for people who are passionate about design and about Apple's SwiftUI. It beginner-friendly, but it is also packed with tricks and cool workflows about building the best UI. Currently, Xcode 11 is still in beta so the installation process may be a little hard. However, once you get everything working, then it'll get much friendlier!"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/view3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/Desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/baloo_bhai_2"
-                android:text="This course was written for people who are passionate about design and about Apple's SwiftUI. It beginner-friendly, but it is also packed with tricks and cool workflows about building the best UI. Currently, Xcode 11 is still in beta so the installation process may be a little hard. However, once you get everything working, then it'll get much friendlier!"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <View
         android:id="@+id/view3"
         android:layout_width="350dp"
         android:layout_height="1dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
         android:background="#E4E4E4"
-        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
-        app:layout_constraintStart_toStartOf="@+id/scrollView2"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintBottom_toTopOf="@+id/but_Buy"
+        app:layout_constraintLeft_toLeftOf="@+id/Desc"
+        app:layout_constraintRight_toRightOf="@+id/Desc"
+        app:layout_constraintTop_toBottomOf="@+id/Desc" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView5"
