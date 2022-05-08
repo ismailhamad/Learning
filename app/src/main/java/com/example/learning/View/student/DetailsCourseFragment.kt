@@ -25,9 +25,9 @@ import java.util.concurrent.TimeUnit
 
 class DetailsCourseFragment : Fragment() {
     lateinit var learningViewModel: LearningViewModel
-    val args:DetailsCourseFragmentArgs by navArgs()
+    val args: DetailsCourseFragmentArgs by navArgs()
     lateinit var auth: FirebaseAuth
-    var users: users?=null
+    var users: users? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +44,8 @@ class DetailsCourseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        learningViewModel =(activity as Student).learningViewModel
-    auth = Firebase.auth
+        learningViewModel = (activity as Student).learningViewModel
+        auth = Firebase.auth
         val navBar: DrawerLayout = requireActivity().findViewById(R.id.drawerLayout)
         navBar.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         val gd = GradientDrawable(
@@ -62,37 +62,35 @@ class DetailsCourseFragment : Fragment() {
         nameCourseD.transitionName = course.namecourse
         Glide.with(this).load(course.image).into(imageView4)
         //titlle.text=course.name
-        nameCourseD.text=course.namecourse
-        Desc.text=course.description
-        name_techer.text =course.techer
-        countUsers.text="+${(course.users?.count()?.minus(1))}"
+        nameCourseD.text = course.namecourse
+        Desc.text = course.description
+        name_techer.text = course.techer
+        countUsers.text = "+${(course.users?.count()?.minus(1))}"
 
         But_Back.setOnClickListener {
             findNavController().navigate(R.id.action_detailsCourseFragment_to_homeFragment)
         }
-learningViewModel.users!!.observe(viewLifecycleOwner, Observer { it->
-    for (item in it){
-        users = item
-    }
-})
+        learningViewModel.users!!.observe(viewLifecycleOwner, Observer { it ->
+            for (item in it) {
+                users = item
+            }
+        })
 
 
         but_Buy.setOnClickListener {
-            users?.let { it1 -> learningViewModel.updateUsers(view,course.id.toString(), it1) }
+            users?.let { it1 -> learningViewModel.updateUsers(view, course.id.toString(), it1) }
             SendEmail.sendEmail(
-                activity as Student,"learing@gmail.com","shroud123shroud@gmail.com","اشتراك بالكورس",
-            "<h1>learing Course</h1>" +
-                    "<p>" +
-                    "<b>اشتراك بالكورس<br>" +
-                    "<b>وصف الكورس<br>" +
-                    "<b>Email: </b>'shroud123shroud@gmail.com'<br>" +
-                    "</p>")
-           // learningViewModel.AddMyCourse(myCourse(course.id.toString(),course.name.toString(),course.description,course.image,auth.currentUser!!.uid,course.lecture))
+                activity as Student, "learing@gmail.com", users!!.email, "اشتراك بالكورس",
+                "I have subscribed to a ${course.namecourse} course \n" +
+                        "Course Description \n ${course.description} \n" +
+                        "Thank you"
+            )
+            // learningViewModel.AddMyCourse(myCourse(course.id.toString(),course.name.toString(),course.description,course.image,auth.currentUser!!.uid,course.lecture))
 
         }
 
         btn_favorite.setOnClickListener {
-            learningViewModel.addFavorite(view,course,users!!.id!!)
+            learningViewModel.addFavorite(view, course, users!!.id!!)
 
         }
 

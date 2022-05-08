@@ -1,5 +1,6 @@
 package com.example.learning.View.teacher
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -14,6 +15,7 @@ import com.example.learning.Adapter.CourseAD
 import com.example.learning.Adapter.CourseTechAD
 import com.example.learning.Model.users
 import com.example.learning.R
+import com.example.learning.View.Sign_In
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.firebase.auth.FirebaseAuth
@@ -121,6 +123,11 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
 
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(recyclerView)
+        }
+
+        imgBtn_LogOut_t.setOnClickListener {
+            auth.signOut()
+            startActivity(Intent(activity, Sign_In::class.java))
         }
     }
  fun setupReceyclview(){

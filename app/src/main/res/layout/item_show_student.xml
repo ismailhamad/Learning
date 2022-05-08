@@ -34,31 +34,47 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/man1" />
 
-            <TextView
-                android:id="@+id/nameStudent"
+            <LinearLayout
+                android:id="@+id/liner111"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
-                android:fontFamily="@font/baloo_bhaijaan"
-                android:text="ismailhamad"
-                android:textColor="#000000"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/imageView14"
                 app:layout_constraintStart_toStartOf="@+id/imageView14"
-                app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView14"
+                >
 
-            <TextView
-                android:id="@+id/Email_Student"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="20dp"
-                android:text="ismailhamad2001@gmail.com"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageView14"
-                app:layout_constraintHorizontal_bias="0.305"
-                app:layout_constraintStart_toStartOf="@+id/imageView14"
-                app:layout_constraintTop_toBottomOf="@+id/nameStudent" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/nameStudent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:fontFamily="@font/baloo_bhaijaan"
+                        android:text="ismailhamad"
+                        android:textColor="#000000"
+                        android:layout_gravity="center" />
+
+                    <TextView
+                        android:id="@+id/Email_Student"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="ismailhamad2001@gmail.com"
+                        android:textSize="10sp"
+                        android:layout_gravity="center"
+                        />
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

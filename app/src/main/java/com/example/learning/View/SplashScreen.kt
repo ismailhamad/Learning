@@ -20,21 +20,20 @@ import kotlinx.android.synthetic.main.fragment_add_course.*
 class SplashScreen : AppCompatActivity() {
     lateinit var learningViewModel: LearningViewModel
     lateinit var auth: FirebaseAuth
-    private lateinit var motionLayout:MotionLayout
+    private lateinit var motionLayout: MotionLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         auth = Firebase.auth
 
-motionLayout = findViewById(R.id.splash)
+        motionLayout = findViewById(R.id.splash)
         motionLayout.startLayoutAnimation()
-        motionLayout.setTransitionListener(object :MotionLayout.TransitionListener{
+        motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
                 endId: Int
             ) {
-
 
 
             }
@@ -48,22 +47,22 @@ motionLayout = findViewById(R.id.splash)
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-                 if (auth.currentUser?.uid==null){
-           val i = Intent(this@SplashScreen,Sign_In::class.java)
-                startActivity(i)
-                     finish()
-         }else{
-             if(auth.currentUser?.email=="joehamad2060@gmail.com"){
-                 val i = Intent(this@SplashScreen,Teacher::class.java)
-                 startActivity(i)
-                 finish()
-             }else{
-                 val i = Intent(this@SplashScreen,Student::class.java)
-                 startActivity(i)
-                 finish()
-             }
+                if (auth.currentUser?.uid == null) {
+                    val i = Intent(this@SplashScreen, Sign_In::class.java)
+                    startActivity(i)
+                    finish()
+                } else {
+                    if (auth.currentUser?.email == "joehamad2060@gmail.com") {
+                        val i = Intent(this@SplashScreen, Teacher::class.java)
+                        startActivity(i)
+                        finish()
+                    } else {
+                        val i = Intent(this@SplashScreen, Student::class.java)
+                        startActivity(i)
+                        finish()
+                    }
 
-          }
+                }
             }
 
             override fun onTransitionTrigger(
@@ -75,15 +74,6 @@ motionLayout = findViewById(R.id.splash)
             }
 
         })
-
-
-
-
-
-
-
-
-
 
 
     }

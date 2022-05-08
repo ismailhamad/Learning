@@ -3,100 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../../layout/custom_preview.xml" value="0.34205128205128205" />
-        <entry key="../../../Library/Android/sdk/platforms/android-32/data/res/layout/auto_complete_list.xml" value="0.1" />
-        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_assignment.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_course.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_add_lecture.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/activity_sign_up.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning_update/app/src/main/res/layout/item_courses.xml" value="0.24635416666666668" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/drawable-v24/ic_gallery.xml" value="0.167" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/drawable/back_butf.xml" value="0.167" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/layout/activity_chat.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/layout/fragment_home.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/layout/fragment_home_t.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/layout/item_left.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/layout/item_right.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/menu/menu.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/menu/menu_chat.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/menu/menu_edit.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/menu/menu_tech.xml" value="0.25" />
-        <entry key="..\:/githup/Learning_update_1/app/src/main/res/xml/network_security_config.xml" value="0.25" />
-        <entry key="app/src/main/res/drawable/back_but.xml" value="0.2205" />
-        <entry key="app/src/main/res/drawable/back_butf.xml" value="0.249" />
-        <entry key="app/src/main/res/drawable/back_search.xml" value="0.249" />
-        <entry key="app/src/main/res/drawable/back_textf.xml" value="0.2205" />
-        <entry key="app/src/main/res/drawable/back_view.xml" value="0.262" />
-        <entry key="app/src/main/res/drawable/button_background.xml" value="0.1775" />
-        <entry key="app/src/main/res/drawable/click_but.xml" value="0.249" />
-        <entry key="app/src/main/res/drawable/item_left_side_background.xml" value="0.236" />
-        <entry key="app/src/main/res/drawable/item_right_side_background.xml" value="0.236" />
-        <entry key="app/src/main/res/drawable/rounded.xml" value="0.1445" />
-        <entry key="app/src/main/res/drawable/rounded2.xml" value="0.1575" />
-        <entry key="app/src/main/res/layout/activity_add_assignment.xml" value="0.3374094202898551" />
-        <entry key="app/src/main/res/layout/activity_add_course.xml" value="0.28306159420289856" />
-        <entry key="app/src/main/res/layout/activity_add_lecture.xml" value="0.3115942028985507" />
-        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.26010065706354085" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2776268115942029" />
-        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.31393737792968757" />
-        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.34967193603515623" />
-        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_student.xml" value="0.22734527587890627" />
-        <entry key="app/src/main/res/layout/activity_studentt.xml" value="0.15704154002026344" />
-        <entry key="app/src/main/res/layout/activity_teacher.xml" value="0.28306159420289856" />
-        <entry key="app/src/main/res/layout/fragment_add_assigment.xml" value="0.3306884765624999" />
-        <entry key="app/src/main/res/layout/fragment_add_course.xml" value="0.26103871663411454" />
-        <entry key="app/src/main/res/layout/fragment_add_lecture.xml" value="0.33574789988354464" />
-        <entry key="app/src/main/res/layout/fragment_all_user_assigment.xml" value="0.2568862915039063" />
-        <entry key="app/src/main/res/layout/fragment_bottom_sheet_lec.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.24655625999872408" />
-        <entry key="app/src/main/res/layout/fragment_details__lecture_tech.xml" value="0.2496868160599513" />
-        <entry key="app/src/main/res/layout/fragment_details_assigment.xml" value="0.31140289306640623" />
-        <entry key="app/src/main/res/layout/fragment_details_course.xml" value="0.25938720703125007" />
-        <entry key="app/src/main/res/layout/fragment_details_course_tech.xml" value="0.265631103515625" />
-        <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.28606193101877136" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.16346153846153846" />
-        <entry key="app/src/main/res/layout/fragment_home_t.xml" value="0.19973449707031252" />
-        <entry key="app/src/main/res/layout/fragment_my_course.xml" value="0.2873504638671875" />
-        <entry key="app/src/main/res/layout/fragment_profileuser.xml" value="0.12686567164179105" />
-        <entry key="app/src/main/res/layout/fragment_show__student.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_update_assigment.xml" value="0.27595367431640627" />
-        <entry key="app/src/main/res/layout/fragment_update_lecture.xml" value="0.29285698207557626" />
-        <entry key="app/src/main/res/layout/fragment_w_course.xml" value="0.2704818725585938" />
-        <entry key="app/src/main/res/layout/header_nav.xml" value="0.11716688594798791" />
-        <entry key="app/src/main/res/layout/item_alluser_ass.xml" value="0.24488525390625002" />
-        <entry key="app/src/main/res/layout/item_assigment.xml" value="0.325611382561761" />
-        <entry key="app/src/main/res/layout/item_corse_tech.xml" value="0.3340957641601563" />
-        <entry key="app/src/main/res/layout/item_course_profile.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_courses.xml" value="0.259923807779948" />
-        <entry key="app/src/main/res/layout/item_exploer.xml" value="0.23301849365234373" />
-        <entry key="app/src/main/res/layout/item_favorite.xml" value="0.3138513070565682" />
-        <entry key="app/src/main/res/layout/item_lecture.xml" value="0.46436157226562513" />
-        <entry key="app/src/main/res/layout/item_lecture_tech.xml" value="0.42542114257812497" />
-        <entry key="app/src/main/res/layout/item_left.xml" value="0.3115942028985507" />
-        <entry key="app/src/main/res/layout/item_mycourse.xml" value="0.3373493975903614" />
-        <entry key="app/src/main/res/layout/item_right.xml" value="0.2224273681640625" />
-        <entry key="app/src/main/res/layout/item_show_student.xml" value="0.2656588347061821" />
-        <entry key="app/src/main/res/layout/lecture_item.xml" value="0.3115942028985507" />
-        <entry key="app/src/main/res/menu/menu.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/menu/menu_edit.xml" value="0.19814814814814816" />
-        <entry key="app/src/main/res/menu/menu_tech.xml" value="0.3880208333333333" />
-        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1605" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.165" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/drawable/ic_logout.xml" value="0.165" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/activity_chat.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/activity_splash_screen.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_details_course.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_home.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_home_t.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_profileuser.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_w_course.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/item_course_profile.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/item_lecture_tech.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/item_left.xml" value="0.24635416666666668" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
-  </component>
-  <component name="VisualizationToolProject">
-    <option name="state">
-      <ProjectState>
-        <option name="scale" value="0.1" />
-      </ProjectState>
-    </option>
   </component>
 </project>

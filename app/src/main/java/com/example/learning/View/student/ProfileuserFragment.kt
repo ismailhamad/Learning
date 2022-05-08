@@ -1,6 +1,7 @@
 package com.example.learning.View.student
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +16,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.learning.Adapter.profileCourseAD
 import com.example.learning.Model.users
 import com.example.learning.R
+import com.example.learning.View.Sign_In
+import com.example.learning.View.Sign_Up
 import com.example.learning.ViewModel.LearningViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_profileuser.*
 
 
 class profileuserFragment : Fragment() {
 lateinit var learningViewModel: LearningViewModel
 lateinit var profileCourseAD: profileCourseAD
+    lateinit var auth: FirebaseAuth
     var users:users?=null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +42,7 @@ lateinit var profileCourseAD: profileCourseAD
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         learningViewModel = (activity as Student).learningViewModel
+        auth = Firebase.auth
         setupReceycleview()
         learningViewModel.MyCourse?.observe(viewLifecycleOwner, Observer {
             profileCourseAD.differ.submitList(it)
@@ -90,13 +98,10 @@ lateinit var profileCourseAD: profileCourseAD
             attachToRecyclerView(rv_course_profile)
         }
 
-
-
-
-
-
-
-
+        imgBtn_LogOut.setOnClickListener {
+            auth.signOut()
+            startActivity(Intent(activity,Sign_In::class.java))
+        }
 
 
     }
