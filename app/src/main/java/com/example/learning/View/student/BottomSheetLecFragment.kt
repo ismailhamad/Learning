@@ -80,7 +80,6 @@ val args:bottomSheetLecFragmentArgs by navArgs()
             learningViewModel.usersLectureMu?.observe(viewLifecycleOwner, Observer { itlist ->
                 itlist.forEach { iii ->
                     if (iii.name+iii.lastName == users?.name+users!!.lastName) {
-                        Toast.makeText(activity, "ddddd", Toast.LENGTH_SHORT).show()
                         findNavController().navigate(
                             R.id.action_bottomSheetLecFragment_to_WCourseFragment,
                             Bundle

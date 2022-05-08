@@ -7,7 +7,17 @@
     android:background="#E7EEFB"
     tools:context=".View.teacher.HomeTFragment">
 
-
+    <ImageButton
+        android:id="@+id/imgBtn_LogOut_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#00FFFFFF"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
