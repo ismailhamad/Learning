@@ -130,9 +130,7 @@ class HomeFragment : Fragment() {
 
             }
         })
-        go_profile.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_profileuserFragment)
-        }
+
         courseAD.setOnItemClickListener { course, imageView, textView,Color ->
 //            val extras = FragmentNavigatorExtras(
 //                imageView to course.image.toString(),
