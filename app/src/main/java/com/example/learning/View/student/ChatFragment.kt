@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.fragment_chat.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -105,6 +106,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
             .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
                 chatAdapter = ChatAdapter(requireActivity(), it)
                 chatactivityRecyclerView.adapter = chatAdapter
+                chatactivityRecyclerView.scrollToPosition(it.size - 1);
                 chatAdapter.setOnItemClickListener { chat, textView ->
                     textView.setOnLongClickListener(View.OnLongClickListener {
                         img_delete_message.visibility = View.VISIBLE
@@ -112,7 +114,6 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
                             learningViewModel.deleteMessageCourse(course?.id!!, chat.id)
                             img_delete_message.visibility = View.INVISIBLE
-
                         }
 
                         true

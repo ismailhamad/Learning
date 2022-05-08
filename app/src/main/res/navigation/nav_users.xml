@@ -16,9 +16,14 @@
             app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
+
         <action
             android:id="@+id/action_homeFragment_to_WCourseFragment"
-            app:destination="@id/WCourseFragment" />
+            app:destination="@id/WCourseFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_homeFragment_to_chatFragment"
             app:destination="@id/chatFragment"
@@ -47,7 +52,11 @@
             android:id="@+id/action_detailsCourseFragment_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <argument
             android:name="color"
             app:argType="integer[]" />
@@ -59,7 +68,11 @@
         tools:layout="@layout/fragment_favorite" >
         <action
             android:id="@+id/action_favoriteFragment_to_detailsCourseFragment"
-            app:destination="@id/detailsCourseFragment" />
+            app:destination="@id/detailsCourseFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/profileuserFragment"
@@ -68,10 +81,18 @@
         tools:layout="@layout/fragment_my_course" >
         <action
             android:id="@+id/action_myCourseFragment_to_WCourseFragment"
-            app:destination="@id/WCourseFragment" />
+            app:destination="@id/WCourseFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <action
             android:id="@+id/action_myCourseFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
+            app:destination="@id/chatFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/WCourseFragment"
@@ -87,7 +108,11 @@
             app:argType="com.example.learning.Model.myCourse" />
         <action
             android:id="@+id/action_WCourseFragment_to_detailsAssigmentFragment"
-            app:destination="@id/detailsAssigmentFragment" />
+            app:destination="@id/detailsAssigmentFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -121,7 +146,11 @@
         tools:layout="@layout/fragment_profileuser" >
         <action
             android:id="@+id/action_profileuserFragment_to_bottomSheetLecFragment"
-            app:destination="@id/bottomSheetLecFragment" />
+            app:destination="@id/bottomSheetLecFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <dialog
         android:id="@+id/bottomSheetLecFragment"
@@ -130,12 +159,20 @@
         tools:layout="@layout/fragment_bottom_sheet_lec" >
         <action
             android:id="@+id/action_bottomSheetLecFragment_to_profileuserFragment"
-            app:destination="@id/profileuserFragment" />
+            app:destination="@id/profileuserFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
         <argument
             android:name="myCoursee"
             app:argType="com.example.learning.Model.myCourse" />
         <action
             android:id="@+id/action_bottomSheetLecFragment_to_WCourseFragment"
-            app:destination="@id/WCourseFragment" />
+            app:destination="@id/WCourseFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </dialog>
 </navigation>

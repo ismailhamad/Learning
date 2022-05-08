@@ -30,12 +30,12 @@
 
 
     </LinearLayout>
+
     <ImageView
         android:id="@+id/img_chat"
-        android:layout_width="136dp"
-        android:layout_height="137dp"
+        android:layout_width="103dp"
+        android:layout_height="105dp"
         android:layout_marginRight="20dp"
-        android:visibility="invisible"
-        />
+        android:visibility="gone" />
 
 </LinearLayout>
