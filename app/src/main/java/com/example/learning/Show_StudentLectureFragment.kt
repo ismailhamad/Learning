@@ -1,4 +1,4 @@
-package com.example.learning.View.teacher
+package com.example.learning
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,29 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.learning.Adapter.showStudentAD
-import com.example.learning.Constants.Constants
-import com.example.learning.R
-import com.example.learning.ShowUsersLectureArgs
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
 import kotlinx.android.synthetic.main.fragment_show__student.*
 
 
-class ShowAllUsersLecture : Fragment() {
+class Show_StudentLectureFragment : Fragment() {
     lateinit var learningViewModel: LearningViewModel
+    val args: Show_StudentLectureFragmentArgs by navArgs()
     lateinit var showStudentAD: showStudentAD
-    val args:ShowUsersLectureArgs by navArgs()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_show_users_lecture, container, false)
+        return inflater.inflate(R.layout.fragment_show__student_lecture, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,21 +31,28 @@ class ShowAllUsersLecture : Fragment() {
         learningViewModel = (activity as Teacher).learningViewModel
         val course = args.showCourse
         val lecture = args.showLecture
-        learningViewModel.getUserShowLecture(course.id!!,lecture.id!!)
+        //setupReceyclview()
+        learningViewModel.getUserShowLecture(course.id.toString(), lecture.id.toString())
 
-        learningViewModel.usersLectureMu?.observe(viewLifecycleOwner, Observer {
-            showStudentAD.differ.submitList(it)
-        })
-        setupReceyclview()
+//        learningViewModel.usersLectureMu?.observe(viewLifecycleOwner, Observer {
+//            if (it==null){
+//
+//            }else{
+//                showStudentAD.differ.submitList(it)
+//
+//            }
+//
+//        })
+
+
     }
 
 
-    fun setupReceyclview(){
-        showStudentAD = showStudentAD()
-        rv_showUser.apply {
-            adapter = showStudentAD
-            layoutManager = GridLayoutManager(activity,2)
-        }
-    }
-
+//    fun setupReceyclview() {
+//        showStudentAD = showStudentAD()
+//        rv_showUser.apply {
+//          adapter = showStudentAD
+//            layoutManager = GridLayoutManager(activity, 2)
+//        }
+//    }
 }

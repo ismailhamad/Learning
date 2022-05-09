@@ -64,10 +64,8 @@ val args:Details_LectureTechFragmentArgs by navArgs()
                 putSerializable("showCourse", idCourse)
                 putSerializable("showLecture", lecture)
             }
-            findNavController().navigate(
-                R.id.action_details_LectureTechFragment_to_showAllUsersLecture,
-                Bundle
-            )
+            findNavController().navigate(R.id.action_details_LectureTechFragment_to_show_StudentLectureFragment,Bundle)
+
         }
 
         if (lecture.file==""){

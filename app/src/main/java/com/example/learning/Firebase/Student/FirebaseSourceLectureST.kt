@@ -2,6 +2,7 @@ package com.example.learning.Firebase.Student
 
 import android.app.Activity
 import android.app.ProgressDialog
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.example.learning.Model.lecture
 import com.example.learning.Model.users
@@ -46,9 +47,13 @@ class FirebaseSourceLectureST(val activity: Activity) {
         usersLectureListMutableLiveData = MutableLiveData()
         db.collection("courses/${documentCourses}/lecture/${documentLecture}/users")
             .addSnapshotListener { result, error ->
-                val user = result!!.toObjects<users>()
+                if (result!!.isEmpty){
+                    usersLectureListMutableLiveData.postValue(null)
+                }else{
+                    val user = result.toObjects<users>()
+                    usersLectureListMutableLiveData.postValue(user)
+                }
 
-                usersLectureListMutableLiveData.postValue(user)
             }
         return usersLectureListMutableLiveData
 

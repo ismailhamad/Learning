@@ -109,8 +109,8 @@
             android:id="@+id/action_details_LectureTechFragment_to_allUserAssigmentFragment"
             app:destination="@id/allUserAssigmentFragment" />
         <action
-            android:id="@+id/action_details_LectureTechFragment_to_showAllUsersLecture"
-            app:destination="@id/showAllUsersLecture" />
+            android:id="@+id/action_details_LectureTechFragment_to_show_StudentLectureFragment"
+            app:destination="@id/show_StudentLectureFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateAssigmentFragment"
@@ -178,10 +178,10 @@
             app:destination="@id/sendEmailFragment" />
     </dialog>
     <fragment
-        android:id="@+id/showAllUsersLecture"
-        android:name="com.example.learning.ShowUsersLecture"
-        android:label="fragment_show_users_lecture"
-        tools:layout="@layout/fragment_show_users_lecture" >
+        android:id="@+id/show_StudentLectureFragment"
+        android:name="com.example.learning.Show_StudentLectureFragment"
+        android:label="fragment_show__student_lecture"
+        tools:layout="@layout/fragment_show__student_lecture" >
         <argument
             android:name="showCourse"
             app:argType="com.example.learning.Model.course" />
