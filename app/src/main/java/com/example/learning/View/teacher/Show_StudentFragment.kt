@@ -1,12 +1,10 @@
 package com.example.learning.View.teacher
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,17 +12,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.learning.Adapter.showStudentAD
 import com.example.learning.Model.users
 import com.example.learning.R
-import com.example.learning.View.ChatActivity
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.fragment_bottom_sheet_techer.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_show__student.*
-import kotlinx.android.synthetic.main.item_show_student.*
 
 
 class show_StudentFragment : Fragment(R.layout.fragment_show__student) {
@@ -56,7 +49,7 @@ val args:show_StudentFragmentArgs by navArgs()
                 for (users in item.users!!){
                     users as HashMap<String,users>
                     if (users.get("id").toString()!=""){
-                        animationView5.visibility = View.GONE
+                        animationView10.visibility = View.GONE
                         textView38.visibility = View.GONE
                         val items = users(users.get("id").toString(),
                             users.get("name").toString(),
@@ -65,7 +58,7 @@ val args:show_StudentFragmentArgs by navArgs()
                         userss.add(items)
                         showStudentAD.differ.submitList(userss)
                     }else{
-                        animationView5.visibility = View.VISIBLE
+                        animationView10.visibility = View.VISIBLE
                         textView38.visibility = View.VISIBLE
                     }
 
@@ -97,7 +90,7 @@ val args:show_StudentFragmentArgs by navArgs()
 
     fun setupReceyclview(){
         showStudentAD = showStudentAD()
-        rv_showS.apply {
+        rv_showUser.apply {
             adapter = showStudentAD
             layoutManager =GridLayoutManager(activity,2)
         }

@@ -59,7 +59,16 @@ val args:Details_LectureTechFragmentArgs by navArgs()
         player.prepare()
 
         learningViewModel.getCountUserShowLecture(idCourse.id!!,lecture.id!!,tv_countSeeLec)
-
+        img_seen.setOnClickListener {
+            val Bundle = Bundle().apply {
+                putSerializable("showCourse", idCourse)
+                putSerializable("showLecture", lecture)
+            }
+            findNavController().navigate(
+                R.id.action_details_LectureTechFragment_to_showAllUsersLecture,
+                Bundle
+            )
+        }
 
         if (lecture.file==""){
             pdfTech.visibility=View.GONE

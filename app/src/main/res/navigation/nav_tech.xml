@@ -108,6 +108,9 @@
         <action
             android:id="@+id/action_details_LectureTechFragment_to_allUserAssigmentFragment"
             app:destination="@id/allUserAssigmentFragment" />
+        <action
+            android:id="@+id/action_details_LectureTechFragment_to_showAllUsersLecture"
+            app:destination="@id/showAllUsersLecture" />
     </fragment>
     <fragment
         android:id="@+id/updateAssigmentFragment"
@@ -174,4 +177,16 @@
             android:id="@+id/action_bottomSheetTecher_to_sendEmailFragment"
             app:destination="@id/sendEmailFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/showAllUsersLecture"
+        android:name="com.example.learning.ShowUsersLecture"
+        android:label="fragment_show_users_lecture"
+        tools:layout="@layout/fragment_show_users_lecture" >
+        <argument
+            android:name="showCourse"
+            app:argType="com.example.learning.Model.course" />
+        <argument
+            android:name="showLecture"
+            app:argType="com.example.learning.Model.lecture" />
+    </fragment>
 </navigation>

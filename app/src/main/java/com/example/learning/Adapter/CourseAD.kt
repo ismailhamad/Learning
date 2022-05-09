@@ -42,6 +42,7 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
         )
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val course = differ.currentList[position]
 
@@ -56,17 +57,14 @@ class CourseAD: RecyclerView.Adapter<CourseAD.ViewHolder>() {
                 Color.argb(200, random.nextInt(255), random.nextInt(50), random.nextInt(200))
             val color2 =
                 Color.argb(100, random.nextInt(255), random.nextInt(50), random.nextInt(200))
-            gd.setColors(
-                intArrayOf(
-                    color,
-                    color2,
-                )
+            gd.colors = intArrayOf(
+                color,
+                color2,
             )
-            var c =intArrayOf(color,color2)
+            val c =intArrayOf(color,color2)
 
-            setOnTouchListener { v, event ->
-                val action = event.action
-                when(action){
+            setOnTouchListener { _ , event ->
+                when(event.action){
 
                     MotionEvent.ACTION_DOWN -> {
 

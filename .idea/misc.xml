@@ -7,10 +7,13 @@
         <entry key="..\:/githup/LearningFinal/app/src/main/res/drawable/ic_logout.xml" value="0.165" />
         <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/activity_chat.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/activity_splash_screen.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_details__lecture_tech.xml" value="0.25" />
         <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_details_course.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_home.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_home_t.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_profileuser.xml" value="0.24635416666666668" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_show__student.xml" value="0.25" />
+        <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_show_users_lecture.xml" value="0.25" />
         <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/fragment_w_course.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/item_course_profile.xml" value="0.24635416666666668" />
         <entry key="..\:/githup/LearningFinal/app/src/main/res/layout/item_lecture_tech.xml" value="0.24635416666666668" />

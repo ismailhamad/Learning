@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E7EEFB"
-    tools:context=".View.teacher.show_StudentFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".View.teacher.ShowAllUsersLecture">
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_showUser"
+        android:id="@+id/rv_showUserL"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -23,15 +22,14 @@
         tools:listitem="@layout/item_show_student" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView10"
+        android:id="@+id/animationView9"
         android:layout_width="343dp"
         android:layout_height="301dp"
-
         android:layout_marginTop="68dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_showUser"
+        app:layout_constraintTop_toTopOf="@+id/rv_showUserL"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_5035qbsq.json" />
@@ -41,10 +39,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="21dp"
-        android:text="لا يوجد طلاب مشتركين في هذا الكورس"
+        android:text="لا يوجد مشاهدين لمحاضرة"
         android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/animationView10"
-        app:layout_constraintStart_toStartOf="@+id/animationView10"
-        app:layout_constraintTop_toBottomOf="@+id/animationView10" />
+        app:layout_constraintEnd_toEndOf="@+id/animationView9"
+        app:layout_constraintStart_toStartOf="@+id/animationView9"
+        app:layout_constraintTop_toBottomOf="@+id/animationView9" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
