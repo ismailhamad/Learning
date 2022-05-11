@@ -39,6 +39,7 @@ class FirebaseSourceLectureST(val activity: Activity) {
 
     }
 
+
     fun getUserShowLecture(
         documentCourses: String,
         documentLecture: String,

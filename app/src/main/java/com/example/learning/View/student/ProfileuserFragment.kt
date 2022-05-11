@@ -49,6 +49,9 @@ lateinit var profileCourseAD: profileCourseAD
             rv_course_profile.adapter?.notifyDataSetChanged()
         })
 
+        imageButton4.setOnClickListener {
+            findNavController().navigate(R.id.action_profileuserFragment_to_homeFragment)
+        }
         profileCourseAD.setOnItemClickListener {
             var bundle = Bundle().apply {
                 putSerializable("myCoursee",it)
@@ -101,6 +104,8 @@ lateinit var profileCourseAD: profileCourseAD
         imgBtn_LogOut.setOnClickListener {
             auth.signOut()
             startActivity(Intent(activity,Sign_In::class.java))
+            requireActivity().finish()
+
         }
 
 

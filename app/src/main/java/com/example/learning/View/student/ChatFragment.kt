@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learning.Adapter.ChatAdapter
@@ -49,9 +50,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         rev = arrayListOf()
 
         course = args.chaat
-
+        imgba.setOnClickListener {
+            findNavController().navigate(R.id.action_chatFragment_to_homeFragment)
+        }
         btnSendMessageactiv.setOnClickListener {
-
 
             var message: String = etMessage.text.toString()
 
@@ -101,6 +103,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
             }
 
         }
+
 
         learningViewModel.getMessageCourse(course?.id!!)
             .observe(viewLifecycleOwner, androidx.lifecycle.Observer {

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E7EEFB">
+    android:background="#E7EEFB"
+    tools:context=".View.student.ChatFragment">
 
 
     <!--    <ImageView-->
@@ -88,9 +89,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imgBack"
-            android:layout_width="44dp"
-            android:layout_height="40dp"
+            android:id="@+id/imgba"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="200dp"
             android:layout_weight="0.5"

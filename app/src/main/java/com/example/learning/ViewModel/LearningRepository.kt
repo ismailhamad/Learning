@@ -64,4 +64,5 @@ class LearningRepository(
     fun getCountUserShowLecture(documentCourses: String,documentLecture: String,textView: TextView) = firebaseSourceLectureTR.getCountUserShowLecture(documentCourses,documentLecture,textView)
     fun getCountUserAddAssigment(documentCourses: String,documentLecture: String,documentAssignment: String,textView: TextView) = firebaseSourceAssigmentTR.getCountUserAddAssigment(documentCourses,documentLecture,documentAssignment,textView)
     fun getAlluserAddAssigment(documentCourses: String, documentLecture: String, documentAssignment: String) = firebaseSourceAssigmentTR.getAlluserAddAssigment(documentCourses, documentLecture, documentAssignment)
+    fun updateCourse(view: View,course: course, img: Uri?, document: String) = firebaseSourceCourseTR.updateCourse(view, course, img, document)
 }

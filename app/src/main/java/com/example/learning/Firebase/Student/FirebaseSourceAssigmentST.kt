@@ -46,15 +46,8 @@ class FirebaseSourceAssigmentST(val activity: Activity) {
         return AssignmentListMutableLiveData
 
     }
-
-    fun userAddAssignment(
-        view: View,
-        users: users,
-        documentCourses: String,
-        documentLecture: String,
-        documentAssignment: String,
-        file: Uri,
-        fileString: String
+    fun userAddAssignment(view: View, users: users, documentCourses: String, documentLecture: String, documentAssignment: String, file: Uri,
+                          fileString: String
     ) {
         storge = Firebase.storage
         storageRef = storge!!.reference

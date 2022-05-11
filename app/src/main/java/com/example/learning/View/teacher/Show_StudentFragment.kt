@@ -73,12 +73,15 @@ val args:show_StudentFragmentArgs by navArgs()
             imageView.setOnClickListener {
 
                 val Bundle = Bundle().apply {
-                        putSerializable("userSheet", user)
-                    }
+                    putSerializable("userSheet", user)
+                }
+                if (findNavController().currentDestination?.id == R.id.show_StudentFragment) {
+
                     findNavController().navigate(
                         R.id.action_show_StudentFragment_to_bottomSheetTecher,
                         Bundle
                     )
+                }
             }
         }
 

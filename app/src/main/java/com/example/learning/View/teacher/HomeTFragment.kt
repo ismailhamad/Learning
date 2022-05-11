@@ -128,6 +128,7 @@ class HomeTFragment : Fragment(R.layout.fragment_home_t) {
         imgBtn_LogOut_t.setOnClickListener {
             auth.signOut()
             startActivity(Intent(activity, Sign_In::class.java))
+            requireActivity().finish()
         }
     }
  fun setupReceyclview(){

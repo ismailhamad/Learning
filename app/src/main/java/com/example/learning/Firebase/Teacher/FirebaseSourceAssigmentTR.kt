@@ -217,7 +217,8 @@ class FirebaseSourceAssigmentTR(val activity: Activity) {
         textView: TextView
     ) {
         db = Firebase.firestore
-        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment").addSnapshotListener { value, error ->
+        db.collection("courses/${documentCourses}/lecture/${documentLecture}/assignment/${documentAssignment}/userAssignment")
+            .addSnapshotListener { value, error ->
             textView.text =value!!.size().toString()
         }
     }

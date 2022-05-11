@@ -40,6 +40,8 @@ class FirebaseSourceCourseST(val activity: Activity) {
     lateinit var searchListMutableLiveData: MutableLiveData<List<course>>
     lateinit var favoriteListMutableLiveData: MutableLiveData<List<course>>
     lateinit var courseExploreListMutableLiveData: MutableLiveData<List<course>>
+
+
     fun getCourse(): MutableLiveData<List<course>> {
         db = Firebase.firestore
         val Courselist = ArrayList<course>()
@@ -59,6 +61,7 @@ class FirebaseSourceCourseST(val activity: Activity) {
         return CourseListMutableLiveData
 
     }
+
 
     fun getStudentrCourse(uid: String, documentCourses: String): MutableLiveData<List<course>> {
         db = Firebase.firestore

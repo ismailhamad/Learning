@@ -59,7 +59,9 @@ class WCourseFragment : Fragment(R.layout.fragment_w_course) {
             }
 
         })
-
+        imageButton3.setOnClickListener {
+            findNavController().navigate(R.id.action_WCourseFragment_to_homeFragment)
+        }
 
 
         ask_techer.setOnClickListener {
