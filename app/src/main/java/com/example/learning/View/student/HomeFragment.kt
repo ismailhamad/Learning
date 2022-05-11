@@ -116,6 +116,11 @@ class HomeFragment : Fragment() {
             val navBar: DrawerLayout = requireActivity().findViewById(R.id.drawerLayout)
             navBar.open()
         }
+        imageView15.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_homeFragment_to_profileuserFragment
+            )
+        }
         learningViewModel.Course!!.observe(viewLifecycleOwner, Observer {
             courseAD.differ.submitList(it)
             sizeCourse.text = "${it.size.toString()} courses, more coming"
