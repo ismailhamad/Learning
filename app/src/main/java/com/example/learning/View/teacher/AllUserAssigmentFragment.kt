@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.learning.Adapter.AlluserAssi
@@ -50,6 +51,9 @@ var pdf:Any?=null
             }
         })
 
+        imageButton8.setOnClickListener {
+            findNavController().navigateUp()
+        }
         alluserAssi.setOnItemClickListener {
             var request= DownloadManager.Request(Uri.parse(it.toString()))
                 .setTitle("Download")

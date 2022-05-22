@@ -269,13 +269,19 @@ class FirebaseSourceCourseST(val activity: Activity) {
         favoriteListMutableLiveData = MutableLiveData()
         db.collection("users/${documentUsers}/Favorite").addSnapshotListener { value, error ->
             favoritelist.clear()
-            for (document in value!!) {
-                val course = document.toObject<course>()
-                favoritelist.add(course)
-                favoriteListMutableLiveData.postValue(favoritelist)
+            if (value!!.isEmpty){
+                favoriteListMutableLiveData.postValue(null)
+
+            }else{
+                for (document in value!!) {
+                    val course = document.toObject<course>()
+                    favoritelist.add(course)
+                    favoriteListMutableLiveData.postValue(favoritelist)
+                }
+
+            }
             }
 
-        }
 
         return favoriteListMutableLiveData
 

@@ -8,6 +8,7 @@ import com.example.learning.Model.lecture
 import com.example.learning.Model.users
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
@@ -44,6 +45,7 @@ class FirebaseSourceLectureST(val activity: Activity) {
         documentCourses: String,
         documentLecture: String,
     ): MutableLiveData<List<users>> {
+        auth = Firebase.auth
         db = Firebase.firestore
         usersLectureListMutableLiveData = MutableLiveData()
         db.collection("courses/${documentCourses}/lecture/${documentLecture}/users")

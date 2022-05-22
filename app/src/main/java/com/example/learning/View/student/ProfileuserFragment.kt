@@ -62,7 +62,8 @@ lateinit var profileCourseAD: profileCourseAD
         learningViewModel.users?.observe(viewLifecycleOwner, Observer {
             for (item in it){
                 users = item
-
+                textView31.text = users?.name
+                textView32.text = users?.email
             }
         })
 

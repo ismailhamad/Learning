@@ -78,6 +78,8 @@ val args:bottomSheetLecFragmentArgs by navArgs()
 
 
             learningViewModel.usersLectureMu?.observe(viewLifecycleOwner, Observer { itlist ->
+
+
                 itlist.forEach { iii ->
                     if (iii.name+iii.lastName == users?.name+users!!.lastName) {
                         findNavController().navigate(

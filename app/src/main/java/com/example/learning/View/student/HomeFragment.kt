@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.doOnPreDraw
@@ -114,7 +115,9 @@ class HomeFragment : Fragment() {
         })
         imageButton.setOnClickListener {
             val navBar: DrawerLayout = requireActivity().findViewById(R.id.drawerLayout)
+
             navBar.open()
+
         }
         imageView15.setOnClickListener {
             findNavController().navigate(
@@ -135,6 +138,11 @@ class HomeFragment : Fragment() {
 
             }
         })
+
+//        val inflater = layoutInflater
+//        val inflate_view = inflater.inflate(R.layout.header_nav,null)
+//        val username = inflate_view.findViewById(R.id.textView13username) as TextView
+//        username.text = "users?.name"
 
         courseAD.setOnItemClickListener { course, imageView, textView,Color ->
 //            val extras = FragmentNavigatorExtras(
@@ -214,34 +222,41 @@ class HomeFragment : Fragment() {
             } else {
                 val idLect = lectureAD.differ.currentList[indexLec - 1].id
                 learningViewModel.getUserShowLecture(idCourse!!, idLect!!)
-                learningViewModel.showUserLecture(
-                    users(users?.id, "a", "", "", 0),
-                    idCourse!!,
-                    itLec.id!!
-                )
+//                learningViewModel.showUserLecture(
+//                    users(users?.id, "a", "", "", 0),
+//                    idCourse!!,
+//                    itLec.id!!
+//                )
             }
 
 
             learningViewModel.usersLectureMu?.observe(viewLifecycleOwner, Observer { itlist ->
-                itlist.forEach { iii ->
-                    if (iii.name + iii.lastName == users?.name + users!!.lastName) {
-                        findNavController().navigate(
-                            R.id.action_homeFragment_to_WCourseFragment,
-                            Bundle
-                        )
+                if (itlist !=null){
+                    itlist.forEach { iii ->
+                        if (iii.id  == users?.id) {
+                            findNavController().navigate(
+                                R.id.action_homeFragment_to_WCourseFragment,
+                                Bundle
+                            )
 
-                        learningViewModel.showUserLecture(users!!, idCourse!!, itLec.id!!)
+                            learningViewModel.showUserLecture(users!!, idCourse!!, itLec.id!!)
 
 
+                        }else  {
+
+                            Constants.showSnackBar(
+                                view, "عليك مشاهدة المحاضرات السابقة أولا",
+                                Constants.redColor
+                            )
+                        }
                     }
-                    if (iii?.name == "a") {
-
-                        Constants.showSnackBar(
-                            view, "عليك مشاهدة المحاضرات السابقة أولا",
-                            Constants.redColor
-                        )
-                    }
+                }else{
+                    Constants.showSnackBar(
+                        view, "عليك مشاهدة المحاضرات السابقة أولا",
+                        Constants.redColor
+                    )
                 }
+
 
             })
 
@@ -330,6 +345,9 @@ class HomeFragment : Fragment() {
                     lectureAD.differ.submitList(null)
                     users?.let {
                         learningViewModel.deleteMyCourse(view, it, Course.id!!)
+
+                        animationView7.visibility = View.GONE
+                        textView42.visibility = View.GONE
 
 
                     }

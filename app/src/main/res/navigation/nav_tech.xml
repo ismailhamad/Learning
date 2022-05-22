@@ -45,6 +45,9 @@
         <argument
             android:name="color"
             app:argType="integer[]" />
+        <action
+            android:id="@+id/action_detailsCourseTechFragment_to_homeTFragment"
+            app:destination="@id/homeTFragment" />
     </fragment>
     <fragment
         android:id="@+id/addLectureFragment"

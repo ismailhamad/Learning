@@ -43,6 +43,9 @@ val args:show_StudentFragmentArgs by navArgs()
         auth = Firebase.auth
         userss = arrayListOf()
         setupReceyclview()
+        imageView10.setOnClickListener {
+            findNavController().navigateUp()
+        }
         learningViewModel.getStudentrCourse(auth.currentUser!!.uid, course.id.toString())
         learningViewModel.ShowstudentT?.observe(viewLifecycleOwner, Observer {
             for (item in it){

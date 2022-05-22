@@ -59,6 +59,10 @@ learningViewModel =(activity as Teacher).learningViewModel
             }
    findNavController().navigate(R.id.action_detailsCourseTechFragment_to_addLectureFragment,Bundle)
         }
+
+        imageButton2.setOnClickListener {
+            findNavController().navigateUp()
+        }
         LectureTecAD.setOnItemClickListener {
             val Bundle=Bundle().apply {
                 putSerializable("detailsLecture",it)

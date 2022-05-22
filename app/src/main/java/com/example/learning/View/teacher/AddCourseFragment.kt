@@ -7,6 +7,7 @@ import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.course
 import com.example.learning.Model.users
@@ -40,6 +41,9 @@ lateinit var ArrayList:ArrayList<users>
                 nametecher = item.name
             }
         })
+        imageButton6.setOnClickListener {
+            findNavController().navigateUp()
+        }
         Add_Course.setOnClickListener {
             val user=users("","","","",0)
             ArrayList.add(user)

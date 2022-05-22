@@ -59,7 +59,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
             if (message.isEmpty()) {
                 Toast.makeText(activity, "message is empty", Toast.LENGTH_SHORT).show()
-                etMessage.setText("")
+                //etMessage.setText("")
             } else {
                 rev.clear()
 //                for (userid in course!!.users!!){
@@ -95,10 +95,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
                         }
                     }
 
-                    etMessage.setText("")
 
                 }
 
+                etMessage.setText("")
 
             }
 

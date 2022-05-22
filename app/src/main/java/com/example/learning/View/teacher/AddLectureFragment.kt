@@ -30,18 +30,10 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
         val course = args.idCourseL
         idLecture = UUID.randomUUID()
 
-
-        Go_to_AddAssi.setOnClickListener {
-            val Bundle = Bundle().apply {
-                putString("idlectureAssi", idLecture.toString())
-                putSerializable("idCourseAssi", course)
-            }
-
-            findNavController().navigate(
-                R.id.action_addLectureFragment_to_addAssigmentFragment,
-                Bundle
-            )
+        imageButton7.setOnClickListener {
+            findNavController().navigateUp()
         }
+
 
         Add_lect.setOnClickListener {
             var time = System.currentTimeMillis()
@@ -64,6 +56,8 @@ class AddLectureFragment : Fragment(R.layout.fragment_add_lecture) {
                         course.id.toString(),
                         "5000"
                     )
+
+
                     cleanText()
                 } else {
                     Constants.showSnackBar(

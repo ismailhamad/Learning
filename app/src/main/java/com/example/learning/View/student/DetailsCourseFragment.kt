@@ -1,11 +1,15 @@
 package com.example.learning.View.student
 
+import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_details_course.*
+import kotlinx.android.synthetic.main.fragment_favorite.*
 import java.util.concurrent.TimeUnit
 
 
@@ -67,6 +72,27 @@ class DetailsCourseFragment : Fragment() {
         name_techer.text = course.techer
         countUsers.text = "+${(course.users?.count()?.minus(1))}"
 
+        learningViewModel.favorite?.observe(viewLifecycleOwner, Observer {
+            if (it !=null){
+                for (item in it){
+                    if(item.id == course.id){
+                        DrawableCompat.setTint(
+                            DrawableCompat.wrap(btn_favorite.getDrawable()),
+                            ContextCompat.getColor(requireActivity(), R.color.redd)
+                        );
+                    }else{
+                        DrawableCompat.setTint(
+                            DrawableCompat.wrap(btn_favorite.getDrawable()),
+                            ContextCompat.getColor(requireActivity(), R.color.white)
+                        );
+                    }
+                }
+            }
+
+
+
+        })
+
         But_Back.setOnClickListener {
             findNavController().navigate(R.id.action_detailsCourseFragment_to_homeFragment)
         }
@@ -91,6 +117,7 @@ class DetailsCourseFragment : Fragment() {
 
         btn_favorite.setOnClickListener {
             learningViewModel.addFavorite(view, course, users!!.id!!)
+
 
         }
 

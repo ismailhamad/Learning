@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.SendEmail
@@ -15,11 +16,14 @@ import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.fragment_send_email.*
 
 class SendEmailFragment : Fragment(R.layout.fragment_send_email) {
-    val args:SendEmailFragmentArgs by navArgs()
 
+val args:SendEmailFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val users =  args.userEmail
+        imageButton9.setOnClickListener {
+            findNavController().navigateUp()
+        }
         btn_sendEmail.setOnClickListener {
             if (tv_titleEmail.text.isNotEmpty() && tv_desEmail.text.isNotEmpty()){
                 SendEmail.sendEmail(

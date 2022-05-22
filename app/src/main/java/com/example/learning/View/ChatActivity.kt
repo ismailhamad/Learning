@@ -48,7 +48,6 @@ class ChatActivity : AppCompatActivity() {
                 etMessage.setText("")
             } else {
                 if (ii?.idTeacher==null){
-                    Toast.makeText(this, "ccccc", Toast.LENGTH_SHORT).show()
                 learningViewModel.sendMessagePrivate(Chat(UUID.randomUUID().toString(), auth.currentUser!!.uid, auth.currentUser!!.uid, etaMessage.editableText.toString(), "",time,null),iT?.id.toString())
                     val topic = "/topics/${iT?.id.toString()}"
                     PushNotification(

@@ -48,7 +48,11 @@ class FirebaseService : FirebaseMessagingService() {
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this,0,intent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getActivity(this,0,intent, PendingIntent.FLAG_MUTABLE)
+        } else {
+            TODO("VERSION.SDK_INT < S")
+        }
         val notification = NotificationCompat.Builder(this,CHANNEL_ID)
             .setContentTitle(p0.data["title"])
             .setContentText(p0.data["message"])

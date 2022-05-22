@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.learning.Model.lecture
 import com.example.learning.R
@@ -31,7 +32,10 @@ val args:UpdateLectureFragmentArgs by navArgs()
         Text_descriptionLectureUp.append(lecturee.description)
         Text_VideoLectureUp.append(lecturee.video)
         Text_pdfLectureUp.append(lecturee.file)
-        Log.e("aa","lecturee.id ${lecturee.id}")
+
+        imageButt10.setOnClickListener {
+            findNavController().navigateUp()
+        }
         update.setOnClickListener {
             var time = System.currentTimeMillis()
             val newLecture = lecture(lecturee.id.toString(),Text_NameLectureUp.text.toString(),Text_descriptionLectureUp.text.toString(),"",time,true,Text_VideoLectureUp.text.toString(),Text_pdfLectureUp.text.toString())

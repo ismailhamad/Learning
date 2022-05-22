@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.learning.Constants.Constants
 import com.example.learning.Model.Assignment
@@ -32,6 +33,9 @@ lateinit var learningViewModel: LearningViewModel
         val idCourse = args.idCourseAssi
         Text_pdfAssig.setOnClickListener {
             chooseFile()
+        }
+        imageButton5.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         Add_Assigment.setOnClickListener {

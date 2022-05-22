@@ -31,7 +31,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
         learningViewModel.getFavorite(auth.currentUser!!.uid)
         setupReceycleView()
         learningViewModel.favorite?.observe(viewLifecycleOwner, Observer {
-            if (it.isEmpty()){
+            if (it == null){
                 animationView11.visibility = View.VISIBLE
                 textView43.visibility = View.VISIBLE
             }else{

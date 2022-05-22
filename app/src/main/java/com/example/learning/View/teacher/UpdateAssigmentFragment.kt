@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.learning.Model.Assignment
 import com.example.learning.R
@@ -29,6 +30,9 @@ val args:updateAssigmentFragmentArgs by navArgs()
         Text_descriptionUpAssig.append(assigment.description.toString())
         Text_pdfUpAssig.setOnClickListener {
             chooseFile()
+        }
+        imageButton120.setOnClickListener {
+            findNavController().navigateUp()
         }
         update_Assigment.setOnClickListener {
             fileUri?.let { it1 ->

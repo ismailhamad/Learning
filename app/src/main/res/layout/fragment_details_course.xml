@@ -50,7 +50,7 @@
                 android:id="@+id/But_Back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="#008C8A8A"
                 android:src="@drawable/ic_baseline_close_24"

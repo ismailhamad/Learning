@@ -5,11 +5,10 @@ import android.content.Context
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -19,16 +18,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.learning.Adapter.assigmentAD
 import com.example.learning.Constants.Constants
-import com.example.learning.Firebase.FirebaseSource
-import com.example.learning.Firebase.Teacher.FirebaseSourceLectureTR
 import com.example.learning.R
 import com.example.learning.View.Teacher
 import com.example.learning.ViewModel.LearningViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 import kotlinx.android.synthetic.main.fragment_details__lecture_tech.*
 
@@ -50,6 +44,11 @@ val args:Details_LectureTechFragmentArgs by navArgs()
         setupRecyclview()
         lecture.id?.let { learningViewModel.getAssignment(idCourse.id.toString(), it) }
 
+
+
+        imageButton3.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         val player = ExoPlayer.Builder(requireActivity()).build()
         videoViewTech.player = player
